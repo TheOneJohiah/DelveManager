@@ -37,7 +37,7 @@ intrinsic_focus = Skill("Intrinsic Focus", "Multiply maximum mana by 1+(RNK/5)",
 # ... other skills ...
 
 class Awakened:
-    def __init__(self, attributes=None, vitals=None, level=0, level_cap=5, experience=0, character_class=None):
+    def __init__(self, name="",attributes=None, vitals=None, level=0, level_cap=5, experience=0, character_class=None):
         if attributes is None:
             # str, rec, end, vig, foc, cla
             attributes = [10, 10, 10, 10, 10, 10]  # Default attributes
@@ -47,6 +47,7 @@ class Awakened:
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = [0] * 8  # Create a list for general statistics
 
+        self.name = name
         self.attributes = attributes
         self.vitals = vitals
         self.used_skill_points = 0
@@ -226,22 +227,3 @@ class Awakened:
         print(f"Level: {self.level}")
         print(f"Level Cap: {self.level_cap}")
         print(f"Class: {self.character_class.name}")
-
-# Example usage
-awakened_character = Awakened(attributes = [10, 10, 10, 10, 10, 60], level = 20, character_class = worker)
-awakened_character.add_skill(intrinsic_clarity, starting_level=10)
-awakened_character.add_skill(intrinsic_focus, starting_level=10)
-
-# Assign a class to the character
-#awakened_character.set_class(dynamo)
-
-awakened_character.display_stats()
-
-awakened_character.add_experience(2000)  # Set the character's current experience
-awakened_character.display_required_experience()
-
-awakened_character.set_class(dynamo)
-
-awakened_character.add_experience(2000)  # Set the character's current experience
-awakened_character.display_stats()
-awakened_character.display_required_experience()
