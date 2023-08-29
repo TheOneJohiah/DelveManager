@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{Name}} Character Sheet</title>
+
+    <style>
+        body {
+            background: #000;
+            color:#ccc;
+            text-align: center;
+
+            --bg: #00436e;
+        }
+
+        table {
+            background: var(--bg);
+            table-layout: fixed;
+            border: none;
+            border-collapse: separate;
+            border-spacing: 2px;
+            margin: 10px auto;
+            width: 90%;
+        }
+
+        table td {
+            margin: 0;
+            padding: 6px;
+            border: 1px solid #ccc;
+        }
+        table td h1 {border-bottom: 1px solid #ccc;}
+    </style>
+</head>
+<body>
+    <table>
+        <tr><td>
+            <h1>{{Name}}</h1>
+            <table id="Overview">
+                <tr><td>ClASS</td><td>LVL</td><td>CAP</td></tr>
+                <tr><td></td><td></td><td></td></tr>
+                <tr><td>EXP</td><td>NEXT</td><td>TOTAL</td></tr>
+                <tr><td></td><td></td><td></td></tr>
+            </table>
+
+            <h2>Vitals</h2>
+            <table id="Vitals">
+                <tr id="VitHD"><td></td><td>CUR</td><td>MAX</td><td>RGN</td></tr>
+                <tr id="VitHP"><td>HP</td><td></td><td></td><td></td></tr>
+                <tr id="VitSP"><td>SP</td><td></td><td></td><td></td></tr>
+                <tr id="VitMP"><td>MP</td><td></td><td></td><td></td></tr>
+            </table>
+
+            <h2>Attributes</h2>
+            <table id="Attributes">
+                <tr id="AttHD"><td></td><td>EFF</td><td>TOTAL</td><td>BASE</td><td>BUFF</td><td>SYN</td></tr>
+                <tr id="AttSTR"><td>STR</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr id="AttRCV"><td>RCV</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr id="AttEND"><td>END</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr id="AttVGR"><td>VGR</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr id="AttFCS"><td>FCS</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr id="AttCLR"><td>CLR</td><td></td><td></td><td></td><td></td><td></td></tr>
+            </table>
+
+            <h2>Resistances</h2>
+            <table id="Resistances">
+                <tr id="ResHD"><td></td><td>FLAT</td><td>PERCENT</td></tr>
+                <tr id="ResHE"><td>HEAT</td><td></td><td></td></tr>
+                <tr id="ResCO"><td>COLD</td><td></td><td></td></tr>
+                <tr id="ResLI"><td>LIGHT</td><td></td><td></td></tr>
+                <tr id="ResDA"><td>DARK</td><td></td><td></td></tr>
+                <tr id="ResFO"><td>FORCE</td><td></td><td></td></tr>
+                <tr id="ResAR"><td>ARCANE</td><td></td><td></td></tr>
+                <tr id="ResCH"><td>CHEMICAL</td><td></td><td></td></tr>
+                <tr id="ResME"><td>MENTAL</td><td></td><td></td></tr>
+            </table>
+        </td></tr>
+    </table>
+</body>
+</html>
