@@ -154,6 +154,10 @@ class Awakened:
             return False
         
     def set_class(self, character_class):
+        if self.level != 5 or self.level != 25:
+            print(f"Character not at a class selection level!'")
+            return False
+    
         if character_class.meets_requirements(self):
             self.character_class = character_class
             print(f"Class '{character_class.name}' assigned successfully")
@@ -213,8 +217,6 @@ class Awakened:
 
 
     def display_stats(self):
-        print("Stats:")
-        # ... display other attributes ...
         print(f"Stats: {self.attributes}")
         self.initialize_vitals()
         print(f"Current vitals: {self.vitals}")
@@ -226,7 +228,7 @@ class Awakened:
         print(f"Class: {self.character_class.name}")
 
 # Example usage
-awakened_character = Awakened(attributes = [10, 10, 10, 10, 10, 60], level = 5, character_class = unclassed)
+awakened_character = Awakened(attributes = [10, 10, 10, 10, 10, 60], level = 20, character_class = worker)
 awakened_character.add_skill(intrinsic_clarity, starting_level=10)
 awakened_character.add_skill(intrinsic_focus, starting_level=10)
 
