@@ -7,8 +7,9 @@
 
     <style>
         body {
-            background: #000;
+            background: #080808;
             color:#ccc;
+            font-family: "courier new",monospace;
             text-align: center;
 
             --bg: #00436e;
@@ -37,42 +38,42 @@
         <tr><td>
             <h1>{{Name}}</h1>
             <table id="Overview">
-                <tr><td>ClASS</td><td>LVL</td><td>CAP</td></tr>
-                <tr><td></td><td></td><td></td></tr>
-                <tr><td>EXP</td><td>NEXT</td><td>TOTAL</td></tr>
-                <tr><td></td><td></td><td></td></tr>
+                <tr><td>CLASS</td><td>LVL</td><td>CAP</td>{% if pluscol %}<td>+STAT</td>{% endif %}</tr>
+                <tr><td>{{Class}}</td><td>{{Level}}</td><td>{{LevelCap}}</td>{% if pluscol %}<td>{{FreeStat}}</td>{% endif %}</tr>
+                <tr><td>EXP</td><td>NEXT</td><td>TOTAL</td>{% if pluscol %}<td>+SKILL</td>{% endif %}</tr>
+                <tr><td>{{CurrXP}}</td><td>{{NextXP}}</td><td>{{TotXP}}</td>{% if pluscol %}<td>{{FreeSkill}}</td>{% endif %}</tr>
             </table>
 
             <h2>Vitals</h2>
             <table id="Vitals">
                 <tr id="VitHD"><td></td><td>CUR</td><td>MAX</td><td>RGN</td></tr>
-                <tr id="VitHP"><td>HP</td><td></td><td></td><td></td></tr>
-                <tr id="VitSP"><td>SP</td><td></td><td></td><td></td></tr>
-                <tr id="VitMP"><td>MP</td><td></td><td></td><td></td></tr>
+                <tr id="VitHP"><td>HP</td><td>{{curHP}}</td><td>{{maxHP}}</td><td>{{rgnHP}}</td></tr>
+                <tr id="VitSP"><td>SP</td><td>{{curSP}}</td><td>{{maxSP}}</td><td>{{rgnSP}}</td></tr>
+                <tr id="VitMP"><td>MP</td><td>{{curMP}}</td><td>{{maxMP}}</td><td>{{rgnMP}}</td></tr>
             </table>
 
             <h2>Attributes</h2>
             <table id="Attributes">
                 <tr id="AttHD"><td></td><td>EFF</td><td>TOTAL</td><td>BASE</td><td>BUFF</td><td>SYN</td></tr>
-                <tr id="AttSTR"><td>STR</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttRCV"><td>RCV</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttEND"><td>END</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttVGR"><td>VGR</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttFCS"><td>FCS</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttCLR"><td>CLR</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr id="AttSTR"><td>STR</td><td>{{effSTR}}</td><td>{{totSTR}}</td><td>{{basSTR}}</td><td>{{bufSTR}}</td><td>{{synSTR}}</td></tr>
+                <tr id="AttRCV"><td>RCV</td><td>{{effRCV}}</td><td>{{totRCV}}</td><td>{{basRCV}}</td><td>{{bufRCV}}</td><td>{{synRCV}}</td></tr>
+                <tr id="AttEND"><td>END</td><td>{{effEND}}</td><td>{{totEND}}</td><td>{{basEND}}</td><td>{{bufEND}}</td><td>{{synEND}}</td></tr>
+                <tr id="AttVGR"><td>VGR</td><td>{{effVGR}}</td><td>{{totVGR}}</td><td>{{basVGR}}</td><td>{{bufVGR}}</td><td>{{synVGR}}</td></tr>
+                <tr id="AttFCS"><td>FCS</td><td>{{effFCS}}</td><td>{{totFCS}}</td><td>{{basFCS}}</td><td>{{bufFCS}}</td><td>{{synFCS}}</td></tr>
+                <tr id="AttCLR"><td>CLR</td><td>{{effCLR}}</td><td>{{totCLR}}</td><td>{{basCLR}}</td><td>{{bufCLR}}</td><td>{{synCLR}}</td></tr>
             </table>
 
             <h2>Resistances</h2>
             <table id="Resistances">
                 <tr id="ResHD"><td></td><td>FLAT</td><td>PERCENT</td></tr>
-                <tr id="ResHE"><td>HEAT</td><td></td><td></td></tr>
-                <tr id="ResCO"><td>COLD</td><td></td><td></td></tr>
-                <tr id="ResLI"><td>LIGHT</td><td></td><td></td></tr>
-                <tr id="ResDA"><td>DARK</td><td></td><td></td></tr>
-                <tr id="ResFO"><td>FORCE</td><td></td><td></td></tr>
-                <tr id="ResAR"><td>ARCANE</td><td></td><td></td></tr>
-                <tr id="ResCH"><td>CHEMICAL</td><td></td><td></td></tr>
-                <tr id="ResME"><td>MENTAL</td><td></td><td></td></tr>
+                <tr id="ResHE"><td>HEAT</td><td>{{fltHE}}</td><td>{{perHE}}</td></tr>
+                <tr id="ResCO"><td>COLD</td><td>{{fltCO}}</td><td>{{perCO}}</td></tr>
+                <tr id="ResLI"><td>LIGHT</td><td>{{fltLI}}</td><td>{{perLI}}</td></tr>
+                <tr id="ResDA"><td>DARK</td><td>{{fltDA}}</td><td>{{perDA}}</td></tr>
+                <tr id="ResFO"><td>FORCE</td><td>{{fltFO}}</td><td>{{perFO}}</td></tr>
+                <tr id="ResAR"><td>ARCANE</td><td>{{fltAR}}</td><td>{{perAR}}</td></tr>
+                <tr id="ResCH"><td>CHEMICAL</td><td>{{fltCH}}</td><td>{{perCH}}</td></tr>
+                <tr id="ResME"><td>MENTAL</td><td>{{fltME}}</td><td>{{perME}}</td></tr>
             </table>
         </td></tr>
     </table>
