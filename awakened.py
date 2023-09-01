@@ -1,4 +1,5 @@
 import math
+from jinja2 import Template;
 
 class Class:
     def __init__(self, name, rarity, notes, attribute_effect, tree_effect, additional_effect):
@@ -23,27 +24,25 @@ dynamo = Class("Dynamo", "Rare", "Master of energy manipulation", attribute_effe
 shieldwielding_defender = Class("Shieldwielding Defender", "Uncommon", "Master of defense with a shield", attribute_effect=[1, 1, 1.5, 1, 1, 1], tree_effect={"shieldwielding": 3}, additional_effect=None)
 
 class Skill:
-    def __init__(self, name, description, tree):
+    def __init__(self, name, description, tier, tree):
         self.name = name
         self.description = description
-        self.tier = 0
+        self.tier = tier
         self.tree = tree
-        self.rank = 0  # Initial rank is 0
+        self.rank = 1  # Initial rank is 1
         self.cap = 10 # Starting cap for all skills is 10
+        self.xp = 0 #starting xp for all skills is 0
+
+    def getNextRankXP(self):
+        return (.5*self.rank*(self.rank - 1) + 1) * 2**self.tier * 100
 
 # Create specific skills
-intrinsic_clarity = Skill("Intrinsic Clarity", "Multiply mana regen by 1+(RNK/5)", tree="Magical Utility")
-intrinsic_focus = Skill("Intrinsic Focus", "Multiply maximum mana by 1+(RNK/5)", tree="Magical Utility")
+intrinsic_clarity = Skill("Intrinsic Clarity", "Multiply mana regen by 1+(RNK/5)", 0, "Magical Utility")
+intrinsic_focus = Skill("Intrinsic Focus", "Multiply maximum mana by 1+(RNK/5)", 0, "Magical Utility")
 # ... other skills ...
 
 class Awakened:
-    def __init__(self, name="",attributes=None, vitals=None, level=0, level_cap=5, experience=0, character_class=None):
-        if attributes is None:
-            # str, rec, end, vig, foc, cla
-            attributes = [10, 10, 10, 10, 10, 10]  # Default attributes
-        if vitals is None:
-            vitals = [200, 100, 200, 100, 200, 100] # Default health/mana/etc
-
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed):
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = [0] * 8  # Create a list for general statistics
 
@@ -54,19 +53,23 @@ class Awakened:
         self.level = level
         self.level_cap = level_cap
         self.experience = experience
-        self.skills = []
+        self.skills = {}
         self.specialization = []
         self.character_class = character_class
+        self.currVitals = [200,200,200]
         self.update_free_attributes()
         self.initialize_vitals()  # Initialize vitals when the character is created
 
 
     def initialize_vitals(self):
         self.vitals[0] = self.calculate_health_cap()
+        self.currVitals[0] = self.calculate_health_cap()
         self.vitals[1] = self.calculate_health_regen()
         self.vitals[2] = self.calculate_stamina_cap()
+        self.currVitals[1] = self.calculate_stamina_cap()
         self.vitals[3] = self.calculate_stamina_regen()
         self.vitals[4] = self.calculate_mana_cap()
+        self.currVitals[2] = self.calculate_mana_cap()
         self.vitals[5] = self.calculate_mana_regen()
 
     def update_free_attributes(self):
@@ -134,25 +137,37 @@ class Awakened:
         return sum(1 for skill in self.skills if skill.tree == tree_name)
 
     def add_skill(self, skill, starting_level=1):
+        if skill.name in self.skills:
+                print("Skill already aquired!")
+                return False
+                # What about granted skills, or True Jacks? Think
+        
+        self.skills.update({skill.name:skill})
+        return True
+        
+    def update_skill_caps (self):
         # Update the skill's cap to the class-based cap
-        if skill.tree in self.character_class.tree_effect:
-            tree_cap = 10 + self.character_class.tree_effect[skill.tree]
-            if skill.cap < tree_cap:
-                skill.cap = tree_cap
+        for skill in list(skill.values()):
+            if skill.tree in self.character_class.tree_effect:
+                tree_cap = 10 + self.character_class.tree_effect[skill.tree]
+                if skill.cap < tree_cap:
+                    skill.cap = tree_cap
+    
+    def add_skill_exp (self, skillN, xp):
+        # Find Skill in skills, get xp
+        currXP = self.skills[skillN].xp + xp
+        nextXP = self.skills[skillN].getNextRankXP()
 
-        existing_skill = next((s for s in self.skills if s.name == skill.name), None)
+        if currXP >= nextXP:
+            while currXP >= nextXP:
+                currXP -= nextXP
+                self.skills[skillN].rank +=1
+                print(self.skills[skillN].name+" Leveled up!")
+                nextXP = self.skills[skillN].getNextRankXP()
 
-        if existing_skill and starting_level <= tree_cap:
-            existing_skill.rank = starting_level
-            return True
+        self.skills[skillN].xp = currXP
+        # consider making this a method of Skill?
 
-        if skill.rank < skill.cap and self.calculate_free_skill_points() > 0:
-            if starting_level <= skill.cap:  # Check against the skill's cap
-                skill.rank = starting_level
-                self.skills.append(skill)
-                return True
-        else:
-            return False
         
     def set_class(self, character_class):
         if self.level != 5 or self.level != 25:
@@ -215,8 +230,6 @@ class Awakened:
         print(f"Required Experience for Level {self.level + 1}: {required_exp}")
         print(f"Difference: {difference}")
 
-
-
     def display_stats(self):
         print(f"Stats: {self.attributes}")
         self.initialize_vitals()
@@ -227,3 +240,72 @@ class Awakened:
         print(f"Level: {self.level}")
         print(f"Level Cap: {self.level_cap}")
         print(f"Class: {self.character_class.name}")
+
+    # Awful, innefficient, but best that I can think of
+    def genSkillList (self):
+        tr = []
+        for skill in list(self.skills.values()):
+            tr.append(skill.tree)
+        tr = list(set(tr))
+
+        trees = []
+
+        for tree in tr:
+            trr = {"name":tree,"tiers":{"0": {"t":0,"skills":[]},
+                                        "1": {"t":1,"skills":[]}, 
+                                        "2": {"t":2,"skills":[]}, 
+                                        "3": {"t":3,"skills":[]}, 
+                                        "4": {"t":4,"skills":[]}}}
+            for skill in list(self.skills.values()):                      
+                if skill.tree == tree:
+                    trr["tiers"][str(skill.tier)]["skills"].append(skill)
+                    
+            for tier in list(trr["tiers"].values()):
+                if not tier["skills"]: trr["tiers"].pop(str(tier["t"]))
+            trees.append(trr)
+
+        return trees;
+
+    def printCharSheet (self,altCol = False):
+        temp = Template(open('CharSheetTemplate.html').read())
+        pluscol = False
+        if (self.free_attributes > 0 or self.used_skill_points > 0):
+            pluscol = True
+
+        sheet = open(self.name+' CharSheet.html','w')
+        sheet.write( temp.render(
+                    pluscol = pluscol,
+                    altcol = altCol,
+                    Name = self.name,
+                    Class = self.character_class.name,
+                    Level = self.level,
+                    LevelCap = self.level_cap,
+                    FreeStat = self.free_attributes,
+                    FreeSkill = self.calculate_free_skill_points(),
+                    CurrXP = self.experience,
+                    NextXP = self.calculate_required_experience(),
+                    TotXP = "#todo Add Total XP",
+                    
+                    maxHP = self.vitals[0],
+                    rgnHP = self.vitals[1],
+                    maxSP = self.vitals[2],
+                    rgnSP = self.vitals[3],
+                    maxMP = self.vitals[4],
+                    rgnMP = self.vitals[5],
+
+                    curHP = self.currVitals[0],
+                    curSP = self.currVitals[1],
+                    curMP = self.currVitals[2],
+
+                    basSTR = self.attributes[0],
+                    basRCV = self.attributes[1],
+                    basEND = self.attributes[2],
+                    basVGR = self.attributes[3],
+                    basFCS = self.attributes[4],
+                    basCLR = self.attributes[5],
+
+                    trees = self.genSkillList()
+                    
+            ))
+
+        sheet.close()
