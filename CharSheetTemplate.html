@@ -7,13 +7,22 @@
 
     <style>
         body {
-            background: #000;
-            color:#ccc;
+            background: #080808;
+            color:var(--fg);
+            font-family: "courier new",monospace;
             text-align: center;
-
+            font-size:16pt;
+            --fg: #ccc;
             --bg: #00436e;
         }
-
+        
+        h1 {font-size:1.5em}
+        h2 {font-size:1.4em}
+        h3 {font-size:1.3em}
+        h4 {font-size:1.2em}
+        h5 {font-size:1.1em;margin: 0;}
+        h6 {font-size:1em;margin: 0;}
+        
         table {
             background: var(--bg);
             table-layout: fixed;
@@ -24,57 +33,95 @@
             width: 90%;
         }
 
-        table td {
+        table td , table th {
             margin: 0;
             padding: 6px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--fg);
         }
-        table td h1 {border-bottom: 1px solid #ccc;}
+        table td h1 {border-bottom: 1px solid var(--fg);}
+
+        #Overview tr:nth-child(1),#Overview tr:nth-child(3) {font-weight: bold;}
+
+        table th {font-weight: bold;text-align: center;}
+        
+        #VitHP td:nth-child(2) span {opacity: {{curHP / maxHP}};}
+        #VitSP td:nth-child(2) span {opacity: {{curSP / maxSP}};}
+        #VitMP td:nth-child(2) span {opacity: {{curMP / maxMP}};}
+
+        #Skills {
+            text-align: left;
+        }
+
+        #Skills h2, #Skills h3, #Skills h4 {text-align: center;}
+
+        #Skills table tr th:nth-child(1) {width: 10%;}
+
+        table table table {
+            margin: -6px;
+            width: calc(100% + 12px);
+            height: calc(100% + 12px);
+        }
     </style>
 </head>
-<body>
+<body class="{% if altcol %} alt {% endif %} {{ Name.split()[0] }}">
     <table>
         <tr><td>
             <h1>{{Name}}</h1>
             <table id="Overview">
-                <tr><td>ClASS</td><td>LVL</td><td>CAP</td></tr>
-                <tr><td></td><td></td><td></td></tr>
-                <tr><td>EXP</td><td>NEXT</td><td>TOTAL</td></tr>
-                <tr><td></td><td></td><td></td></tr>
+                <tr><th>CLASS</th><th>LVL</th><th>CAP</th>{% if pluscol %}<th>+STAT</th>{% endif %}</tr>
+                <tr><td>{{Class}}</td><td>{{Level}}</td><td>{{LevelCap}}</td>{% if pluscol %}<td>{{FreeStat}}</td>{% endif %}</tr>
+                <tr><th>EXP</th><th>NEXT</th><th>TOTAL</th>{% if pluscol %}<th>+SKILL</th>{% endif %}</tr>
+                <tr><td>{{CurrXP}}</td><td>{{NextXP}}</td><td>{{TotXP}}</td>{% if pluscol %}<td>{{FreeSkill}}</td>{% endif %}</tr>
             </table>
 
             <h2>Vitals</h2>
             <table id="Vitals">
-                <tr id="VitHD"><td></td><td>CUR</td><td>MAX</td><td>RGN</td></tr>
-                <tr id="VitHP"><td>HP</td><td></td><td></td><td></td></tr>
-                <tr id="VitSP"><td>SP</td><td></td><td></td><td></td></tr>
-                <tr id="VitMP"><td>MP</td><td></td><td></td><td></td></tr>
+                <tr id="VitHD"><td></td><th>CUR</th><th>MAX</th><th>RGN</th></tr>
+                <tr id="VitHP"><th>HP</th><td><span>{{curHP}}</span></td><td>{{maxHP}}</td><td>{{rgnHP}}</td></tr>
+                <tr id="VitSP"><th>SP</th><td><span>{{curSP}}</span></td><td>{{maxSP}}</td><td>{{rgnSP}}</td></tr>
+                <tr id="VitMP"><th>MP</th><td><span>{{curMP}}</span></td><td>{{maxMP}}</td><td>{{rgnMP}}</td></tr>
             </table>
 
             <h2>Attributes</h2>
             <table id="Attributes">
-                <tr id="AttHD"><td></td><td>EFF</td><td>TOTAL</td><td>BASE</td><td>BUFF</td><td>SYN</td></tr>
-                <tr id="AttSTR"><td>STR</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttRCV"><td>RCV</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttEND"><td>END</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttVGR"><td>VGR</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttFCS"><td>FCS</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr id="AttCLR"><td>CLR</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr id="AttHD"><td></td><th>EFF</th><th>TOTAL</th><th>BASE</th><th>BUFF</th><th>SYN</th></tr>
+                <tr id="AttSTR"><th>STR</th><td>{{effSTR}}</td><td>{{totSTR}}</td><td>{{basSTR}}</td><td>{{bufSTR}}</td><td>{{synSTR}}</td></tr>
+                <tr id="AttRCV"><th>RCV</th><td>{{effRCV}}</td><td>{{totRCV}}</td><td>{{basRCV}}</td><td>{{bufRCV}}</td><td>{{synRCV}}</td></tr>
+                <tr id="AttEND"><th>END</th><td>{{effEND}}</td><td>{{totEND}}</td><td>{{basEND}}</td><td>{{bufEND}}</td><td>{{synEND}}</td></tr>
+                <tr id="AttVGR"><th>VGR</th><td>{{effVGR}}</td><td>{{totVGR}}</td><td>{{basVGR}}</td><td>{{bufVGR}}</td><td>{{synVGR}}</td></tr>
+                <tr id="AttFCS"><th>FCS</th><td>{{effFCS}}</td><td>{{totFCS}}</td><td>{{basFCS}}</td><td>{{bufFCS}}</td><td>{{synFCS}}</td></tr>
+                <tr id="AttCLR"><th>CLR</th><td>{{effCLR}}</td><td>{{totCLR}}</td><td>{{basCLR}}</td><td>{{bufCLR}}</td><td>{{synCLR}}</td></tr>
             </table>
 
             <h2>Resistances</h2>
             <table id="Resistances">
-                <tr id="ResHD"><td></td><td>FLAT</td><td>PERCENT</td></tr>
-                <tr id="ResHE"><td>HEAT</td><td></td><td></td></tr>
-                <tr id="ResCO"><td>COLD</td><td></td><td></td></tr>
-                <tr id="ResLI"><td>LIGHT</td><td></td><td></td></tr>
-                <tr id="ResDA"><td>DARK</td><td></td><td></td></tr>
-                <tr id="ResFO"><td>FORCE</td><td></td><td></td></tr>
-                <tr id="ResAR"><td>ARCANE</td><td></td><td></td></tr>
-                <tr id="ResCH"><td>CHEMICAL</td><td></td><td></td></tr>
-                <tr id="ResME"><td>MENTAL</td><td></td><td></td></tr>
+                <tr id="ResHD"><td></td><th>FLAT</th><th>PERCENT</th></tr>
+                <tr id="ResHE"><th>HEAT</th><td>{{fltHE}}</td><td>{{perHE}}</td></tr>
+                <tr id="ResCO"><th>COLD</th><td>{{fltCO}}</td><td>{{perCO}}</td></tr>
+                <tr id="ResLI"><th>LIGHT</th><td>{{fltLI}}</td><td>{{perLI}}</td></tr>
+                <tr id="ResDA"><th>DARK</th><td>{{fltDA}}</td><td>{{perDA}}</td></tr>
+                <tr id="ResFO"><th>FORCE</th><td>{{fltFO}}</td><td>{{perFO}}</td></tr>
+                <tr id="ResAR"><th>ARCANE</th><td>{{fltAR}}</td><td>{{perAR}}</td></tr>
+                <tr id="ResCH"><th>CHEMICAL</th><td>{{fltCH}}</td><td>{{perCH}}</td></tr>
+                <tr id="ResME"><th>MENTAL</th><td>{{fltME}}</td><td>{{perME}}</td></tr>
             </table>
         </td></tr>
     </table>
+
+    <table id="Skills"><tr><td><h2>Skills</h2>
+        {% for tree in trees %}
+            <table><tr><th>Tier</th><th><h3>{{tree.name}}</h3></th></tr>
+            {% for tier in tree["tiers"].values() %}
+                <tr><th><h4>{{tier["t"]}}</h4></th>
+                <td><table>
+                {% for skill in tier["skills"] %}
+                    <tr><td><h5>{{skill.name}} ({{skill.rank}} / {{skill.cap}}) (Exp: {{skill.xp}} / {{ skill.getNextRankXP() }})</h5>
+                    {{skill.description}}</td></tr>
+                {% endfor %}
+            </table></td></tr>
+            {% endfor %}
+        </table>
+        {% endfor %}
+    </td></tr></table>
 </body>
 </html>
