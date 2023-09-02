@@ -23,6 +23,8 @@ dynamo = Class("Dynamo", "Rare", "Master of energy manipulation", attribute_effe
 
 shieldwielding_defender = Class("Shieldwielding Defender", "Uncommon", "Master of defense with a shield", attribute_effect=[1, 1, 1.5, 1, 1, 1], tree_effect={"shieldwielding": 3}, additional_effect=None)
 
+geomancer = Class("Geomancer", "Uncommon", "A dirty dude", attribute_effect=[1,1,1,1,1.5,1], tree_effect={"geoevocation": 3}, additional_effect=None)
+
 class Skill:
     def __init__(self, name, description, tier, tree):
         self.name = name
@@ -129,9 +131,6 @@ class Awakened:
                 mana_regen_multiplier *= (1 + skill.rank * 0.2)  # 20% increase per rank
 
         return base_mana_regen * mana_regen_multiplier
-
-    def absorb_damage(self, damage_amount):
-        self.damage_absorbed_total += damage_amount  # Update total damage absorbed
 
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
