@@ -57,6 +57,7 @@ class Awakened:
 
         self.attributes[i] += a
         self.update_vitals()
+        self.update_free_attributes()
     
     def update_free_attributes(self):
         self.free_attributes = 70 + (self.level * 10) - sum(self.attributes)
