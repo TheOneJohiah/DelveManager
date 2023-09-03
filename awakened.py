@@ -138,7 +138,10 @@ class Awakened:
         time = hours/24
         for x in [0,1,2]:
             self.currVitals[x] = min(self.currVitals[x] + (time*self.vitals[2*x + 1]), self.vitals[2*x])
+
+            ##Currently incorrect and will count excess mana regen towards 'mana regenerated' statistic. Perhaps total and actual should be two values?
             self.add_statistics("total "+["HP","SP","MP"][x]+" regen",(time*self.vitals[x+1]))
+
 
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
@@ -150,6 +153,7 @@ class Awakened:
                 # What about granted skills, or True Jacks? Think
         
         self.skills.update({skill.name:skill})
+        self.update_vitals()
         return True
         
     def update_skill_caps (self):
@@ -219,26 +223,6 @@ class Awakened:
             self.level += 1
             print(f"Congratulations! You have leveled up to level {self.level}!")
             self.update_free_attributes()
-
-    def display_required_experience(self):
-        current_exp = self.experience  # You should have a variable for tracking the character's experience
-        required_exp = self.calculate_required_experience()
-        difference = required_exp - current_exp
-
-        print(f"Current Experience: {current_exp}")
-        print(f"Required Experience for Level {self.level + 1}: {required_exp}")
-        print(f"Difference: {difference}")
-
-    def display_stats(self):
-        print(f"Stats: {self.attributes}")
-        self.initialize_vitals()
-        print(f"Current vitals: {self.vitals}")
-        print(f"Free Attributes: {self.free_attributes}")
-        print(f"Used Skill Points: {self.calculate_used_skill_points()}")
-        print(f"Free Skill Points: {self.calculate_free_skill_points()}")
-        print(f"Level: {self.level}")
-        print(f"Level Cap: {self.level_cap}")
-        print(f"Class: {self.character_class.name}")
 
     # Awful, innefficient, but best that I can think of
     def genSkillList (self):
