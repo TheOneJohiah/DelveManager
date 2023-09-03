@@ -9,9 +9,9 @@
         body {
             background: #080808;
             color:var(--fg);
-            font-family: "courier new",monospace;
+            font-family: monospace;
             text-align: center;
-            font-size:16pt;
+            font-size: 12pt;
             --fg: #ccc;
             --bg: #00436e;
         }
@@ -22,6 +22,44 @@
         h4 {font-size:1.2em}
         h5 {font-size:1.1em;margin: 0;}
         h6 {font-size:1em;margin: 0;}
+
+        body.Grace {
+            background-color: #000;
+            --fg:#9f6;
+            --bg:hsla(98, 25%, 22%,66%);
+            --hp:#2f2;
+            --sp:#ff2;
+            --mp:#fff;
+            --heat:#f40;
+            --cold:#04f;
+            --light:#ffd;
+            --dark:#002;
+            --force:#8a8;
+            --arcane:#408;
+            --chemical:#6f0;
+            --mental:#805;
+            --RE: #f64;
+            --NW: #cf0;
+            --CH: var(--chemical);
+        }
+
+        .alt #VitHP, .alt #AttSTR, .alt #AttRCV {color:var(--hp)}
+        .alt #VitSP, .alt #AttEND, .alt #AttVGR  {color:var(--sp)}
+        .alt #VitMP, .alt #AttFCS, .alt #AttCLR  {color:var(--mp)}
+
+        .Restoration {--TR: var(--RE);}
+        .Natureworking {--TR: var(--NW);}
+        .Chemistry {--TR: var(--CH);}
+        .alt table.Tree {color: var(--TR); --fg: var(--TR);}
+        
+        .alt #ResHE {color:var(--heat);}
+        .alt #ResCO {color:var(--cold);}
+        .alt #ResLI {color:var(--light);}
+        .alt #ResDA {color:var(--dark);}
+        .alt #ResFO {color:var(--force);}
+        .alt #ResAR {color:var(--arcane);}
+        .alt #ResCH {color:var(--chemical);}
+        .alt #ResME {color:var(--mental);}
         
         table {
             background: var(--bg);
@@ -110,7 +148,7 @@
 
     <table id="Skills"><tr><td><h2>Skills</h2>
         {% for tree in trees %}
-            <table><tr><th>Tier</th><th><h3>{{tree.name}}</h3></th></tr>
+            <table class="Tree {{tree.name}}"><tr><th>Tier</th><th><h3>{{tree.name}}</h3></th></tr>
             {% for tier in tree["tiers"].values() %}
                 <tr><th><h4>{{tier["t"]}}</h4></th>
                 <td><table>

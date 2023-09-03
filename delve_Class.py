@@ -18,6 +18,6 @@ worker = delve_Class("Worker", "Common", "Warning: Experience may no longer be g
 # Create specific classes
 dynamo = delve_Class("Dynamo", "Rare", "Master of energy manipulation", attribute_effect=[1, 1, 1, 1, 1, 3], tree_effect={}, additional_effect=None)
 
-shieldwielding_defender = delve_Class("Shieldwielding Defender", "Uncommon", "Master of defense with a shield", attribute_effect=[1, 1, 1.5, 1, 1, 1], tree_effect={"shieldwielding": 3}, additional_effect=None)
+shieldwielding_defender = delve_Class("Shieldwielding Defender", "Uncommon", "Master of defense with a shield", attribute_effect=[1, 1, 1.5, 1, 1, 1], tree_effect={"Shieldwielding": 3}, additional_effect=None)
 
-geomancer = delve_Class("Geomancer", "Uncommon", "A dirty dude", attribute_effect=[1,1,1,1,1.5,1], tree_effect={"geoevocation": 3}, additional_effect=None)
+geomancer = delve_Class("Geomancer", "Uncommon", "A dirty dude", attribute_effect=[1,1,1,1,1.5,1], tree_effect={"Geoevocation": 3}, additional_effect=None)

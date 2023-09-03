@@ -1,7 +1,10 @@
-class Skill:
-    def __init__(self, name, description, rarity, level, blue):
+class Monster:
+    def __init__(self, name, description, tier, level, tamed):
         self.name = name
         self.description = description
-        self.rarity = rarity
+        self.tier = tier
         self.level = level
-        self.blue = blue
+        self.tamed = tamed
+        self.reward_exp = 25*tier*level
+
+slime = Monster('Slime','Goopy Goober',1,5,False)

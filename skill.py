@@ -25,7 +25,28 @@ class Skill:
 
         self.xp = currXP
 
-# Create specific skills
-intrinsic_clarity = Skill("Intrinsic Clarity", "Multiply mana regen by 1+(RNK/5)", 0, "Magical Utility")
-intrinsic_focus = Skill("Intrinsic Focus", "Multiply maximum mana by 1+(RNK/5)", 0, "Magical Utility")
-# ... other skills ...
+# specific skills
+intrinsic_clarity = Skill("Intrinsic Clarity",
+                          "Multiply mana regen by 1+(RNK/5)",
+                          0,"Magical Utility")
+intrinsic_focus = Skill("Intrinsic Focus",
+                        "Multiply maximum mana by 1+(RNK/5)",
+                        0, "Magical Utility")
+
+healing_word = Skill("Healing Word",
+                     "Invoke a word of healing to restore health to a touched entity <br> Heal [10-20]*[RNK]*[1 + .005*FCS] hp <br> Cost: 10mp <br> Cannot Heal Self",
+                     0,"Restoration",cost={'type':"MP",'value':10})
+
+natural_intuition = Skill("Natural Intuition",
+                          "Develop an intuitive understanding of the mechanics of fibres and polymers <br> Higher ranks mean greater insight",
+                          0,"Natureworking")
+
+chemical_intuition = Skill("Chemical Intuition",
+                           "Develop an intuitive understanding of the mechanics of compounds <br> Higher ranks mean greater insight",
+                           0,"Chemistry")
+
+cleave_fibers = Skill("Cleave Fibers", "Manipulate the bonds between fibers, binding them together or cutting them apart. <br> Alter area of [RNK^2] cm<sup>2</sup> <br> Cost: 5*RNK mp",0,"Natureworking")
+stamina_transfer = Skill("Stamina Transfer","Sacrifice a portion of your stamina to energize a touched entity <br> Gives: [20*RNK] sp <br> Cost: [40*RNK] sp",0,"Restoration")
+purge_poison = Skill("Purge Poison","Weaken and destroy poisons and toxins (fcs) <br> Reduce poison damage by  [20*RNK*(1 + .01*FCS)] <br> Range: Touch<br> Cost: 20mp <br> If damage is reduced to 0, the condition is ended",1,"Restoration")
+healers_synergy = Skill("Healers Synergy","Multiply intensity of healing skills by [1+0.002*RNK*restoration_ranks] <br> Requires 50 ranks in Restoration",2,"Restoration")
+tissue_scan = Skill("Tissue Scan","Scan the body of a touched entity. <br> Resolution of resulting scan is equal to: [200 + 20*RNK] % of mundane optical vision <br> Cost: 5mp",2,"Restoration")

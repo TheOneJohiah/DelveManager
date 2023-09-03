@@ -1,10 +1,10 @@
 import math
-import delve_Class as dClass;
-import skill as Skill;
+import delve_Class as dc;
+import skill as sk;
 from jinja2 import Template;
 
 class Awakened:
-    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dClass.unclassed):
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dc.unclassed):
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
@@ -164,9 +164,7 @@ class Awakened:
     def cast_skill (self, skillN, n):
         skill = self.skills[skillN]
         type = ["HP","SP","MP"].index(skill.cost['type'])
-        print("Pre-cast "+skill.cost['type']+": "+str(self.currVitals[type]))
         self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
-        print("Post-cast "+skill.cost['type']+": "+str(self.currVitals[type]))
         skill.add_exp(.5*n*skill.cost['value'])
     
     def set_class(self, character_class):
@@ -200,7 +198,7 @@ class Awakened:
 
         new_exp = current_exp + amount
 
-        if self.level == 5 and self.character_class == unclassed or self.level == 25 or self.level == self.level_cap:
+        if self.level == 5 and self.character_class == dc.unclassed or self.level == 25 or self.level == self.level_cap:
                 max_exp = required_exp - 1
                 new_exp = min(new_exp, max_exp)
 
