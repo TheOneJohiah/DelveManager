@@ -1,28 +1,88 @@
+class Material:
+    def __init__(self, name):
+        self.name = name
+
 class Enchantment:
-    def __init__(self, name, description, mana_cost, slot_requirement, 
-                 resistance_buff=None, attribute_buff=None,
-                 abstract_effect=None, skill_bonus=None, 
-                 mana_storage=False, mana_input_efficiency=100, 
-                 mana_output_efficiency=100, binding_strength="None"):
+    def __init__(self, name, description, mana_cost=0, per_activation=False):
         self.name = name
         self.description = description
         self.mana_cost = mana_cost
+        self.per_activation = per_activation
+
+    def spend_mana(self, mana_cost, per_activation):
+        if per_activation == False:
+            return mana_cost
+        return True
+
+class ResistanceEnchantment(Enchantment):
+    def __init__(self, name, description, resistance_buff, mana_cost):
+        super().__init__(name, description, mana_cost)
+        # array [], location 0 through 7, heat/cold/light/dark/force/arcane/chemical/mental
+        self.resistance_buff = resistance_buff
+
+class AttributeEnchantment(Enchantment):
+    def __init__(self, name, description, attribute_buff, mana_cost):
+        super().__init__(name, description, mana_cost)
+        # array [], 0 through 5, str/rec/end/vig/foc/cha
+        self.attribute_buff = attribute_buff
+
+#Durability, hardness, sharpness, weight % increase
+class ItemStatEnchantment(Enchantment):
+    def __init__(self, name, description, percent_buff, buff_type, mana_cost):
+        super().__init__(name, description, mana_cost)
+        self.percent_buff = percent_buff
+        self.buff_type = buff_type
+
+class MiscellaneousEnchantment(Enchantment):
+    def __init__(self, name, description, mana_cost, abstract_effect=None, skill_bonus=None, per_activation=False):
+        super().__init__(name, description, mana_cost, per_activation)
+        self.abstract_effect = abstract_effect
+        self.skill_bonus = skill_bonus
+
+class RepairEnchantment(Enchantment):
+    def __init__(self, name, description, mana_cost_per_repair, repair_rate, conditions):
+        super().__init__(name, description)
+        self.mana_cost_per_repair = mana_cost_per_repair
+        self.repair_rate = repair_rate
+        self.conditions = conditions
+
+
+class ManaCapacitanceEnchantment(Enchantment):
+    def __init__(self, name, description, storage_capacity, input_efficiency, output_efficiency, mana_leakage_rate):
+        super().__init__(name, description)
+        self.storage_capacity = storage_capacity
+
+        #Both between 0 and 100%
+        self.input_efficiency = input_efficiency
+        self.output_efficiency = output_efficiency
+
+        #Some number per time unit
+        self.mana_leakage_rate = mana_leakage_rate
+
+class Rune:
+    def __init__(self, name, active=False, enchantments=None, slot_requirement="Any"):
+        self.name = name
+        self.active = active
+        self.enchantments = enchantments if enchantments is not None else []
         self.slot_requirement = slot_requirement
-        self.resistance_buff = resistance_buff if resistance_buff is not None else {}
-        self.attribute_buff = attribute_buff if attribute_buff is not None else [0, 0, 0, 0, 0, 0]
-        self.abstract_effect = abstract_effect  # You can define this as needed
-        self.skill_bonus = skill_bonus  # You can define this as needed
-        self.mana_storage = mana_storage
-        self.mana_input_efficiency = mana_input_efficiency
-        self.mana_output_efficiency = mana_output_efficiency
-        self.binding_strength = binding_strength
 
+    def activate(self):
+        self.is_active = True
 
+    def deactivate(self):
+        self.is_active = False
+
+    def deplete_charge(self, enchantments, deplete):
+        ##Todo: if item has Capacitance rune, then deplete charge from it.
+        ##depletion amount for time passing on passive runes calculated outside this function
+        ##if mana below 0, rune deactivates.
+        return True
 
 class Item:
-    def __init__(self, name, description, durability, hardness, manaSat, manaConvert, manaDissipate,  enchantments=None):
+    def __init__(self, name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments=None):
         self.name = name
         self.description = description
+        self.material = material
         self.enchantments = enchantments if enchantments is not None else []
         self.durability = durability
         self.hardness = hardness
@@ -30,33 +90,40 @@ class Item:
         self.manaConvert = manaConvert
         self.manaDissipate = manaDissipate
 
-
 class Equipment(Item):
-    def __init__(self, name, description, slot, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments=None):
-        super().__init__(name, description, enchantments, durability, hardness, manaSat, manaConvert, manaDissipate)
+    def __init__(self, name, description, material, slot, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments=None):
+        super().__init__(name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments)
         self.slot = slot
 
-
 class Weapon(Equipment):
-    def __init__(self, name, description, durability, hardness, manaSat, manaConvert, manaDissipate, slot, weight, sharpness, enchantments=None):
-        super().__init__(name, description, durability, hardness, manaSat, manaConvert, manaDissipate, slot, enchantments)
+    def __init__(self, name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, slot, weight, sharpness, enchantments=None):
+        super().__init__(name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, slot, enchantments)
         self.weight = weight
         self.sharpness = sharpness
 
+# Example usage:
 
+# Creating materials
+force_oak = Material("Force Oak")
+heat_copper = Material("Heat Copper")
+dark_steel = Material("Dark Steel")
 
 # Creating enchantments
-hardness_enchantment = Enchantment("Hardness", "Increases item hardness", mana_cost=10, slot_requirement="Any")
-durability_enchantment = Enchantment("Durability", "Increases item durability", mana_cost=15, slot_requirement="Any")
-resistance_enchantment = Enchantment("Resistance", "Provides resistances", mana_cost=20, slot_requirement="Chest", resistance_buff=[100,100,0,0,0,0,0,0])
-# ... Define more enchantments as needed
+resistance_enchantment = ResistanceEnchantment("Grand Arcane Resistance", "Provides resistances", resistance_buff=[0, 0, 0, 0, 0, 5000, 0, 0], mana_cost=100)
+attribute_enchantment = AttributeEnchantment("Grand Strength", "Boosts attributes", attribute_buff=[100, 0, 0, 0, 0, 0], mana_cost=100)
+mana_capacitance = ManaCapacitanceEnchantment("Lesser Mana Capacitance", "Stores mana", 10000, 0.7, 0.1, 1)
+##Placeholder enchantment type variable. Replace with dict? Array?
+durability_enchantment = ItemStatEnchantment("Enhanced Durability", "Boosts item durability cap", 10, "durability", mana_cost=20)
+blade_sharpness = ItemStatEnchantment("Greater sharpness", "increase to sharpness", 0.49, "sharpness", mana_cost=20)
+swing_damage = MiscellaneousEnchantment("Greater sharpness", "increase strike damage when using sword-aspect skills.", mana_cost=20, per_activation=True)
 
-# Creating an item with enchantments, attributes, and resistances
-attributes = [10, 5, 8, 7, 12, 15]  # Example values for attributes
-resistances = [20, 15, 10, 5, 18, 25, 8, 14]  # Example values for endurances
-enchanted_item = Equipment("Enchanted Armor", "An armor with enchantments", durability=100, hardness=8, slot="Chest",
-                            attributes=attributes, resistance_buff=resistances, enchantments=[hardness_enchantment, durability_enchantment])
+# Creating runes
+mana_capacitance_rune = Rune("Lesser Mana Capacitance Rune", enchantments=[mana_capacitance])
+grand_arcane_resistance_rune = Rune("Grand Arcane Resistance Rune", "Provides resistances", enchantments=[resistance_enchantment])
+enhanced_durability_rune = Rune("Enhanced Durability Rune", enchantments=[durability_enchantment])
+greater_sharpness_rune = Rune("Greater Sharpness Rune", enchantments=[blade_sharpness,swing_damage])
 
-# Accessing attributes and endurances of an item
-print(f"Attributes: {enchanted_item.attributes}")
-print(f"Endurances: {enchanted_item.endurance}")
+# Creating items
+sword = Weapon("Sword", "A sharp weapon", material=force_oak, durability=80, hardness=10,
+               manaSat=50, manaConvert=30, manaDissipate=5, slot="Hand", weight=5, sharpness=8,
+               enchantments=[greater_sharpness_rune,enhanced_durability_rune])
