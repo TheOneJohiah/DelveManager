@@ -1,50 +1,10 @@
 import math
+import delve_Class as dClass;
+import skill as Skill;
 from jinja2 import Template;
 
-class Class:
-    def __init__(self, name, rarity, notes, attribute_effect, tree_effect, additional_effect):
-        self.name = name
-        self.rarity = rarity
-        self.notes = notes
-        self.attribute_effect = attribute_effect  # Now an array [str, rec, end, vig, foc, cla]
-        self.tree_effect = tree_effect
-        self.additional_effect = additional_effect
-        
-    def meets_requirements(self, awakened):
-        ##Todo: Reimplement these requirements in a better way
-        return True
-
-unclassed = Class("Unclassed", "Common", "Everyone's first class", attribute_effect=[1, 1, 1, 1, 1, 1], tree_effect={}, additional_effect=None)
-
-worker = Class("Worker", "Common", "Warning: Experience may no longer be gained through combat", attribute_effect=[1, 1, 1, 1, 1, 1], tree_effect={}, additional_effect="50% boost to non-combat skills")
-
-# Create specific classes
-dynamo = Class("Dynamo", "Rare", "Master of energy manipulation", attribute_effect=[1, 1, 1, 1, 1, 3], tree_effect={}, additional_effect=None)
-
-shieldwielding_defender = Class("Shieldwielding Defender", "Uncommon", "Master of defense with a shield", attribute_effect=[1, 1, 1.5, 1, 1, 1], tree_effect={"shieldwielding": 3}, additional_effect=None)
-
-geomancer = Class("Geomancer", "Uncommon", "A dirty dude", attribute_effect=[1,1,1,1,1.5,1], tree_effect={"geoevocation": 3}, additional_effect=None)
-
-class Skill:
-    def __init__(self, name, description, tier, tree):
-        self.name = name
-        self.description = description
-        self.tier = tier
-        self.tree = tree
-        self.rank = 1  # Initial rank is 1
-        self.cap = 10 # Starting cap for all skills is 10
-        self.xp = 0 #starting xp for all skills is 0
-
-    def getNextRankXP(self):
-        return (.5*self.rank*(self.rank - 1) + 1) * 2**self.tier * 100
-
-# Create specific skills
-intrinsic_clarity = Skill("Intrinsic Clarity", "Multiply mana regen by 1+(RNK/5)", 0, "Magical Utility")
-intrinsic_focus = Skill("Intrinsic Focus", "Multiply maximum mana by 1+(RNK/5)", 0, "Magical Utility")
-# ... other skills ...
-
 class Awakened:
-    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed):
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dClass.unclassed):
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = [0] * 8  # Create a list for general statistics
 
@@ -59,9 +19,9 @@ class Awakened:
         self.specialization = []
         self.character_class = character_class
         self.currVitals = [200,200,200]
+        self.calculate_resistances()
         self.update_free_attributes()
         self.initialize_vitals()  # Initialize vitals when the character is created
-
 
     def initialize_vitals(self):
         self.vitals[0] = self.calculate_health_cap()
@@ -131,6 +91,12 @@ class Awakened:
                 mana_regen_multiplier *= (1 + skill.rank * 0.2)  # 20% increase per rank
 
         return base_mana_regen * mana_regen_multiplier
+    
+    def calculate_resistances(self):
+        end_multiplier = self.character_class.attribute_effect[2]
+        baseRes = math.floor(self.attributes[2] * end_multiplier / 10)
+        # Remember to include item and other skill effects later
+        self.resistances = [baseRes] * 8
 
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
@@ -302,6 +268,15 @@ class Awakened:
                     basVGR = self.attributes[3],
                     basFCS = self.attributes[4],
                     basCLR = self.attributes[5],
+
+                    fltHE = self.resistances[0],
+                    fltCO = self.resistances[1],
+                    fltLI = self.resistances[2],
+                    fltDA = self.resistances[3],
+                    fltFO = self.resistances[4],
+                    fltAR = self.resistances[5],
+                    fltCH = self.resistances[6],
+                    fltME = self.resistances[7],
 
                     trees = self.genSkillList()
                     
