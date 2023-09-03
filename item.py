@@ -20,23 +20,26 @@ class Enchantment:
 
 
 class Item:
-    def __init__(self, name, description, enchantments=None):
+    def __init__(self, name, description, durability, hardness, manaSat, manaConvert, manaDissipate,  enchantments=None):
         self.name = name
         self.description = description
         self.enchantments = enchantments if enchantments is not None else []
+        self.durability = durability
+        self.hardness = hardness
+        self.manaSat = manaSat
+        self.manaConvert = manaConvert
+        self.manaDissipate = manaDissipate
 
 
 class Equipment(Item):
-    def __init__(self, name, description, durability, hardness, slot, enchantments=None):
-        super().__init__(name, description, enchantments)
-        self.durability = durability
-        self.hardness = hardness
+    def __init__(self, name, description, slot, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments=None):
+        super().__init__(name, description, enchantments, durability, hardness, manaSat, manaConvert, manaDissipate)
         self.slot = slot
 
 
 class Weapon(Equipment):
-    def __init__(self, name, description, durability, hardness, slot, weight, sharpness, enchantments=None):
-        super().__init__(name, description, durability, hardness, slot, enchantments)
+    def __init__(self, name, description, durability, hardness, manaSat, manaConvert, manaDissipate, slot, weight, sharpness, enchantments=None):
+        super().__init__(name, description, durability, hardness, manaSat, manaConvert, manaDissipate, slot, enchantments)
         self.weight = weight
         self.sharpness = sharpness
 
