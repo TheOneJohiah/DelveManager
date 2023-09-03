@@ -6,7 +6,15 @@ from jinja2 import Template;
 class Awakened:
     def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dClass.unclassed):
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
-        self.general_statistics = [0] * 8  # Create a list for general statistics
+        self.general_statistics = {"total HP regen":0,
+                                   "total HP spent":0,
+                                   "total SP regen":0,
+                                   "total SP spent":0,
+                                   "total MP regen":0,
+                                   "total MP spent":0,
+                                   "melee kills":0,
+                                   "ranged kills":0,
+                                   "magical kills":0}  # Create a dict for general statistics
 
         self.name = name
         self.attributes = attributes
@@ -34,6 +42,22 @@ class Awakened:
         self.currVitals[2] = self.calculate_mana_cap()
         self.vitals[5] = self.calculate_mana_regen()
 
+    def update_vitals(self):
+        self.vitals[0] = self.calculate_health_cap()
+        self.vitals[1] = self.calculate_health_regen()
+        self.vitals[2] = self.calculate_stamina_cap()
+        self.vitals[3] = self.calculate_stamina_regen()
+        self.vitals[4] = self.calculate_mana_cap()
+        self.vitals[5] = self.calculate_mana_regen()
+
+    def raise_attribute(self,i,a):
+        if (a > self.free_attributes):
+            a = self.free_attributes
+            print ("Tried to spend too many stat points! Reduced to "+str(a))
+
+        self.attributes[i] += a
+        self.update_vitals()
+    
     def update_free_attributes(self):
         self.free_attributes = 70 + (self.level * 10) - sum(self.attributes)
 
@@ -74,7 +98,7 @@ class Awakened:
         base_mana_cap = self.attributes[4] * 20
         mana_cap_multiplier = self.character_class.attribute_effect[4]
 
-        for skill in self.skills:
+        for skill in list(self.skills.values()):
             if skill.name == "Intrinsic Focus":
                 # Calculate the multiplicative effect based on the skill's rank
                 mana_cap_multiplier *= (1 + skill.rank * 0.2)  # 20% increase per rank
@@ -85,7 +109,7 @@ class Awakened:
         base_mana_regen = self.attributes[5] * 10
         mana_regen_multiplier = self.character_class.attribute_effect[5]
 
-        for skill in self.skills:
+        for skill in list(self.skills.values()):
             if skill.name == "Intrinsic Clarity":
                 # Calculate the multiplicative effect based on the skill's rank
                 mana_regen_multiplier *= (1 + skill.rank * 0.2)  # 20% increase per rank
@@ -97,6 +121,23 @@ class Awakened:
         baseRes = math.floor(self.attributes[2] * end_multiplier / 10)
         # Remember to include item and other skill effects later
         self.resistances = [baseRes] * 8
+
+    def reduce_vital(self, type, amount):
+        self.add_statistics("total "+type+" spent",amount) 
+
+        if type == "HP": type = 0
+        elif type == "SP": type = 1
+        elif type == "MP": type = 2
+        else: print(type+" is not a vital, goof") 
+        
+        self.currVitals[type] -= amount
+        self.add_experience(.5*amount)
+
+    def regen (self, hours):
+        time = hours/24
+        for x in [0,1,2]:
+            self.currVitals[x] = min(self.currVitals[x] + (time*self.vitals[2*x + 1]), self.vitals[2*x])
+            self.add_statistics("total "+["HP","SP","MP"][x]+" regen",(time*self.vitals[x+1]))
 
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
@@ -118,22 +159,16 @@ class Awakened:
                 if skill.cap < tree_cap:
                     skill.cap = tree_cap
     
-    def add_skill_exp (self, skillN, xp):
-        # Find Skill in skills, get xp
-        currXP = self.skills[skillN].xp + xp
-        nextXP = self.skills[skillN].getNextRankXP()
-
-        if currXP >= nextXP:
-            while currXP >= nextXP:
-                currXP -= nextXP
-                self.skills[skillN].rank +=1
-                print(self.skills[skillN].name+" Leveled up!")
-                nextXP = self.skills[skillN].getNextRankXP()
-
-        self.skills[skillN].xp = currXP
-        # consider making this a method of Skill?
-
+    def add_skill_exp (self, skillN, xp): self.skills[skillN].add_exp(xp) #redirect to skill method
         
+    def cast_skill (self, skillN, n):
+        skill = self.skills[skillN]
+        type = ["HP","SP","MP"].index(skill.cost['type'])
+        print("Pre-cast "+skill.cost['type']+": "+str(self.currVitals[type]))
+        self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
+        print("Post-cast "+skill.cost['type']+": "+str(self.currVitals[type]))
+        skill.add_exp(.5*n*skill.cost['value'])
+    
     def set_class(self, character_class):
         if self.level != 5 or self.level != 25:
             print(f"Character not at a class selection level!'")
@@ -211,7 +246,7 @@ class Awakened:
         tr = []
         for skill in list(self.skills.values()):
             tr.append(skill.tree)
-        tr = list(set(tr))
+        tr = sorted(list(set(tr)))
 
         trees = []
 
