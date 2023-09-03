@@ -101,8 +101,6 @@ class Weapon(Equipment):
         self.weight = weight
         self.sharpness = sharpness
 
-# Example usage:
-
 # Creating materials
 force_oak = Material("Force Oak")
 heat_copper = Material("Heat Copper")
