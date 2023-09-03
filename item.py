@@ -45,15 +45,14 @@ class Weapon(Equipment):
 # Creating enchantments
 hardness_enchantment = Enchantment("Hardness", "Increases item hardness", mana_cost=10, slot_requirement="Any")
 durability_enchantment = Enchantment("Durability", "Increases item durability", mana_cost=15, slot_requirement="Any")
-resistance_enchantment = Enchantment("Resistance", "Provides resistance to damage", mana_cost=20, slot_requirement="Chest",
-                                        resistance_buff={"Fire": 10, "Ice": 5})
+resistance_enchantment = Enchantment("Resistance", "Provides resistances", mana_cost=20, slot_requirement="Chest", resistance_buff=[100,100,0,0,0,0,0,0])
 # ... Define more enchantments as needed
 
-# Creating an item with enchantments, attributes, and endurances
+# Creating an item with enchantments, attributes, and resistances
 attributes = [10, 5, 8, 7, 12, 15]  # Example values for attributes
-endurances = [20, 15, 10, 5, 18, 25, 8, 14]  # Example values for endurances
+resistances = [20, 15, 10, 5, 18, 25, 8, 14]  # Example values for endurances
 enchanted_item = Equipment("Enchanted Armor", "An armor with enchantments", durability=100, hardness=8, slot="Chest",
-                            attributes=attributes, endurance=endurances, enchantments=[hardness_enchantment, durability_enchantment])
+                            attributes=attributes, resistance_buff=resistances, enchantments=[hardness_enchantment, durability_enchantment])
 
 # Accessing attributes and endurances of an item
 print(f"Attributes: {enchanted_item.attributes}")
