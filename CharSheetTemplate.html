@@ -161,5 +161,18 @@
         </table>
         {% endfor %}
     </td></tr></table>
+
+    <table id="Inventory">
+        <tr><th>Slot</th><th>Item</th><th>Charge</th><th>Saturation</th><th>Durability</th></tr>
+    {% for item in Items %}
+        <tr class="item">
+            <td>{{item.slot}}</td>
+            <td><h4>{{item.name}}</h4>{{item.describe()}}</td>
+            <td>{{item.currCharge}} / {{item.charge}}</td>
+            <td>{{item.currSat}} / {{item.manaSat}}</td>
+            <td>{{item.currDurability}} / {{item.durability}}</td>
+        </tr>
+    {% endfor %}
+    </table>
 </body>
 </html>

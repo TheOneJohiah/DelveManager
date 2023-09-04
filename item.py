@@ -2,6 +2,32 @@ class Material:
     def __init__(self, name):
         self.name = name
 
+    #def describe(self): return describe(self);
+    def describe(self): return "<ul><li>name:"+self.name+"</li></ul>";
+
+global describe
+def describe (thing):
+    attributes = [attr for attr in dir(thing) if not callable(getattr(thing, attr)) and not attr.startswith("__")]
+    descr = "<ul>" #initialize description
+    for attr in attributes:
+        val = getattr(thing, attr)
+        desc = ""
+        # print(attr+" is a "+str(type(val))+", Desc: "+str(hasattr(val, 'describe'))+", List:"+str())
+        if callable(hasattr(val, 'describe')):
+            print(attr+" is describeable")
+            desc = attr.describe()
+        elif type(val) == list:
+            desc += "[<ul>"
+            for item in val:
+                desc += "<li>"+describe(item)+"</li>,"
+            desc += "</ul>]"
+        elif hasattr(val,'name'): desc = str(getattr(val,'name'))
+        else: desc = str(val).replace('<','{').replace('>','}')
+
+        descr += "<li>"+attr+": "+desc+"</li>"
+        #print(descr)
+    return descr+"</ul>"
+
 class Enchantment:
     def __init__(self, name, description, mana_cost=0, per_activation=False):
         self.name = name
@@ -13,6 +39,8 @@ class Enchantment:
         if per_activation == False:
             return mana_cost
         return True
+    
+    def describe(self): return describe(self);
 
 class ResistanceEnchantment(Enchantment):
     def __init__(self, name, description, resistance_buff, mana_cost):
@@ -77,6 +105,9 @@ class Rune:
         ##depletion amount for time passing on passive runes calculated outside this function
         ##if mana below 0, rune deactivates.
         return True
+    
+    def describe(self): return describe(self);
+
 
 class Item:
     def __init__(self, name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments=None):
@@ -90,6 +121,8 @@ class Item:
         self.manaConvert = manaConvert
         self.manaDissipate = manaDissipate
 
+    def describe(self): return describe(self);
+    
 class Equipment(Item):
     def __init__(self, name, description, material, slot, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments=None):
         super().__init__(name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments)
