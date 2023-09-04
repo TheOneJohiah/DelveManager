@@ -13,6 +13,13 @@ class Enchantment:
         if per_activation == False:
             return mana_cost
         return True
+    
+    def describe(self):
+        attributes = [attr for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]
+        descr = "<ul>" #initialize description
+        for attr in attributes:
+            descr += "<li>"+attr+": "+str(getattr(self, attr))+"</li>"
+        return descr+"</ul>"
 
 class ResistanceEnchantment(Enchantment):
     def __init__(self, name, description, resistance_buff, mana_cost):
@@ -77,6 +84,13 @@ class Rune:
         ##depletion amount for time passing on passive runes calculated outside this function
         ##if mana below 0, rune deactivates.
         return True
+    
+    def describe(self):
+        attributes = [attr for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]
+        descr = "<ul>" #initialize description
+        for attr in attributes:
+            descr += "<li>"+attr+": "+str(getattr(self, attr))+"</li>"
+        return descr+"</ul>"
 
 class Item:
     def __init__(self, name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments=None):
@@ -90,6 +104,13 @@ class Item:
         self.manaConvert = manaConvert
         self.manaDissipate = manaDissipate
 
+    def describe(self):
+        attributes = [attr for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]
+        descr = "<ul>" #initialize description
+        for attr in attributes:
+            descr += "<li>"+attr+": "+str(getattr(self, attr))+"</li>"
+        return descr+"</ul>"
+    
 class Equipment(Item):
     def __init__(self, name, description, material, slot, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments=None):
         super().__init__(name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments)
@@ -97,12 +118,13 @@ class Equipment(Item):
 
 class Weapon(Equipment):
     def __init__(self, name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, slot, weight, sharpness, enchantments=None):
-        super().__init__(name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, slot, enchantments)
+        super().__init__(name, description, material, slot, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments) #Keep track of order!!
         self.weight = weight
         self.sharpness = sharpness
 
 # Creating materials
 force_oak = Material("Force Oak")
+force_steel = Material("Force Steel")
 heat_copper = Material("Heat Copper")
 dark_steel = Material("Dark Steel")
 

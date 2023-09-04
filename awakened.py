@@ -1,10 +1,10 @@
 import math
-import delve_Class as dc;
-import skill as sk;
+import delve_Class as dc
+import skill as sk
 from jinja2 import Template;
 
 class Awakened:
-    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dc.unclassed):
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dc.unclassed):
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
@@ -27,6 +27,7 @@ class Awakened:
         self.specialization = []
         self.character_class = character_class
         self.currVitals = [200,200,200]
+        self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
         self.calculate_resistances()
         self.update_free_attributes()
         self.initialize_vitals()  # Initialize vitals when the character is created
@@ -50,17 +51,17 @@ class Awakened:
         self.vitals[4] = self.calculate_mana_cap()
         self.vitals[5] = self.calculate_mana_regen()
 
-    def raise_attribute(self,i,a):
-        if (a > self.free_attributes):
-            a = self.free_attributes
-            print ("Tried to spend too many stat points! Reduced to "+str(a))
+    def raise_attribute(self,index,amount):
+        if (amount > self.free_attributes):
+            amount = self.free_attributes
+            print ("Tried to spend too many stat points! Reduced to "+str(amount))
 
-        self.attributes[i] += a
+        self.attributes[index] += amount
         self.update_vitals()
         self.update_free_attributes()
     
     def update_free_attributes(self):
-        self.free_attributes = 70 + (self.level * 10) - sum(self.attributes)
+        self.free_attributes = 90 + (self.level * 10) - sum(self.attributes)
 
     def max_skill_points(self):
         return self.level + 1
@@ -123,6 +124,8 @@ class Awakened:
         # Remember to include item and other skill effects later
         self.resistances = [baseRes] * 8
 
+    def add_equipment (self,item): self.inventory[item.slot] = item
+    
     def reduce_vital(self, type, amount):
         self.add_statistics("total "+type+" spent",amount) 
 
@@ -142,14 +145,22 @@ class Awakened:
                     self.add_skill_exp(skill.name, .5*amount)
                 elif skill.name == "Magical Synergy":
                     self.add_skill_exp(skill.name, .5*amount)
+                    
+    def add_vital(self, type, amount):
+        if type == "HP": type = 0
+        elif type == "SP": type = 1
+        elif type == "MP": type = 2
+        else: print(type+" is not a vital, goof") 
+        
+        self.currVitals[type] += amount
 
     def regen (self, hours):
         time = hours/24
         for x in [0,1,2]:
-            self.currVitals[x] = min(self.currVitals[x] + (time*self.vitals[2*x + 1]), self.vitals[2*x])
-
-            ##Currently incorrect and will count excess mana regen towards 'mana regenerated' statistic. Perhaps total and actual should be two values?
-            self.add_statistics("total "+["HP","SP","MP"][x]+" regen",(time*self.vitals[x+1]))
+            regN = min( time*self.vitals[2*x + 1], self.vitals[2*x] - self.currVitals[x]) # ensuring regen doesn't overflow cap
+            overN = time*self.vitals[2*x + 1] - regN #Over-whatever; currently unused, could add an total-overvital statistic?
+            self.currVitals[x] += regN
+            self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
 
 
     def count_skills_in_tree(self, tree_name):
@@ -249,8 +260,7 @@ class Awakened:
                                         "3": {"t":3,"skills":[]}, 
                                         "4": {"t":4,"skills":[]}}}
             for skill in list(self.skills.values()):                      
-                if skill.tree == tree:
-                    trr["tiers"][str(skill.tier)]["skills"].append(skill)
+                if skill.tree == tree: trr["tiers"][str(skill.tier)]["skills"].append(skill)
                     
             for tier in list(trr["tiers"].values()):
                 if not tier["skills"]: trr["tiers"].pop(str(tier["t"]))
@@ -295,6 +305,8 @@ class Awakened:
                     basVGR = self.attributes[3],
                     basFCS = self.attributes[4],
                     basCLR = self.attributes[5],
+                    basPER = self.attributes[6],
+                    basSPD = self.attributes[7],
 
                     fltHE = self.resistances[0],
                     fltCO = self.resistances[1],
@@ -305,7 +317,9 @@ class Awakened:
                     fltCH = self.resistances[6],
                     fltME = self.resistances[7],
 
-                    trees = self.genSkillList()
+                    trees = self.genSkillList(),
+
+                    Items = filter(None,list(self.inventory.values()))
                     
             ))
 
