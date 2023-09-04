@@ -134,6 +134,14 @@ class Awakened:
         self.currVitals[type] -= amount
         self.add_experience(.5*amount)
 
+    def add_vital(self, type, amount):
+        if type == "HP": type = 0
+        elif type == "SP": type = 1
+        elif type == "MP": type = 2
+        else: print(type+" is not a vital, goof") 
+        
+        self.currVitals[type] += amount
+
     def regen (self, hours):
         time = hours/24
         for x in [0,1,2]:
