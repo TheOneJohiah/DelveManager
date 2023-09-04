@@ -153,6 +153,7 @@ class Awakened:
             self.currVitals[x] += regN
             self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
 
+
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
 
@@ -163,6 +164,7 @@ class Awakened:
                 # What about granted skills, or True Jacks? Think
         
         self.skills.update({skill.name:skill})
+        self.update_vitals()
         return True
         
     def update_skill_caps (self):
