@@ -8,12 +8,14 @@ class Skill:
         self.rank = 1  # Initial rank is 1
         self.cap = 10 # Starting cap for all skills is 10
         self.xp = 0 #starting xp for all skills is 0
+        self.banked_xp = 0
 
     def getNextRankXP(self):
         return (.5*self.rank*(self.rank - 1) + 1) * 2**self.tier * 100
     
-    def add_exp (self, xp):
-        currXP = self.xp + xp
+    #Iterate through adding levels during essence exchange
+    def add_exp (self):
+        currXP = self.xp + self.banked_xp
         nextXP = self.getNextRankXP()
 
         if currXP >= nextXP:
@@ -24,6 +26,12 @@ class Skill:
                 nextXP = self.getNextRankXP()
 
         self.xp = currXP
+        self.banked_xp = 0
+
+    #Store xp for the next essence exchange
+    def bank_exp(self, xp):
+        self.banked_xp += xp
+        #print(f"XP {xp} banked for {self.name}") #Was just a debug output
 
 # specific skills
 intrinsic_clarity = Skill("Intrinsic Clarity",
