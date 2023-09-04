@@ -26,6 +26,7 @@ class Awakened:
         self.skills = {}
         self.specialization = []
         self.character_class = character_class
+        self.banked_xp = 0
         self.currVitals = [200,200,200]
         self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
         self.calculate_resistances()
@@ -126,6 +127,17 @@ class Awakened:
 
     def add_equipment (self,item): self.inventory[item.slot] = item
     
+    def essence_exhange(self):
+        #All banked xp from stat expenditure or anything else
+        self.add_experience(self.banked_xp)
+        self.banked_xp = 0
+        for skill in list(self.skills.values()):
+            if skill.banked_xp > 0:
+                self.add_skill_exp(skill.name)
+
+    def bank_experience(self, xp):
+        self.banked_xp += xp
+
     def reduce_vital(self, type, amount):
         self.add_statistics("total "+type+" spent",amount) 
 
@@ -135,16 +147,16 @@ class Awakened:
         else: print(type+" is not a vital, goof") 
         
         self.currVitals[type] -= amount
-        self.add_experience(.5*amount)
+        self.bank_experience(.5*amount)
 
         if type == 2:
             for skill in list(self.skills.values()):
                 if skill.name == "Intrinsic Clarity":
-                    self.add_skill_exp(skill.name, .5*amount)
+                    self.bank_skill_exp(skill.name, .5*amount)
                 elif skill.name == "Intrinsic Focus":
-                    self.add_skill_exp(skill.name, .5*amount)
+                    self.bank_skill_exp(skill.name, .5*amount)
                 elif skill.name == "Magical Synergy":
-                    self.add_skill_exp(skill.name, .5*amount)
+                    self.bank_skill_exp(skill.name, .5*amount)
                     
     def add_vital(self, type, amount):
         if type == "HP": type = 0
@@ -184,13 +196,14 @@ class Awakened:
                 if skill.cap < tree_cap:
                     skill.cap = tree_cap
     
-    def add_skill_exp (self, skillN, xp): self.skills[skillN].add_exp(xp) #redirect to skill method
-        
+    def bank_skill_exp (self, skillN, xp): self.skills[skillN].bank_exp(xp) #redirect to skill method
+    def add_skill_exp (self, skillN): self.skills[skillN].add_exp() #redirect to skill method
+
     def cast_skill (self, skillN, n):
         skill = self.skills[skillN]
         type = ["HP","SP","MP"].index(skill.cost['type'])
         self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
-        skill.add_exp(.5*n*skill.cost['value'])
+        skill.bank_exp(.5*n*skill.cost['value'])
     
     def set_class(self, character_class):
         if self.level != 5 or self.level != 25:
