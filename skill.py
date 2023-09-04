@@ -8,12 +8,14 @@ class Skill:
         self.rank = 1  # Initial rank is 1
         self.cap = 10 # Starting cap for all skills is 10
         self.xp = 0 #starting xp for all skills is 0
+        self.banked_xp = 0
 
     def getNextRankXP(self):
         return (.5*self.rank*(self.rank - 1) + 1) * 2**self.tier * 100
     
-    def add_exp (self, xp):
-        currXP = self.xp + xp
+    #Iterate through adding levels during essence exchange
+    def add_exp (self):
+        currXP = self.xp + self.banked_xp
         nextXP = self.getNextRankXP()
 
         if currXP >= nextXP:
@@ -24,6 +26,12 @@ class Skill:
                 nextXP = self.getNextRankXP()
 
         self.xp = currXP
+        self.banked_xp = 0
+
+    #Store xp for the next essence exchange
+    def bank_exp(self, xp):
+        self.banked_xp += xp
+        #print(f"XP {xp} banked for {self.name}") #Was just a debug output
 
 # specific skills
 intrinsic_clarity = Skill("Intrinsic Clarity",
@@ -45,7 +53,7 @@ chemical_intuition = Skill("Chemical Intuition",
                            "Develop an intuitive understanding of the mechanics of compounds <br> Higher ranks mean greater insight",
                            0,"Chemistry")
 
-cleave_fibers = Skill("Cleave Fibers", "Manipulate the bonds between fibers, binding them together or cutting them apart. <br> Alter area of [RNK^2] cm<sup>2</sup> <br> Cost: 5*RNK mp",0,"Natureworking")
+cleave_fibers = Skill("Cleave Fibers", "Manipulate the bonds between fibers, binding them together or cutting them apart. <br> Alter volume of [RNK^2] cm<sup>3</sup> <br> Cost: 5*RNK mp",0,"Natureworking")
 stamina_transfer = Skill("Stamina Transfer","Sacrifice a portion of your stamina to energize a touched entity <br> Gives: [20*RNK] sp <br> Cost: [40*RNK] sp",0,"Restoration")
 purge_poison = Skill("Purge Poison","Weaken and destroy poisons and toxins (fcs) <br> Reduce poison damage by  [20*RNK*(1 + .01*FCS)] <br> Range: Touch<br> Cost: 20mp <br> If damage is reduced to 0, the condition is ended",1,"Restoration")
 healers_synergy = Skill("Healers Synergy","Multiply intensity of healing skills by [1+0.002*RNK*restoration_ranks] <br> Requires 50 ranks in Restoration",2,"Restoration")

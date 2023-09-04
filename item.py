@@ -130,12 +130,13 @@ class Equipment(Item):
 
 class Weapon(Equipment):
     def __init__(self, name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, slot, weight, sharpness, enchantments=None):
-        super().__init__(name, description, material, durability, hardness, manaSat, manaConvert, manaDissipate, slot, enchantments)
+        super().__init__(name, description, material, slot, durability, hardness, manaSat, manaConvert, manaDissipate, enchantments) #Keep track of order!!
         self.weight = weight
         self.sharpness = sharpness
 
 # Creating materials
 force_oak = Material("Force Oak")
+force_steel = Material("Force Steel")
 heat_copper = Material("Heat Copper")
 dark_steel = Material("Dark Steel")
 

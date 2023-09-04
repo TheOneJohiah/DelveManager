@@ -26,10 +26,12 @@
         body.Grace {
             background-color: #000;
             --fg:#9f6;
-            --bg:hsla(98, 25%, 22%,66%);
+            --bg:hsla(98, 55%, 15%,66%);
             --hp:#2f2;
             --sp:#ff2;
             --mp:#fff;
+            --SPD: #ca3;
+            --PER: #205;
             --heat:#f40;
             --cold:#04f;
             --light:#ffd;
@@ -42,10 +44,11 @@
             --NW: #cf0;
             --CH: var(--chemical);
         }
-
         .alt #VitHP, .alt #AttSTR, .alt #AttRCV {color:var(--hp)}
         .alt #VitSP, .alt #AttEND, .alt #AttVGR  {color:var(--sp)}
         .alt #VitMP, .alt #AttFCS, .alt #AttCLR  {color:var(--mp)}
+        .alt #AttPER {color:var(--PER)}
+        .alt #AttSPD {color:var(--SPD)}
 
         .Restoration {--TR: var(--RE);}
         .Natureworking {--TR: var(--NW);}
@@ -69,6 +72,7 @@
             border-spacing: 2px;
             margin: 10px auto;
             width: 90%;
+            overflow: hidden;
         }
 
         table td , table th {
@@ -86,19 +90,22 @@
         #VitSP td:nth-child(2) span {opacity: {{curSP / maxSP}};}
         #VitMP td:nth-child(2) span {opacity: {{curMP / maxMP}};}
 
-        #Skills {
-            text-align: left;
-        }
+        #Skills {text-align: left;}
 
         #Skills h2, #Skills h3, #Skills h4 {text-align: center;}
 
         #Skills table tr th:nth-child(1) {width: 10%;}
-
+        
         table table table {
             margin: -6px;
             width: calc(100% + 12px);
             height: calc(100% + 12px);
         }
+
+        #Inventory tr th:nth-child(1) {width: 12%;}
+        #Inventory tr th:nth-child(2) {width: 52%;}
+        #Inventory tr td:nth-child(2) {text-align: left;}
+        #Inventory tr th:nth-child(n+3) {width: 12%;}
     </style>
 </head>
 <body class="{% if altcol %} alt {% endif %} {{ Name.split()[0] }}">
@@ -129,6 +136,8 @@
                 <tr id="AttVGR"><th>VGR</th><td>{{effVGR}}</td><td>{{totVGR}}</td><td>{{basVGR}}</td><td>{{bufVGR}}</td><td>{{synVGR}}</td></tr>
                 <tr id="AttFCS"><th>FCS</th><td>{{effFCS}}</td><td>{{totFCS}}</td><td>{{basFCS}}</td><td>{{bufFCS}}</td><td>{{synFCS}}</td></tr>
                 <tr id="AttCLR"><th>CLR</th><td>{{effCLR}}</td><td>{{totCLR}}</td><td>{{basCLR}}</td><td>{{bufCLR}}</td><td>{{synCLR}}</td></tr>
+                <tr id="AttPER"><th>PER</th><td>{{effPER}}</td><td>{{totPER}}</td><td>{{basPER}}</td><td>{{bufPER}}</td><td>{{synPER}}</td></tr>
+                <tr id="AttSPD"><th>SPD</th><td>{{effSPD}}</td><td>{{totSPD}}</td><td>{{basSPD}}</td><td>{{bufSPD}}</td><td>{{synSPD}}</td></tr>
             </table>
 
             <h2>Resistances</h2>
