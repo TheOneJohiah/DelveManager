@@ -137,6 +137,15 @@ class Awakened:
         self.currVitals[type] -= amount
         self.add_experience(.5*amount)
 
+        if type == 2:
+            for skill in list(self.skills.values()):
+                if skill.name == "Intrinsic Clarity":
+                    self.add_skill_exp(skill.name, .5*amount)
+                elif skill.name == "Intrinsic Focus":
+                    self.add_skill_exp(skill.name, .5*amount)
+                elif skill.name == "Magical Synergy":
+                    self.add_skill_exp(skill.name, .5*amount)
+                    
     def add_vital(self, type, amount):
         if type == "HP": type = 0
         elif type == "SP": type = 1
