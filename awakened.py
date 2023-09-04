@@ -1,6 +1,6 @@
 import math
-import delve_Class as dc;
-import skill as sk;
+import delve_Class as dc
+import skill as sk
 from jinja2 import Template;
 
 class Awakened:
@@ -27,6 +27,7 @@ class Awakened:
         self.specialization = []
         self.character_class = character_class
         self.currVitals = [200,200,200]
+        self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
         self.calculate_resistances()
         self.update_free_attributes()
         self.initialize_vitals()  # Initialize vitals when the character is created
@@ -123,6 +124,8 @@ class Awakened:
         # Remember to include item and other skill effects later
         self.resistances = [baseRes] * 8
 
+    def add_equipment (self,item): self.inventory[item.slot] = item
+    
     def reduce_vital(self, type, amount):
         self.add_statistics("total "+type+" spent",amount) 
 
@@ -303,7 +306,9 @@ class Awakened:
                     fltCH = self.resistances[6],
                     fltME = self.resistances[7],
 
-                    trees = self.genSkillList()
+                    trees = self.genSkillList(),
+
+                    Items = filter(None,list(self.inventory.values()))
                     
             ))
 
