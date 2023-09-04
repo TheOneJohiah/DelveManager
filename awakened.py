@@ -4,7 +4,7 @@ import skill as sk;
 from jinja2 import Template;
 
 class Awakened:
-    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dc.unclassed):
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dc.unclassed):
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
@@ -50,16 +50,17 @@ class Awakened:
         self.vitals[4] = self.calculate_mana_cap()
         self.vitals[5] = self.calculate_mana_regen()
 
-    def raise_attribute(self,i,a):
-        if (a > self.free_attributes):
-            a = self.free_attributes
-            print ("Tried to spend too many stat points! Reduced to "+str(a))
+    def raise_attribute(self,index,amount):
+        if (amount > self.free_attributes):
+            amount = self.free_attributes
+            print ("Tried to spend too many stat points! Reduced to "+str(amount))
 
-        self.attributes[i] += a
+        self.attributes[index] += amount
         self.update_vitals()
+        self.update_free_attributes()
     
     def update_free_attributes(self):
-        self.free_attributes = 70 + (self.level * 10) - sum(self.attributes)
+        self.free_attributes = 90 + (self.level * 10) - sum(self.attributes)
 
     def max_skill_points(self):
         return self.level + 1
@@ -136,8 +137,10 @@ class Awakened:
     def regen (self, hours):
         time = hours/24
         for x in [0,1,2]:
-            self.currVitals[x] = min(self.currVitals[x] + (time*self.vitals[2*x + 1]), self.vitals[2*x])
-            self.add_statistics("total "+["HP","SP","MP"][x]+" regen",(time*self.vitals[x+1]))
+            regN = min( time*self.vitals[2*x + 1], self.vitals[2*x] - self.currVitals[x]) # ensuring regen doesn't overflow cap
+            overN = time*self.vitals[2*x + 1] - regN #Over-whatever; currently unused, could add an total-overvital statistic?
+            self.currVitals[x] += regN
+            self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
 
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
@@ -219,26 +222,6 @@ class Awakened:
             print(f"Congratulations! You have leveled up to level {self.level}!")
             self.update_free_attributes()
 
-    def display_required_experience(self):
-        current_exp = self.experience  # You should have a variable for tracking the character's experience
-        required_exp = self.calculate_required_experience()
-        difference = required_exp - current_exp
-
-        print(f"Current Experience: {current_exp}")
-        print(f"Required Experience for Level {self.level + 1}: {required_exp}")
-        print(f"Difference: {difference}")
-
-    def display_stats(self):
-        print(f"Stats: {self.attributes}")
-        self.initialize_vitals()
-        print(f"Current vitals: {self.vitals}")
-        print(f"Free Attributes: {self.free_attributes}")
-        print(f"Used Skill Points: {self.calculate_used_skill_points()}")
-        print(f"Free Skill Points: {self.calculate_free_skill_points()}")
-        print(f"Level: {self.level}")
-        print(f"Level Cap: {self.level_cap}")
-        print(f"Class: {self.character_class.name}")
-
     # Awful, innefficient, but best that I can think of
     def genSkillList (self):
         tr = []
@@ -255,8 +238,7 @@ class Awakened:
                                         "3": {"t":3,"skills":[]}, 
                                         "4": {"t":4,"skills":[]}}}
             for skill in list(self.skills.values()):                      
-                if skill.tree == tree:
-                    trr["tiers"][str(skill.tier)]["skills"].append(skill)
+                if skill.tree == tree: trr["tiers"][str(skill.tier)]["skills"].append(skill)
                     
             for tier in list(trr["tiers"].values()):
                 if not tier["skills"]: trr["tiers"].pop(str(tier["t"]))
@@ -301,6 +283,8 @@ class Awakened:
                     basVGR = self.attributes[3],
                     basFCS = self.attributes[4],
                     basCLR = self.attributes[5],
+                    basPER = self.attributes[6],
+                    basSPD = self.attributes[7],
 
                     fltHE = self.resistances[0],
                     fltCO = self.resistances[1],

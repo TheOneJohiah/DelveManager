@@ -30,6 +30,8 @@
             --hp:#2f2;
             --sp:#ff2;
             --mp:#fff;
+            --SPD: #ca3;
+            --PER: #205;
             --heat:#f40;
             --cold:#04f;
             --light:#ffd;
@@ -42,10 +44,11 @@
             --NW: #cf0;
             --CH: var(--chemical);
         }
-
         .alt #VitHP, .alt #AttSTR, .alt #AttRCV {color:var(--hp)}
         .alt #VitSP, .alt #AttEND, .alt #AttVGR  {color:var(--sp)}
         .alt #VitMP, .alt #AttFCS, .alt #AttCLR  {color:var(--mp)}
+        .alt #AttPER {color:var(--PER)}
+        .alt #AttSPD {color:var(--SPD)}
 
         .Restoration {--TR: var(--RE);}
         .Natureworking {--TR: var(--NW);}
@@ -86,9 +89,7 @@
         #VitSP td:nth-child(2) span {opacity: {{curSP / maxSP}};}
         #VitMP td:nth-child(2) span {opacity: {{curMP / maxMP}};}
 
-        #Skills {
-            text-align: left;
-        }
+        #Skills {text-align: left;}
 
         #Skills h2, #Skills h3, #Skills h4 {text-align: center;}
 
@@ -129,6 +130,8 @@
                 <tr id="AttVGR"><th>VGR</th><td>{{effVGR}}</td><td>{{totVGR}}</td><td>{{basVGR}}</td><td>{{bufVGR}}</td><td>{{synVGR}}</td></tr>
                 <tr id="AttFCS"><th>FCS</th><td>{{effFCS}}</td><td>{{totFCS}}</td><td>{{basFCS}}</td><td>{{bufFCS}}</td><td>{{synFCS}}</td></tr>
                 <tr id="AttCLR"><th>CLR</th><td>{{effCLR}}</td><td>{{totCLR}}</td><td>{{basCLR}}</td><td>{{bufCLR}}</td><td>{{synCLR}}</td></tr>
+                <tr id="AttPER"><th>PER</th><td>{{effPER}}</td><td>{{totPER}}</td><td>{{basPER}}</td><td>{{bufPER}}</td><td>{{synPER}}</td></tr>
+                <tr id="AttSPD"><th>SPD</th><td>{{effSPD}}</td><td>{{totSPD}}</td><td>{{basSPD}}</td><td>{{bufSPD}}</td><td>{{synSPD}}</td></tr>
             </table>
 
             <h2>Resistances</h2>
