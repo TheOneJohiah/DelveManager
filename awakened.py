@@ -29,10 +29,14 @@ class Awakened:
         self.character_class = character_class
         self.banked_xp = 0
         self.currVitals = [200,200,200]
+        #Needed to prevent recursion
+        self.synergy_vitals = [0,0,0,0,0,0]
         self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
         self.calculate_resistances()
         self.update_free_attributes()
         self.initialize_vitals()  # Initialize vitals when the character is created
+
+
 
     def initialize_vitals(self):
         self.vitals[0] = self.calculate_health_cap()
@@ -41,6 +45,11 @@ class Awakened:
         self.vitals[2] = self.calculate_stamina_cap()
         self.currVitals[1] = self.calculate_stamina_cap()
         self.vitals[3] = self.calculate_stamina_regen()
+        self.vitals[4] = self.calculate_mana_cap()
+        self.currVitals[2] = self.calculate_mana_cap()
+        self.vitals[5] = self.calculate_mana_regen()
+
+        #Call a second time now that they've set the synergy_values. Ew. I guess technically only needed for characters that start with magical synergy.
         self.vitals[4] = self.calculate_mana_cap()
         self.currVitals[2] = self.calculate_mana_cap()
         self.vitals[5] = self.calculate_mana_regen()
@@ -99,6 +108,7 @@ class Awakened:
         return base_stamina_regen * stamina_regen_multiplier
 
     def calculate_mana_cap(self):
+        synergy_mana = 0
         base_mana_cap = self.attributes[4] * 20
         mana_cap_multiplier = self.character_class.attribute_effect[4]
 
@@ -106,10 +116,15 @@ class Awakened:
             if skill.name == "Intrinsic Focus":
                 # Calculate the multiplicative effect based on the skill's rank
                 mana_cap_multiplier *= (1 + skill.rank * 0.2)  # 20% increase per rank
+            if skill.name == "Magical Synergy":
+                synergy_effect = 0.025 * skill.rank
+                synergy_mana = synergy_effect * self.synergy_vitals[5]
+        self.synergy_vitals[4] = (base_mana_cap * mana_cap_multiplier)
 
-        return base_mana_cap * mana_cap_multiplier
+        return (base_mana_cap * mana_cap_multiplier) + synergy_mana
 
     def calculate_mana_regen(self):
+        synergy_mana = 0
         base_mana_regen = self.attributes[5] * 10
         mana_regen_multiplier = self.character_class.attribute_effect[5]
 
@@ -117,8 +132,12 @@ class Awakened:
             if skill.name == "Intrinsic Clarity":
                 # Calculate the multiplicative effect based on the skill's rank
                 mana_regen_multiplier *= (1 + skill.rank * 0.2)  # 20% increase per rank
+            if skill.name == "Magical Synergy":
+                synergy_effect = 0.025 * skill.rank
+                synergy_mana = synergy_effect * self.synergy_vitals[4]
+        self.synergy_vitals[5] = (base_mana_regen * mana_regen_multiplier)
 
-        return base_mana_regen * mana_regen_multiplier
+        return (base_mana_regen * mana_regen_multiplier) + synergy_mana
     
     def calculate_resistances(self):
         end_multiplier = self.character_class.attribute_effect[2]
@@ -234,12 +253,13 @@ class Awakened:
 
         new_exp = current_exp + amount
 
-        if self.level == 5 and self.character_class == dc.unclassed or self.level == 25 or self.level == self.level_cap:
-                max_exp = required_exp - 1
-                new_exp = min(new_exp, max_exp)
-
         if new_exp >= required_exp:
             while new_exp >= required_exp:
+                ##Moved inside the while loop so it rechecks each level when getting lots of xp at once.
+                if self.level == 5 and self.character_class == dc.unclassed or self.level == 25 or self.level == self.level_cap:
+                    max_exp = required_exp - 1
+                    new_exp = min(new_exp, max_exp)
+                    return True
                 new_exp -= required_exp
                 self.level_up()
                 required_exp = self.calculate_required_experience()

@@ -20,6 +20,11 @@ class Skill:
 
         if currXP >= nextXP:
             while currXP >= nextXP:
+                if self.rank == self.cap:
+                    max_exp = nextXP - 1
+                    self.xp = min(currXP, max_exp)
+                    self.banked_xp = 0
+                    return True
                 currXP -= nextXP
                 self.rank +=1
                 print(self.name+" Leveled up!")
@@ -37,6 +42,7 @@ class Skill:
 # Magical Utility
 intrinsic_clarity = Skill("Intrinsic Clarity","Multiply mana regen by 1+(RNK/5)",0,"Magical Utility")
 intrinsic_focus = Skill("Intrinsic Focus","Multiply maximum mana by 1+(RNK/5)",0, "Magical Utility")
+magical_synergy = Skill("Magical Synergy","Enables limited synergistic cross-coupling of magical attributes <br> [2.5%*RNK] of Focus contributes to M.Regen <br> [2.5%*RNK] of Clarity contributes to Mana <br>  Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus",0, "Magical Utility")
 
 # Restoration
 healing_word = Skill("Healing Word","Invoke a word of healing to restore health to a touched entity <br> Heal [10-20]*[RNK]*[1 + .005*FCS] hp <br> Cost: 10mp <br> Cannot Heal Self",0,"Restoration",cost={'type':"MP",'value':10})
