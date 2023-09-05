@@ -39,9 +39,9 @@ class Awakened:
         #Needed to prevent recursion
         self.synergy_vitals = [0,0,0,0,0,0]
         self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
-        self.calculate_resistances()
         self.update_free_attributes()
         self.update_attributes()  # Initialize attributes when the character is created
+        self.calculate_resistances()
         self.initialize_vitals()  # Initialize vitals when the character is created
 
     def update_attributes(self):
