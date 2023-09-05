@@ -12,15 +12,15 @@ def describe (thing):
     for attr in attributes:
         val = getattr(thing, attr)
         desc = ""
-        # print(attr+" is a "+str(type(val))+", Desc: "+str(hasattr(val, 'describe'))+", List:"+str())
-        if callable(hasattr(val, 'describe')):
-            print(attr+" is describeable")
-            desc = attr.describe()
+        if callable(hasattr(val, 'describe')): desc = attr.describe()
         elif type(val) == list:
-            desc += "[<ul>"
-            for item in val:
-                desc += "<li>"+describe(item)+"</li>,"
-            desc += "</ul>]"
+            if not val: desc = "None"
+            elif hasattr(val[0], 'describe'):
+                desc += "[<ul>"
+                for item in val:
+                    desc += "<li>"+describe(item)+"</li>,"
+                desc += "<ul>]"
+            else: desc = str(val).replace('<','{').replace('>','}')
         elif hasattr(val,'name'): desc = str(getattr(val,'name'))
         else: desc = str(val).replace('<','{').replace('>','}')
 

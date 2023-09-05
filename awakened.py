@@ -25,6 +25,7 @@ class Awakened:
         self.experience = experience
         self.skills = {}
         self.specialization = []
+        self.tree_effect = {}
         self.character_class = character_class
         self.banked_xp = 0
         self.currVitals = [200,200,200]
@@ -186,15 +187,15 @@ class Awakened:
         
         self.skills.update({skill.name:skill})
         self.update_vitals()
+        self.used_skill_points = self.calculate_used_skill_points()
+        if skill.tree in self.character_class.tree_effect: skill.cap = 10 + self.character_class.tree_effect[skill.tree]
         return True
         
     def update_skill_caps (self):
         # Update the skill's cap to the class-based cap
-        for skill in list(skill.values()):
+        for skill in list(self.skills.values()):
             if skill.tree in self.character_class.tree_effect:
-                tree_cap = 10 + self.character_class.tree_effect[skill.tree]
-                if skill.cap < tree_cap:
-                    skill.cap = tree_cap
+                skill.cap = 10 + self.character_class.tree_effect[skill.tree]
     
     def bank_skill_exp (self, skillN, xp): self.skills[skillN].bank_exp(xp) #redirect to skill method
     def add_skill_exp (self, skillN): self.skills[skillN].add_exp() #redirect to skill method
@@ -206,22 +207,19 @@ class Awakened:
         skill.bank_exp(.5*n*skill.cost['value'])
     
     def set_class(self, character_class):
-        if self.level != 5 or self.level != 25:
-            print(f"Character not at a class selection level!'")
-            return False
+        if not self.level in [5,25,50,75]:
+            print(f"{self.name} not at a class selection level!")   
+            return False 
     
         if character_class.meets_requirements(self):
             self.character_class = character_class
             print(f"Class '{character_class.name}' assigned successfully")
 
             # Update tree effects based on the assigned class
-            for tree, bonus in character_class.tree_effect.items():
-                if tree in character_class.tree_effect:
-                    self.tree_effect[tree] += bonus
-                else:
-                    self.tree_effect[tree] = bonus
+            for tree, bonus in character_class.tree_effect.items(): self.tree_effect[tree] = bonus
+            self.update_skill_caps()
         else:
-            print(f"Character does not meet the requirements for class '{character_class.name}'")
+            print(f"{self.name} does not meet the requirements for class '{character_class.name}'")
 
     def calculate_required_experience(self):
         if self.character_class is None or self.level < 5 or self.character_class.rarity in ["Common", "Uncommon"]:
@@ -283,9 +281,7 @@ class Awakened:
 
     def printCharSheet (self,altCol = False):
         temp = Template(open('CharSheetTemplate.html').read())
-        pluscol = False
-        if (self.free_attributes > 0 or self.used_skill_points > 0):
-            pluscol = True
+        pluscol = self.free_attributes > 0 or self.calculate_free_skill_points() > 0
 
         sheet = open(self.name+' CharSheet.html','w')
         sheet.write( temp.render(

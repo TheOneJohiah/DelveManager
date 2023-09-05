@@ -129,15 +129,15 @@
 
             <h2>Attributes</h2>
             <table id="Attributes">
-                <tr id="AttHD"><td></td><th>EFF</th><th>TOTAL</th><th>BASE</th><th>BUFF</th><th>SYN</th></tr>
-                <tr id="AttSTR"><th>STR</th><td>{{effSTR}}</td><td>{{totSTR}}</td><td>{{basSTR}}</td><td>{{bufSTR}}</td><td>{{synSTR}}</td></tr>
-                <tr id="AttRCV"><th>RCV</th><td>{{effRCV}}</td><td>{{totRCV}}</td><td>{{basRCV}}</td><td>{{bufRCV}}</td><td>{{synRCV}}</td></tr>
-                <tr id="AttEND"><th>END</th><td>{{effEND}}</td><td>{{totEND}}</td><td>{{basEND}}</td><td>{{bufEND}}</td><td>{{synEND}}</td></tr>
-                <tr id="AttVGR"><th>VGR</th><td>{{effVGR}}</td><td>{{totVGR}}</td><td>{{basVGR}}</td><td>{{bufVGR}}</td><td>{{synVGR}}</td></tr>
-                <tr id="AttFCS"><th>FCS</th><td>{{effFCS}}</td><td>{{totFCS}}</td><td>{{basFCS}}</td><td>{{bufFCS}}</td><td>{{synFCS}}</td></tr>
-                <tr id="AttCLR"><th>CLR</th><td>{{effCLR}}</td><td>{{totCLR}}</td><td>{{basCLR}}</td><td>{{bufCLR}}</td><td>{{synCLR}}</td></tr>
-                <tr id="AttPER"><th>PER</th><td>{{effPER}}</td><td>{{totPER}}</td><td>{{basPER}}</td><td>{{bufPER}}</td><td>{{synPER}}</td></tr>
-                <tr id="AttSPD"><th>SPD</th><td>{{effSPD}}</td><td>{{totSPD}}</td><td>{{basSPD}}</td><td>{{bufSPD}}</td><td>{{synSPD}}</td></tr>
+                <tr id="AttHD"><td></td><th>EFF</th><th>TOTAL</th><th>BASE</th><th>MISC</th><th>SYN</th></tr>
+                <tr id="AttSTR"><th>STR</th><td>{{effSTR}}</td><td>{{totSTR}}</td><td>{{basSTR}}</td><td>{{miscSTR}}</td><td>{{synSTR}}</td></tr>
+                <tr id="AttRCV"><th>RCV</th><td>{{effRCV}}</td><td>{{totRCV}}</td><td>{{basRCV}}</td><td>{{miscRCV}}</td><td>{{synRCV}}</td></tr>
+                <tr id="AttEND"><th>END</th><td>{{effEND}}</td><td>{{totEND}}</td><td>{{basEND}}</td><td>{{miscEND}}</td><td>{{synEND}}</td></tr>
+                <tr id="AttVGR"><th>VGR</th><td>{{effVGR}}</td><td>{{totVGR}}</td><td>{{basVGR}}</td><td>{{miscVGR}}</td><td>{{synVGR}}</td></tr>
+                <tr id="AttFCS"><th>FCS</th><td>{{effFCS}}</td><td>{{totFCS}}</td><td>{{basFCS}}</td><td>{{miscFCS}}</td><td>{{synFCS}}</td></tr>
+                <tr id="AttCLR"><th>CLR</th><td>{{effCLR}}</td><td>{{totCLR}}</td><td>{{basCLR}}</td><td>{{miscCLR}}</td><td>{{synCLR}}</td></tr>
+                <tr id="AttPER"><th>PER</th><td>{{effPER}}</td><td>{{totPER}}</td><td>{{basPER}}</td><td>{{miscPER}}</td><td>{{synPER}}</td></tr>
+                <tr id="AttSPD"><th>SPD</th><td>{{effSPD}}</td><td>{{totSPD}}</td><td>{{basSPD}}</td><td>{{miscSPD}}</td><td>{{synSPD}}</td></tr>
             </table>
 
             <h2>Resistances</h2>
@@ -176,7 +176,7 @@
     {% for item in Items %}
         <tr class="item">
             <td>{{item.slot}}</td>
-            <td><h4>{{item.name}}</h4>{{item.describe()}}</td>
+            <td><h5>{{item.name}}</h5>{{item.describe()}}</td>
             <td>{{item.currCharge}} / {{item.charge}}</td>
             <td>{{item.currSat}} / {{item.manaSat}}</td>
             <td>{{item.currDurability}} / {{item.durability}}</td>
