@@ -17,7 +17,14 @@ class Awakened:
                                    "magical kills":0}  # Create a dict for general statistics
 
         self.name = name
-        self.attributes = attributes
+        self.attributes = [[]] * 7 
+        self.attributes[0] = [0] * 8 # 0 = effective
+        self.attributes[1] = [0] * 8 # 1 = total
+        self.attributes[2] = attributes # 2 = base
+        self.attributes[3] = [0] * 8 # 3 = accolades
+        self.attributes[4] = [0] * 8 # 4 = misc
+        self.attributes[5] = [0] * 8 # 5 = tolerance
+        self.attributes[6] = [0] * 8 # 6 = synchronized
         self.vitals = vitals
         self.used_skill_points = 0
         self.level = level
@@ -34,9 +41,13 @@ class Awakened:
         self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
         self.calculate_resistances()
         self.update_free_attributes()
+        self.update_attributes()  # Initialize attributes when the character is created
         self.initialize_vitals()  # Initialize vitals when the character is created
 
-
+    def update_attributes(self):
+        for x in range(8):
+            self.attributes[1][x] = self.attributes[2][x] + self.attributes[3][x] + self.attributes[4][x]
+            self.attributes[0][x] = min(self.attributes[6][x], self.attributes[2][x]+self.attributes[3][x]) + min(1, self.attributes[6][x]/(self.attributes[2][x]+self.attributes[3][x]))*min(self.attributes[4][x],self.attributes[5][x])
 
     def initialize_vitals(self):
         self.vitals[0] = self.calculate_health_cap()
@@ -67,49 +78,46 @@ class Awakened:
             amount = self.free_attributes
             print ("Tried to spend too many stat points! Reduced to "+str(amount))
 
-        self.attributes[index] += amount
+        self.attributes[2][index] += amount
+        self.update_attributes()
         self.update_vitals()
         self.update_free_attributes()
     
-    def update_free_attributes(self):
-        self.free_attributes = 90 + (self.level * 10) - sum(self.attributes)
+    def update_free_attributes(self): self.free_attributes = 90 + (self.level * 10) - sum(self.attributes[2])
 
-    def max_skill_points(self):
-        return self.level + 1
+    def max_skill_points(self): return self.level + 1
     
-    def calculate_used_skill_points(self):
-        return len(self.skills)
+    def calculate_used_skill_points(self): return len(self.skills)
     
-    def calculate_free_skill_points(self):
-        return self.max_skill_points() - self.calculate_used_skill_points()
+    def calculate_free_skill_points(self): return self.max_skill_points() - self.calculate_used_skill_points()
 
     def calculate_health_cap(self):
-        base_health = self.attributes[0] * 20
+        base_health = self.attributes[1][0] * 20
         health_multiplier = self.character_class.attribute_effect[0]
 
         return base_health * health_multiplier
 
     def calculate_health_regen(self):
-        base_health_regen = self.attributes[1] * 10
+        base_health_regen = self.attributes[1][1] * 10
         health_regen_multiplier = self.character_class.attribute_effect[1]
 
         return base_health_regen * health_regen_multiplier
 
     def calculate_stamina_cap(self):
-        base_stamina = self.attributes[2] * 20
+        base_stamina = self.attributes[1][2] * 20
         stamina_multiplier = self.character_class.attribute_effect[2]
 
         return base_stamina * stamina_multiplier
     
     def calculate_stamina_regen(self):
-        base_stamina_regen = self.attributes[3] * 10
+        base_stamina_regen = self.attributes[1][3] * 10
         stamina_regen_multiplier = self.character_class.attribute_effect[3]
 
         return base_stamina_regen * stamina_regen_multiplier
 
     def calculate_mana_cap(self):
         synergy_mana = 0
-        base_mana_cap = self.attributes[4] * 20
+        base_mana_cap = self.attributes[1][4] * 20
         mana_cap_multiplier = self.character_class.attribute_effect[4]
 
         for skill in list(self.skills.values()):
@@ -125,7 +133,7 @@ class Awakened:
 
     def calculate_mana_regen(self):
         synergy_mana = 0
-        base_mana_regen = self.attributes[5] * 10
+        base_mana_regen = self.attributes[1][5] * 10
         mana_regen_multiplier = self.character_class.attribute_effect[5]
 
         for skill in list(self.skills.values()):
@@ -141,7 +149,7 @@ class Awakened:
     
     def calculate_resistances(self):
         end_multiplier = self.character_class.attribute_effect[2]
-        baseRes = math.floor(self.attributes[2] * end_multiplier / 10)
+        baseRes = math.floor(self.attributes[1][2] * end_multiplier / 10)
         # Remember to include item and other skill effects later
         self.resistances = [baseRes] * 8
 
@@ -188,7 +196,7 @@ class Awakened:
 
     def regen (self, hours):
         time = hours/24
-        for x in [0,1,2]:
+        for x in range(3):
             regN = min( time*self.vitals[2*x + 1], self.vitals[2*x] - self.currVitals[x]) # ensuring regen doesn't overflow cap
             overN = time*self.vitals[2*x + 1] - regN #Over-whatever; currently unused, could add an total-overvital statistic?
             self.currVitals[x] += regN
@@ -328,14 +336,68 @@ class Awakened:
                     curSP = self.currVitals[1],
                     curMP = self.currVitals[2],
 
-                    basSTR = self.attributes[0],
-                    basRCV = self.attributes[1],
-                    basEND = self.attributes[2],
-                    basVGR = self.attributes[3],
-                    basFCS = self.attributes[4],
-                    basCLR = self.attributes[5],
-                    basPER = self.attributes[6],
-                    basSPD = self.attributes[7],
+                    effSTR = self.attributes[0][0],
+                    effRCV = self.attributes[0][1],
+                    effEND = self.attributes[0][2],
+                    effVGR = self.attributes[0][3],
+                    effFCS = self.attributes[0][4],
+                    effCLR = self.attributes[0][5],
+                    effPER = self.attributes[0][6],
+                    effSPD = self.attributes[0][7],
+
+                    totSTR = self.attributes[1][0],
+                    totRCV = self.attributes[1][1],
+                    totEND = self.attributes[1][2],
+                    totVGR = self.attributes[1][3],
+                    totFCS = self.attributes[1][4],
+                    totCLR = self.attributes[1][5],
+                    totPER = self.attributes[1][6],
+                    totSPD = self.attributes[1][7],
+
+                    basSTR = self.attributes[2][0],
+                    basRCV = self.attributes[2][1],
+                    basEND = self.attributes[2][2],
+                    basVGR = self.attributes[2][3],
+                    basFCS = self.attributes[2][4],
+                    basCLR = self.attributes[2][5],
+                    basPER = self.attributes[2][6],
+                    basSPD = self.attributes[2][7],
+
+                    accSTR = self.attributes[3][0],
+                    accRCV = self.attributes[3][1],
+                    accEND = self.attributes[3][2],
+                    accVGR = self.attributes[3][3],
+                    accFCS = self.attributes[3][4],
+                    accCLR = self.attributes[3][5],
+                    accPER = self.attributes[3][6],
+                    accSPD = self.attributes[3][7],
+                    
+                    mscSTR = self.attributes[4][0],
+                    mscRCV = self.attributes[4][1],
+                    mscEND = self.attributes[4][2],
+                    mscVGR = self.attributes[4][3],
+                    mscFCS = self.attributes[4][4],
+                    mscCLR = self.attributes[4][5],
+                    mscPER = self.attributes[4][6],
+                    mscSPD = self.attributes[4][7],
+                    
+                    tolSTR = self.attributes[5][0],
+                    tolRCV = self.attributes[5][1],
+                    tolEND = self.attributes[5][2],
+                    tolVGR = self.attributes[5][3],
+                    tolFCS = self.attributes[5][4],
+                    tolCLR = self.attributes[5][5],
+                    tolPER = self.attributes[5][6],
+                    tolSPD = self.attributes[5][7],
+                    
+                    synSTR = self.attributes[6][0],
+                    synRCV = self.attributes[6][1],
+                    synEND = self.attributes[6][2],
+                    synVGR = self.attributes[6][3],
+                    synFCS = self.attributes[6][4],
+                    synCLR = self.attributes[6][5],
+                    synPER = self.attributes[6][6],
+                    synSPD = self.attributes[6][7],
 
                     fltHE = self.resistances[0],
                     fltCO = self.resistances[1],
