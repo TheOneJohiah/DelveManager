@@ -31,6 +31,7 @@ class Awakened:
         self.currVitals = [200,200,200]
         #Needed to prevent recursion
         self.synergy_vitals = [0,0,0,0,0,0]
+        self.total_attributes = [10,10,10,10,10,10,10,10]
         self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
         self.calculate_resistances()
         self.update_free_attributes()
@@ -86,24 +87,28 @@ class Awakened:
     def calculate_health_cap(self):
         base_health = self.attributes[0] * 20
         health_multiplier = self.character_class.attribute_effect[0]
+        self.total_attributes[0] = self.attributes[0] * health_multiplier
 
         return base_health * health_multiplier
 
     def calculate_health_regen(self):
         base_health_regen = self.attributes[1] * 10
         health_regen_multiplier = self.character_class.attribute_effect[1]
+        self.total_attributes[1] = self.attributes[1] * health_regen_multiplier
 
         return base_health_regen * health_regen_multiplier
 
     def calculate_stamina_cap(self):
         base_stamina = self.attributes[2] * 20
         stamina_multiplier = self.character_class.attribute_effect[2]
+        self.total_attributes[2] = self.attributes[2] * stamina_multiplier
 
         return base_stamina * stamina_multiplier
     
     def calculate_stamina_regen(self):
         base_stamina_regen = self.attributes[3] * 10
         stamina_regen_multiplier = self.character_class.attribute_effect[3]
+        self.total_attributes[3] = self.attributes[3] * stamina_regen_multiplier
 
         return base_stamina_regen * stamina_regen_multiplier
 
@@ -111,6 +116,7 @@ class Awakened:
         synergy_mana = 0
         base_mana_cap = self.attributes[4] * 20
         mana_cap_multiplier = self.character_class.attribute_effect[4]
+        self.total_attributes[4] = self.attributes[4] * mana_cap_multiplier
 
         for skill in list(self.skills.values()):
             if skill.name == "Intrinsic Focus":
@@ -127,6 +133,7 @@ class Awakened:
         synergy_mana = 0
         base_mana_regen = self.attributes[5] * 10
         mana_regen_multiplier = self.character_class.attribute_effect[5]
+        self.total_attributes[5] = self.attributes[5] * mana_regen_multiplier
 
         for skill in list(self.skills.values()):
             if skill.name == "Intrinsic Clarity":
@@ -194,6 +201,8 @@ class Awakened:
             self.currVitals[x] += regN
             self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
 
+    def update_level_cap(self, newLevel):
+        self.level_cap = newLevel
 
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
@@ -259,6 +268,7 @@ class Awakened:
                 if self.level == 5 and self.character_class == dc.unclassed or self.level == 25 or self.level == self.level_cap:
                     max_exp = required_exp - 1
                     new_exp = min(new_exp, max_exp)
+                    self.experience = new_exp
                     return True
                 new_exp -= required_exp
                 self.level_up()
@@ -327,6 +337,15 @@ class Awakened:
                     curHP = self.currVitals[0],
                     curSP = self.currVitals[1],
                     curMP = self.currVitals[2],
+
+                    totSTR = self.total_attributes[0],
+                    totRCV = self.total_attributes[1],
+                    totEND = self.total_attributes[2],
+                    totVGR = self.total_attributes[3],
+                    totFCS = self.total_attributes[4],
+                    totCLR = self.total_attributes[5],
+                    totPER = self.total_attributes[6],
+                    totSPD = self.total_attributes[7],
 
                     basSTR = self.attributes[0],
                     basRCV = self.attributes[1],
