@@ -211,6 +211,8 @@ class Awakened:
             self.currVitals[x] += regN
             self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
 
+    def update_level_cap(self, newLevel):
+        self.level_cap = newLevel
 
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
@@ -279,6 +281,7 @@ class Awakened:
                 if self.level == 5 and self.character_class == dc.unclassed or self.level == 25 or self.level == self.level_cap:
                     max_exp = required_exp - 1
                     new_exp = min(new_exp, max_exp)
+                    self.experience = new_exp
                     return True
                 new_exp -= required_exp
                 self.level_up()
