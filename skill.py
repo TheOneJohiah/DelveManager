@@ -26,6 +26,8 @@ class Skill:
                     self.banked_xp = 0
                     return True
                 currXP -= nextXP
+                if self.tree == "Utility Auras":
+                    self.cost = self.cost + self.cost/self.rank
                 self.rank +=1
                 print(self.name+" Leveled up!")
                 nextXP = self.getNextRankXP()
@@ -62,6 +64,14 @@ chemical_intuition = Skill("Chemical Intuition","Develop an intuitive understand
 # Alchemy
 alchemic_intuition = Skill("Alchemic Intuition","Develop an intuitive understanding of the mechanics of atoms <br> Higher ranks mean greater insight",0,"Chemistry")
 
+# Fire evocation
+firebolt = Skill("Firebolt","A bolt of magical fire assails your target",0,"Fire Evocation",cost={'type':"MP",'value':10})
+
 # Geoevocation
 stonebolt = Skill("Stonebolt","A magical stone assails your target <br> Deal [(7.5-11)*RNK*(1+FCS/100)] force damage on hit <br> Range: 5*RNK meters <br> Cost: 10mp",0,"Geoevocation",cost={'type':"MP",'value':10})
 rock_push = Skill("Rock Push", "Cost proportional to mass",0,"Geoevocation",cost={'type':"MP",'value':1})
+
+# Utility Auras
+purify = Skill("Purify","Purify poison, corruption, and contamination <br> Range: [RNK] m <br> [10*RNK] mp/min",0,"Utility Auras",10)
+
+winter = Skill("Winter","Boost M.Regen by [10%*RNK] for all entities <br> Range: [RNK] m <br> Cost: [RNK] mp/hr",0,"Utility Auras",1)
