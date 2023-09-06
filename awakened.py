@@ -23,8 +23,8 @@ class Awakened:
         self.attributes[2] = attributes # 2 = base
         self.attributes[3] = [0] * 8 # 3 = accolades
         self.attributes[4] = [0] * 8 # 4 = misc
-        self.attributes[5] = [0] * 8 # 5 = tolerance
-        self.attributes[6] = [0] * 8 # 6 = synchronized
+        self.attributes[5] = [0] * 9 # 5 = tolerance, [8] = general tolerance
+        self.attributes[6] = [1] * 8 # 6 = synchronized
         self.vitals = vitals
         self.used_skill_points = 0
         self.level = level
@@ -41,6 +41,15 @@ class Awakened:
         self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
         self.update_free_attributes()
         self.update_attributes()  # Initialize attributes when the character is created
+        self.resistances = [[]] * 8
+        self.resistances[0] = [0] * 8 #total flat
+        self.resistances[1] = [0] * 8 #total percent
+        self.resistances[2] = [0] * 8 #base flat
+        self.resistances[3] = [0] * 8 #base percent
+        self.resistances[4] = [0] * 8 #accolade flat
+        self.resistances[5] = [0] * 8 #accolade percent
+        self.resistances[6] = [0] * 8 #misc flat
+        self.resistances[7] = [0] * 8 #misc percent
         self.calculate_resistances()
         self.initialize_vitals()  # Initialize vitals when the character is created
 
@@ -48,6 +57,7 @@ class Awakened:
         for x in range(8):
             self.attributes[1][x] = self.attributes[2][x] + self.attributes[3][x] + self.attributes[4][x]
             self.attributes[0][x] = min(self.attributes[6][x], self.attributes[2][x]+self.attributes[3][x]) + min(1, self.attributes[6][x]/(self.attributes[2][x]+self.attributes[3][x]))*min(self.attributes[4][x],self.attributes[5][x])
+        self.update_vitals()
 
     def initialize_vitals(self):
         self.vitals[0] = self.calculate_health_cap()
@@ -120,13 +130,10 @@ class Awakened:
         base_mana_cap = self.attributes[1][4] * 20
         mana_cap_multiplier = self.character_class.attribute_effect[4]
 
-        for skill in list(self.skills.values()):
-            if skill.name == "Intrinsic Focus":
-                # Calculate the multiplicative effect based on the skill's rank
-                mana_cap_multiplier *= (1 + skill.rank * 0.2)  # 20% increase per rank
-            if skill.name == "Magical Synergy":
-                synergy_effect = 0.025 * skill.rank
-                synergy_mana = synergy_effect * self.synergy_vitals[5]
+        # Calculate the multiplicative effect based on the skill's rank
+        mana_cap_multiplier *= (1 + self.get_skill_rank("Intrinsic Focus") * 0.2)  # 20% increase per rank
+        synergy_effect = 0.025 * self.get_skill_rank("Magical Synergy")
+        synergy_mana = synergy_effect * self.synergy_vitals[5]
         self.synergy_vitals[4] = (base_mana_cap * mana_cap_multiplier)
 
         return (base_mana_cap * mana_cap_multiplier) + synergy_mana
@@ -136,22 +143,25 @@ class Awakened:
         base_mana_regen = self.attributes[1][5] * 10
         mana_regen_multiplier = self.character_class.attribute_effect[5]
 
-        for skill in list(self.skills.values()):
-            if skill.name == "Intrinsic Clarity":
-                # Calculate the multiplicative effect based on the skill's rank
-                mana_regen_multiplier *= (1 + skill.rank * 0.2)  # 20% increase per rank
-            if skill.name == "Magical Synergy":
-                synergy_effect = 0.025 * skill.rank
-                synergy_mana = synergy_effect * self.synergy_vitals[4]
+        mana_regen_multiplier *= (1 + self.get_skill_rank("Intrinsic Clarity") * 0.2)  # 20% increase per rank
+        synergy_effect = 0.025 * self.get_skill_rank("Magical Synergy")
+        synergy_mana = synergy_effect * self.synergy_vitals[4]
         self.synergy_vitals[5] = (base_mana_regen * mana_regen_multiplier)
 
         return (base_mana_regen * mana_regen_multiplier) + synergy_mana
     
     def calculate_resistances(self):
         end_multiplier = self.character_class.attribute_effect[2]
-        baseRes = math.floor(self.attributes[1][2] * end_multiplier / 10)
+        intMult = 1 + .2*self.get_skill_rank("Intrinsic Resistance")
+        synMult = .025*self.get_skill_rank("Resistance Synergy")
+        baseRes = (self.attributes[1][2] * end_multiplier * intMult / 10)
         # Remember to include item and other skill effects later
-        self.resistances = [baseRes] * 8
+        tots = [0] * 8
+        for x in range (8): tots[x] = sum(self.resistances[x])
+        self.resistances[2] = [baseRes] * 8
+        for x in range(8):
+            self.resistances[0][x] = self.resistances[2][x] + self.resistances[4][x] + self.resistances[6][x] + synMult*(tots[2]-self.resistances[2][x] + tots[4]-self.resistances[4][x] + tots[6]-self.resistances[6][x])
+            self.resistances[1][x] = self.resistances[3][x] + self.resistances[5][x] + self.resistances[7][x] + synMult*(tots[3]-self.resistances[3][x] + tots[5]-self.resistances[5][x] + tots[7]-self.resistances[7][x])
 
     def add_equipment (self,item): self.inventory[item.slot] = item
     
@@ -163,8 +173,7 @@ class Awakened:
             if skill.banked_xp > 0:
                 self.add_skill_exp(skill.name)
 
-    def bank_experience(self, xp):
-        self.banked_xp += xp
+    def bank_experience(self, xp): self.banked_xp += xp
 
     def reduce_vital(self, type, amount):
         self.add_statistics("total "+type+" spent",amount) 
@@ -206,6 +215,10 @@ class Awakened:
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
 
+    def get_skill_rank(self, skillN):
+        if skillN in self.skills: return self.skills[skillN].rank
+        else: return 0
+    
     def add_skill(self, skill, starting_level=1):
         if skill.name in self.skills:
                 print("Skill already aquired!")
@@ -229,7 +242,6 @@ class Awakened:
 
     def cast_skill (self, skillN, n):
         skill = self.skills[skillN]
-        type = ["HP","SP","MP"].index(skill.cost['type'])
         self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
         skill.bank_exp(.5*n*skill.cost['value'])
     
@@ -399,14 +411,70 @@ class Awakened:
                     synPER = self.attributes[6][6],
                     synSPD = self.attributes[6][7],
 
-                    fltHE = self.resistances[0],
-                    fltCO = self.resistances[1],
-                    fltLI = self.resistances[2],
-                    fltDA = self.resistances[3],
-                    fltFO = self.resistances[4],
-                    fltAR = self.resistances[5],
-                    fltCH = self.resistances[6],
-                    fltME = self.resistances[7],
+                    fltHE = self.resistances[0][0],
+                    fltCO = self.resistances[0][1],
+                    fltLI = self.resistances[0][2],
+                    fltDA = self.resistances[0][3],
+                    fltFO = self.resistances[0][4],
+                    fltAR = self.resistances[0][5],
+                    fltCH = self.resistances[0][6],
+                    fltME = self.resistances[0][7],
+                    perHE = self.resistances[1][0],
+                    perCO = self.resistances[1][1],
+                    perLI = self.resistances[1][2],
+                    perDA = self.resistances[1][3],
+                    perFO = self.resistances[1][4],
+                    perAR = self.resistances[1][5],
+                    perCH = self.resistances[1][6],
+                    perME = self.resistances[1][7],
+                    ENDfltHE = self.resistances[2][0],
+                    ENDfltCO = self.resistances[2][1],
+                    ENDfltLI = self.resistances[2][2],
+                    ENDfltDA = self.resistances[2][3],
+                    ENDfltFO = self.resistances[2][4],
+                    ENDfltAR = self.resistances[2][5],
+                    ENDfltCH = self.resistances[2][6],
+                    ENDfltME = self.resistances[2][7],
+                    ENDperHE = self.resistances[3][0],
+                    ENDperCO = self.resistances[3][1],
+                    ENDperLI = self.resistances[3][2],
+                    ENDperDA = self.resistances[3][3],
+                    ENDperFO = self.resistances[3][4],
+                    ENDperAR = self.resistances[3][5],
+                    ENDperCH = self.resistances[3][6],
+                    ENDperME = self.resistances[3][7],
+                    ACCfltHE = self.resistances[4][0],
+                    ACCfltCO = self.resistances[4][1],
+                    ACCfltLI = self.resistances[4][2],
+                    ACCfltDA = self.resistances[4][3],
+                    ACCfltFO = self.resistances[4][4],
+                    ACCfltAR = self.resistances[4][5],
+                    ACCfltCH = self.resistances[4][6],
+                    ACCfltME = self.resistances[4][7],
+                    ACCperHE = self.resistances[5][0],
+                    ACCperCO = self.resistances[5][1],
+                    ACCperLI = self.resistances[5][2],
+                    ACCperDA = self.resistances[5][3],
+                    ACCperFO = self.resistances[5][4],
+                    ACCperAR = self.resistances[5][5],
+                    ACCperCH = self.resistances[5][6],
+                    ACCperME = self.resistances[5][7],
+                    MSCfltHE = self.resistances[6][0],
+                    MSCfltCO = self.resistances[6][1],
+                    MSCfltLI = self.resistances[6][2],
+                    MSCfltDA = self.resistances[6][3],
+                    MSCfltFO = self.resistances[6][4],
+                    MSCfltAR = self.resistances[6][5],
+                    MSCfltCH = self.resistances[6][6],
+                    MSCfltME = self.resistances[6][7],
+                    MSCperHE = self.resistances[7][0],
+                    MSCperCO = self.resistances[7][1],
+                    MSCperLI = self.resistances[7][2],
+                    MSCperDA = self.resistances[7][3],
+                    MSCperFO = self.resistances[7][4],
+                    MSCperAR = self.resistances[7][5],
+                    MSCperCH = self.resistances[7][6],
+                    MSCperME = self.resistances[7][7],
 
                     trees = self.genSkillList(),
 
