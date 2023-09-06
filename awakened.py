@@ -392,6 +392,7 @@ class Awakened:
                     mscCLR = self.attributes[4][5],
                     mscPER = self.attributes[4][6],
                     mscSPD = self.attributes[4][7],
+                    totMSC = sum(self.attributes[4]),
                     
                     tolSTR = self.attributes[5][0],
                     tolRCV = self.attributes[5][1],
@@ -401,6 +402,7 @@ class Awakened:
                     tolCLR = self.attributes[5][5],
                     tolPER = self.attributes[5][6],
                     tolSPD = self.attributes[5][7],
+                    totTOL = self.attributes[5][8],
                     
                     synSTR = self.attributes[6][0],
                     synRCV = self.attributes[6][1],
