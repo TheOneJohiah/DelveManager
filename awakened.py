@@ -172,6 +172,7 @@ class Awakened:
         for skill in list(self.skills.values()):
             if skill.banked_xp > 0:
                 self.add_skill_exp(skill.name)
+        print(f"A new dawn, a new day! You are currently level {self.level}")
 
     def bank_experience(self, xp): self.banked_xp += xp
 
@@ -210,6 +211,10 @@ class Awakened:
             overN = time*self.vitals[2*x + 1] - regN #Over-whatever; currently unused, could add an total-overvital statistic?
             self.currVitals[x] += regN
             self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
+            
+            #Debug output
+            if x == 2 and overN > 0:
+                print(f"Wasted {overN} mana regen!")
 
     def update_level_cap(self, newLevel):
         self.level_cap = newLevel
