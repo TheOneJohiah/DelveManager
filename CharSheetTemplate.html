@@ -44,6 +44,41 @@
             --NW: #cf0;
             --CH: var(--chemical);
         }
+
+        body.Mo {
+            background-color: #210;
+            --fg: #f40;
+            --bg: hsla(20,9%,20%,69%);
+            --hp: #465;
+            --sp: #ff6;
+            --mp: #f20;
+            --heat: #f20;
+            --cold: #000;
+            --light: #ffa;
+            --dark: #000;
+            --force: #454;
+            --arcane: #408;
+            --chemical: #380;
+            --mental: #805;
+        }
+
+        body.Micah {
+            background-color: hsl(28 100% 2% / 1);
+            --fg: #aba;
+            --bg: hsla(28,28%,21%,70%);
+            --hp: #898;
+            --sp: hsl(28 100% 60% / 1);
+            --mp: hsl(2 100% 5% / 1);
+            --heat: #f40;
+            --cold: #04f;
+            --light: #ffd;
+            --dark: #002;
+            --force: #aba;
+            --arcane: #80f;
+            --chemical: #6f0;
+            --mental: #f0a;
+        }
+
         .alt #VitHP, .alt #AttSTR, .alt #AttRCV {color:var(--hp)}
         .alt #VitSP, .alt #AttEND, .alt #AttVGR  {color:var(--sp)}
         .alt #VitMP, .alt #AttFCS, .alt #AttCLR  {color:var(--mp)}
@@ -129,15 +164,15 @@
 
             <h2>Attributes</h2>
             <table id="Attributes">
-                <tr id="AttHD"><td></td><th>EFF</th><th>TOTAL</th><th>BASE</th><th>MISC</th><th>SYN</th></tr>
-                <tr id="AttSTR"><th>STR</th><td>{{effSTR}}</td><td>{{totSTR}}</td><td>{{basSTR}}</td><td>{{miscSTR}}</td><td>{{synSTR}}</td></tr>
-                <tr id="AttRCV"><th>RCV</th><td>{{effRCV}}</td><td>{{totRCV}}</td><td>{{basRCV}}</td><td>{{miscRCV}}</td><td>{{synRCV}}</td></tr>
-                <tr id="AttEND"><th>END</th><td>{{effEND}}</td><td>{{totEND}}</td><td>{{basEND}}</td><td>{{miscEND}}</td><td>{{synEND}}</td></tr>
-                <tr id="AttVGR"><th>VGR</th><td>{{effVGR}}</td><td>{{totVGR}}</td><td>{{basVGR}}</td><td>{{miscVGR}}</td><td>{{synVGR}}</td></tr>
-                <tr id="AttFCS"><th>FCS</th><td>{{effFCS}}</td><td>{{totFCS}}</td><td>{{basFCS}}</td><td>{{miscFCS}}</td><td>{{synFCS}}</td></tr>
-                <tr id="AttCLR"><th>CLR</th><td>{{effCLR}}</td><td>{{totCLR}}</td><td>{{basCLR}}</td><td>{{miscCLR}}</td><td>{{synCLR}}</td></tr>
-                <tr id="AttPER"><th>PER</th><td>{{effPER}}</td><td>{{totPER}}</td><td>{{basPER}}</td><td>{{miscPER}}</td><td>{{synPER}}</td></tr>
-                <tr id="AttSPD"><th>SPD</th><td>{{effSPD}}</td><td>{{totSPD}}</td><td>{{basSPD}}</td><td>{{miscSPD}}</td><td>{{synSPD}}</td></tr>
+                <tr id="AttHD"><td></td><th>EFF</th><th>TOTAL</th><th>BASE</th><th>ACCLD</th><th>MISC</th><th>SYN</th></tr>
+                <tr id="AttSTR"><th>STR</th><td>{{effSTR}}</td><td>{{totSTR}}</td><td>{{basSTR}}</td><td>{{accSTR}}</td><td>{{mscSTR}}/{{tolSTR}}</td><td>{{synSTR}}</td></tr>
+                <tr id="AttRCV"><th>RCV</th><td>{{effRCV}}</td><td>{{totRCV}}</td><td>{{basRCV}}</td><td>{{accRCV}}</td><td>{{mscRCV}}/{{tolRCV}}</td><td>{{synRCV}}</td></tr>
+                <tr id="AttEND"><th>END</th><td>{{effEND}}</td><td>{{totEND}}</td><td>{{basEND}}</td><td>{{accEND}}</td><td>{{mscEND}}/{{tolEND}}</td><td>{{synEND}}</td></tr>
+                <tr id="AttVGR"><th>VGR</th><td>{{effVGR}}</td><td>{{totVGR}}</td><td>{{basVGR}}</td><td>{{accVGR}}</td><td>{{mscVGR}}/{{tolVGR}}</td><td>{{synVGR}}</td></tr>
+                <tr id="AttFCS"><th>FCS</th><td>{{effFCS}}</td><td>{{totFCS}}</td><td>{{basFCS}}</td><td>{{accFCS}}</td><td>{{mscFCS}}/{{tolFCS}}</td><td>{{synFCS}}</td></tr>
+                <tr id="AttCLR"><th>CLR</th><td>{{effCLR}}</td><td>{{totCLR}}</td><td>{{basCLR}}</td><td>{{accCLR}}</td><td>{{mscCLR}}/{{tolCLR}}</td><td>{{synCLR}}</td></tr>
+                <tr id="AttPER"><th>PER</th><td>{{effPER}}</td><td>{{totPER}}</td><td>{{basPER}}</td><td>{{accPER}}</td><td>{{mscPER}}/{{tolPER}}</td><td>{{synPER}}</td></tr>
+                <tr id="AttSPD"><th>SPD</th><td>{{effSPD}}</td><td>{{totSPD}}</td><td>{{basSPD}}</td><td>{{accSPD}}</td><td>{{mscSPD}}/{{tolSPD}}</td><td>{{synSPD}}</td></tr>
             </table>
 
             <h2>Resistances</h2>
