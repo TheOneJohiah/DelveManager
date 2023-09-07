@@ -40,6 +40,28 @@ class Skill:
         self.banked_xp += xp
         # print(f"XP {xp} banked for {self.name}") # Was just a debug output
 
+class Tier:
+    def __init__(self,tier):
+        self.tier = tier
+        self.lock = True
+        self.skills = {}
+
+class Tree:
+    def __init__(self,name):
+        self.name = name
+        self.bonus = 0
+        self.tiers = {0:Tier(0),1:Tier(1),2:Tier(2),3:Tier(3),4:Tier(4)}
+        self.tiers[0].lock = False
+
+    def count_ranks(self):
+        return 0
+    
+    def unlock(self, tier): self.tiers[tier].lock = False
+
+    def get_Skill(self,skillN):
+        for x in range(5):
+            if skillN in self.tiers[x]: return self.tiers[x][skillN]
+
 # specific skills
 # Magical Utility
 intrinsic_clarity = Skill("Intrinsic Clarity","Multiply mana regen by 1+(RNK/5)",0,"Magical Utility")
@@ -78,3 +100,8 @@ rock_push = Skill("Rock Push", "Cost proportional to mass",0,"Geoevocation",cost
 purify = Skill("Purify","Purify poison, corruption, and contamination <br> Range: [RNK] m <br> [10*RNK] mp/min",0,"Utility Auras",10)
 
 winter = Skill("Winter","Boost M.Regen by [10%*RNK] for all entities <br> Range: [RNK] m <br> Cost: [RNK] mp/hr",0,"Utility Auras",1)
+
+
+# Emtpy Trees!
+# Current tree count: 
+# Needed empty trees!

@@ -25,14 +25,14 @@ class Awakened:
         self.attributes[4] = [0] * 8 # 4 = misc
         self.attributes[5] = [0] * 9 # 5 = tolerance, [8] = general tolerance
         self.attributes[6] = [1] * 8 # 6 = synchronized
+        self.accolades = {}
         self.vitals = vitals
         self.used_skill_points = 0
         self.level = level
         self.level_cap = level_cap
         self.experience = experience
-        self.skills = {}
+        self.trees = {}
         self.specialization = []
-        self.tree_effect = {}
         self.character_class = character_class
         self.banked_xp = 0
         self.total_xp = experience
@@ -98,7 +98,7 @@ class Awakened:
 
     def max_skill_points(self): return self.level + 1
     
-    def calculate_used_skill_points(self): return len(self.skills)
+    def calculate_used_skill_points(self): return len(self.get_skills())
     
     def calculate_free_skill_points(self): return self.max_skill_points() - self.calculate_used_skill_points()
 
@@ -170,7 +170,7 @@ class Awakened:
         #All banked xp from stat expenditure or anything else
         self.add_experience(self.banked_xp)
         self.banked_xp = 0
-        for skill in list(self.skills.values()):
+        for skill in list(self.get_skills().values()):
             if skill.banked_xp > 0:
                 self.add_skill_exp(skill.name)
         print(f"A new dawn, a new day! You are currently level {self.level}")
@@ -193,7 +193,7 @@ class Awakened:
             self.currVitals[type] -= amount
         
         if type == 2:
-            for skill in list(self.skills.values()):
+            for skill in list(self.get_skills().values()):
                 if skill.name == "Intrinsic Clarity":
                     self.bank_skill_exp(skill.name, .5*amount)
                 elif skill.name == "Intrinsic Focus":
@@ -225,35 +225,40 @@ class Awakened:
         self.level_cap = newLevel
 
     def count_skills_in_tree(self, tree_name):
-        return sum(1 for skill in self.skills if skill.tree == tree_name)
+        return sum(1 for skill in self.get_skills() if skill.tree == tree_name)
 
     def get_skill_rank(self, skillN):
-        if skillN in self.skills: return self.skills[skillN].rank
+        if skillN in self.get_skills(): return self.get_skills()[skillN].rank
         else: return 0
     
+    def get_skills(self):
+        skills = {}
+        for tree in self.trees:
+            for tier in tree.tiers:
+                skills.update(tier.skills)
+        return skills
+    
     def add_skill(self, skill, starting_level=1):
-        if skill.name in self.skills:
-                print("Skill already aquired!")
-                return False
-                # What about granted skills, or True Jacks? Think
-        
-        self.skills.update({skill.name:skill})
+        if self.trees[skill.tree][skill.tier].lock: print("Tree not unlocked!"); return False
+        if skill.name in self.get_skills(): print("Skill already aquired!"); return False
+                
+        self.trees[skill.tree][skill.tier].skills.update({skill.name:skill})
         self.update_vitals()
         self.used_skill_points = self.calculate_used_skill_points()
-        if skill.tree in self.character_class.tree_effect: skill.cap = 10 + self.character_class.tree_effect[skill.tree]
+        skill.cap = 10 + self.trees[skill.tree].bonus
         return True
         
     def update_skill_caps (self):
         # Update the skill's cap to the class-based cap
-        for skill in list(self.skills.values()):
+        for skill in list(self.get_skills().values()):
             if skill.tree in self.character_class.tree_effect:
                 skill.cap = 10 + self.character_class.tree_effect[skill.tree]
     
-    def bank_skill_exp (self, skillN, xp): self.skills[skillN].bank_exp(xp) #redirect to skill method
-    def add_skill_exp (self, skillN): self.skills[skillN].add_exp() #redirect to skill method
+    def bank_skill_exp (self, skillN, xp): self.get_skills()[skillN].bank_exp(xp) #redirect to skill method
+    def add_skill_exp (self, skillN): self.get_skills()[skillN].add_exp() #redirect to skill method
 
     def cast_skill (self, skillN, n):
-        skill = self.skills[skillN]
+        skill = self.get_skills()[skillN]
         self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
         skill.bank_exp(.5*n*skill.cost['value'])
     
@@ -267,7 +272,7 @@ class Awakened:
             print(f"Class '{character_class.name}' assigned successfully")
 
             # Update tree effects based on the assigned class
-            for tree, bonus in character_class.tree_effect.items(): self.tree_effect[tree] = bonus
+            for tree, bonus in character_class.tree_effect.items(): self.trees[tree].bonus = bonus
             self.update_skill_caps()
         else:
             print(f"{self.name} does not meet the requirements for class '{character_class.name}'")
@@ -312,7 +317,7 @@ class Awakened:
     # Awful, innefficient, but best that I can think of
     def genSkillList (self):
         tr = []
-        for skill in list(self.skills.values()):
+        for skill in list(self.get_skills().values()):
             tr.append(skill.tree)
         tr = sorted(list(set(tr)))
 
@@ -324,7 +329,7 @@ class Awakened:
                                         "2": {"t":2,"skills":[]}, 
                                         "3": {"t":3,"skills":[]}, 
                                         "4": {"t":4,"skills":[]}}}
-            for skill in list(self.skills.values()):                      
+            for skill in list(self.get_skills().values()):                      
                 if skill.tree == tree: trr["tiers"][str(skill.tier)]["skills"].append(skill)
                     
             for tier in list(trr["tiers"].values()):
