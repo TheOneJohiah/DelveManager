@@ -1,3 +1,6 @@
+#Hard-coded list of all skill trees; add whenever you add skills for a new tree. Recombinants should be added for relevant trees through their own thing (method of Awakened?)
+AllTreeList = ["Physical Passive","Physical Utility","Physicality","Equipment Use","Melee Weapons","Heavy Armor","Light Armor","Shieldwielding","Staff Combat","Swordplay","Fencing","Dagger Combat","Hurling","Sharpshooting","Tracking","Threat Attraction","Magical Utility","Aura Metamagic","Offensive Auras","Defensive Auras","Utility Auras","Elemental Archer","Evocation Metamagic","Fire Evocation","Ice Evocation","Hydroevocation","Geoevocation","Earth Manipulation","Arcane Metamagic","Arcane Mysteries","Arcane Utility","Arcane Shifter","Elemental Enhancement","Elemental Inhibition","Psionics","Restoration","Beams","Survivalist Utility","Monster Taming","Divination","Defensive Constructs","Force Metamagic","Blood Magic","Chemistry","Alchemy","Natureworking","Runecrafting","Stoneworking","Armor Crafting","Weapon-Crafting","Artificing","Metalworking"]
+
 class Skill:
     def __init__(self, name, description, tier, tree,cost={'type':"",'value':0}):
         self.name = name
@@ -39,6 +42,27 @@ class Skill:
     def bank_exp(self, xp):
         self.banked_xp += xp
         # print(f"XP {xp} banked for {self.name}") # Was just a debug output
+
+class Tier:
+    def __init__(self,tier):
+        self.tier = tier
+        self.lock = True
+        self.skills = {}
+
+class Tree:
+    def __init__(self,name):
+        self.name = name
+        self.bonus = 0
+        self.tiers = {0:Tier(0),1:Tier(1),2:Tier(2),3:Tier(3),4:Tier(4)}
+        self.tiers[0].lock = False
+
+    #def count_ranks(self): return 0 #todo: implement? or keep as Awakened method?
+    
+    def unlock(self, tier): self.tiers[tier].lock = False
+
+    def get_Skill(self,skillN):
+        for x in range(5):
+            if skillN in self.tiers[x]: return self.tiers[x][skillN]
 
 # specific skills
 # Magical Utility
