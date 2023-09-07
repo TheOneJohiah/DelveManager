@@ -51,7 +51,7 @@ class ResistanceEnchantment(Enchantment):
 class AttributeEnchantment(Enchantment):
     def __init__(self, name, description, attribute_buff, mana_cost):
         super().__init__(name, description, mana_cost)
-        # array [], 0 through 5, str/rec/end/vig/foc/cha
+        # array [], 0 through 7, str/rec/end/vig/foc/cla/per/spd
         self.attribute_buff = attribute_buff
 
 #Durability, hardness, sharpness, weight % increase

@@ -35,6 +35,7 @@ class Awakened:
         self.tree_effect = {}
         self.character_class = character_class
         self.banked_xp = 0
+        self.total_xp = experience
         self.currVitals = [200,200,200]
         #Needed to prevent recursion
         self.synergy_vitals = [0,0,0,0,0,0]
@@ -184,9 +185,13 @@ class Awakened:
         elif type == "MP": type = 2
         else: print(type+" is not a vital, goof") 
         
-        self.currVitals[type] -= amount
         self.bank_experience(.5*amount)
-
+        if 0 > (self.currVitals[type] - amount):
+            self.currVitals[type] = 0
+            underV = self.currVitals[type] - amount #Undervital; currently unused, but maybe should be.
+        else:
+            self.currVitals[type] -= amount
+        
         if type == 2:
             for skill in list(self.skills.values()):
                 if skill.name == "Intrinsic Clarity":
@@ -275,6 +280,7 @@ class Awakened:
         return required_exp
 
     def add_experience(self, amount):
+        self.total_xp += amount
         current_exp = self.experience  # You should have a variable for tracking the character's experience
         required_exp = self.calculate_required_experience()
 
@@ -343,7 +349,7 @@ class Awakened:
                     FreeSkill = self.calculate_free_skill_points(),
                     CurrXP = self.experience,
                     NextXP = self.calculate_required_experience(),
-                    TotXP = "#todo Add Total XP",
+                    TotXP = self.total_xp,
                     
                     maxHP = self.vitals[0],
                     rgnHP = self.vitals[1],

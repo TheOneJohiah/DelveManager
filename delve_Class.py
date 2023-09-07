@@ -21,3 +21,5 @@ dynamo = delve_Class("Dynamo", "Rare", "Master of energy manipulation", attribut
 shieldwielding_defender = delve_Class("Shieldwielding Defender", "Uncommon", "Master of defense with a shield", attribute_effect=[1, 1, 1.5, 1, 1, 1], tree_effect={"Shieldwielding": 3}, additional_effect=None)
 
 geomancer = delve_Class("Geomancer", "Uncommon", "A dirty dude", attribute_effect=[1,1,1,1,1.5,1], tree_effect={"Geoevocation": 3}, additional_effect=None)
+
+life_worker = delve_Class("Life Worker","Rare","Worker specializing in all sorts of organics",[1] * 6,{"Restoration":2,"Natureworking":2,"Chemistry":2},None)
