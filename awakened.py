@@ -1,6 +1,7 @@
 import math
 import delve_Class as dc
 import skill as sk
+import item as eq
 from jinja2 import Template;
 
 class Awakened:
@@ -59,6 +60,19 @@ class Awakened:
             self.attributes[1][x] = self.attributes[2][x] + self.attributes[3][x] + self.attributes[4][x]
             self.attributes[0][x] = min(self.attributes[6][x], self.attributes[2][x]+self.attributes[3][x]) + min(1, self.attributes[6][x]/(self.attributes[2][x]+self.attributes[3][x]))*min(self.attributes[4][x],self.attributes[5][x])
         self.update_vitals()
+        self.calculate_resistances()
+
+    #Update array column [6] with item attribute buffs
+    def update_item_attributes(self):
+        
+        self.update_attributes()
+        return True
+    
+    #Update array column [4] with accolade attribute buffs
+    def update_accolade_attributes(self):
+
+        self.update_attributes()
+        return True
 
     def initialize_vitals(self):
         self.vitals[0] = self.calculate_health_cap()
@@ -164,8 +178,17 @@ class Awakened:
             self.resistances[0][x] = self.resistances[2][x] + self.resistances[4][x] + self.resistances[6][x] + synMult*(tots[2]-self.resistances[2][x] + tots[4]-self.resistances[4][x] + tots[6]-self.resistances[6][x])
             self.resistances[1][x] = self.resistances[3][x] + self.resistances[5][x] + self.resistances[7][x] + synMult*(tots[3]-self.resistances[3][x] + tots[5]-self.resistances[5][x] + tots[7]-self.resistances[7][x])
 
-    def add_equipment (self,item): self.inventory[item.slot] = item
-    
+    def add_equipment (self,item):
+        self.inventory[item.slot] = item
+        #if rune in item.runes ==  
+        self.update_attributes()
+
+    def toggle_equipment (self,item):
+        if item in self.inventory:
+            self.inventory[item].toggle_rune
+            self.update_attributes()
+        else: return 0
+
     def essence_exhange(self):
         #All banked xp from stat expenditure or anything else
         self.add_experience(self.banked_xp)
