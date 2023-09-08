@@ -193,10 +193,10 @@
     <table id="Skills"><tr><td><h2>Skills</h2>
         {% for tree in trees %}
             <table class="Tree {{tree.name}}"><tr><th>Tier</th><th><h3>{{tree.name}}</h3></th></tr>
-            {% for tier in tree["tiers"].values() %}
-                <tr><th><h4>{{tier["t"]}}</h4></th>
+            {% for tier in tree.tiers.values() %}
+                <tr><th><h4>{{tier.tier}}</h4></th>
                 <td><table>
-                {% for skill in tier["skills"] %}
+                {% for skill in tier.skills.values() %}
                     <tr><td><h5>{{skill.name}} ({{skill.rank}} / {{skill.cap}}) (Exp: {{skill.xp}} / {{ skill.getNextRankXP() }})</h5>
                     {{skill.description}}</td></tr>
                 {% endfor %}

@@ -1,3 +1,6 @@
+#Hard-coded list of all skill trees; add whenever you add skills for a new tree. Recombinants should be added for relevant trees through their own thing (method of Awakened?)
+AllTreeList = ["Physical Passive","Physical Utility","Physicality","Equipment Use","Melee Weapons","Heavy Armor","Light Armor","Shieldwielding","Staff Combat","Swordplay","Fencing","Dagger Combat","Hurling","Sharpshooting","Tracking","Threat Attraction","Magical Utility","Aura Metamagic","Offensive Auras","Defensive Auras","Utility Auras","Elemental Archer","Evocation Metamagic","Fire Evocation","Ice Evocation","Hydroevocation","Geoevocation","Earth Manipulation","Arcane Metamagic","Arcane Mysteries","Arcane Utility","Arcane Shifter","Elemental Enhancement","Elemental Inhibition","Psionics","Restoration","Beams","Survivalist Utility","Monster Taming","Divination","Defensive Constructs","Force Metamagic","Blood Magic","Chemistry","Alchemy","Natureworking","Runecrafting","Stoneworking","Armor Crafting","Weapon-Crafting","Artificing","Metalworking"]
+
 class Skill:
     def __init__(self, name, description, tier, tree,cost={'type':"",'value':0}):
         self.name = name
@@ -10,8 +13,7 @@ class Skill:
         self.xp = 0 # starting xp for all skills is 0
         self.banked_xp = 0
 
-    def getNextRankXP(self):
-        return (.5*self.rank*(self.rank - 1) + 1) * 2**self.tier * 100
+    def getNextRankXP(self): return (.5*self.rank*(self.rank - 1) + 1) * 2**self.tier * 100
     
     # Iterate through adding levels during essence exchange
     def add_exp (self):
@@ -36,15 +38,13 @@ class Skill:
         self.banked_xp = 0
 
     # Store xp for the next essence exchange
-    def bank_exp(self, xp):
-        self.banked_xp += xp
-        # print(f"XP {xp} banked for {self.name}") # Was just a debug output
+    def bank_exp(self, xp): self.banked_xp += xp
 
 class Tier:
     def __init__(self,tier):
         self.tier = tier
         self.lock = True
-        self.skills = {}
+        self.skills = []
 
 class Tree:
     def __init__(self,name):
@@ -53,8 +53,7 @@ class Tree:
         self.tiers = {0:Tier(0),1:Tier(1),2:Tier(2),3:Tier(3),4:Tier(4)}
         self.tiers[0].lock = False
 
-    def count_ranks(self):
-        return 0
+    #def count_ranks(self): return 0 #todo: implement? or keep as Awakened method?
     
     def unlock(self, tier): self.tiers[tier].lock = False
 
@@ -73,7 +72,7 @@ healing_word = Skill("Healing Word","Invoke a word of healing to restore health 
 stamina_transfer = Skill("Stamina Transfer","Sacrifice a portion of your stamina to energize a touched entity <br> Gives: [20*RNK] sp <br> Cost: [40*RNK] sp",0,"Restoration")
 purge_poison = Skill("Purge Poison","Weaken and destroy poisons and toxins (fcs) <br> Reduce Chemical Effect damage by  [20*RNK*(1 + .01*FCS)] <br> Range: Touch<br> Cost: 20mp <br> If damage is reduced to 0, the Effect is ended",1,"Restoration")
 regeneration = Skill("Regeneration","Instill a font of life within a target that slowly restores them (fcs) <br> Target recovers (1 + .01*FCS) health every second <br> Range: Touch<br> Cost: 50mp <br> Duration: .5*RNK m",1,"Restoration")
-healing_affinity = Skill("Healing Affinity","Multiply intensity of healing skills by [1+0.2*RNK] <br> Requires 10 ranks in Restoration",1,"Restoration")
+healing_affinity = Skill("Healing Affinity","Multiply intensity of healing skills by [1+0.1*RNK] <br> Requires 10 ranks in Restoration",1,"Restoration")
 healers_synergy = Skill("Healers Synergy","Multiply intensity of healing skills by [1+0.002*RNK*restoration_ranks] <br> Requires 50 ranks in Restoration",2,"Restoration")
 tissue_scan = Skill("Tissue Scan","Scan the body of a touched entity. <br> Resolution of resulting scan is equal to: [200 + 20*RNK] % of mundane optical vision <br> Cost: 5mp",2,"Restoration")
 
@@ -100,8 +99,3 @@ rock_push = Skill("Rock Push", "Cost proportional to mass",0,"Geoevocation",cost
 purify = Skill("Purify","Purify poison, corruption, and contamination <br> Range: [RNK] m <br> [10*RNK] mp/min",0,"Utility Auras",10)
 
 winter = Skill("Winter","Boost M.Regen by [10%*RNK] for all entities <br> Range: [RNK] m <br> Cost: [RNK] mp/hr",0,"Utility Auras",1)
-
-
-# Emtpy Trees!
-# Current tree count: 
-# Needed empty trees!
