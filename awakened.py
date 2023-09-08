@@ -1,6 +1,7 @@
 import math
 import delve_Class as dc
 import skill as sk
+import item as eq
 from jinja2 import Template;
 
 class Awakened:
@@ -61,6 +62,19 @@ class Awakened:
             self.attributes[1][x] = self.attributes[2][x] + self.attributes[3][x] + self.attributes[4][x]
             self.attributes[0][x] = min(self.attributes[6][x], self.attributes[2][x]+self.attributes[3][x]) + min(1, self.attributes[6][x]/(self.attributes[2][x]+self.attributes[3][x]))*min(self.attributes[4][x],self.attributes[5][x])
         self.update_vitals()
+        self.calculate_resistances()
+
+    #Update array column [6] with item attribute buffs
+    def update_item_attributes(self):
+        
+        self.update_attributes()
+        return True
+    
+    #Update array column [4] with accolade attribute buffs
+    def update_accolade_attributes(self):
+
+        self.update_attributes()
+        return True
 
     def initialize_trees(self):
         for tree in sk.AllTreeList: self.trees.update({tree:sk.Tree(tree)})
@@ -103,7 +117,7 @@ class Awakened:
 
     def max_skill_points(self): return self.level + 1
     
-    def calculate_used_skill_points(self): return len(self.skills)
+    def calculate_used_skill_points(self): return len(self.get_skills())
     
     def calculate_free_skill_points(self): return self.max_skill_points() - self.calculate_used_skill_points()
 
@@ -169,13 +183,22 @@ class Awakened:
             self.resistances[0][x] = self.resistances[2][x] + self.resistances[4][x] + self.resistances[6][x] + synMult*(tots[2]-self.resistances[2][x] + tots[4]-self.resistances[4][x] + tots[6]-self.resistances[6][x])
             self.resistances[1][x] = self.resistances[3][x] + self.resistances[5][x] + self.resistances[7][x] + synMult*(tots[3]-self.resistances[3][x] + tots[5]-self.resistances[5][x] + tots[7]-self.resistances[7][x])
 
-    def add_equipment (self,item): self.inventory[item.slot] = item
-    
+    def add_equipment (self,item):
+        self.inventory[item.slot] = item
+        #if rune in item.runes ==  
+        self.update_attributes()
+
+    def toggle_equipment (self,item):
+        if item in self.inventory:
+            self.inventory[item].toggle_rune
+            self.update_attributes()
+        else: return 0
+
     def essence_exhange(self):
         #All banked xp from stat expenditure or anything else
         self.add_experience(self.banked_xp)
         self.banked_xp = 0
-        for skill in list(self.skills.values()):
+        for skill in list(self.get_skills().values()):
             if skill.banked_xp > 0:
                 self.add_skill_exp(skill.name)
         print(f"A new dawn, a new day! You are currently level {self.level}")
@@ -198,7 +221,7 @@ class Awakened:
             self.currVitals[type] -= amount
         
         if type == 2:
-            for skill in list(self.skills.values()):
+            for skill in list(self.get_skills().values()):
                 if skill.name == "Intrinsic Clarity":
                     self.bank_skill_exp(skill.name, .5*amount)
                 elif skill.name == "Intrinsic Focus":
@@ -230,11 +253,18 @@ class Awakened:
         self.level_cap = newLevel
 
     def count_skills_in_tree(self, tree_name):
-        return sum(1 for skill in self.skills if skill.tree == tree_name)
+        return sum(1 for skill in self.get_skills() if skill.tree == tree_name)
 
     def get_skill_rank(self, skillN):
-        if skillN in self.skills: return self.skills[skillN].rank
+        if skillN in self.get_skills(): return self.get_skills()[skillN].rank
         else: return 0
+    
+    def get_skills(self):
+        skills = {}
+        for tree in self.trees:
+            for tier in tree.tiers:
+                skills.update(tier.skills)
+        return skills
     
     def add_skill(self, skill, starting_level=1):
         if self.trees[skill.tree].tiers[skill.tier].lock: print("Tree not unlocked!"); return False
@@ -250,15 +280,15 @@ class Awakened:
         
     def update_skill_caps (self):
         # Update the skill's cap to the class-based cap
-        for skill in list(self.skills.values()):
+        for skill in list(self.get_skills().values()):
             if skill.tree in self.character_class.tree_effect:
                 skill.cap = 10 + self.character_class.tree_effect[skill.tree]
     
-    def bank_skill_exp (self, skillN, xp): self.skills[skillN].bank_exp(xp) #redirect to skill method
-    def add_skill_exp (self, skillN): self.skills[skillN].add_exp() #redirect to skill method
+    def bank_skill_exp (self, skillN, xp): self.get_skills()[skillN].bank_exp(xp) #redirect to skill method
+    def add_skill_exp (self, skillN): self.get_skills()[skillN].add_exp() #redirect to skill method
 
     def cast_skill (self, skillN, n):
-        skill = self.skills[skillN]
+        skill = self.get_skills()[skillN]
         self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
         skill.bank_exp(.5*n*skill.cost['value'])
     
