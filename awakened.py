@@ -32,7 +32,9 @@ class Awakened:
         self.level = level
         self.level_cap = level_cap
         self.experience = experience
+        self.skills = {}
         self.trees = {}
+        self.initialize_trees()
         self.specialization = []
         self.character_class = character_class
         self.banked_xp = 0
@@ -74,6 +76,9 @@ class Awakened:
         self.update_attributes()
         return True
 
+    def initialize_trees(self):
+        for tree in sk.AllTreeList: self.trees.update({tree:sk.Tree(tree)})
+    
     def initialize_vitals(self):
         self.vitals[0] = self.calculate_health_cap()
         self.currVitals[0] = self.calculate_health_cap()
@@ -262,12 +267,14 @@ class Awakened:
         return skills
     
     def add_skill(self, skill, starting_level=1):
-        if self.trees[skill.tree][skill.tier].lock: print("Tree not unlocked!"); return False
-        if skill.name in self.get_skills(): print("Skill already aquired!"); return False
+        if self.trees[skill.tree].tiers[skill.tier].lock: print("Tree not unlocked!"); return False
+        if skill.name in self.skills: print("Skill already aquired!"); return False
                 
-        self.trees[skill.tree][skill.tier].skills.update({skill.name:skill})
+        self.skills.update({skill.name:skill})
+        self.trees[skill.tree].tiers[skill.tier].skills.append(skill.name)
         self.update_vitals()
         self.used_skill_points = self.calculate_used_skill_points()
+        skill.rank = starting_level
         skill.cap = 10 + self.trees[skill.tree].bonus
         return True
         
@@ -285,6 +292,15 @@ class Awakened:
         self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
         skill.bank_exp(.5*n*skill.cost['value'])
     
+    def unlock_tier(self,tree,tier):
+        if not self.trees[tree].tiers[tier].lock: print("Already unlocked!"); return False
+        if self.trees[tree].tiers[max(0,tier-1)].lock: print("Unlock the tier below!"); return False
+        cost = 10**(tier+1)
+        if self.experience < cost: print("Not enough experience!"); return False
+
+        self.experience -= cost
+        self.trees[tree].unlock(tier)
+
     def set_class(self, character_class):
         if not self.level in [5,25,50,75]:
             print(f"{self.name} not at a class selection level!")   
@@ -339,27 +355,18 @@ class Awakened:
 
     # Awful, innefficient, but best that I can think of
     def genSkillList (self):
-        tr = []
-        for skill in list(self.get_skills().values()):
-            tr.append(skill.tree)
-        tr = sorted(list(set(tr)))
+        trees = self.trees.copy()
 
-        trees = []
+        for tree in list(trees.values()):
+            for tier in list(tree.tiers.values()):
+                if not tier.skills: tree.tiers.pop(tier.tier)
+                else:
+                    skills = {}
+                    for skill in tier.skills: skills.update({skill:self.skills[skill]})
+                    tier.skills = skills
+            if not tree.tiers: trees.pop(tree.name)
 
-        for tree in tr:
-            trr = {"name":tree,"tiers":{"0": {"t":0,"skills":[]},
-                                        "1": {"t":1,"skills":[]}, 
-                                        "2": {"t":2,"skills":[]}, 
-                                        "3": {"t":3,"skills":[]}, 
-                                        "4": {"t":4,"skills":[]}}}
-            for skill in list(self.get_skills().values()):                      
-                if skill.tree == tree: trr["tiers"][str(skill.tier)]["skills"].append(skill)
-                    
-            for tier in list(trr["tiers"].values()):
-                if not tier["skills"]: trr["tiers"].pop(str(tier["t"]))
-            trees.append(trr)
-
-        return trees;
+        return list(trees.values());
 
     def printCharSheet (self,altCol = False):
         temp = Template(open('CharSheetTemplate.html').read())
