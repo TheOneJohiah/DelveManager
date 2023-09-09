@@ -43,8 +43,6 @@ class Awakened:
         #Needed to prevent recursion
         self.synergy_vitals = [0,0,0,0,0,0]
         self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
-        self.update_free_attributes()
-        self.update_attributes()  # Initialize attributes when the character is created
         self.resistances = [[]] * 8
         self.resistances[0] = [0] * 8 #total flat
         self.resistances[1] = [0] * 8 #total percent
@@ -54,6 +52,8 @@ class Awakened:
         self.resistances[5] = [0] * 8 #accolade percent
         self.resistances[6] = [0] * 8 #misc flat
         self.resistances[7] = [0] * 8 #misc percent
+        self.update_free_attributes()
+        self.update_attributes()  # Initialize attributes when the character is created
         self.calculate_resistances()
         self.initialize_vitals()  # Initialize vitals when the character is created
 
@@ -117,7 +117,7 @@ class Awakened:
 
     def max_skill_points(self): return self.level + 1
     
-    def calculate_used_skill_points(self): return len(self.get_skills())
+    def calculate_used_skill_points(self): return len(self.skills)
     
     def calculate_free_skill_points(self): return self.max_skill_points() - self.calculate_used_skill_points()
 
@@ -198,7 +198,7 @@ class Awakened:
         #All banked xp from stat expenditure or anything else
         self.add_experience(self.banked_xp)
         self.banked_xp = 0
-        for skill in list(self.get_skills().values()):
+        for skill in list(self.skills.values()):
             if skill.banked_xp > 0:
                 self.add_skill_exp(skill.name)
         print(f"A new dawn, a new day! You are currently level {self.level}")
@@ -221,7 +221,7 @@ class Awakened:
             self.currVitals[type] -= amount
         
         if type == 2:
-            for skill in list(self.get_skills().values()):
+            for skill in list(self.skills.values()):
                 if skill.name == "Intrinsic Clarity":
                     self.bank_skill_exp(skill.name, .5*amount)
                 elif skill.name == "Intrinsic Focus":
@@ -253,18 +253,11 @@ class Awakened:
         self.level_cap = newLevel
 
     def count_skills_in_tree(self, tree_name):
-        return sum(1 for skill in self.get_skills() if skill.tree == tree_name)
+        return sum(1 for skill in self.skills if skill.tree == tree_name)
 
     def get_skill_rank(self, skillN):
-        if skillN in self.get_skills(): return self.get_skills()[skillN].rank
+        if skillN in self.skills: return self.skills[skillN].rank
         else: return 0
-    
-    def get_skills(self):
-        skills = {}
-        for tree in self.trees:
-            for tier in tree.tiers:
-                skills.update(tier.skills)
-        return skills
     
     def add_skill(self, skill, starting_level=1):
         if self.trees[skill.tree].tiers[skill.tier].lock: print("Tree not unlocked!"); return False
@@ -280,15 +273,15 @@ class Awakened:
         
     def update_skill_caps (self):
         # Update the skill's cap to the class-based cap
-        for skill in list(self.get_skills().values()):
+        for skill in list(self.skills.values()):
             if skill.tree in self.character_class.tree_effect:
                 skill.cap = 10 + self.character_class.tree_effect[skill.tree]
     
-    def bank_skill_exp (self, skillN, xp): self.get_skills()[skillN].bank_exp(xp) #redirect to skill method
-    def add_skill_exp (self, skillN): self.get_skills()[skillN].add_exp() #redirect to skill method
+    def bank_skill_exp (self, skillN, xp): self.skills[skillN].bank_exp(xp) #redirect to skill method
+    def add_skill_exp (self, skillN): self.skills[skillN].add_exp() #redirect to skill method
 
     def cast_skill (self, skillN, n):
-        skill = self.get_skills()[skillN]
+        skill = self.skills[skillN]
         self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
         skill.bank_exp(.5*n*skill.cost['value'])
     
@@ -374,6 +367,7 @@ class Awakened:
 
         sheet = open(self.name+' CharSheet.html','w')
         sheet.write( temp.render(
+                    aw = self,
                     pluscol = pluscol,
                     altcol = altCol,
                     Name = self.name,

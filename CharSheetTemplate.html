@@ -197,8 +197,8 @@
                 <tr><th><h4>{{tier.tier}}</h4></th>
                 <td><table>
                 {% for skill in tier.skills.values() %}
-                    <tr><td><h5>{{skill.name}} ({{skill.rank}} / {{skill.cap}}) (Exp: {{skill.xp}} / {{ skill.getNextRankXP() }})</h5>
-                    {{skill.description}}</td></tr>
+                    <tr><td><h5>{{skill.name}} ({{skill.rank + skill.rank_bonus}} / {{skill.cap}}) {% if not skill.rank == skill.cap %} (Exp: {{skill.xp}} / {{ skill.getNextRankXP() }}) {% endif %}</h5>
+                    {{skill.describe(aw)}}</td></tr>
                 {% endfor %}
             </table></td></tr>
             {% endfor %}
