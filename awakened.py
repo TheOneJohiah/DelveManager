@@ -30,7 +30,7 @@ class Awakened:
         self.vitals = vitals
         self.used_skill_points = 0
         self.level = level
-        self.level_cap = level_cap
+        self.level_cap = level_cap if level_cap >= level else level
         self.experience = experience
         self.skills = {}
         self.trees = {}
@@ -64,18 +64,25 @@ class Awakened:
         self.update_vitals()
         self.calculate_resistances()
 
-    #Update array column [6] with item attribute buffs
-    def update_item_attributes(self):
-        
+    def update_buffs(self):
+        #Reset & Repopulate non-base boosts
+        self.attributes[3] = [0] * 8
+        self.attributes[4] = [0] * 8
+        self.resistances[4] = [0] * 8
+        self.resistances[5] = [0] * 8
+        self.resistances[6] = [0] * 8
+        self.resistances[7] = [0] * 8
+        #Update array column [4] with item attribute buffs
+        for item in filter(None, list(self.inventory.values())):
+            for rune in item.runes:
+                for enchant in rune.enchantments: #Add buffs to arrays
+                    if hasattr(enchant,'attribute_buff'): self.attributes[4] = [sum(i) for i in zip(self.attributes[4],enchant.attribute_buff)]
+                    if hasattr(enchant,'resistance_buff'): self.resistances[6] = [sum(i) for i in zip(self.resistances[6],enchant.resistance_buff)]
+        #Update array column [3] with accolade attribute buffs
+        #Do something for spell buffs?
+        #for acc in self.accolades:
         self.update_attributes()
-        return True
     
-    #Update array column [4] with accolade attribute buffs
-    def update_accolade_attributes(self):
-
-        self.update_attributes()
-        return True
-
     def initialize_trees(self):
         for tree in sk.AllTreeList: self.trees.update({tree:sk.Tree(tree)})
     
@@ -186,12 +193,12 @@ class Awakened:
     def add_equipment (self,item):
         self.inventory[item.slot] = item
         #if rune in item.runes ==  
-        self.update_attributes()
+        self.update_buffs()
 
     def toggle_equipment (self,item):
         if item in self.inventory:
             self.inventory[item].toggle_rune
-            self.update_attributes()
+            self.update_buffs()
         else: return 0
 
     def essence_exhange(self):
@@ -364,7 +371,6 @@ class Awakened:
     def printCharSheet (self,altCol = False):
         temp = Template(open('CharSheetTemplate.html').read())
         pluscol = self.free_attributes > 0 or self.calculate_free_skill_points() > 0
-
         sheet = open(self.name+' CharSheet.html','w')
         sheet.write( temp.render(
                     aw = self,

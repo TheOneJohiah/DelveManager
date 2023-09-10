@@ -146,7 +146,7 @@ grand_arcane_atantum = Material("Grand Arcane Atantum")
 
 # Creating enchantments
 resistance_enchantment = ResistanceEnchantment("Grand Arcane Resistance", "Provides resistances", resistance_buff=[0, 0, 0, 0, 0, 5000, 0, 0], mana_cost=100)
-attribute_enchantment = AttributeEnchantment("Grand AllStat enchant", "Boosts attributes", attribute_buff=[150, 150, 150, 150, 150, 150], mana_cost=1200, toggleable=True)
+attribute_enchantment = AttributeEnchantment("Grand AllStat enchant", "Boosts attributes", attribute_buff=[150, 150, 150, 150, 150, 150, 0, 0], mana_cost=1200, toggleable=True)
 mana_capacitance = ManaCapacitanceEnchantment("Lesser Mana Capacitance", "Stores mana", 10000, 0.7, 0.1, 1)
 ##Placeholder enchantment type variable. Replace with dict? Array?
 durability_enchantment = ItemStatEnchantment("Enhanced Durability", "Boosts item durability cap", 10, "durability", mana_cost=20)
