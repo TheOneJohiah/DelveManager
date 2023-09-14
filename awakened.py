@@ -221,20 +221,15 @@ class Awakened:
         else: print(type+" is not a vital, goof") 
         
         self.bank_experience(.5*amount)
-        if 0 > (self.currVitals[type] - amount):
+        if amount > self.currVitals[type]:
             self.currVitals[type] = 0
             underV = self.currVitals[type] - amount #Undervital; currently unused, but maybe should be.
         else:
             self.currVitals[type] -= amount
         
         if type == 2:
-            for skill in list(self.skills.values()):
-                if skill.name == "Intrinsic Clarity":
-                    self.bank_skill_exp(skill.name, .5*amount)
-                elif skill.name == "Intrinsic Focus":
-                    self.bank_skill_exp(skill.name, .5*amount)
-                elif skill.name == "Magical Synergy":
-                    self.bank_skill_exp(skill.name, .5*amount)
+            for passive in ["Intrinsic Clarity","Intrinsic Focus","Magical Synergy"]:
+                if passive in self.skills: self.bank_skill_exp(passive, .5*amount)
                     
     def add_vital(self, type, amount):
         if type == "HP": type = 0
@@ -289,8 +284,9 @@ class Awakened:
 
     def cast_skill (self, skillN, n):
         skill = self.skills[skillN]
-        self.reduce_vital(skill.cost['type'],skill.cost['value']*n)
-        skill.bank_exp(.5*n*skill.cost['value'])
+        cost = skill.get_cost()
+        self.reduce_vital(cost['type'],cost['value']*n)
+        skill.bank_exp(.5*n*cost['value'])
     
     def unlock_tier(self,tree,tier):
         if not self.trees[tree].tiers[tier].lock: print("Already unlocked!"); return False
