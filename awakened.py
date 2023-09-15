@@ -264,6 +264,8 @@ class Awakened:
             # Update tree effects based on the assigned class
             for tree, bonus in character_class.tree_effect.items(): self.tree_effect[tree] = bonus
             self.update_skill_caps()
+            self.update_attributes()
+            self.update_vitals()
         else:
             print(f"{self.name} does not meet the requirements for class '{character_class.name}'")
 
