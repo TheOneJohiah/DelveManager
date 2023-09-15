@@ -130,68 +130,59 @@ class Awakened:
     def calculate_free_skill_points(self): return self.max_skill_points() - self.calculate_used_skill_points()
 
     def calculate_health_cap(self):
-        base_health = int(self.attributes[1][0] * 20)
-        health_multiplier = self.character_class.attribute_effect[0]
-
-        health_multiplier *= round(1 + self.get_skill_rank("Intrinsic Strength")/5,1)
-        health_multiplier = round(health_multiplier,1)
-        print(health_multiplier)
-        return base_health * health_multiplier
+        base_health = self.attributes[1][0] * 20
+        health_multiplier = 100 + self.character_class.attribute_effect[0]
+        health_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Strength")
+        return base_health * health_multiplier / 10000
 
     def calculate_health_regen(self):
         base_health_regen = self.attributes[1][1] * 10
-        health_regen_multiplier = self.character_class.attribute_effect[1]
-
-        health_regen_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Recovery")
-
-        return base_health_regen * health_regen_multiplier
+        health_regen_multiplier = 100 + self.character_class.attribute_effect[1]
+        health_regen_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Recovery")
+        return base_health_regen * health_regen_multiplier / 10000
 
     def calculate_stamina_cap(self):
         base_stamina = self.attributes[1][2] * 20
-        stamina_multiplier = self.character_class.attribute_effect[2]
-
-        stamina_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Endurance")
-
-        return base_stamina * stamina_multiplier
+        stamina_multiplier = 100 + self.character_class.attribute_effect[2]
+        stamina_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Endurance")
+        return base_stamina * stamina_multiplier / 10000
     
     def calculate_stamina_regen(self):
         base_stamina_regen = self.attributes[1][3] * 10
-        stamina_regen_multiplier = self.character_class.attribute_effect[3]
-
-        stamina_regen_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Vigor")
-
-        return base_stamina_regen * stamina_regen_multiplier
+        stamina_regen_multiplier = 100 + self.character_class.attribute_effect[3]
+        stamina_regen_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Vigor")
+        return base_stamina_regen * stamina_regen_multiplier / 10000
 
     def calculate_mana_cap(self):
         synergy_mana = 0
         base_mana_cap = self.attributes[1][4] * 20
-        mana_cap_multiplier = self.character_class.attribute_effect[4]
+        mana_cap_multiplier = 100 + self.character_class.attribute_effect[4]
 
         # Calculate the multiplicative effect based on the skill's rank
-        mana_cap_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Focus")  # 20% increase per rank
-        synergy_effect = self.get_skill_power("Magical Synergy")
+        mana_cap_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Focus")  # 20% increase per rank
+        synergy_effect = 2.5*self.get_skill_rank("Magical Synergy")
         synergy_mana = synergy_effect * self.synergy_vitals[5]
-        self.synergy_vitals[4] = (base_mana_cap * mana_cap_multiplier)
+        self.synergy_vitals[4] = (base_mana_cap * mana_cap_multiplier)/100
 
-        return (base_mana_cap * mana_cap_multiplier) + synergy_mana
+        return (base_mana_cap*mana_cap_multiplier + synergy_mana)/10000
 
     def calculate_mana_regen(self):
         synergy_mana = 0
         base_mana_regen = self.attributes[1][5] * 10
-        mana_regen_multiplier = self.character_class.attribute_effect[5]
+        mana_regen_multiplier = 100 + self.character_class.attribute_effect[5]
 
-        mana_regen_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Clarity")  # 20% increase per rank
+        mana_regen_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Clarity")  # 20% increase per rank
         synergy_effect = self.get_skill_power("Magical Synergy")
         synergy_mana = synergy_effect * self.synergy_vitals[4]
-        self.synergy_vitals[5] = (base_mana_regen * mana_regen_multiplier)
+        self.synergy_vitals[5] = (base_mana_regen * mana_regen_multiplier)/100
 
-        return (base_mana_regen * mana_regen_multiplier) + synergy_mana
+        return (base_mana_regen*mana_regen_multiplier + synergy_mana)/10000
     
     def calculate_resistances(self):
-        end_multiplier = self.character_class.attribute_effect[2]
-        intMult = 1 + .2*self.get_skill_rank("Intrinsic Resistance")
+        end_multiplier = 100 + self.character_class.attribute_effect[2]
+        intMult = 100 + 20*self.get_skill_rank("Intrinsic Resistance")
         synMult = .025*self.get_skill_rank("Resistance Synergy")
-        baseRes = (self.attributes[1][2] * end_multiplier * intMult / 10)
+        baseRes = (self.attributes[1][2] * end_multiplier * intMult / 100000)
         # Remember to include item and other skill effects later
         tots = [0] * 8
         for x in range (8): tots[x] = sum(self.resistances[x])

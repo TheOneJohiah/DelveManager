@@ -135,32 +135,32 @@ class intrinsic_strength(Passive):
     def __init__(self):
         super().__init__("Intrinsic Strength","Multiply maximum Health by 1+(RNK/5)",0,"Physical Utility",keywords=[])
     
-    def get_power(self, awakened): return (self.rank/5)
-    def describe(self,awakened): return f"Multiply maximum Health by {1 + self.get_power(awakened)}"
+    def get_power(self, awakened): return 20*self.rank
+    def describe(self,awakened): return f"Boost maximum Health by {self.get_power(awakened)}%"
     def get_modifier(self): return None
 
 class intrinsic_recovery(Passive):
     def __init__(self):
         super().__init__("Intrinsic Recovery","Multiply Health regen by 1+(RNK/5)",0,"Physical Utility",keywords=[])
 
-    def get_power(self, awakened): return (self.rank/5)
-    def describe(self,awakened): return f"Multiply Health regen by {1 + self.get_power(awakened)}"
+    def get_power(self, awakened): return 20*self.rank
+    def describe(self,awakened): return f"Boost Health regen by {self.get_power(awakened)}%"
     def get_modifier(self): return None
 
 class intrinsic_endurance(Passive):
     def __init__(self):
         super().__init__("Intrinsic Endurance","Multiply maximum Stamina by 1+(RNK/5)",0,"Physical Utility",keywords=[])
     
-    def get_power(self, awakened): return (self.rank/5)
-    def describe(self,awakened): return f"Multiply maximum Stamina by {1 + self.get_power(awakened)}"
+    def get_power(self, awakened): return 20*self.rank
+    def describe(self,awakened): return f"Boost maximum Stamina by {self.get_power(awakened)}%"
     def get_modifier(self): return None
 
 class intrinsic_vigor(Passive):
     def __init__(self):
         super().__init__("Intrinsic Vigor","Multiply mana Stamina by 1+(RNK/5)",0,"Physical Utility",keywords=[])
 
-    def get_power(self, awakened): return (self.rank/5)
-    def describe(self,awakened): return f"Multiply mana Stamina by {1 + self.get_power(awakened)}"
+    def get_power(self, awakened): return 20*self.rank
+    def describe(self,awakened): return f"Multiply mana Stamina by {self.get_power(awakened)}%"
     def get_modifier(self): return None
 
 # Magical Utility
@@ -168,25 +168,24 @@ class intrinsic_focus(Passive):
     def __init__(self):
         super().__init__("Intrinsic Focus","Multiply maximum Mana by 1+(RNK/5)",0,"Magical Utility",keywords=[])
     
-    def get_power(self, awakened): return (self.rank/5)
-    def describe(self,awakened): return f"Multiply maximum Mana by {1 + self.get_power(awakened)}"
+    def get_power(self, awakened): return 20*self.rank
+    def describe(self,awakened): return f"Boost maximum Mana by {self.get_power(awakened)}%"
     def get_modifier(self): return None
 
 class intrinsic_clarity(Passive):
     def __init__(self):
         super().__init__("Intrinsic Clarity","Multiply Mana regen by 1+(RNK/5)",0,"Magical Utility",keywords=[])
 
-    def get_power(self, awakened): return (self.rank/5)
-    def describe(self,awakened): return f"Multiply Mana regen by {1 + self.get_power(awakened)}"
+    def get_power(self, awakened): return 20*self.rank
+    def describe(self,awakened): return f"Boost Mana regen by {self.get_power(awakened)}%"
     def get_modifier(self): return None
-
 
 class magical_synergy(Passive):
     def __init__(self):
-        super().__init__("Magical Synergy","Enables limited synergistic cross-coupling of magical attributes <br> [2.5%*RNK] of Focus contributes to M.Regen <br> [2.5%*RNK] of Clarity contributes to Mana <br> Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus",0, "Magical Utility")
+        super().__init__("Magical Synergy","Enables limited synergistic cross-coupling of magical attributes <br> [2.5%*RNK] of Focus contributes to M.Regen <br> [2.5%*RNK] of Clarity contributes to Mana <br> Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus",2,"Magical Utility")
         
-    def get_power(self, awakened): return self.rank/40
-    def describe(self, awakened): return f"Enables limited synergistic cross-coupling of magical attributes <br> {100*self.get_power(awakened)}% of Focus contributes to M.Regen <br> {100*self.get_power(awakened)}% of Clarity contributes to Mana <br> Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus"
+    def get_power(self, awakened): return 2.5*self.rank
+    def describe(self, awakened): return f"Enables limited synergistic cross-coupling of magical attributes <br> {self.get_power(awakened)}% of Focus contributes to M.Regen <br> {self.get_power(awakened)}% of Clarity contributes to Mana <br> Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus"
 
 # Restoration
 class healing_word(Instant):
@@ -206,6 +205,7 @@ class purge_poison(Instant):
     def describe(self, awakened): return "Weaken and destroy poisons and toxins (fcs) <br> Reduce Chemical Effect damage by "+str(round(self.get_power(awakened),2))+" <br> Range: Touch<br> Cost: 20mp <br> If damage is reduced to 0, the Effect is ended"
 
 regeneration = Skill("Regeneration","Instill a font of life within a target that slowly restores them (fcs) <br> Target recovers (1 + .01*FCS) health every second <br> Range: Touch<br> Cost: 50mp <br> Duration: .5*RNK m",1,"Restoration")
+
 class healing_affinity(Passive):
     def __init__(self):
         super().__init__("Healing Affinity","Multiply intensity of healing skills by [1+0.1*RNK] <br> Requires 10 ranks in Restoration",1,"Restoration",Modifier(target="Healing"),keywords=[])
@@ -219,6 +219,7 @@ class healing_affinity(Passive):
         )
 
 healers_synergy = Skill("Healers Synergy","Multiply intensity of healing skills by [1+0.002*RNK*restoration_ranks] <br> Requires 50 ranks in Restoration",2,"Restoration")
+
 tissue_scan = Skill("Tissue Scan","Scan the body of a touched entity. <br> Resolution of resulting scan is equal to: [200 + 20*RNK] % of mundane optical vision <br> Cost: 5mp",2,"Restoration")
 
 # Natureworking
