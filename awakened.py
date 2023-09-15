@@ -1,11 +1,12 @@
 import math
-import delve_Class as dc
-import skill as sk
-import item as eq
+from delve_Class import *
+from skill import *
+from item import *
+from copy import *
 from jinja2 import Template;
 
 class Awakened:
-    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=dc.unclassed):
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed):
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
@@ -84,7 +85,7 @@ class Awakened:
         self.update_attributes()
     
     def initialize_trees(self):
-        for tree in sk.AllTreeList: self.trees.update({tree:sk.Tree(tree)})
+        for tree in AllTreeList: self.trees.update({tree:Tree(tree)})
     
     def initialize_vitals(self):
         self.vitals[0] = self.calculate_health_cap()
@@ -129,14 +130,19 @@ class Awakened:
     def calculate_free_skill_points(self): return self.max_skill_points() - self.calculate_used_skill_points()
 
     def calculate_health_cap(self):
-        base_health = self.attributes[1][0] * 20
+        base_health = int(self.attributes[1][0] * 20)
         health_multiplier = self.character_class.attribute_effect[0]
 
+        health_multiplier *= round(1 + self.get_skill_rank("Intrinsic Strength")/5,1)
+        health_multiplier = round(health_multiplier,1)
+        print(health_multiplier)
         return base_health * health_multiplier
 
     def calculate_health_regen(self):
         base_health_regen = self.attributes[1][1] * 10
         health_regen_multiplier = self.character_class.attribute_effect[1]
+
+        health_regen_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Recovery")
 
         return base_health_regen * health_regen_multiplier
 
@@ -144,11 +150,15 @@ class Awakened:
         base_stamina = self.attributes[1][2] * 20
         stamina_multiplier = self.character_class.attribute_effect[2]
 
+        stamina_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Endurance")
+
         return base_stamina * stamina_multiplier
     
     def calculate_stamina_regen(self):
         base_stamina_regen = self.attributes[1][3] * 10
         stamina_regen_multiplier = self.character_class.attribute_effect[3]
+
+        stamina_regen_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Vigor")
 
         return base_stamina_regen * stamina_regen_multiplier
 
@@ -158,8 +168,8 @@ class Awakened:
         mana_cap_multiplier = self.character_class.attribute_effect[4]
 
         # Calculate the multiplicative effect based on the skill's rank
-        mana_cap_multiplier *= (1 + self.get_skill_rank("Intrinsic Focus") * 0.2)  # 20% increase per rank
-        synergy_effect = 0.025 * self.get_skill_rank("Magical Synergy")
+        mana_cap_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Focus")  # 20% increase per rank
+        synergy_effect = self.get_skill_power("Magical Synergy")
         synergy_mana = synergy_effect * self.synergy_vitals[5]
         self.synergy_vitals[4] = (base_mana_cap * mana_cap_multiplier)
 
@@ -170,8 +180,8 @@ class Awakened:
         base_mana_regen = self.attributes[1][5] * 10
         mana_regen_multiplier = self.character_class.attribute_effect[5]
 
-        mana_regen_multiplier *= (1 + self.get_skill_rank("Intrinsic Clarity") * 0.2)  # 20% increase per rank
-        synergy_effect = 0.025 * self.get_skill_rank("Magical Synergy")
+        mana_regen_multiplier *= 1 + .2*self.get_skill_rank("Intrinsic Clarity")  # 20% increase per rank
+        synergy_effect = self.get_skill_power("Magical Synergy")
         synergy_mana = synergy_effect * self.synergy_vitals[4]
         self.synergy_vitals[5] = (base_mana_regen * mana_regen_multiplier)
 
@@ -218,7 +228,7 @@ class Awakened:
         if type == "HP": type = 0
         elif type == "SP": type = 1
         elif type == "MP": type = 2
-        else: print(type+" is not a vital, goof") 
+        #else: print(type+" is not a vital, goof")
         
         self.bank_experience(.5*amount)
         if amount > self.currVitals[type]:
@@ -227,6 +237,12 @@ class Awakened:
         else:
             self.currVitals[type] -= amount
         
+        if type == 0:
+            for passive in ["Intrinsic Resistance","Turtle Skin","Intrinsic Strength","Intrinsic Recovery"]:
+                if passive in self.skills: self.bank_skill_exp(passive, .5*amount)
+        if type == 1:
+            for passive in ["Strength of Arm","Intrinsic Endurance","Intrinsic Vigor"]:
+                if passive in self.skills: self.bank_skill_exp(passive, .5*amount)
         if type == 2:
             for passive in ["Intrinsic Clarity","Intrinsic Focus","Magical Synergy"]:
                 if passive in self.skills: self.bank_skill_exp(passive, .5*amount)
@@ -235,21 +251,19 @@ class Awakened:
         if type == "HP": type = 0
         elif type == "SP": type = 1
         elif type == "MP": type = 2
-        else: print(type+" is not a vital, goof") 
+        #else: print(type+" is not a vital, goof") 
         
-        self.currVitals[type] += amount
+        addN = min(amount, self.vitals[2*type] - self.currVitals[type]) # ensuring regen doesn't overflow cap
+        overN = amount - addN #Over-whatever; currently unused, could add an total-overvital statistic?
+        self.currVitals[type] += addN
+
+        return addN
 
     def regen (self, hours):
         time = hours/24
         for x in range(3):
-            regN = min( time*self.vitals[2*x + 1], self.vitals[2*x] - self.currVitals[x]) # ensuring regen doesn't overflow cap
-            overN = time*self.vitals[2*x + 1] - regN #Over-whatever; currently unused, could add an total-overvital statistic?
-            self.currVitals[x] += regN
+            regN = self.add_vital(x,time*self.vitals[2*x + 1])
             self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
-            
-            #Debug output
-            if x == 2 and overN > 0:
-                print(f"Wasted {overN} mana regen!")
 
     def update_level_cap(self, newLevel):
         self.level_cap = newLevel
@@ -257,10 +271,17 @@ class Awakened:
     def count_skills_in_tree(self, tree_name):
         return sum(1 for skill in self.skills if skill.tree == tree_name)
 
+    def get_modifiers(self,targets):
+        return 0
+    
     def get_skill_rank(self, skillN):
         if skillN in self.skills: return self.skills[skillN].rank
         else: return 0
     
+    def get_skill_power(self, skillN):
+        if skillN in self.skills: return self.skills[skillN].get_power(self)
+        else: return 0
+
     def add_skill(self, skill, starting_level=1):
         if self.trees[skill.tree].tiers[skill.tier].lock: print("Tree not unlocked!"); return False
         if skill.name in self.skills: print("Skill already aquired!"); return False
@@ -309,6 +330,8 @@ class Awakened:
             # Update tree effects based on the assigned class
             for tree, bonus in character_class.tree_effect.items(): self.trees[tree].bonus = bonus
             self.update_skill_caps()
+            #self.update_attributes()
+            self.update_vitals()
         else:
             print(f"{self.name} does not meet the requirements for class '{character_class.name}'")
 
@@ -329,7 +352,7 @@ class Awakened:
         if new_exp >= required_exp:
             while new_exp >= required_exp:
                 ##Moved inside the while loop so it rechecks each level when getting lots of xp at once.
-                if self.level == 5 and self.character_class == dc.unclassed or self.level == 25 or self.level == self.level_cap:
+                if self.level == 5 and self.character_class == unclassed or self.level == 25 or self.level == self.level_cap:
                     max_exp = required_exp - 1
                     new_exp = min(new_exp, max_exp)
                     self.experience = new_exp
@@ -349,9 +372,8 @@ class Awakened:
             print(f"Congratulations! You have leveled up to level {self.level}!")
             self.update_free_attributes()
 
-    # Awful, innefficient, but best that I can think of
     def genSkillList (self):
-        trees = self.trees.copy()
+        trees = deepcopy(self.trees)
 
         for tree in list(trees.values()):
             for tier in list(tree.tiers.values()):
