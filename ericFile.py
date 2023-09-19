@@ -191,7 +191,51 @@ skillTight.bank_exp(0.1*1200*10)
 skillFlex.bank_exp(0.1*1200*10)
 
 eric.regen(14) #regen before fight?
-print(eric.currVitals[2])
+eric.reduce_vital("SP",100) #Fighting Skar
+eric.cast_skill("Rammer",66) #Attacking mana walls with rammer, arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*66*10)
+skillArm.bank_exp(0.1*66*10)
+skillTight.bank_exp(0.1*66*10)
+skillFlex.bank_exp(0.1*66*10)
+
+eric.regen(10) #Morning of the fifteenth day
+eric.essence_exhange() #Morning after fighting Skar
+print("Eviction day")
+
+eric.raise_attribute(5, 10) #points into clarity
+eric.add_skill(sk.multi_build)
+skillBuild = eric.skills["Multi Build"]
+
+eric.add_vital("MP",eric.vitals[5]*1.2) #regen assuming most of this day was spent within range of Daniel's 170% winter.
+
+eric.reduce_vital("SP",60) #Walking and such
+eric.cast_skill("Stone Tower",2400) #Attacking mana walls with rammer, arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*2400*10)
+skillArm.bank_exp(0.1*2400*10)
+skillTight.bank_exp(0.1*2400*10)
+skillFlex.bank_exp(0.1*2400*10)
+skillBuild.bank_exp(0.1*2400*10)
+
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.cast_skill("Ominous Eye",300)
+skillPyl.bank_exp(0.1*300*10)
+skillArm.bank_exp(0.1*300*10)
+skillTight.bank_exp(0.1*300*10)
+skillFlex.bank_exp(0.1*300*10)
+skillBuild.bank_exp(0.1*300*10)
+
+eric.regen(24) #Morning of the sixteenth day
+eric.essence_exhange() #Morning after getting kicked out
+
+eric.raise_attribute(5, 10) #points into clarity
+eric.add_skill(sk.insulated_walls)
+skillWalls = eric.skills["Insulated Walls"]
 
 eric.update_vitals()
 eric.update_free_attributes()

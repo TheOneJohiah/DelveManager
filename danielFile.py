@@ -238,13 +238,46 @@ daniel.cast_skill("Purify",20*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1
 skillAmp.bank_exp(skillPur.cost['value']*20*0.2)
 skillExt.bank_exp(skillPur.cost['value']*20*0.2)
 skillFoc.bank_exp(skillPur.cost['value']*20*0.2)
-daniel.cast_skill("Winter",12*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*12*0.2)
-skillExt.bank_exp(skillWint.cost['value']*12*0.2)
-daniel.regen(14) #regen before fight?
+daniel.cast_skill("Winter",14*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*14*0.2)
+skillExt.bank_exp(skillWint.cost['value']*14*0.2)
 
-#daniel.regen(24) #Morning of the fifteenth day
-#daniel.essence_exhange() #Morning after talking to Skar"""
+daniel.regen(14) #regen before fight?
+daniel.reduce_vital("SP",100) #Fighting Skar
+daniel.cast_skill("Winter",10*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*10*0.2)
+skillExt.bank_exp(skillWint.cost['value']*10*0.2)
+
+daniel.regen(10) #Morning of the fifteenth day
+daniel.essence_exhange() #Morning after talking to Skar
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print("Day after Death")
+
+daniel.reduce_vital("SP",50) #Workout
+daniel.cast_skill("Purify",19*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillPur.cost['value']*19*0.2)
+skillExt.bank_exp(skillPur.cost['value']*19*0.2)
+skillFoc.bank_exp(skillPur.cost['value']*19*0.2)
+daniel.cast_skill("Winter",20*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*20*0.2)
+skillExt.bank_exp(skillWint.cost['value']*20*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*20*0.2)
+daniel.cast_skill("Winter",4*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
+skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+
+daniel.add_skill(sk.spring)
+daniel.add_skill(sk.summer)
+
+daniel.regen(24) #Morning of the sixteenth day
+daniel.essence_exhange() #Morning after getting kicked out
+#daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print("Day after kicked out")
+
+
+
 
 daniel.update_vitals()
 daniel.update_free_attributes()

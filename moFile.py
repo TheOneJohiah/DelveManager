@@ -111,16 +111,39 @@ mo.regen(24) #Morning of the fourteenth day
 mo.essence_exhange() #7 of 7 training timelapse
 print("7 of 7, skar evening")
 
+mo.add_skill(sk.fire_affinity) #Unlocked with five ranks in fire evocation
+mo.add_skill(sk.heat_mastery) #Unlocked with firebolt level 5
+skillFiAff = mo.skills["Fire Affinity"]
+skillHeMas = mo.skills["Heat Mastery"]
+
 mo.reduce_vital("SP",100) #Workout
 mo.add_vital("MP",mo.vitals[5]*0.40) #regen assuming most of this day was spent within range of Daniel's 68% winter.
 mo.cast_skill("Firebolt",10)
+skillFiAff.bank_exp(0.1*10*10)
+skillHeMas.bank_exp(0.1*10*10)
+
 mo.raise_attribute(4, 24) #Focus before fighting Skar
 mo.regen(14) #regen before fight?
 mo.add_vital("MP",333) # Mana bank, filling up for the fight
-print(mo.currVitals[2])
+mo.reduce_vital("SP",100) #Fighting Skar
+mo.cast_skill("Firebolt",30) #Fighting Skar
+skillFiAff.bank_exp(0.1*30*10)
+skillHeMas.bank_exp(0.1*30*10)
 
-#mo.regen(24) #Morning of the fifteenth day
-#mo.essence_exhange() #Morning after talking to Skar
+mo.regen(10) #Morning of the fifteenth day
+mo.essence_exhange() #Morning after fighting Skar
+print("Eviction day")
+
+mo.add_vital("MP",mo.vitals[5]*1.2) #regen assuming most of this day was spent within range of Daniel's 170% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",60) #Walking
+mo.cast_skill("Firebolt",160) #Training
+skillFiAff.bank_exp(0.1*160*10)
+skillHeMas.bank_exp(0.1*160*10)
+
+mo.regen(24) #Morning of the sixteenth day
+mo.essence_exhange() #Morning after getting kicked out
 
 mo.update_vitals()
 mo.update_free_attributes()

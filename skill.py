@@ -69,7 +69,10 @@ firebolt = Skill("Firebolt","A bolt of magical fire assails your target <br> Dam
 fire_affinity = Skill("Fire Affinity", "Multiply the intensity of all Fire skills by [1 + .1*RNK]",0,"Fire Evocation")
 
 heat_mastery = Skill("Heat Mastery", "Multiply the intensity of all Heat skills by [1 + .1*RNK]",1,"Fire Evocation")
-smoke_burst = Skill("Smoke Burst","Burst forward [RNK] meters in an instant, leaving a trail of fire in your wake. <br> Fire trail deals [(5~7)*RNK*(1+FCS/100)] heat damage to everything it touches <br> Cost: 15mp <br> Note: burst can be in wathever direction the casters decides incluiding to the air <br> Smoke abilities are Fire abilities, subject to fire affinity and heat mastery",1,"Fire Evocation",cost={'type':'mp','value':15})
+
+# Fire Manipulation
+smoke_burst = Skill("Smoke Burst","Burst forward [RNK] meters in an instant, leaving a trail of fire in your wake. <br> Fire trail deals [(5~7)*RNK*(1+FCS/100)] heat damage to everything it touches <br> Cost: 15mp <br> Note: burst can be in wathever direction the casters decides incluiding to the air <br> Smoke abilities are Fire abilities, subject to fire affinity and heat mastery",1,"Fire Manipulation",cost={'type':'mp','value':15})
+
 # Geoevocation
 stonebolt = Skill("Stonebolt","A magical stone assails your target <br> Deal [(7.5-11)*RNK*(1+FCS/100)] force damage on hit <br> Range: 5*RNK meters <br> Cost: 10mp",0,"Geoevocation",cost={'type':"MP",'value':10})
 rock_push = Skill("Rock Push", "Cost proportional to mass",0,"Geoevocation",cost={'type':"MP",'value':1})
@@ -78,6 +81,12 @@ stone_spray = Skill("Stone Spray", "Deal [(6-8)*(1+FCS/100)] force damage per hi
 # Utility Auras
 purify = Skill("Purify","Purify poison, corruption, and contamination <br> Range: [RNK] m <br> [10*RNK] mp/min",0,"Utility Auras",cost={'type':"MP",'value':10})
 
+spring = Skill("Spring","Boost S.Regen by [10%*RNK] for all entities <br> Range: [RNK] m <br> Cost: [RNK] mp/hr",0,"Utility Auras",cost={'type':"MP",'value':1})
+
+summer = Skill("Summer","Boost H.Regen by [10%*RNK] for all entities <br> Range: [RNK] m <br> Cost: [RNK] mp/hr",0,"Utility Auras",cost={'type':"MP",'value':1})
+
+fall = Skill("Fall","Fall (hidden) <br> Reduce the need for food and water for all entities by [1%*RNK] <br> Range: [RNK] m <br> Cost: [RNK] mp/hr <br> Hidden Skill, Revealed by Meeting Requirement <br> Requires 5 ranks in Spring <br> Requires 5 ranks in Summer <br> Requires 5 ranks in Winter",0,"Utility Auras",cost={'type':"MP",'value':1})
+
 winter = Skill("Winter","Boost M.Regen by [10%*RNK] for all entities <br> Range: [RNK] m <br> Cost: [RNK] mp/hr",0,"Utility Auras",cost={'type':"MP",'value':1})
 
 # Aura Metamagic
@@ -85,13 +94,18 @@ amplify_aura = Skill("Amplify Aura", "Multiply aura intensity by [1+RNK/10] <br>
 extend_aura = Skill("Extend Aura", "Extend aura range by [RNK] m <br> Boost aura mana cost by [1+RNK/5]",0,"Aura Metamagic",cost={'type':"MP",'value':1})
 
 aura_focus = Skill("Aura Focus", "Focus on an aura to boost its output <br> Multiply aura intensity by [1+RNK/5] <br> Multiply aura range by [1+RNK/5] <br> Multiply aura mana cost by [1+RNK/5] <br> User loses all external senses while focusing <br> Requires 5 ranks in amplify aura <br> Requires 5 ranks in extend aura",1,"Aura Metamagic",cost={'type':"MP",'value':1})
+aura_synergy = Skill("Aura Synergy", "Aura Synergy <br> Increase all aura output by [0.1%*RNK] for each rank in any aura <br> Requires 1 rank in five different Auras",1,"Aura Metamagic")
+
+aura_IFF = Skill("Aura IFF", "Aura IFF <br> User may exempt entities from direct aura effects at will <br> Selected entities receive [1-0.1*RNK] aura output <br> Requires 10 ranks in Amplify Aura <br> Requires 10 ranks in Extend Aura <br> Requires 10 ranks in Aura Focus",2,"Aura Metamagic")
+
+aura_compression = Skill("Aura Compression","Aura Compression <br> Compress aura output, reducing range to boost intensity <br> Increase intensity by [0.2%*RNK] per meter of compression <br> Requires 50 ranks in Aura Metamagic <br> Requires 10 ranks in Aura IFF",3,"Aura Metamagic")
 
 # Offensive Constructs
 rammer = Skill("Rammer","A floating block of stone <br> Deals 3 (rnk * fcs * 0.5%) force damage by ramming into enemies. <br> 30 HP * RNK * (fcs * 0.5%) <br> Hardness:1*rnk (fcs * 0.2%) <br> Range: 30 * RNK meters <br> Costs 40 mana, 5mp/min to sustain.",0,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 magic_missile_turret = Skill("Magic Missile Turret","Hp 30 * RNK * (fcs * 0.5%) <br> Shoots a missile dealing 4-6  * RNK * (fcs * 0.75%) arcane damage every 5 seconds <br> Can target up to 1+RNK/5 targets <br> Causes mild disorientation <br> Cast range: 3xRNK meters <br> Mp cost 100   30mp/min",1,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
-ominous_eye = Skill("Ominous Eye", "Summon Ominous Eye <br> Looks like a dark crystal eye <br> 20 hp (fcs * 0.5%) <br> Deals 5 * RNK * (fcs * 0.75%) dark damage every 3 seconds to enemies hit by it's eye beam. <br> Range: 10m * RNK <br> Enough damage will interrupt stamina regen on enemies.",1,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
+ominous_eye = Skill("Ominous Eye", "Summon Ominous Eye <br> Looks like a dark crystal eye <br> 20 hp (fcs * 0.5%) <br> Deals 5 * RNK * (fcs * 0.75%) dark damage every 3 seconds to enemies hit by it's eye beam. <br> Range: 10m * RNK <br> Enough damage will interrupt stamina regen on enemies. <br> Cast range 3xRNK meters <br> Cost 80mp 60mp/min",1,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 granite_golem = Skill("Granite Golem","50 hp * rnk (fcs * 1%) <br> Hardness: 2 * RNK * (fcs * 0.2%) <br> Deals 4 * RNK * (fcs * 0.5%) force damage. <br> Is intelligent enough to hold on to enemies and attempt to stop them from moving. <br> It is quite slow <br> Cast time: 20s <br> Cast range 3.x rnk meters <br> 250mp cost | 40mp/min sustain cost",1,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 

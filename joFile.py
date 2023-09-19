@@ -123,9 +123,23 @@ micah.regen(14) #regen before fight?
 micah.add_vital("MP",333) # Mana bank, filling up for the fight
 micah.raise_attribute(4,10)
 print(micah.currVitals[2])
+micah.cast_skill("Stonebolt",30) #Fighting Skar
+micah.reduce_vital("SP",100) #Fighting Skar
 
-#micah.regen(24) #Morning of the fifteenth day
-#micah.essence_exhange() #Morning after talking to Skar
+micah.regen(10) #Morning of the fifteenth day
+micah.essence_exhange() #Morning after talking to Skar
+print("Eviction day")
+
+micah.reduce_vital("SP",50) #Workout
+micah.reduce_vital("HP",40) #Falling on rocks lol
+micah.add_vital("MP",micah.vitals[5]*1.2) #regen assuming most of this day was spent within range of Daniel's 170% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spray",90)
+micah.cast_skill("Rock Push",600)
+print(micah.currVitals[2])
+
+micah.regen(24) #Morning of the sixteenth day
+micah.essence_exhange() #Morning after getting kicked out
 
 micah.update_vitals()
 micah.update_free_attributes()
