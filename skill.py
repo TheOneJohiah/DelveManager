@@ -44,7 +44,9 @@ class Skill:
 # Magical Utility
 intrinsic_clarity = Skill("Intrinsic Clarity","Multiply mana regen by 1+(RNK/5)",0,"Magical Utility")
 intrinsic_focus = Skill("Intrinsic Focus","Multiply maximum mana by 1+(RNK/5)",0, "Magical Utility")
-magical_synergy = Skill("Magical Synergy","Enables limited synergistic cross-coupling of magical attributes <br> [2.5%*RNK] of Focus contributes to M.Regen <br> [2.5%*RNK] of Clarity contributes to Mana <br>  Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus",0, "Magical Utility")
+
+
+magical_synergy = Skill("Magical Synergy","Enables limited synergistic cross-coupling of magical attributes <br> [2.5%*RNK] of Focus contributes to M.Regen <br> [2.5%*RNK] of Clarity contributes to Mana <br>  Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus",2, "Magical Utility")
 
 # Restoration
 healing_word = Skill("Healing Word","Invoke a word of healing to restore health to a touched entity <br> Heal [10-20]*[RNK]*[1 + .005*FCS] hp <br> Cost: 10mp <br> Cannot Heal Self",0,"Restoration",cost={'type':"MP",'value':10})
@@ -78,6 +80,11 @@ stonebolt = Skill("Stonebolt","A magical stone assails your target <br> Deal [(7
 rock_push = Skill("Rock Push", "Cost proportional to mass",0,"Geoevocation",cost={'type':"MP",'value':1})
 stone_spray = Skill("Stone Spray", "Deal [(6-8)*(1+FCS/100)] force damage per hit. 2*RNK projectiles <br> Range: 1*RNK m <br> Cost: 20 mp <br> 5 ranks in Stonebolt",1,"Geoevocation",cost={'type':"MP",'value':20})
 
+stone_spear = Skill("Stone Spear","Fire a single large chunk of stone. Sufficient damage can stun target. <br> [30-40*RNK*(1+(FCS*0.75)/100)] force damage <br> Range: 5*RNK m <br> Cost: 50 mp <br> 5 ranks in Stone Spray, Rock Push, Stonebolt",2,"Geoevocation",cost={'type':"MP",'value':50})
+
+# Earth Manipulation
+earth_affinity = Skill("Earth Affinity","Boosts skills with the Earth subelement keyword, but not all effects of that element <br> Boost Earth keyword skills by [1+RNK/10] <br> Requires: 1 rank in three Earth keyword skills.",0,"Earth Manipulation")
+
 # Utility Auras
 purify = Skill("Purify","Purify poison, corruption, and contamination <br> Range: [RNK] m <br> [10*RNK] mp/min",0,"Utility Auras",cost={'type':"MP",'value':10})
 
@@ -104,13 +111,10 @@ aura_compression = Skill("Aura Compression","Aura Compression <br> Compress aura
 rammer = Skill("Rammer","A floating block of stone <br> Deals 3 (rnk * fcs * 0.5%) force damage by ramming into enemies. <br> 30 HP * RNK * (fcs * 0.5%) <br> Hardness:1*rnk (fcs * 0.2%) <br> Range: 30 * RNK meters <br> Costs 40 mana, 5mp/min to sustain.",0,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 magic_missile_turret = Skill("Magic Missile Turret","Hp 30 * RNK * (fcs * 0.5%) <br> Shoots a missile dealing 4-6  * RNK * (fcs * 0.75%) arcane damage every 5 seconds <br> Can target up to 1+RNK/5 targets <br> Causes mild disorientation <br> Cast range: 3xRNK meters <br> Mp cost 100   30mp/min",1,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
-
 ominous_eye = Skill("Ominous Eye", "Summon Ominous Eye <br> Looks like a dark crystal eye <br> 20 hp (fcs * 0.5%) <br> Deals 5 * RNK * (fcs * 0.75%) dark damage every 3 seconds to enemies hit by it's eye beam. <br> Range: 10m * RNK <br> Enough damage will interrupt stamina regen on enemies. <br> Cast range 3xRNK meters <br> Cost 80mp 60mp/min",1,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
-
 granite_golem = Skill("Granite Golem","50 hp * rnk (fcs * 1%) <br> Hardness: 2 * RNK * (fcs * 0.2%) <br> Deals 4 * RNK * (fcs * 0.5%) force damage. <br> Is intelligent enough to hold on to enemies and attempt to stop them from moving. <br> It is quite slow <br> Cast time: 20s <br> Cast range 3.x rnk meters <br> 250mp cost | 40mp/min sustain cost",1,"Offensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 # Defensive Constructs
-
 mana_wall = Skill("Mana Wall","a wall of pure mana. <br> 50 HP (RNK * FCS * 1%) <br> Takes double damage from metal <br> Cast time 10 seconds <br> Cast range: 3xRNK meters <br> Mana cost 100mp 5mp/min",0,"Defensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 stone_tower = Skill("Stone Tower","Stone Tower with a ladder <br> 100 hp * RNK (fcs * 1%) <br> Hardness 1 * rnk (fcs * 0.5%) <br> 15 second cast time <br> Cost 300mp 100mp/min",1,"Defensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
@@ -118,23 +122,50 @@ stone_tower = Skill("Stone Tower","Stone Tower with a ladder <br> 100 hp * RNK (
 stone_bunker = Skill("Stone Bunker","Bunker with windows <br> HP 125 * RNK * (fcs * 1%) <br> Hardness: 1.5 * rnk * (fcs * 1%) <br> 30 second cast time <br> Cast range: 3 * RNK.meters <br> 400mp cost.   100mp/min <br> Requires 5 ranks in tighter mana structures",2,"Defensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 # Utility Constructs
+lamp_post = Skill("Lamp Post","Emits light in a 2 * RNK meter radius <br> 10hp * RNK (fcs 0.5%) <br> Must be within 50m RNK from caster <br> Cost 20 mp 2mp/min sustain <br> Can be carried.",0,"Utility Constructs",cost={'type':"MP",'value':2}) #The per minute cost
 
-war_banner = Skill("War Banner", "Hp 30*RNK (fcs 0.5%) <br> Increases the damage of all constructs by 5% * RNK in a range of 3 * RNK meters. <br> Mp cost 50 * RNK  mana sustain 1 * RNK per minute <br> Cast range 3xRNK meters <br> Requires 8 ranks in an offensive constructs skill",1,"Utility Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
-
+war_banner = Skill("War Banner", "Hp 30*RNK (fcs 0.5%) <br> Increases the damage of all constructs by 5% * RNK in a range of 3 * RNK meters. <br> Mp cost 50 * RNK  mana sustain 10 * RNK per minute <br> Cast range 3xRNK meters <br> Requires 8 ranks in an offensive constructs skill",1,"Utility Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 mana_bank = Skill("Mana Bank","40 hp * RNK (fcs * 0.5%) <br> Transfer 50 * RNK mp/min, split between each person in the mana bank <br> Does not apply to caster <br> Cast time: 10 seconds <br> Cast range 3 x RNK meters <br> Mp cost 100   Sustain cost 100 * RNK mp/min",1,"Utility Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 # Construct Metamagic
-
 flexible_design = Skill("Flexible Design","You can increase the depth, width and height of any construct in any direction by 20% * RNK. <br> Does not affect stats, just size",0,"Construct Metamagic",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
-                        
 tighter_mana_structures = Skill("Tighter Mana Structures","Increases durability of all constructs by 10% * RNK",0,"Construct Metamagic",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 more_pylons = Skill("More Pylons","Adds +1 * RNK to the limit of constructs you can have.",1,"Construct Metamagic",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
-
 combined_arms = Skill("Combined Arms","Each rank in Offensive Constructs you have increase durability of defensive constructs by (RNK * 0.2%) <br> Each rank in defensive Constructs you have increase damage of offensive constructs by (RNK * 0.2%)",1,"Construct Metamagic",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
-
 multi_build = Skill("Multi Build","You can start casting 1+(RNK/5) constructs at a time <br> (This means you do not have to wait for a spell to finish casting before you can begin casting the next one)",1,"Construct Metamagic",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
-
 absorbent_constructs = Skill("Absorbent Constructs","Buffs that aren't from passives become 10% * RNK more powerful when applied to construct",1,"Construct Metamagic",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 insulated_walls = Skill("Insulated Walls", "Defensive constructs block environmental piercing and resistance piercing spells by 5% * RNK",2,"Construct Metamagic",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
+
+# Sharpshooting
+drilling_shot = Skill("Drilling Shot","Shoot an arrow that spins, dealing increased damage <br> Multiplies base physical damage by [1+(RNK/10)*(1+STR/200)] <br> Cost: 10 sp",0,"Sharpshooting",cost={'type':"SP",'value':10})
+seeker_shot = Skill("Seeker Shot","Shoot an arrow that tracks its target <br> Turn speed [(RNK*90)*(1+FCS/200)] deg/s <br> Tracking effect expires after [RNK*10] m <br> Cost: 10 sp",0,"Sharpshooting",cost={'type':"SP",'value':10})
+
+hardened_arrowheads = Skill("Hardened Arrowheads","Hardened Arrowheads <br> Hardness of arrows multiplied by [1+RNK/10] <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting",cost={'type':"SP",'value':10})
+sturdy_bow = Skill("Sturdy Bow","Durability of bows multiplied by [1+RNK/10] <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting",cost={'type':"SP",'value':10})
+strong_draw = Skill("Strong Draw","Bow draw weight multiplied by [1+RNK/10] <br> Toggleable <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting",cost={'type':"SP",'value':10})
+piercing_shot = Skill("Piercing Shot","Shoot an arrow that ignores [RNK*5%] of target’s hardness <br> If physical damage is dealt, arrow pierces through the target <br> After piercing, physical damage to any secondary target is reduced by the hardness of the primary target <br> After piercing, magical damage to any secondary target is reduced by the appropriate resistance of the primary target <br> Effect can recurse indefinitely <br> Cost: 25 sp <br> Requires 5 ranks in Drilling Shot",1,"Sharpshooting",cost={'type':"SP",'value':10})
+
+sharpened_arrowheads = Skill("Sharpened Arrowheads","Multiply physical damage of arrows by [1+RNK/10] <br> Requires 5 ranks in Hardened Arrowheads",2,"Sharpshooting",cost={'type':"SP",'value':10})
+endless_quiver = Skill("Endless Quiver","Conjure a copy of any arrow in your possession <br> Copy persists for [RNK] minutes <br> Cost: [100/RNK] sp + [SM] mp <br> Requires 10 ranks in Hardened Arrowheads",2,"Sharpshooting",cost={'type':"SP",'value':10})
+pinning_shot = Skill("Pinning Shot","Fire a shot that roots an enemy <br> Effect only activates if physical damage is dealt <br> Cost: 50 sp <br> Root the enemy for r [RNK*6] seconds <br> Requires ranks in Seeker Shot",2,"Sharpshooting",cost={'type':"SP",'value':10})
+sniper_shot = Skill("Sniper Shot (Hidden)","Fire a powerful charged shot with extreme range <br> Multiply physical damage by [1+(RNK/3.33)*(1+STR/100)] <br> Arrow is not affected by gravity or wind within 1km <br> Cost: 100 sp <br> Charge time: 10s <br> Hidden Skill, Revealed by Meeting Requirement <br> Requires 10 ranks in Piercing Shot <br> Requires 10 ranks in Drilling Shot",2,"Sharpshooting",cost={'type':"SP",'value':10})
+
+bleeder_shot = Skill("Bleeder Shot","Shoot an arrow that drains the target’s blood <br> Effect only activates if physical damage is dealt to health <br> Target bleeds freely for [RNK] minutes until wound is sealed <br> Bloodless entities are not affected by bleeding <br> Cost: 200 sp <br> Requires 5 ranks in Sharpened Arrowheads <br> Requires 5 ranks in Pinning Shot",3,"Sharpshooting",cost={'type':"SP",'value':10})
+splinter_shot = Skill("Splinter Shot","Arrow splits into [2*RNK] arrows just before impact with the original target, striking up to [2*RNK] enemies within [RNK/2] m <br> Split arrows deal [50%/RNK] of the original’s damage <br> Split arrows have [50%/RNK] of the original’s hardness and durability <br> Cost: None <br> Requires 50 ranks in Sharpshooting",3,"Sharpshooting",cost={'type':"SP",'value':10})
+multishot = Skill("Multishot (Hidden)","Fire an arrow that splits into [RNK*2] projectiles <br> Each projectile deals 10% of the original damage <br> Arrows fly in a fan up to 45 degrees wide, equally spaced <br> Cost: [10*RNK] mp <br> Hidden Skill, Revealed by Meeting Requirement <br> Requires 10 ranks in Mana Manipulation <br> Requires 10 ranks in Endless Quiver",3,"Sharpshooting",cost={'type':"SP",'value':10})
+stacked_shot = Skill("Stacked Shot","Up to [1+RNK] Shot skills may be combined <br> Cost: additive <br> Requires 60 ranks in Shot skills",4,"Sharpshooting",cost={'type':"SP",'value':10})
+
+# Elemental Archer
+fire_arrow = Skill("Fire Arrow","Wreathe an arrow in flames <br> [(5~10)*RNK*(1+FCS/200)] Heat on impact <br> Sufficient damage causes ignition <br> Cost: 5 mana",0,"Elemental Archer",cost={'type':"MP",'value':5})
+ice_arrow = Skill("Ice Arrow", "Encrust an arrow with ice <br> [(5~10)*RNK*(1+FCS/200)] Cold on impact <br> Sufficient damage causes slow <br> Cost: 5 mana",0,"Elemental Archer",cost={'type':"MP",'value':5})
+
+shock_arrow = Skill("Shock Arrow", "Charge an arrow with lightning <br> [(5~10)*RNK*(1+FCS/200)] Arcane on impact <br> Sufficient damage causes paralysis <br> Cost: 5 mana",1,"Elemental Archer",cost={'type':"MP",'value':5})
+poison_arrow = Skill("Poison Arrow","Douse an arrow in poison <br> [(10~20)*RNK*(1+FCS/200)] Chemical over 10 seconds <br> Effect only activates if physical damage is dealt <br> Sufficient damage disrupts regeneration <br> Cost: 5 mana",1,"Elemental Archer",cost={'type':"MP",'value':5})
+stone_arrow = Skill("Stone Arrow","Jacket an arrow with stone <br> [(5~10)*RNK*(1+FCS/200)] Force on impact <br> Arrow will not be affected by wind <br> Cost: 5 mana",1,"Elemental Archer",cost={'type':"MP",'value':5})
+arrow_affinity = Skill("Arrow Affinity","Multiply elemental damage of arrows by [1+RNK/10] <br> Requires 1 skill of each element <br> Requires at least 10 ranks in Elemental Archery",1,"Elemental Archer")
+
+radiant_arrow = Skill("Radiant Arrow","Envelop an arrow with the power of the sun <br> [(5~10)*RNK*(1+FCS/200)] Light on impact <br> Arrow velocity is increased to maximum <br> Physical damage is not affected <br> Cost: 5 mana <br> Requires 10 ranks in Fire Arrow",2,"Elemental Archer",cost={'type':"MP",'value':5})
+stygian_arrow = Skill("Stygian Arrow","Cloak an arrow in the shadow of night <br> [(5~10)*RNK*(1+FCS/200)] Dark on impact <br> Arrow release, impact, and flight are muffled <br> Cost: 5 mana <br> Requires 10 ranks in Ice Arrow",2,"Elemental Archer",cost={'type':"MP",'value':5})
+

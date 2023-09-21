@@ -140,6 +140,75 @@ print(micah.currVitals[2])
 
 micah.regen(24) #Morning of the sixteenth day
 micah.essence_exhange() #Morning after getting kicked out
+print("Day 1 of 7 - training at cave")
+micah.add_vital("MP",micah.vitals[5]*1.5) #regen assuming most of this day was spent within range of Daniel's 200% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+micah.reduce_vital("SP",100) #Workout
+micah.cast_skill("Rock Push",1500)
+rock = micah.skills["Rock Push"]
+
+micah.regen(24) #Morning of the seventeeth day
+micah.essence_exhange() #training montage
+print("Day 2 of 7 - training at cave")
+micah.add_vital("MP",micah.vitals[5]*1.5) #regen assuming most of this day was spent within range of Daniel's 200% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+micah.reduce_vital("SP",100) #Workout
+micah.cast_skill("Rock Push",2400)
+
+micah.regen(24) #Morning of the eighteenth day
+micah.essence_exhange() #training montage
+print("Day 3 of 7 - training at cave")
+micah.add_vital("MP",micah.vitals[5]*1.6) #regen assuming most of this day was spent within range of Daniel's 216% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.add_skill(sk.stone_spear)
+
+micah.reduce_vital("SP",100) #Workout
+micah.cast_skill("Stone Spear",45)
+
+micah.regen(24) #Morning of the nineteenth day
+micah.essence_exhange() #training montage
+print("Day 4 of 7 - training at cave")
+micah.add_vital("MP",micah.vitals[5]*1.7) #regen assuming most of this day was spent within range of Daniel's 270% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+micah.reduce_vital("SP",100) #Workout
+micah.cast_skill("Stone Spear",55)
+
+micah.regen(24) #Morning of the twentieth day
+micah.essence_exhange() #training montage
+print("Day 5 of 7 - training at cave")
+micah.add_vital("MP",micah.vitals[5]*1.7) #regen assuming most of this day was spent within range of Daniel's 270% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+micah.reduce_vital("SP",100) #Workout
+micah.cast_skill("Stone Spear",65)
+
+micah.regen(24) #Morning of the 21st day
+micah.essence_exhange() #training montage
+print("Day 6 of 7 - training at cave")
+micah.add_vital("MP",micah.vitals[5]*2) #regen assuming most of this day was spent within range of Daniel's 316% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+micah.reduce_vital("SP",100) #Workout
+micah.cast_skill("Stone Spear",70)
+
+micah.regen(24) #Morning of the 22nd day
+micah.essence_exhange() #training montage
+print("Day 7 of 7 - training at cave")
+micah.add_vital("MP",micah.vitals[5]*2.3) #regen assuming most of this day was spent within range of Daniel's 334% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.set_class(dc.geomancer)
+
+micah.reduce_vital("SP",100) #Workout
+micah.cast_skill("Stone Spear",70)
+
+micah.regen(24) #Blarg
+micah.essence_exhange() #Blarg
+micah.add_skill(sk.magical_synergy)
+micah.add_skill(sk.earth_affinity)
+
 
 micah.update_vitals()
 micah.update_free_attributes()

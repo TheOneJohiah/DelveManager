@@ -232,10 +232,184 @@ skillBuild.bank_exp(0.1*300*10)
 
 eric.regen(24) #Morning of the sixteenth day
 eric.essence_exhange() #Morning after getting kicked out
-
+print("Day 1 of 7 - training at cave")
+eric.add_vital("MP",eric.vitals[5]*1.5) #regen assuming most of this day was spent within range of Daniel's 200% winter.
 eric.raise_attribute(5, 10) #points into clarity
-eric.add_skill(sk.insulated_walls)
-skillWalls = eric.skills["Insulated Walls"]
+eric.add_skill(sk.lamp_post)
+
+eric.reduce_vital("SP",60) #Workout
+eric.cast_skill("Stone Tower",2400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*2400*10)
+skillArm.bank_exp(0.1*2400*10)
+skillTight.bank_exp(0.1*2400*10)
+skillFlex.bank_exp(0.1*2400*10)
+skillBuild.bank_exp(0.1*2400*10)
+
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.cast_skill("Lamp Post",4000)
+skillPyl.bank_exp(0.1*4000*2)
+skillArm.bank_exp(0.1*4000*2)
+skillTight.bank_exp(0.1*4000*2)
+skillFlex.bank_exp(0.1*4000*2)
+skillBuild.bank_exp(0.1*4000*2)
+
+eric.regen(24) #Morning of the seventeeth day
+eric.essence_exhange() #training montage
+eric.add_vital("MP",eric.vitals[5]*1.5) #regen assuming most of this day was spent within range of Daniel's 200% winter.
+print("Day 2 of 7 - training at cave")
+eric.raise_attribute(5, 10) #points into clarity
+eric.add_skill(sk.stone_bunker)
+
+eric.reduce_vital("SP",60) #Workout
+eric.cast_skill("Stone Tower",2400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*2400*10)
+skillArm.bank_exp(0.1*2400*10)
+skillTight.bank_exp(0.1*2400*10)
+skillFlex.bank_exp(0.1*2400*10)
+skillBuild.bank_exp(0.1*2400*10)
+
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.cast_skill("Lamp Post",5400)
+skillPyl.bank_exp(0.1*5400*2)
+skillArm.bank_exp(0.1*5400*2)
+skillTight.bank_exp(0.1*5400*2)
+skillFlex.bank_exp(0.1*5400*2)
+skillBuild.bank_exp(0.1*5400*2)
+
+eric.regen(24) #Morning of the eighteenth day
+eric.essence_exhange() #training montage
+eric.add_vital("MP",eric.vitals[5]*1.6) #regen assuming most of this day was spent within range of Daniel's 216% winter.
+print("Day 3 of 7 - training at cave")
+eric.raise_attribute(5, 10) #points into clarity
+eric.add_skill(sk.granite_golem)
+
+eric.reduce_vital("SP",60) #Workout
+eric.cast_skill("Stone Bunker",2800) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*2800*10)
+skillArm.bank_exp(0.1*2800*10)
+skillTight.bank_exp(0.1*2800*10)
+skillFlex.bank_exp(0.1*2800*10)
+skillBuild.bank_exp(0.1*2800*10)
+
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.cast_skill("Lamp Post",5400)
+skillPyl.bank_exp(0.1*5400*2)
+skillArm.bank_exp(0.1*5400*2)
+skillTight.bank_exp(0.1*5400*2)
+skillFlex.bank_exp(0.1*5400*2)
+skillBuild.bank_exp(0.1*5400*2)
+
+eric.regen(24) #Morning of the nineteenth day
+eric.essence_exhange() #training montage
+print("Day 4 of 7 - training at cave")
+eric.add_vital("MP",eric.vitals[5]*1.7) #regen assuming most of this day was spent within range of Daniel's 270% winter.
+eric.raise_attribute(5, 10) #points into clarity
+
+eric.reduce_vital("SP",60) #Workout
+eric.cast_skill("Stone Bunker",4200) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*4200*10)
+skillArm.bank_exp(0.1*4200*10)
+skillTight.bank_exp(0.1*4200*10)
+skillFlex.bank_exp(0.1*4200*10)
+skillBuild.bank_exp(0.1*4200*10)
+
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.regen(24) #Morning of the twentieth day
+eric.essence_exhange() #training montage
+print("Day 5 of 7 - training at cave")
+eric.add_vital("MP",eric.vitals[5]*1.7) #regen assuming most of this day was spent within range of Daniel's 270% winter.
+eric.raise_attribute(5, 10) #points into clarity
+
+eric.reduce_vital("SP",60) #Workout
+eric.cast_skill("Stone Bunker",4600) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*4600*10)
+skillArm.bank_exp(0.1*4600*10)
+skillTight.bank_exp(0.1*4600*10)
+skillFlex.bank_exp(0.1*4600*10)
+skillBuild.bank_exp(0.1*4600*10)
+
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.regen(24) #Morning of the 21st day
+eric.essence_exhange() #training montage
+print("Day 6 of 7 - training at cave")
+eric.add_vital("MP",eric.vitals[5]*2) #regen assuming most of this day was spent within range of Daniel's 316% winter.
+eric.raise_attribute(5, 10) #points into clarity
+
+eric.reduce_vital("SP",60) #Workout
+eric.cast_skill("Granite Golem",5300) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*5300*10)
+skillArm.bank_exp(0.1*5300*10)
+skillTight.bank_exp(0.1*5300*10)
+skillFlex.bank_exp(0.1*5300*10)
+skillBuild.bank_exp(0.1*5300*10)
+
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.regen(24) #Morning of the 22nd day
+eric.essence_exhange() #training montage
+print("Day 7 of 7 - training at cave")
+eric.add_vital("MP",eric.vitals[5]*2.3) #regen assuming most of this day was spent within range of Daniel's 334% winter.
+eric.raise_attribute(5, 10) #points into clarity
+
+eric.reduce_vital("SP",60) #Workout
+eric.cast_skill("War Banner",6000) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*6000*10)
+skillArm.bank_exp(0.1*6000*10)
+skillTight.bank_exp(0.1*6000*10)
+skillFlex.bank_exp(0.1*6000*10)
+skillBuild.bank_exp(0.1*6000*10)
+
+eric.cast_skill("Ominous Eye",230) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*230*10)
+skillArm.bank_exp(0.1*230*10)
+skillTight.bank_exp(0.1*230*10)
+skillFlex.bank_exp(0.1*230*10)
+skillBuild.bank_exp(0.1*230*10)
+
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.regen(24) #Blarg
+eric.essence_exhange() #Blarg
 
 eric.update_vitals()
 eric.update_free_attributes()
