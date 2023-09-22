@@ -144,8 +144,101 @@ skillHeMas.bank_exp(0.1*160*10)
 
 mo.regen(24) #Morning of the sixteenth day
 mo.essence_exhange() #Morning after getting kicked out
+print("Day 1 of 7 - training at cave")
+mo.add_vital("MP",mo.vitals[5]*1.5) #regen assuming most of this day was spent within range of Daniel's 200% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",100) #Workout
+mo.cast_skill("Firebolt",160) #Training
+skillFiAff.bank_exp(0.1*160*10)
+skillHeMas.bank_exp(0.1*160*10)
+
+mo.regen(24) #Morning of the seventeeth day
+mo.essence_exhange() #training montage
+print("Day 2 of 7 - training at cave")
+mo.add_vital("MP",mo.vitals[5]*1.5) #regen assuming most of this day was spent within range of Daniel's 200% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",100) #Workout
+mo.cast_skill("Firebolt",120) #Training
+skillFiAff.bank_exp(0.1*120*10)
+skillHeMas.bank_exp(0.1*120*10)
+
+mo.regen(24) #Morning of the eighteenth day
+mo.essence_exhange() #training montage
+print("Day 3 of 7 - training at cave")
+mo.add_vital("MP",mo.vitals[5]*1.6) #regen assuming most of this day was spent within range of Daniel's 216% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",100) #Workout
+mo.cast_skill("Firebolt",120) #Training
+skillFiAff.bank_exp(0.1*120*10)
+skillHeMas.bank_exp(0.1*120*10)
+
+mo.regen(24) #Morning of the nineteenth day
+mo.essence_exhange() #training montage
+print("Day 4 of 7 - training at cave")
+mo.add_vital("MP",mo.vitals[5]*1.7) #regen assuming most of this day was spent within range of Daniel's 270% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",100) #Workout
+mo.cast_skill("Firebolt",130) #Training
+skillFiAff.bank_exp(0.1*130*10)
+skillHeMas.bank_exp(0.1*130*10)
+
+mo.regen(24) #Morning of the twentieth day
+mo.essence_exhange() #training montage
+print("Day 5 of 7 - training at cave")
+mo.add_vital("MP",mo.vitals[5]*1.7) #regen assuming most of this day was spent within range of Daniel's 270% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",100) #Workout
+mo.cast_skill("Firebolt",140) #Training
+skillFiAff.bank_exp(0.1*140*10)
+skillHeMas.bank_exp(0.1*140*10)
+
+mo.regen(24) #Morning of the 21st day
+mo.essence_exhange() #training montage
+print("Day 6 of 7 - training at cave")
+mo.add_vital("MP",mo.vitals[5]*2) #regen assuming most of this day was spent within range of Daniel's 316% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",100) #Workout
+mo.cast_skill("Firebolt",140) #Training
+skillFiAff.bank_exp(0.1*140*10)
+skillHeMas.bank_exp(0.1*140*10)
+
+mo.regen(24) #Morning of the 22nd day
+mo.essence_exhange() #training montage
+print("Day 7 of 7 - training at cave")
+mo.add_vital("MP",mo.vitals[5]*2.3) #regen assuming most of this day was spent within range of Daniel's 334% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",100) #Workout
+mo.cast_skill("Firebolt",150) #Training
+skillFiAff.bank_exp(0.1*150*10)
+skillHeMas.bank_exp(0.1*150*10)
+
+mo.regen(24) #Morning of the 23rd day
+mo.essence_exhange() #Gotta open da rocks
+mo.add_vital("MP",mo.vitals[5]*3.1) #regen assuming most of this day was spent within range of Daniel's 410% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+
+mo.reduce_vital("SP",100) #Workout
+mo.cast_skill("Firebolt",160) #Training
+skillFiAff.bank_exp(0.1*160*10)
+skillHeMas.bank_exp(0.1*160*10)
+
+mo.regen(24) #Morning of the 24th day
+mo.essence_exhange() #Gotta open da rocks
+#mo.add_vital("MP",mo.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+#mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+print("Cave Day 2")
+
 
 mo.update_vitals()
 mo.update_free_attributes()
 mo.printCharSheet(altCol= False)
+print(mo.vitals)
+print(mo.currVitals)
 print(mo.general_statistics)

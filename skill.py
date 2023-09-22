@@ -26,7 +26,7 @@ class Skill:
                     self.banked_xp = 0
                     return True
                 currXP -= nextXP
-                if self.tree == "Utility Auras":
+                if self.tree == "Utility Auras" or self.name == "Liquefaction":
                     self.cost['value'] = self.cost['value'] + (self.cost['value'] // self.rank)
                 self.rank +=1
                 print(self.name+" Leveled up!")
@@ -85,6 +85,14 @@ stone_spear = Skill("Stone Spear","Fire a single large chunk of stone. Sufficien
 # Earth Manipulation
 earth_affinity = Skill("Earth Affinity","Boosts skills with the Earth subelement keyword, but not all effects of that element <br> Boost Earth keyword skills by [1+RNK/10] <br> Requires: 1 rank in three Earth keyword skills.",0,"Earth Manipulation")
 
+earthmolding = Skill("Earthmolding","Channeled, freely shape earth <br> Finer control with higher ranks <br> Cost: 1 mp/min",1,"Earth Manipulation",cost={'type':"MP",'value':1})
+liquefaction = Skill("Liquefaction","Channeled liquefaction of earthen material. Increases ease of use for molding. Volume depends on intensity <br> Immobilizes entities on contact, sufficient contact leads to suffocation if head is covered <br> Range: 5*RNK m <br> Cost: 5*RNK/s <br> Requires 5 ranks in earthmolding",1,"Earth Manipulation",cost={'type':"MP",'value':5})
+
+stoneset = Skill("Stoneset","Condenses loose earth and mud into stone  <br> Requires physical contact with target material <br> Cost scales with volume <br> Temporary unless boosted <br> Requires 5 ranks in liquefaction",2,"Earth Manipulation",cost={'type':"MP",'value':1}) #Haven't decided on an actual cost yet
+stonemolding = Skill("Stonemolding","Channeled, freely shape stone. Finer control with higher ranks <br> Cost: 15 mp/s <br> Requires 5 ranks in earthmolding, liquefaction",2,"Earth Manipulation",cost={'type':"MP",'value':5})
+
+rooted = Skill("Rooted","Harvest the power of the Earth, boosting earth magic and rooting yourself in place. <br> 1+(RNK/20) effectiveness to Earth keyword spells, RNK/10 if environment is majority deepstone <br> User is [1+(RNK/10)*(1+END/100)] times harder to knock back, dependant of material user stands on <br> Automatically deactivates if user loses contact with the ground for more than 3 seconds <br> Requires focus to maintain <br> Requires 5 ranks in Earth Affinity",3,"Earth Manipulation")
+
 # Utility Auras
 purify = Skill("Purify","Purify poison, corruption, and contamination <br> Range: [RNK] m <br> [10*RNK] mp/min",0,"Utility Auras",cost={'type':"MP",'value':10})
 
@@ -142,20 +150,20 @@ insulated_walls = Skill("Insulated Walls", "Defensive constructs block environme
 drilling_shot = Skill("Drilling Shot","Shoot an arrow that spins, dealing increased damage <br> Multiplies base physical damage by [1+(RNK/10)*(1+STR/200)] <br> Cost: 10 sp",0,"Sharpshooting",cost={'type':"SP",'value':10})
 seeker_shot = Skill("Seeker Shot","Shoot an arrow that tracks its target <br> Turn speed [(RNK*90)*(1+FCS/200)] deg/s <br> Tracking effect expires after [RNK*10] m <br> Cost: 10 sp",0,"Sharpshooting",cost={'type':"SP",'value':10})
 
-hardened_arrowheads = Skill("Hardened Arrowheads","Hardened Arrowheads <br> Hardness of arrows multiplied by [1+RNK/10] <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting",cost={'type':"SP",'value':10})
-sturdy_bow = Skill("Sturdy Bow","Durability of bows multiplied by [1+RNK/10] <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting",cost={'type':"SP",'value':10})
-strong_draw = Skill("Strong Draw","Bow draw weight multiplied by [1+RNK/10] <br> Toggleable <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting",cost={'type':"SP",'value':10})
-piercing_shot = Skill("Piercing Shot","Shoot an arrow that ignores [RNK*5%] of target’s hardness <br> If physical damage is dealt, arrow pierces through the target <br> After piercing, physical damage to any secondary target is reduced by the hardness of the primary target <br> After piercing, magical damage to any secondary target is reduced by the appropriate resistance of the primary target <br> Effect can recurse indefinitely <br> Cost: 25 sp <br> Requires 5 ranks in Drilling Shot",1,"Sharpshooting",cost={'type':"SP",'value':10})
+hardened_arrowheads = Skill("Hardened Arrowheads","Hardened Arrowheads <br> Hardness of arrows multiplied by [1+RNK/10] <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting")
+sturdy_bow = Skill("Sturdy Bow","Durability of bows multiplied by [1+RNK/10] <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting")
+strong_draw = Skill("Strong Draw","Bow draw weight multiplied by [1+RNK/10] <br> Toggleable <br> Requires 5 ranks in Sharpshooting",1,"Sharpshooting")
+piercing_shot = Skill("Piercing Shot","Shoot an arrow that ignores [RNK*5%] of target’s hardness <br> If physical damage is dealt, arrow pierces through the target <br> After piercing, physical damage to any secondary target is reduced by the hardness of the primary target <br> After piercing, magical damage to any secondary target is reduced by the appropriate resistance of the primary target <br> Effect can recurse indefinitely <br> Cost: 25 sp <br> Requires 5 ranks in Drilling Shot",1,"Sharpshooting",cost={'type':"SP",'value':25})
 
-sharpened_arrowheads = Skill("Sharpened Arrowheads","Multiply physical damage of arrows by [1+RNK/10] <br> Requires 5 ranks in Hardened Arrowheads",2,"Sharpshooting",cost={'type':"SP",'value':10})
-endless_quiver = Skill("Endless Quiver","Conjure a copy of any arrow in your possession <br> Copy persists for [RNK] minutes <br> Cost: [100/RNK] sp + [SM] mp <br> Requires 10 ranks in Hardened Arrowheads",2,"Sharpshooting",cost={'type':"SP",'value':10})
-pinning_shot = Skill("Pinning Shot","Fire a shot that roots an enemy <br> Effect only activates if physical damage is dealt <br> Cost: 50 sp <br> Root the enemy for r [RNK*6] seconds <br> Requires ranks in Seeker Shot",2,"Sharpshooting",cost={'type':"SP",'value':10})
-sniper_shot = Skill("Sniper Shot (Hidden)","Fire a powerful charged shot with extreme range <br> Multiply physical damage by [1+(RNK/3.33)*(1+STR/100)] <br> Arrow is not affected by gravity or wind within 1km <br> Cost: 100 sp <br> Charge time: 10s <br> Hidden Skill, Revealed by Meeting Requirement <br> Requires 10 ranks in Piercing Shot <br> Requires 10 ranks in Drilling Shot",2,"Sharpshooting",cost={'type':"SP",'value':10})
+sharpened_arrowheads = Skill("Sharpened Arrowheads","Multiply physical damage of arrows by [1+RNK/10] <br> Requires 5 ranks in Hardened Arrowheads",2,"Sharpshooting")
+endless_quiver = Skill("Endless Quiver","Conjure a copy of any arrow in your possession <br> Copy persists for [RNK] minutes <br> Cost: [100/RNK] sp + [SM] mp <br> Requires 10 ranks in Hardened Arrowheads",2,"Sharpshooting",cost={'type':"SP",'value':1}) #Leaving cost at 1 since it has a rank based formula
+pinning_shot = Skill("Pinning Shot","Fire a shot that roots an enemy <br> Effect only activates if physical damage is dealt <br> Cost: 50 sp <br> Root the enemy for r [RNK*6] seconds <br> Requires ranks in Seeker Shot",2,"Sharpshooting",cost={'type':"SP",'value':50})
+sniper_shot = Skill("Sniper Shot (Hidden)","Fire a powerful charged shot with extreme range <br> Multiply physical damage by [1+(RNK/3.33)*(1+STR/100)] <br> Arrow is not affected by gravity or wind within 1km <br> Cost: 100 sp <br> Charge time: 10s <br> Hidden Skill, Revealed by Meeting Requirement <br> Requires 10 ranks in Piercing Shot <br> Requires 10 ranks in Drilling Shot",2,"Sharpshooting",cost={'type':"SP",'value':100})
 
-bleeder_shot = Skill("Bleeder Shot","Shoot an arrow that drains the target’s blood <br> Effect only activates if physical damage is dealt to health <br> Target bleeds freely for [RNK] minutes until wound is sealed <br> Bloodless entities are not affected by bleeding <br> Cost: 200 sp <br> Requires 5 ranks in Sharpened Arrowheads <br> Requires 5 ranks in Pinning Shot",3,"Sharpshooting",cost={'type':"SP",'value':10})
-splinter_shot = Skill("Splinter Shot","Arrow splits into [2*RNK] arrows just before impact with the original target, striking up to [2*RNK] enemies within [RNK/2] m <br> Split arrows deal [50%/RNK] of the original’s damage <br> Split arrows have [50%/RNK] of the original’s hardness and durability <br> Cost: None <br> Requires 50 ranks in Sharpshooting",3,"Sharpshooting",cost={'type':"SP",'value':10})
-multishot = Skill("Multishot (Hidden)","Fire an arrow that splits into [RNK*2] projectiles <br> Each projectile deals 10% of the original damage <br> Arrows fly in a fan up to 45 degrees wide, equally spaced <br> Cost: [10*RNK] mp <br> Hidden Skill, Revealed by Meeting Requirement <br> Requires 10 ranks in Mana Manipulation <br> Requires 10 ranks in Endless Quiver",3,"Sharpshooting",cost={'type':"SP",'value':10})
-stacked_shot = Skill("Stacked Shot","Up to [1+RNK] Shot skills may be combined <br> Cost: additive <br> Requires 60 ranks in Shot skills",4,"Sharpshooting",cost={'type':"SP",'value':10})
+bleeder_shot = Skill("Bleeder Shot","Shoot an arrow that drains the target’s blood <br> Effect only activates if physical damage is dealt to health <br> Target bleeds freely for [RNK] minutes until wound is sealed <br> Bloodless entities are not affected by bleeding <br> Cost: 200 sp <br> Requires 5 ranks in Sharpened Arrowheads <br> Requires 5 ranks in Pinning Shot",3,"Sharpshooting",cost={'type':"SP",'value':200})
+splinter_shot = Skill("Splinter Shot","Arrow splits into [2*RNK] arrows just before impact with the original target, striking up to [2*RNK] enemies within [RNK/2] m <br> Split arrows deal [50%/RNK] of the original’s damage <br> Split arrows have [50%/RNK] of the original’s hardness and durability <br> Cost: None <br> Requires 50 ranks in Sharpshooting",3,"Sharpshooting")
+multishot = Skill("Multishot (Hidden)","Fire an arrow that splits into [RNK*2] projectiles <br> Each projectile deals 10% of the original damage <br> Arrows fly in a fan up to 45 degrees wide, equally spaced <br> Cost: [10*RNK] mp <br> Hidden Skill, Revealed by Meeting Requirement <br> Requires 10 ranks in Mana Manipulation <br> Requires 10 ranks in Endless Quiver",3,"Sharpshooting",cost={'type':"MP",'value':1}) #Just scales off rank, add to aura section maybe? Arbitrary cost for now
+stacked_shot = Skill("Stacked Shot","Up to [1+RNK] Shot skills may be combined <br> Cost: additive <br> Requires 60 ranks in Shot skills",4,"Sharpshooting") #Just use .bank_xp
 
 # Elemental Archer
 fire_arrow = Skill("Fire Arrow","Wreathe an arrow in flames <br> [(5~10)*RNK*(1+FCS/200)] Heat on impact <br> Sufficient damage causes ignition <br> Cost: 5 mana",0,"Elemental Archer",cost={'type':"MP",'value':5})
@@ -169,3 +177,12 @@ arrow_affinity = Skill("Arrow Affinity","Multiply elemental damage of arrows by 
 radiant_arrow = Skill("Radiant Arrow","Envelop an arrow with the power of the sun <br> [(5~10)*RNK*(1+FCS/200)] Light on impact <br> Arrow velocity is increased to maximum <br> Physical damage is not affected <br> Cost: 5 mana <br> Requires 10 ranks in Fire Arrow",2,"Elemental Archer",cost={'type':"MP",'value':5})
 stygian_arrow = Skill("Stygian Arrow","Cloak an arrow in the shadow of night <br> [(5~10)*RNK*(1+FCS/200)] Dark on impact <br> Arrow release, impact, and flight are muffled <br> Cost: 5 mana <br> Requires 10 ranks in Ice Arrow",2,"Elemental Archer",cost={'type':"MP",'value':5})
 
+# Elemental Enhancement
+concussive_blows = Skill("Concussive Blows","Single target buff, <br> Adds 6 force damage to all attacks <br> within 100 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
+stygian_mind = Skill("Stygian Mind","Single target buff, <br> Adds 6 dark damage to all attacks <br> within 100 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
+radiant_soul = Skill("Radiant Soul","Single target buff, <br> Adds 6 radiant damage to all attacks <br> within 100 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
+
+frost_raiment = Skill("Frost Raiment","Single target buff, <br> Adds 3 cold damage to all attacks and 3 heat resistance <br> within 100 min (1% fcs) <br> Cost: 10 mana",1,"Elemental Enhancement",cost={'type':"MP",'value':10})
+inner_fire = Skill("Inner Fire","Single target buff, <br> Adds 3 heat damage to all attacks and 3 cold resistance <br> within 100 min (1% fcs) <br> Cost: 10 mana",1,"Elemental Enhancement",cost={'type':"MP",'value':10})
+
+stubbornness = Skill("Stubbornness","Single target buff, <br> Adds 6 mental resistance <br> within 100 min (1% fcs) <br> Cost: 10 mana",2,"Elemental Enhancement",cost={'type':"MP",'value':10})

@@ -192,7 +192,7 @@ skillFlex.bank_exp(0.1*1200*10)
 
 eric.regen(14) #regen before fight?
 eric.reduce_vital("SP",100) #Fighting Skar
-eric.cast_skill("Rammer",66) #Attacking mana walls with rammer, arbitrary amount of mana spent
+eric.cast_skill("Rammer",66) #Attacking Skar with rammer, arbitrary amount of mana spent
 skillPyl.bank_exp(0.1*66*10)
 skillArm.bank_exp(0.1*66*10)
 skillTight.bank_exp(0.1*66*10)
@@ -209,7 +209,7 @@ skillBuild = eric.skills["Multi Build"]
 eric.add_vital("MP",eric.vitals[5]*1.2) #regen assuming most of this day was spent within range of Daniel's 170% winter.
 
 eric.reduce_vital("SP",60) #Walking and such
-eric.cast_skill("Stone Tower",2400) #Attacking mana walls with rammer, arbitrary amount of mana spent
+eric.cast_skill("Stone Tower",2400) #Arbitrary amount of mana spent
 skillPyl.bank_exp(0.1*2400*10)
 skillArm.bank_exp(0.1*2400*10)
 skillTight.bank_exp(0.1*2400*10)
@@ -408,8 +408,45 @@ skillTight.bank_exp(0.1*420*10)
 skillFlex.bank_exp(0.1*420*10)
 skillBuild.bank_exp(0.1*420*10)
 
-eric.regen(24) #Blarg
-eric.essence_exhange() #Blarg
+eric.regen(24) #Morning of the 23rd day
+eric.essence_exhange() #Gotta open da rocks
+eric.add_vital("MP",eric.vitals[5]*3.1) #regen assuming most of this day was spent within range of Daniel's 410% winter.
+print("Opening day")
+
+eric.reduce_vital("SP",80) #Helping to clear the rock pile
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.cast_skill("Ominous Eye",1400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*1400*10)
+skillArm.bank_exp(0.1*1400*10)
+skillTight.bank_exp(0.1*1400*10)
+skillFlex.bank_exp(0.1*1400*10)
+skillBuild.bank_exp(0.1*1400*10)
+
+eric.cast_skill("Magic Missile Turret",1400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*1400*10)
+skillArm.bank_exp(0.1*1400*10)
+skillTight.bank_exp(0.1*1400*10)
+skillFlex.bank_exp(0.1*1400*10)
+skillBuild.bank_exp(0.1*1400*10)
+
+eric.cast_skill("Granite Golem",5300) #opening the cave
+skillPyl.bank_exp(0.1*5300*10)
+skillArm.bank_exp(0.1*5300*10)
+skillTight.bank_exp(0.1*5300*10)
+skillFlex.bank_exp(0.1*5300*10)
+skillBuild.bank_exp(0.1*5300*10)
+
+eric.regen(24) #Morning of the 24th day
+eric.essence_exhange() #Gotta open da rocks
+#eric.add_vital("MP",eric.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+print("Cave Day 2")
+
 
 eric.update_vitals()
 eric.update_free_attributes()

@@ -269,6 +269,8 @@ skillExt.bank_exp(skillWint.cost['value']*4*0.2)
 
 daniel.add_skill(sk.spring)
 daniel.add_skill(sk.summer)
+skillSpr = daniel.skills["Spring"]
+skillSum = daniel.skills["Summer"]
 
 daniel.regen(24) #Morning of the sixteenth day
 daniel.essence_exhange() #Morning after getting kicked out
@@ -410,8 +412,33 @@ daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
 skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
 skillExt.bank_exp(skillWint.cost['value']*4*0.2)
 
-daniel.regen(24) #Blarg
-daniel.essence_exhange() #Blarg
+daniel.regen(24) #Morning of the 24th day
+daniel.essence_exhange() #Gotta open da rocks
+print("Opening day")
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+
+daniel.reduce_vital("SP",50) #Workout
+daniel.cast_skill("Purify",76*(1 + skillAmp.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillPur.cost['value']*76*0.2)
+#skillExt.bank_exp(skillPur.cost['value']*29*0.2)
+skillFoc.bank_exp(skillPur.cost['value']*76*0.2)
+daniel.cast_skill("Winter",16*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
+skillExt.bank_exp(skillWint.cost['value']*16*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
+skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+
+daniel.regen(24) #Morning of the 24th day
+daniel.essence_exhange() #Gotta open da rocks
+print("Cave Day 2")
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1))
+print((0.1*skillSpr.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillSum.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.update_vitals()
 daniel.update_free_attributes()

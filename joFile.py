@@ -204,13 +204,30 @@ micah.set_class(dc.geomancer)
 micah.reduce_vital("SP",100) #Workout
 micah.cast_skill("Stone Spear",70)
 
-micah.regen(24) #Blarg
-micah.essence_exhange() #Blarg
+micah.regen(24) #Morning of the 23rd day
+micah.essence_exhange() #Gotta open da rocks
+micah.add_vital("MP",micah.vitals[5]*3.1) #regen assuming most of this day was spent within range of Daniel's 410% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+print("Opening day")
+
 micah.add_skill(sk.magical_synergy)
 micah.add_skill(sk.earth_affinity)
+skillEtAff = micah.skills["Earth Affinity"]
+micah.reduce_vital("SP",80) #Helping to clear the rock pile
+micah.cast_skill("Stone Spear",80)
+skillEtAff.bank_exp(0.1*80*50)
 
+micah.regen(24) #Morning of the 24th day
+micah.essence_exhange() #Gotta open da rocks
+micah.add_vital("MP",micah.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+print("Cave Day 2")
+micah.raise_attribute(4,30)
+micah.add_skill(sk.earthmolding)
 
 micah.update_vitals()
 micah.update_free_attributes()
 micah.printCharSheet(altCol= False)
+print(micah.vitals)
+print(micah.currVitals)
 print(micah.general_statistics)
