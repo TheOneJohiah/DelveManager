@@ -45,6 +45,7 @@ class Skill:
 intrinsic_clarity = Skill("Intrinsic Clarity","Multiply mana regen by 1+(RNK/5)",0,"Magical Utility")
 intrinsic_focus = Skill("Intrinsic Focus","Multiply maximum mana by 1+(RNK/5)",0, "Magical Utility")
 
+mana_manipulation = Skill("Mana Manipulation","Allows internal control of mana <br> Allows expulsion of mana to environment <br> Allows transfer of mana to and from capacitive items with direct contact <br> Alternative formula [100*RNK*(1+FCS/50)]",1,"Magical Utility",cost={'type':"MP",'value':1}) #Just setting to be 1 to 1 for now
 
 magical_synergy = Skill("Magical Synergy","Enables limited synergistic cross-coupling of magical attributes <br> [2.5%*RNK] of Focus contributes to M.Regen <br> [2.5%*RNK] of Clarity contributes to Mana <br>  Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus",2, "Magical Utility")
 
@@ -81,6 +82,7 @@ rock_push = Skill("Rock Push", "Cost proportional to mass",0,"Geoevocation",cost
 stone_spray = Skill("Stone Spray", "Deal [(6-8)*(1+FCS/100)] force damage per hit. 2*RNK projectiles <br> Range: 1*RNK m <br> Cost: 20 mp <br> 5 ranks in Stonebolt",1,"Geoevocation",cost={'type':"MP",'value':20})
 
 stone_spear = Skill("Stone Spear","Fire a single large chunk of stone. Sufficient damage can stun target. <br> [30-40*RNK*(1+(FCS*0.75)/100)] force damage <br> Range: 5*RNK m <br> Cost: 50 mp <br> 5 ranks in Stone Spray, Rock Push, Stonebolt",2,"Geoevocation",cost={'type':"MP",'value':50})
+stone_synergy = Skill("Stone Synergy","Increase all Stone-keyword spells output by 0.1% per rank of this skill for each rank in any Stone-keyword spells <br> Requires 1 rank in five different Stone-keyword spells",2,"Geoevocation")
 
 # Earth Manipulation
 earth_affinity = Skill("Earth Affinity","Boosts skills with the Earth subelement keyword, but not all effects of that element <br> Boost Earth keyword skills by [1+RNK/10] <br> Requires: 1 rank in three Earth keyword skills.",0,"Earth Manipulation")
@@ -126,6 +128,7 @@ granite_golem = Skill("Granite Golem","50 hp * rnk (fcs * 1%) <br> Hardness: 2 *
 mana_wall = Skill("Mana Wall","a wall of pure mana. <br> 50 HP (RNK * FCS * 1%) <br> Takes double damage from metal <br> Cast time 10 seconds <br> Cast range: 3xRNK meters <br> Mana cost 100mp 5mp/min",0,"Defensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 stone_tower = Skill("Stone Tower","Stone Tower with a ladder <br> 100 hp * RNK (fcs * 1%) <br> Hardness 1 * rnk (fcs * 0.5%) <br> 15 second cast time <br> Cost 300mp 100mp/min",1,"Defensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
+ice_wall = Skill("Ice Wall","60 * RNK (fcs * 1%) HP <br> 1 * RNK (fcs * 0.1%) hardness <br> Gives +4 * RNK * (fcs * 0.5%) heat resistance to any allies within 1m * RNK of the wall <br> Cast time 10 seconds <br> Cast range 2m * RNK <br> 150 mp cost 30mp/min",1,"Defensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
 stone_bunker = Skill("Stone Bunker","Bunker with windows <br> HP 125 * RNK * (fcs * 1%) <br> Hardness: 1.5 * rnk * (fcs * 1%) <br> 30 second cast time <br> Cast range: 3 * RNK.meters <br> 400mp cost.   100mp/min <br> Requires 5 ranks in tighter mana structures",2,"Defensive Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 
@@ -134,6 +137,7 @@ lamp_post = Skill("Lamp Post","Emits light in a 2 * RNK meter radius <br> 10hp *
 
 war_banner = Skill("War Banner", "Hp 30*RNK (fcs 0.5%) <br> Increases the damage of all constructs by 5% * RNK in a range of 3 * RNK meters. <br> Mp cost 50 * RNK  mana sustain 10 * RNK per minute <br> Cast range 3xRNK meters <br> Requires 8 ranks in an offensive constructs skill",1,"Utility Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
 mana_bank = Skill("Mana Bank","40 hp * RNK (fcs * 0.5%) <br> Transfer 50 * RNK mp/min, split between each person in the mana bank <br> Does not apply to caster <br> Cast time: 10 seconds <br> Cast range 3 x RNK meters <br> Mp cost 100   Sustain cost 100 * RNK mp/min",1,"Utility Constructs",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
+power_station = Skill("Power Station","Multiplies the effect of any utility construct it is connected to by 1+(RNK/10) and it's cost by 1+(RNK/5) <br> Can connect to RNK constructs <br> Has a max range of 15m * RNK <br> Mp cost 150mp sustain cost 30 * RNK mp /min",1,"Utility Constructs")
 
 # Construct Metamagic
 flexible_design = Skill("Flexible Design","You can increase the depth, width and height of any construct in any direction by 20% * RNK. <br> Does not affect stats, just size",0,"Construct Metamagic",cost={'type':"MP",'value':10}) #Arbitrary mana cost for leveling purposes
@@ -178,11 +182,11 @@ radiant_arrow = Skill("Radiant Arrow","Envelop an arrow with the power of the su
 stygian_arrow = Skill("Stygian Arrow","Cloak an arrow in the shadow of night <br> [(5~10)*RNK*(1+FCS/200)] Dark on impact <br> Arrow release, impact, and flight are muffled <br> Cost: 5 mana <br> Requires 10 ranks in Ice Arrow",2,"Elemental Archer",cost={'type':"MP",'value':5})
 
 # Elemental Enhancement
-concussive_blows = Skill("Concussive Blows","Single target buff, <br> Adds 6 force damage to all attacks <br> within 100 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
-stygian_mind = Skill("Stygian Mind","Single target buff, <br> Adds 6 dark damage to all attacks <br> within 100 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
-radiant_soul = Skill("Radiant Soul","Single target buff, <br> Adds 6 radiant damage to all attacks <br> within 100 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
+concussive_blows = Skill("Concussive Blows","Single target buff, <br> Adds 6 force damage to all attacks <br> within 60 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
+stygian_mind = Skill("Stygian Mind","Single target buff, <br> Adds 6 dark damage to all attacks <br> within 60 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
+radiant_soul = Skill("Radiant Soul","Single target buff, <br> Adds 6 radiant damage to all attacks <br> within 60 min (1% fcs) <br> Cost: 10 mana",0,"Elemental Enhancement",cost={'type':"MP",'value':10})
 
-frost_raiment = Skill("Frost Raiment","Single target buff, <br> Adds 3 cold damage to all attacks and 3 heat resistance <br> within 100 min (1% fcs) <br> Cost: 10 mana",1,"Elemental Enhancement",cost={'type':"MP",'value':10})
-inner_fire = Skill("Inner Fire","Single target buff, <br> Adds 3 heat damage to all attacks and 3 cold resistance <br> within 100 min (1% fcs) <br> Cost: 10 mana",1,"Elemental Enhancement",cost={'type':"MP",'value':10})
+frost_raiment = Skill("Frost Raiment","Single target buff, <br> Adds 3 cold damage to all attacks and 3 heat resistance <br> within 60 min (1% fcs) <br> Cost: 10 mana",1,"Elemental Enhancement",cost={'type':"MP",'value':10})
+inner_fire = Skill("Inner Fire","Single target buff, <br> Adds 3 heat damage to all attacks and 3 cold resistance <br> within 60 min (1% fcs) <br> Cost: 10 mana",1,"Elemental Enhancement",cost={'type':"MP",'value':10})
 
-stubbornness = Skill("Stubbornness","Single target buff, <br> Adds 6 mental resistance <br> within 100 min (1% fcs) <br> Cost: 10 mana",2,"Elemental Enhancement",cost={'type':"MP",'value':10})
+stubbornness = Skill("Stubbornness","Single target buff, <br> Adds 6 mental resistance <br> within 60 min (1% fcs) <br> Cost: 10 mana",2,"Elemental Enhancement",cost={'type':"MP",'value':10})

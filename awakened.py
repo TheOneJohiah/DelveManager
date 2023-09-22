@@ -129,7 +129,7 @@ class Awakened:
         synergy_mana = 0
         base_mana_cap = self.attributes[1][4] * 20
         mana_cap_multiplier = self.character_class.attribute_effect[4]
-
+        #TODO: Modify these so that IF applies to the clarity synergy and vice versa
         # Calculate the multiplicative effect based on the skill's rank
         mana_cap_multiplier *= (1 + self.get_skill_rank("Intrinsic Focus") * 0.2)  # 20% increase per rank
         synergy_effect = 0.025 * self.get_skill_rank("Magical Synergy")

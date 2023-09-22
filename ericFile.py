@@ -444,11 +444,97 @@ skillBuild.bank_exp(0.1*5300*10)
 
 eric.regen(24) #Morning of the 24th day
 eric.essence_exhange() #Gotta open da rocks
-#eric.add_vital("MP",eric.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+eric.add_vital("MP",eric.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
 print("Cave Day 2")
+
+eric.reduce_vital("SP",80) #Helping to clear the rock pile
+eric.cast_skill("Mana Bank",420)
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.cast_skill("Granite Golem",5300) #Fighting
+skillPyl.bank_exp(0.1*5300*10)
+skillArm.bank_exp(0.1*5300*10)
+skillTight.bank_exp(0.1*5300*10)
+skillFlex.bank_exp(0.1*5300*10)
+skillBuild.bank_exp(0.1*5300*10)
+
+eric.cast_skill("War Banner",240) #keeping the war banner summoned for fighting
+skillPyl.bank_exp(0.1*240*10)
+skillArm.bank_exp(0.1*240*10)
+skillTight.bank_exp(0.1*240*10)
+skillFlex.bank_exp(0.1*240*10)
+skillBuild.bank_exp(0.1*240*10)
+
+eric.cast_skill("Ominous Eye",1400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*1400*10)
+skillArm.bank_exp(0.1*1400*10)
+skillTight.bank_exp(0.1*1400*10)
+skillFlex.bank_exp(0.1*1400*10)
+skillBuild.bank_exp(0.1*1400*10)
+
+eric.cast_skill("Magic Missile Turret",1400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*1400*10)
+skillArm.bank_exp(0.1*1400*10)
+skillTight.bank_exp(0.1*1400*10)
+skillFlex.bank_exp(0.1*1400*10)
+skillBuild.bank_exp(0.1*1400*10)
+
+eric.regen(24) #Morning of the 25th day
+eric.essence_exhange() #Second day of fighting at the cave mouth
+eric.add_vital("MP",eric.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+print("Cave Day 3, i.e. bear day 2")
+
+eric.add_skill(sk.mana_manipulation)
+eric.add_skill(sk.ice_wall)
+eric.add_skill(sk.power_station)
+
+eric.reduce_vital("SP",80) #Helping to clear the rock pile
+eric.cast_skill("Mana Bank",630)
+skillPyl.bank_exp(0.1*630*10)
+skillArm.bank_exp(0.1*630*10)
+skillTight.bank_exp(0.1*630*10)
+skillFlex.bank_exp(0.1*630*10)
+skillBuild.bank_exp(0.1*630*10)
+
+eric.cast_skill("Granite Golem",5000) #Fighting
+skillPyl.bank_exp(0.1*5000*10)
+skillArm.bank_exp(0.1*5000*10)
+skillTight.bank_exp(0.1*5000*10)
+skillFlex.bank_exp(0.1*5000*10)
+skillBuild.bank_exp(0.1*5000*10)
+
+eric.cast_skill("War Banner",240) #keeping the war banner summoned for fighting
+skillPyl.bank_exp(0.1*240*10)
+skillArm.bank_exp(0.1*240*10)
+skillTight.bank_exp(0.1*240*10)
+skillFlex.bank_exp(0.1*240*10)
+skillBuild.bank_exp(0.1*240*10)
+
+eric.cast_skill("Ominous Eye",1400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*1400*10)
+skillArm.bank_exp(0.1*1400*10)
+skillTight.bank_exp(0.1*1400*10)
+skillFlex.bank_exp(0.1*1400*10)
+skillBuild.bank_exp(0.1*1400*10)
+
+eric.cast_skill("Magic Missile Turret",1400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*1400*10)
+skillArm.bank_exp(0.1*1400*10)
+skillTight.bank_exp(0.1*1400*10)
+skillFlex.bank_exp(0.1*1400*10)
+skillBuild.bank_exp(0.1*1400*10)
+
+eric.regen(24) #Morning of the 26th day
+eric.essence_exhange() #Third day of fighting at the cave mouth
 
 
 eric.update_vitals()
 eric.update_free_attributes()
 eric.printCharSheet(altCol= False)
+print(eric.vitals)
+print(eric.currVitals)
 print(eric.general_statistics)

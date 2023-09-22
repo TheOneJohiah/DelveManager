@@ -225,6 +225,27 @@ print("Cave Day 2")
 micah.raise_attribute(4,30)
 micah.add_skill(sk.earthmolding)
 
+micah.cast_skill("Stone Spear",40)
+skillEtAff.bank_exp(0.1*40*50)
+micah.cast_skill("Rock Push",80) #Bears!
+skillEtAff.bank_exp(0.1*80)
+micah.add_experience(7392)
+
+micah.regen(24) #Morning of the 25th day
+micah.essence_exhange() #Second day of fighting at the cave mouth
+micah.add_vital("MP",micah.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+print("Cave Day 3, i.e. bear day 2")
+
+micah.cast_skill("Stone Spear",160)
+skillEtAff.bank_exp(0.1*160*50)
+micah.add_experience(5400)
+
+micah.regen(24) #Morning of the 26th day
+micah.essence_exhange() #Third day of fighting at the cave mouth
+
+micah.add_skill(sk.rooted)
+
 micah.update_vitals()
 micah.update_free_attributes()
 micah.printCharSheet(altCol= False)

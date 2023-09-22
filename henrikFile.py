@@ -210,6 +210,26 @@ henrik.essence_exhange() #Gotta open da rocks
 henrik.add_vital("MP",henrik.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
 print("Cave Day 2")
 
+henrik.cast_skill("Concussive Blows",8)
+henrik.cast_skill("Fire Arrow",120) #certified hyperfixation moment
+henrik.reduce_vital("SP",60) #Shooting bears
+henrik.cast_skill("Drilling Shot",11) #Bear time
+henrik.add_experience(3960)
+
+henrik.regen(24) #Morning of the 25th day
+henrik.essence_exhange() #First day of fighting at the cave mouth
+henrik.add_vital("MP",henrik.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+henrik.add_vital("MP",1000) # Mana bank, edging soulstrain
+print("Cave Day 3, i.e. bear day 2")
+
+henrik.cast_skill("Drilling Shot",10) #Bear time
+henrik.cast_skill("Fire Arrow",40)
+henrik.add_experience(5400)
+
+henrik.regen(24) #Morning of the 26th day
+henrik.essence_exhange() #Second day of fighting at the cave mouth
+
+
 henrik.update_vitals()
 henrik.update_free_attributes()
 henrik.printCharSheet(altCol= False)

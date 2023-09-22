@@ -231,9 +231,26 @@ skillHeMas.bank_exp(0.1*160*10)
 
 mo.regen(24) #Morning of the 24th day
 mo.essence_exhange() #Gotta open da rocks
-#mo.add_vital("MP",mo.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
-#mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.add_vital("MP",mo.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
 print("Cave Day 2")
+
+mo.cast_skill("Firebolt",160) #Shooting bears
+skillFiAff.bank_exp(0.1*160*10)
+skillHeMas.bank_exp(0.1*160*10)
+
+mo.regen(24) #Morning of the 25th day
+mo.essence_exhange() #Second day of fighting at the cave mouth
+mo.add_vital("MP",mo.vitals[5]*3.2) #regen assuming most of this day was spent within range of Daniel's 430% winter.
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+print("Cave Day 3, i.e. bear day 2")
+
+mo.cast_skill("Firebolt",170) #Shooting bears
+skillFiAff.bank_exp(0.1*170*10)
+skillHeMas.bank_exp(0.1*170*10)
+
+mo.regen(24) #Morning of the 26th day
+mo.essence_exhange() #Third day of fighting at the cave mouth
 
 
 mo.update_vitals()

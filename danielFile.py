@@ -289,8 +289,8 @@ skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
 skillExt.bank_exp(skillWint.cost['value']*16*0.2)
 skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
 daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
-skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
 
 daniel.regen(24) #Morning of the seventeeth day
 daniel.essence_exhange() #training montage
@@ -309,8 +309,8 @@ skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
 skillExt.bank_exp(skillWint.cost['value']*16*0.2)
 skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
 daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
-skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
 
 daniel.regen(24) #Morning of the eighteenth day
 daniel.essence_exhange() #training montage
@@ -329,8 +329,8 @@ skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
 skillExt.bank_exp(skillWint.cost['value']*16*0.2)
 skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
 daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
-skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
 
 daniel.regen(24) #Morning of the nineteenth day
 daniel.essence_exhange() #training montage
@@ -349,8 +349,8 @@ skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
 skillExt.bank_exp(skillWint.cost['value']*16*0.2)
 skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
 daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
-skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
 
 daniel.regen(24) #Morning of the twentieth day
 daniel.essence_exhange() #training montage
@@ -369,8 +369,8 @@ skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
 skillExt.bank_exp(skillWint.cost['value']*16*0.2)
 skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
 daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
-skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
 
 daniel.regen(24) #Morning of the 21st day
 daniel.essence_exhange() #training montage
@@ -389,8 +389,8 @@ skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
 skillExt.bank_exp(skillWint.cost['value']*16*0.2)
 skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
 daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
-skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
 
 daniel.regen(24) #Morning of the 22nd day
 daniel.essence_exhange() #training montage
@@ -409,8 +409,8 @@ skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
 skillExt.bank_exp(skillWint.cost['value']*16*0.2)
 skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
 daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
-skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
 
 daniel.regen(24) #Morning of the 24th day
 daniel.essence_exhange() #Gotta open da rocks
@@ -429,16 +429,55 @@ skillAmp.bank_exp(skillWint.cost['value']*16*0.2)
 skillExt.bank_exp(skillWint.cost['value']*16*0.2)
 skillFoc.bank_exp(skillWint.cost['value']*16*0.2)
 daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
-skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
-skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
 
 daniel.regen(24) #Morning of the 24th day
 daniel.essence_exhange() #Gotta open da rocks
 print("Cave Day 2")
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
 print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1))
-print((0.1*skillSpr.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
-print((0.1*skillSum.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1))
+#print((0.1*skillSpr.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillSum.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+
+daniel.cast_skill("Purify",73*(1 + skillAmp.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillPur.cost['value']*73*0.2)
+#skillExt.bank_exp(skillPur.cost['value']*29*0.2)
+skillFoc.bank_exp(skillPur.cost['value']*73*0.2)
+daniel.cast_skill("Winter",20*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*20*0.2)
+skillExt.bank_exp(skillWint.cost['value']*20*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*20*0.2)
+daniel.cast_skill("Winter",4*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
+skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+
+daniel.regen(24) #Morning of the 25th day
+daniel.essence_exhange() #First day of fighting at the cave mouth
+print("Cave Day 3, i.e. bear day 2")
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+
+
+daniel.cast_skill("Purify",85*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+#skillAmp.bank_exp(skillPur.cost['value']*73*0.2)
+skillExt.bank_exp(skillPur.cost['value']*85*0.2)
+skillFoc.bank_exp(skillPur.cost['value']*85*0.2)
+daniel.cast_skill("Winter",20*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*20*0.2)
+skillExt.bank_exp(skillWint.cost['value']*20*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*20*0.2)
+daniel.cast_skill("Winter",4*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
+skillExt.bank_exp(skillWint.cost['value']*4*0.2)
+
+daniel.regen(24) #Morning of the 26th day
+daniel.essence_exhange() #Second day of fighting at the cave mouth
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+
 
 daniel.update_vitals()
 daniel.update_free_attributes()
