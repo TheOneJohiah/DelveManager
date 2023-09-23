@@ -133,7 +133,7 @@ daniel.essence_exhange() #2 of 7 training timelapse
 #Winter regen for the day
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
 #print(daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1))
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1))
 print("2 of 7")
 
 daniel.add_skill(sk.aura_focus) #FOCUS TIME WOO
@@ -155,7 +155,7 @@ daniel.essence_exhange() #3 of 7 training timelapse
 #Winter regen for the day
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
 #print(daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 print("3 of 7")
 
 daniel.raise_attribute(5,10) #All in on clarity
@@ -174,7 +174,7 @@ daniel.essence_exhange() #4 of 7 training timelapse
 #Winter regen for the day
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
 #print(daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 print("4 of 7")
 
 daniel.raise_attribute(5,10) #All in on clarity
@@ -193,7 +193,7 @@ daniel.essence_exhange() #5 of 7 training timelapse
 #Winter regen for the day
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
 #print(daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 print("5 of 7")
 
 daniel.raise_attribute(5,10) #All in on clarity
@@ -212,7 +212,7 @@ daniel.essence_exhange() #6 of 7 training timelapse
 #Winter regen for the day
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
 #print(daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 print("6 of 7")
 
 daniel.reduce_vital("SP",100) #Workout
@@ -230,7 +230,7 @@ daniel.essence_exhange() #7 of 7 training timelapse, Skarevening
 #Winter regen for the day
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
 #print(daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 print("7 of 7, skar evening")
 
 daniel.reduce_vital("SP",100) #Workout
@@ -251,7 +251,7 @@ skillExt.bank_exp(skillWint.cost['value']*10*0.2)
 daniel.regen(10) #Morning of the fifteenth day
 daniel.essence_exhange() #Morning after talking to Skar
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)) #Rank 1 winter with rank x amp aura, now assuming he runs it constantly
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 print("Day after Death")
 
 daniel.reduce_vital("SP",50) #Workout
@@ -277,7 +277,7 @@ daniel.essence_exhange() #Morning after getting kicked out
 print("Day 1 of 7 - training at cave")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.reduce_vital("SP",50) #Workout
 daniel.cast_skill("Purify",28*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -297,7 +297,7 @@ daniel.essence_exhange() #training montage
 print("Day 2 of 7 - training at cave")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.reduce_vital("SP",50) #Workout
 daniel.cast_skill("Purify",28*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -317,7 +317,7 @@ daniel.essence_exhange() #training montage
 print("Day 3 of 7 - training at cave")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.reduce_vital("SP",50) #Workout
 daniel.cast_skill("Purify",25*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -337,7 +337,7 @@ daniel.essence_exhange() #training montage
 print("Day 4 of 7 - training at cave")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.reduce_vital("SP",50) #Workout
 daniel.cast_skill("Purify",26*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -357,7 +357,7 @@ daniel.essence_exhange() #training montage
 print("Day 5 of 7 - training at cave")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.reduce_vital("SP",50) #Workout
 daniel.cast_skill("Purify",26*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -377,7 +377,7 @@ daniel.essence_exhange() #training montage
 print("Day 6 of 7 - training at cave")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.reduce_vital("SP",50) #Workout
 daniel.cast_skill("Purify",75*(1 + skillAmp.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -397,7 +397,7 @@ daniel.essence_exhange() #training montage
 print("Day 7 of 7 - training at cave")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.reduce_vital("SP",50) #Workout
 daniel.cast_skill("Purify",72*(1 + skillAmp.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -417,7 +417,7 @@ daniel.essence_exhange() #Gotta open da rocks
 print("Opening day")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 daniel.reduce_vital("SP",50) #Workout
 daniel.cast_skill("Purify",76*(1 + skillAmp.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -437,8 +437,8 @@ daniel.essence_exhange() #Gotta open da rocks
 print("Cave Day 2")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+##print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1))
 #print((0.1*skillSpr.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 #print((0.1*skillSum.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
@@ -455,11 +455,11 @@ skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
 skillExt.bank_exp(skillWint.cost['value']*4*0.2)
 
 daniel.regen(24) #Morning of the 25th day
-daniel.essence_exhange() #First day of fighting at the cave mouth
+daniel.essence_exhange() #Second day of fighting at the cave mouth
 print("Cave Day 3, i.e. bear day 2")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 
 daniel.cast_skill("Purify",85*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -475,12 +475,697 @@ skillAmp.bank_exp(skillWint.cost['value']*4*0.2)
 skillExt.bank_exp(skillWint.cost['value']*4*0.2)
 
 daniel.regen(24) #Morning of the 26th day
-daniel.essence_exhange() #Second day of fighting at the cave mouth
-print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+daniel.essence_exhange() #Begin timelapse
+print("1 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",44*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+#skillAmp.bank_exp(skillPur.cost['value']*73*0.2)
+skillExt.bank_exp(skillPur.cost['value']*44*0.2)
+skillFoc.bank_exp(skillPur.cost['value']*44*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSpr.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 27
+daniel.essence_exhange() #Begin timelapse
+print("2 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",44*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+#skillAmp.bank_exp(skillPur.cost['value']*73*0.2)
+skillExt.bank_exp(skillPur.cost['value']*44*0.2)
+skillFoc.bank_exp(skillPur.cost['value']*44*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSpr.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 28
+daniel.essence_exhange() #Begin timelapse
+print("3 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",44*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+#skillAmp.bank_exp(skillPur.cost['value']*73*0.2)
+skillExt.bank_exp(skillPur.cost['value']*44*0.2)
+skillFoc.bank_exp(skillPur.cost['value']*44*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSpr.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 29
+daniel.essence_exhange() #Begin timelapse
+print("4 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",43*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+#skillAmp.bank_exp(skillPur.cost['value']*73*0.2)
+skillExt.bank_exp(skillPur.cost['value']*43*0.2)
+skillFoc.bank_exp(skillPur.cost['value']*43*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSpr.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 30
+daniel.essence_exhange() #Begin timelapse
+print("5 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",120*(1 + skillFoc.rank*0.2))
+skillFoc.bank_exp(skillPur.cost['value']*120*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+daniel.cast_skill("Spring",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSpr.cost['value']*8*0.2)
+skillExt.bank_exp(skillSpr.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSpr.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 31
+daniel.essence_exhange() #Begin timelapse
+print("6 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",120*(1 + skillFoc.rank*0.2))
+skillFoc.bank_exp(skillPur.cost['value']*120*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSum.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 32
+daniel.essence_exhange() #Begin timelapse
+print("7 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",120*(1 + skillFoc.rank*0.2))
+skillFoc.bank_exp(skillPur.cost['value']*120*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSum.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 33
+daniel.essence_exhange() #Begin timelapse
+print("8 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",115*(1 + skillFoc.rank*0.2))
+skillFoc.bank_exp(skillPur.cost['value']*115*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSum.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 34
+daniel.essence_exhange() #Begin timelapse
+print("9 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+result1 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",115*(1 + skillFoc.rank*0.2))
+skillFoc.bank_exp(skillPur.cost['value']*115*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSum.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 35
+daniel.essence_exhange() #Begin timelapse
+print("10 of 25 big timelapse")
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
+result1 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Spring
+result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
+result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1)
+print(f"{result1}  {result2}") #Summer
+
+daniel.cast_skill("Purify",115*(1 + skillFoc.rank*0.2))
+skillFoc.bank_exp(skillPur.cost['value']*115*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+daniel.cast_skill("Summer",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+skillFoc.bank_exp(skillSum.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 36
+daniel.essence_exhange() #Begin timelapse
+print("11 of 25 big timelapse")
+
+daniel.add_skill(sk.fall)
+skillFal = daniel.skills["Fall"]
+daniel.add_skill(sk.aura_synergy)
+skillSyn = daniel.skills["Aura Synergy"]
+daniel.add_skill(sk.aura_IFF)
+skillIFF = daniel.skills["Aura IFF"]
+
+def printStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, synRanks):
+    result1 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks)
+    result2 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks)
+    print(f"{result1}  {result2}") #Spring
+    result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks)
+    result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks)
+    print(f"{result1}  {result2}") #Spring
+    result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks)
+    result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks)
+    print(f"{result1}  {result2}") #Summer
+    result1 = (0.01 * skillFal.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks)
+    result2 = (0.01 * skillFal.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks)
+    print(f"{result1}  {result2}") #Fall
+
+printStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, 31)
+print(1 + skillSyn.rank*0.001*31)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*31)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",300) #Getting IFF and synergy ranked up
+skillIFF.bank_exp(skillPur.cost['value']*300*0.2)
+skillSyn.bank_exp(skillPur.cost['value']*300*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+skillSyn.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",3*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*3*0.2)
+skillExt.bank_exp(skillSum.cost['value']*3*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*3*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*3*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 37
+daniel.essence_exhange() #Begin timelapse
+print("12 of 25 big timelapse")
+
+printStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, 32)
+print(1 + skillSyn.rank*0.001*32)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*32)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",400) #Getting IFF and synergy ranked up
+skillIFF.bank_exp(skillPur.cost['value']*400*0.2)
+skillSyn.bank_exp(skillPur.cost['value']*400*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+skillSyn.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",2*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*2*0.2)
+skillExt.bank_exp(skillSum.cost['value']*2*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*2*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*2*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 38
+daniel.essence_exhange() #Begin timelapse
+print("13 of 25 big timelapse")
+
+printStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, 33)
+print(1 + skillSyn.rank*0.001*33)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*33)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",400) #Getting IFF and synergy ranked up
+skillIFF.bank_exp(skillPur.cost['value']*400*0.2)
+skillSyn.bank_exp(skillPur.cost['value']*400*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+skillSyn.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",2*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*2*0.2)
+skillExt.bank_exp(skillSum.cost['value']*2*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*2*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*2*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 39
+daniel.essence_exhange() #Begin timelapse
+print("14 of 25 big timelapse")
+
+printStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, 34)
+print(1 + skillSyn.rank*0.001*34)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*34)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting IFF and synergy ranked up
+skillIFF.bank_exp(skillPur.cost['value']*420*0.2)
+skillSyn.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+skillSyn.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",2*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*2*0.2)
+skillExt.bank_exp(skillSum.cost['value']*2*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*2*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*2*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 40
+daniel.essence_exhange() #Begin timelapse
+print("15 of 25 big timelapse")
+
+printStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, 34)
+print(1 + skillSyn.rank*0.001*34)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*34)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting IFF and synergy ranked up
+skillIFF.bank_exp(skillPur.cost['value']*420*0.2)
+skillSyn.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+skillSyn.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",2*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*2*0.2)
+skillExt.bank_exp(skillSum.cost['value']*2*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*2*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*2*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 41
+daniel.essence_exhange() #Begin timelapse
+print("16 of 25 big timelapse")
+
+printStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, 35)
+print(1 + skillSyn.rank*0.001*35)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*35)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting IFF and synergy ranked up
+skillIFF.bank_exp(skillPur.cost['value']*420*0.2)
+skillSyn.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+skillSyn.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",2*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*2*0.2)
+skillExt.bank_exp(skillSum.cost['value']*2*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*2*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*2*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 42
+daniel.essence_exhange() #Begin timelapse
+print("17 of 25 big timelapse")
+
+printStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, 35)
+print(1 + skillSyn.rank*0.001*35)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*35)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting IFF and synergy ranked up
+skillIFF.bank_exp(skillPur.cost['value']*420*0.2)
+skillSyn.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+skillSyn.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",2*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*2*0.2)
+skillExt.bank_exp(skillSum.cost['value']*2*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*2*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*2*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 43
+daniel.essence_exhange() #Begin timelapse
+print("18 of 25 big timelapse")
+
+daniel.add_skill(sk.aura_compression)
+skillCom = daniel.skills["Aura Compression"]
+
+def printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, synRanks):
+    comFactor = skillCom.rank * 0.02
+    comWintFoc = max(1,1 + (comFactor * (((skillWint.rank + 10) * 3 * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+    comWint = max(1,1 + (comFactor * (((skillWint.rank + 10) * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+    comSprFoc = max(1,1 + (comFactor * (((skillSpr.rank + 10) * 3 * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+    comSpr = max(1,1 + (comFactor * (((skillSpr.rank + 10) * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+    comSumFoc = max(1,1 + (comFactor * (((skillSum.rank + 10) * 3 * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+    comSum = max(1,1 + (comFactor * (((skillSum.rank + 10) * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+    comFalFoc = max(1,1 + (comFactor * (((skillFal.rank + 10) * 3 * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+    comFal = max(1,1 + (comFactor * (((skillFal.rank + 10) * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+
+    result1 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks) * comWintFoc
+    result2 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks) * comWint
+    result3 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks) #noncompressed overnight focus boost
+    print(f"{result1}  {result2} {result3}") #Winter
+    result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks) * comSprFoc
+    result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks) * comSpr
+    print(f"{result1}  {result2}") #Spring
+    result1 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks) * comSumFoc
+    result2 = (0.1 * skillSum.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks) * comSum
+    print(f"{result1}  {result2}") #Summer
+    result1 = (0.01 * skillFal.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks) * comFalFoc
+    result2 = (0.01 * skillFal.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks) * comFal
+    print(f"{result1}  {result2}") #Fall
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 36)
+print(1 + skillSyn.rank*0.001*36)
+print(skillCom.rank)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*36)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting compression ranked up
+skillCom.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+skillSyn.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+skillSyn.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 44
+daniel.essence_exhange() #Begin timelapse
+print("19 of 25 big timelapse")
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 36)
+print(1 + skillSyn.rank*0.001*36)
+print(skillCom.rank)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*36)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting compression ranked up
+skillCom.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+skillAmp.bank_exp(skillWint.cost['value']*8*0.2)
+skillExt.bank_exp(skillWint.cost['value']*8*0.2)
+skillFoc.bank_exp(skillWint.cost['value']*8*0.2)
+skillIFF.bank_exp(skillWint.cost['value']*8*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+skillAmp.bank_exp(skillSum.cost['value']*8*0.2)
+skillExt.bank_exp(skillSum.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+skillAmp.bank_exp(skillFal.cost['value']*8*0.2)
+skillExt.bank_exp(skillFal.cost['value']*8*0.2)
+skillFoc.bank_exp(skillFal.cost['value']*8*0.2)
+skillIFF.bank_exp(skillFal.cost['value']*8*0.2)
+
+daniel.regen(24) #Morning of the day 45
+daniel.essence_exhange() #Begin timelapse
+print("20 of 25 big timelapse")
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 37)
+print(1 + skillSyn.rank*0.001*37)
+print(skillCom.rank)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*37)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting compression ranked up
+skillCom.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+
+daniel.regen(24) #Morning of the day 46
+daniel.essence_exhange() #Begin timelapse
+print("21 of 25 big timelapse")
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 37)
+print(1 + skillSyn.rank*0.001*37)
+print(skillCom.rank)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*37)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting compression ranked up
+skillCom.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+
+daniel.regen(24) #Morning of the day 47
+daniel.essence_exhange() #Begin timelapse
+print("22 of 25 big timelapse")
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 38)
+print(1 + skillSyn.rank*0.001*38)
+print(skillCom.rank)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*38)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting compression ranked up
+skillCom.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+
+daniel.regen(24) #Morning of the day 48
+daniel.essence_exhange() #Begin timelapse
+print("23 of 25 big timelapse")
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 38)
+print(1 + skillSyn.rank*0.001*38)
+print(skillCom.rank)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*38)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting compression ranked up
+skillCom.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+
+daniel.regen(24) #Morning of the day 49
+daniel.essence_exhange() #Begin timelapse
+print("24 of 25 big timelapse")
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 38)
+print(1 + skillSyn.rank*0.001*38)
+print(skillCom.rank)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*38)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting compression ranked up
+skillCom.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+
+daniel.regen(24) #Morning of the day 50
+daniel.essence_exhange() #Begin timelapse
+print("25 of 25 big timelapse")
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 39)
+print(1 + skillSyn.rank*0.001*39)
+print(skillCom.rank)
+
+daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33*(1 + skillSyn.rank*0.001*39)) #Winter focus for 8 hours a day
+daniel.cast_skill("Purify",420) #Getting compression ranked up
+skillCom.bank_exp(skillPur.cost['value']*420*0.2)
+daniel.cast_skill("Winter",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2)) #Overnight winter regen costs
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2))
+daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
+
+daniel.regen(24) #Morning of day 51
+daniel.essence_exhange() #The next arc
+print("And so things advance anew")
+
+printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 39)
+print(1 + skillSyn.rank*0.001*39)
+print(skillCom.rank)
 
 
 daniel.update_vitals()
 daniel.update_free_attributes()
 daniel.printCharSheet(altCol= False)
+print(daniel.vitals)
 print(daniel.currVitals)
 print(daniel.general_statistics)
+print(daniel.hours)

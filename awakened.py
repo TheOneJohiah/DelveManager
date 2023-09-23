@@ -36,6 +36,7 @@ class Awakened:
         self.character_class = character_class
         self.banked_xp = 0
         self.currVitals = [200,200,200]
+        self.hours = 0
         #Needed to prevent recursion
         self.synergy_vitals = [0,0,0,0,0,0]
         self.inventory = {"Head" : None, "Chest" : None, "Legs" : None, "Hands" : None, "Feet" : None, "Ring[0]" : None, "Ring[1]" : None, "Ring[2]" : None, "Ring[3]" : None, "Ring[4]" : None, "Ring[5]" : None, "Ring[6]" : None, "Ring[7]" : None, "Ring[8]" : None, "Ring[9]" : None, "Amulet" : None, "Mainhand" : None, "Underwear" : None, "Overwear" : None, "Offhand" : ""}
@@ -205,6 +206,7 @@ class Awakened:
         self.currVitals[type] += amount
 
     def regen (self, hours):
+        self.hours += hours
         time = hours/24
         for x in range(3):
             regN = min( time*self.vitals[2*x + 1], self.vitals[2*x] - self.currVitals[x]) # ensuring regen doesn't overflow cap
