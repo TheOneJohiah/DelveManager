@@ -57,6 +57,7 @@ class Awakened:
         self.update_attributes()  # Initialize attributes when the character is created
         self.calculate_resistances()
         self.initialize_vitals()  # Initialize vitals when the character is created
+        self.hours = 0
 
     def update_attributes(self):
         for x in range(8):
@@ -215,7 +216,7 @@ class Awakened:
 
     def reduce_vital(self, type, amount):
         self.add_statistics("total "+type+" spent",amount) 
-
+        underV = 0
         if type == "HP": type = 0
         elif type == "SP": type = 1
         elif type == "MP": type = 2
@@ -223,8 +224,9 @@ class Awakened:
         
         self.bank_experience(.5*amount)
         if amount > self.currVitals[type]:
+            underV = self.currVitals[type] - amount #Undervital
             self.currVitals[type] = 0
-            underV = self.currVitals[type] - amount #Undervital; currently unused, but maybe should be.
+            print(str(underV) + ["HP","SP","MP"][type])
         else:
             self.currVitals[type] -= amount
         
@@ -237,6 +239,8 @@ class Awakened:
         if type == 2:
             for passive in ["Intrinsic Clarity","Intrinsic Focus","Magical Synergy"]:
                 if passive in self.skills: self.bank_skill_exp(passive, .5*amount)
+
+        return underV
                     
     def add_vital(self, type, amount):
         if type == "HP": type = 0
@@ -251,6 +255,7 @@ class Awakened:
         return addN
 
     def regen (self, hours):
+        self.hours += hours
         time = hours/24
         for x in range(3):
             regN = self.add_vital(x,time*self.vitals[2*x + 1])
@@ -297,14 +302,14 @@ class Awakened:
     def cast_skill (self, skillN, n):
         skill = self.skills[skillN]
         cost = skill.get_cost()
-        self.reduce_vital(cost['type'],cost['value']*n)
-        skill.bank_exp(.5*n*cost['value'])
+        underV = self.reduce_vital(cost['type'],cost['value']*n)
+        skill.bank_exp(.5*(n*cost['value'] - underV))
     
     def unlock_tier(self,tree,tier):
-        if not self.trees[tree].tiers[tier].lock: print("Already unlocked!"); return False
-        if self.trees[tree].tiers[max(0,tier-1)].lock: print("Unlock the tier below!"); return False
+        if not self.trees[tree].tiers[tier].lock: print(f"{tree} already unlocked!"); return False
+        if self.trees[tree].tiers[max(0,tier-1)].lock: print(f"Unlock {tree} tier {tier-1} first!"); return False
         cost = 10**(tier+1)
-        if self.experience < cost: print("Not enough experience!"); return False
+        if self.experience < cost: print(f"Not enough experience for {tree}!"); return False
 
         self.experience -= cost
         self.trees[tree].unlock(tier)
@@ -334,6 +339,7 @@ class Awakened:
         return required_exp
 
     def add_experience(self, amount):
+        self.banked_xp = int(self.banked_xp)
         self.total_xp += amount
         current_exp = self.experience  # You should have a variable for tracking the character's experience
         required_exp = self.calculate_required_experience()
