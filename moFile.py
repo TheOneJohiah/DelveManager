@@ -250,8 +250,276 @@ skillFiAff.bank_exp(0.1*170*10)
 skillHeMas.bank_exp(0.1*170*10)
 
 mo.regen(24) #Morning of the 26th day
-mo.essence_exhange() #Third day of fighting at the cave mouth
+mo.essence_exhange() #Begin timelapse
+print("1 of 25 big timelapse")
 
+mo.add_vital("MP",mo.vitals[5]*5.2) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Firebolt",130) #Training
+skillFiAff.bank_exp(0.1*130*10)
+skillHeMas.bank_exp(0.1*130*10)
+mo.cast_skill("Smoke Burst",40)
+skillFiAff.bank_exp(0.1*40*15)
+skillHeMas.bank_exp(0.1*40*15)
+
+
+mo.regen(24) #Morning of the day 27
+mo.essence_exhange() #Begin timelapse
+print("2 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*5.2) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Firebolt",139) #Training
+skillFiAff.bank_exp(0.1*139*10)
+skillHeMas.bank_exp(0.1*139*10)
+mo.cast_skill("Smoke Burst",40)
+skillFiAff.bank_exp(0.1*40*15)
+skillHeMas.bank_exp(0.1*40*15)
+
+mo.regen(24) #Morning of the day 28
+mo.essence_exhange() #Begin timelapse
+print("3 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*5.2) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Firebolt",139) #Training
+skillFiAff.bank_exp(0.1*139*10)
+skillHeMas.bank_exp(0.1*139*10)
+mo.cast_skill("Smoke Burst",40)
+skillFiAff.bank_exp(0.1*40*15)
+skillHeMas.bank_exp(0.1*40*15)
+
+mo.regen(24) #Morning of the day 29
+mo.essence_exhange() #Begin timelapse
+print("4 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*5.2) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Firebolt",139) #Training
+skillFiAff.bank_exp(0.1*139*10)
+skillHeMas.bank_exp(0.1*139*10)
+mo.cast_skill("Smoke Burst",40)
+skillFiAff.bank_exp(0.1*40*15)
+skillHeMas.bank_exp(0.1*40*15)
+
+mo.regen(24) #Morning of the day 30
+mo.essence_exhange() #Begin timelapse
+print("5 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*5.2) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Firebolt",139) #Training
+skillFiAff.bank_exp(0.1*139*10)
+skillHeMas.bank_exp(0.1*139*10)
+mo.cast_skill("Smoke Burst",40)
+skillFiAff.bank_exp(0.1*40*15)
+skillHeMas.bank_exp(0.1*40*15)
+
+mo.regen(24) #Morning of the day 31
+mo.essence_exhange() #Begin timelapse
+print("6 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*5.6) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",160)
+skillFiAff.bank_exp(0.1*160*15)
+skillHeMas.bank_exp(0.1*160*15)
+
+mo.regen(24) #Morning of the day 32
+mo.essence_exhange() #Begin timelapse
+print("7 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*5.6) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",140)
+skillFiAff.bank_exp(0.1*140*15)
+skillHeMas.bank_exp(0.1*140*15)
+
+mo.regen(24) #Morning of the day 33
+mo.essence_exhange() #Begin timelapse
+print("8 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*5.6) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",140)
+skillFiAff.bank_exp(0.1*140*15)
+skillHeMas.bank_exp(0.1*140*15)
+
+mo.regen(24) #Morning of the day 34
+mo.essence_exhange() #Begin timelapse
+print("9 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*6) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",140)
+skillFiAff.bank_exp(0.1*140*15)
+skillHeMas.bank_exp(0.1*140*15)
+
+mo.regen(24) #Morning of the day 35
+mo.essence_exhange() #Begin timelapse
+print("10 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*6) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",140)
+skillFiAff.bank_exp(0.1*140*15)
+skillHeMas.bank_exp(0.1*140*15)
+
+mo.regen(24) #Morning of the day 36
+mo.essence_exhange() #Begin timelapse
+print("11 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*6.18) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",140)
+skillFiAff.bank_exp(0.1*140*15)
+skillHeMas.bank_exp(0.1*140*15)
+
+mo.regen(24) #Morning of the day 37
+mo.essence_exhange() #Begin timelapse
+print("12 of 25 big timelapse")
+
+mo.add_skill(sk.smoke_cloud)
+
+mo.add_vital("MP",mo.vitals[5]*7.1) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",140)
+skillFiAff.bank_exp(0.1*140*15)
+skillHeMas.bank_exp(0.1*140*15)
+
+mo.regen(24) #Morning of the day 38
+mo.essence_exhange() #Begin timelapse
+print("13 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*7.5) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",160)
+skillFiAff.bank_exp(0.1*160*15)
+skillHeMas.bank_exp(0.1*160*15)
+
+mo.regen(24) #Morning of the day 39
+mo.essence_exhange() #Begin timelapse
+print("14 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*7.8) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",160)
+skillFiAff.bank_exp(0.1*160*15)
+skillHeMas.bank_exp(0.1*160*15)
+
+mo.regen(24) #Morning of the day 40
+mo.essence_exhange() #Begin timelapse
+print("15 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.04) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",160)
+skillFiAff.bank_exp(0.1*160*15)
+skillHeMas.bank_exp(0.1*160*15)
+
+mo.regen(24) #Morning of the day 41
+mo.essence_exhange() #Begin timelapse
+print("16 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.1) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",160)
+skillFiAff.bank_exp(0.1*160*15)
+skillHeMas.bank_exp(0.1*160*15)
+
+mo.regen(24) #Morning of the day 42
+mo.essence_exhange() #Begin timelapse
+print("17 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.1) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",160)
+skillFiAff.bank_exp(0.1*160*15)
+skillHeMas.bank_exp(0.1*160*15)
+
+mo.regen(24) #Morning of the day 43
+mo.essence_exhange() #Begin timelapse
+print("18 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.16) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",170)
+skillFiAff.bank_exp(0.1*170*15)
+skillHeMas.bank_exp(0.1*170*15)
+
+mo.regen(24) #Morning of the day 44
+mo.essence_exhange() #Begin timelapse
+print("19 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.16) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",170)
+skillFiAff.bank_exp(0.1*170*15)
+skillHeMas.bank_exp(0.1*170*15)
+
+mo.regen(24) #Morning of the day 45
+mo.essence_exhange() #Begin timelapse
+print("20 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.2) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",170)
+skillFiAff.bank_exp(0.1*170*15)
+skillHeMas.bank_exp(0.1*170*15)
+
+mo.regen(24) #Morning of the day 46
+mo.essence_exhange() #Begin timelapse
+print("21 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.2) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",170)
+skillFiAff.bank_exp(0.1*170*15)
+skillHeMas.bank_exp(0.1*170*15)
+
+mo.regen(24) #Morning of the day 47
+mo.essence_exhange() #Begin timelapse
+print("22 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.28) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",170)
+skillFiAff.bank_exp(0.1*170*15)
+skillHeMas.bank_exp(0.1*170*15)
+
+mo.regen(24) #Morning of the day 48
+mo.essence_exhange() #Begin timelapse
+print("23 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.28) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",150)
+skillFiAff.bank_exp(0.1*150*15)
+skillHeMas.bank_exp(0.1*150*15)
+
+mo.regen(24) #Morning of the day 49
+mo.essence_exhange() #Begin timelapse
+print("24 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.28) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",170)
+skillFiAff.bank_exp(0.1*170*15)
+skillHeMas.bank_exp(0.1*170*15)
+
+mo.regen(24) #Morning of the day 50
+mo.essence_exhange() #Begin timelapse
+print("25 of 25 big timelapse")
+
+mo.add_vital("MP",mo.vitals[5]*8.34) #regen with night spent neat Daniel
+mo.add_vital("MP",1000) # Mana bank, edging soulstrain
+mo.cast_skill("Smoke Burst",170)
+skillFiAff.bank_exp(0.1*170*15)
+skillHeMas.bank_exp(0.1*170*15)
+
+mo.regen(24) #Morning of day 51
+mo.essence_exhange() #The next arc
+print("And so things advance anew")
 
 mo.update_vitals()
 mo.update_free_attributes()

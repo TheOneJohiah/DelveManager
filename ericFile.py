@@ -491,6 +491,7 @@ print("Cave Day 3, i.e. bear day 2")
 eric.add_skill(sk.mana_manipulation)
 eric.add_skill(sk.ice_wall)
 eric.add_skill(sk.power_station)
+eric.add_skill(sk.battle_tower)
 
 eric.reduce_vital("SP",80) #Helping to clear the rock pile
 eric.cast_skill("Mana Bank",630)
@@ -529,8 +530,230 @@ skillFlex.bank_exp(0.1*1400*10)
 skillBuild.bank_exp(0.1*1400*10)
 
 eric.regen(24) #Morning of the 26th day
-eric.essence_exhange() #Third day of fighting at the cave mouth
+eric.essence_exhange() #Begin timelapse
+print("1 of 25 big timelapse")
 
+eric.add_vital("MP",eric.vitals[5]*5.2) #regen with night spent neat Daniel
+eric.cast_skill("Mana Bank",630)
+skillPyl.bank_exp(0.1*630*10)
+skillArm.bank_exp(0.1*630*10)
+skillTight.bank_exp(0.1*630*10)
+skillFlex.bank_exp(0.1*630*10)
+skillBuild.bank_exp(0.1*630*10)
+
+eric.cast_skill("Granite Golem",5000) #Fighting
+skillPyl.bank_exp(0.1*5000*10)
+skillArm.bank_exp(0.1*5000*10)
+skillTight.bank_exp(0.1*5000*10)
+skillFlex.bank_exp(0.1*5000*10)
+skillBuild.bank_exp(0.1*5000*10)
+
+eric.cast_skill("War Banner",240) #keeping the war banner summoned for fighting
+skillPyl.bank_exp(0.1*240*10)
+skillArm.bank_exp(0.1*240*10)
+skillTight.bank_exp(0.1*240*10)
+skillFlex.bank_exp(0.1*240*10)
+skillBuild.bank_exp(0.1*240*10)
+
+eric.cast_skill("Ominous Eye",1400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*1400*10)
+skillArm.bank_exp(0.1*1400*10)
+skillTight.bank_exp(0.1*1400*10)
+skillFlex.bank_exp(0.1*1400*10)
+skillBuild.bank_exp(0.1*1400*10)
+
+eric.cast_skill("Magic Missile Turret",1400) #arbitrary amount of mana spent
+skillPyl.bank_exp(0.1*1400*10)
+skillArm.bank_exp(0.1*1400*10)
+skillTight.bank_exp(0.1*1400*10)
+skillFlex.bank_exp(0.1*1400*10)
+skillBuild.bank_exp(0.1*1400*10)
+
+eric.cast_skill("Battle Tower",4200)
+skillPyl.bank_exp(0.1*4200*10)
+skillArm.bank_exp(0.1*4200*10)
+skillTight.bank_exp(0.1*4200*10)
+skillFlex.bank_exp(0.1*4200*10)
+skillBuild.bank_exp(0.1*4200*10)
+
+eric.regen(24) #Morning of the day 27
+eric.essence_exhange() #Begin timelapse
+print("2 of 25 big timelapse")
+
+eric.add_vital("MP",eric.vitals[5]*5.2) #regen with night spent neat Daniel
+eric.cast_skill("Mana Bank",420) #Refilling micah and mo
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.cast_skill("Granite Golem",5000) #Fighting
+skillPyl.bank_exp(0.1*5000*10)
+skillArm.bank_exp(0.1*5000*10)
+skillTight.bank_exp(0.1*5000*10)
+skillFlex.bank_exp(0.1*5000*10)
+skillBuild.bank_exp(0.1*5000*10)
+
+eric.cast_skill("War Banner",240) #keeping the war banner summoned for fighting
+skillPyl.bank_exp(0.1*240*10)
+skillArm.bank_exp(0.1*240*10)
+skillTight.bank_exp(0.1*240*10)
+skillFlex.bank_exp(0.1*240*10)
+skillBuild.bank_exp(0.1*240*10)
+
+eric.cast_skill("Battle Tower",7200)
+skillPyl.bank_exp(0.1*7200*10)
+skillArm.bank_exp(0.1*7200*10)
+skillTight.bank_exp(0.1*7200*10)
+skillFlex.bank_exp(0.1*7200*10)
+skillBuild.bank_exp(0.1*7200*10)
+
+eric.regen(24) #Morning of the day 28
+eric.essence_exhange() #Begin timelapse
+print("3 of 25 big timelapse")
+
+eric.add_vital("MP",eric.vitals[5]*5.2) #regen with night spent neat Daniel
+eric.cast_skill("Mana Bank",420) #Refilling micah and mo
+skillPyl.bank_exp(0.1*420*10)
+skillArm.bank_exp(0.1*420*10)
+skillTight.bank_exp(0.1*420*10)
+skillFlex.bank_exp(0.1*420*10)
+skillBuild.bank_exp(0.1*420*10)
+
+eric.cast_skill("Granite Golem",4000) #Fighting
+skillPyl.bank_exp(0.1*4000*10)
+skillArm.bank_exp(0.1*4000*10)
+skillTight.bank_exp(0.1*4000*10)
+skillFlex.bank_exp(0.1*4000*10)
+skillBuild.bank_exp(0.1*4000*10)
+
+eric.cast_skill("War Banner",240) #keeping the war banner summoned for fighting
+skillPyl.bank_exp(0.1*240*10)
+skillArm.bank_exp(0.1*240*10)
+skillTight.bank_exp(0.1*240*10)
+skillFlex.bank_exp(0.1*240*10)
+skillBuild.bank_exp(0.1*240*10)
+
+eric.cast_skill("Battle Tower",8200)
+skillPyl.bank_exp(0.1*8200*10)
+skillArm.bank_exp(0.1*8200*10)
+skillTight.bank_exp(0.1*8200*10)
+skillFlex.bank_exp(0.1*8200*10)
+skillBuild.bank_exp(0.1*8200*10)
+
+eric.regen(24) #Morning of the day 29
+eric.essence_exhange() #Begin timelapse
+print("4 of 25 big timelapse")
+
+eric.add_vital("MP",eric.vitals[5]*5.2) #regen with night spent neat Daniel
+eric.cast_skill("Mana Bank",420) #Refilling micah and mo
+eric.cast_skill("Granite Golem",3000) #Fighting
+eric.cast_skill("War Banner",240) #keeping the war banner summoned for fighting
+eric.cast_skill("Battle Tower",3000)
+eric.cast_skill("Ice Wall",4000)
+eric.cast_skill("Power Station",28000)
+
+eric.regen(24) #Morning of the day 30
+eric.essence_exhange() #Begin timelapse
+print("5 of 25 big timelapse")
+
+eric.add_vital("MP",eric.vitals[5]*5.2) #regen with night spent neat Daniel
+eric.cast_skill("Mana Bank",420) #Refilling micah and mo
+eric.cast_skill("Granite Golem",3000) #Fighting
+eric.cast_skill("War Banner",240) #keeping the war banner summoned for fighting
+eric.cast_skill("Ice Wall",4000)
+eric.cast_skill("Power Station",48000)
+
+eric.regen(24) #Morning of the day 31
+eric.essence_exhange() #Begin timelapse
+print("6 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 32
+eric.essence_exhange() #Begin timelapse
+print("7 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 33
+eric.essence_exhange() #Begin timelapse
+print("8 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 34
+eric.essence_exhange() #Begin timelapse
+print("9 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 35
+eric.essence_exhange() #Begin timelapse
+print("10 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 36
+eric.essence_exhange() #Begin timelapse
+print("11 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 37
+eric.essence_exhange() #Begin timelapse
+print("12 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 38
+eric.essence_exhange() #Begin timelapse
+print("13 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 39
+eric.essence_exhange() #Begin timelapse
+print("14 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 40
+eric.essence_exhange() #Begin timelapse
+print("15 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 41
+eric.essence_exhange() #Begin timelapse
+print("16 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 42
+eric.essence_exhange() #Begin timelapse
+print("17 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 43
+eric.essence_exhange() #Begin timelapse
+print("18 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 44
+eric.essence_exhange() #Begin timelapse
+print("19 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 45
+eric.essence_exhange() #Begin timelapse
+print("20 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 46
+eric.essence_exhange() #Begin timelapse
+print("21 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 47
+eric.essence_exhange() #Begin timelapse
+print("22 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 48
+eric.essence_exhange() #Begin timelapse
+print("23 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 49
+eric.essence_exhange() #Begin timelapse
+print("24 of 25 big timelapse")
+
+eric.regen(24) #Morning of the day 50
+eric.essence_exhange() #Begin timelapse
+print("25 of 25 big timelapse")
+
+eric.regen(24) #Morning of day 51
+eric.essence_exhange() #The next arc
+print("Delveday")
+
+eric.cast_skill("Mana Manipulation",88)
+
+eric.regen(24) #Morning of day 52
+eric.essence_exhange() #The next arc
+print("Dunno yet")
 
 eric.update_vitals()
 eric.update_free_attributes()

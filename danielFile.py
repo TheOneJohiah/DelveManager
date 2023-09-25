@@ -459,7 +459,7 @@ daniel.essence_exhange() #Second day of fighting at the cave mouth
 print("Cave Day 3, i.e. bear day 2")
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.67) #Assume aura focus isn't always active
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*0.32) #8 hours of focusless boost
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 
 
 daniel.cast_skill("Purify",85*(1 + skillExt.rank*0.2)*(1 + skillFoc.rank*0.2))
@@ -479,7 +479,7 @@ daniel.essence_exhange() #Begin timelapse
 print("1 of 25 big timelapse")
 
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
 result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
 print(f"{result1}  {result2}") #Spring
@@ -508,7 +508,7 @@ daniel.essence_exhange() #Begin timelapse
 print("2 of 25 big timelapse")
 
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
 result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
 print(f"{result1}  {result2}") #Spring
@@ -537,7 +537,7 @@ daniel.essence_exhange() #Begin timelapse
 print("3 of 25 big timelapse")
 
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
 result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
 print(f"{result1}  {result2}") #Spring
@@ -566,7 +566,7 @@ daniel.essence_exhange() #Begin timelapse
 print("4 of 25 big timelapse")
 
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
 result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
 print(f"{result1}  {result2}") #Spring
@@ -595,7 +595,7 @@ daniel.essence_exhange() #Begin timelapse
 print("5 of 25 big timelapse")
 
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
 result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
 print(f"{result1}  {result2}") #Spring
@@ -622,7 +622,7 @@ daniel.essence_exhange() #Begin timelapse
 print("6 of 25 big timelapse")
 
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
 result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
 print(f"{result1}  {result2}") #Spring
@@ -649,7 +649,7 @@ daniel.essence_exhange() #Begin timelapse
 print("7 of 25 big timelapse")
 
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
 result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
 print(f"{result1}  {result2}") #Spring
@@ -676,7 +676,7 @@ daniel.essence_exhange() #Begin timelapse
 print("8 of 25 big timelapse")
 
 daniel.add_vital("MP",daniel.vitals[5]*(0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2)*0.33) #Winter focus for 8 hours a day
-#print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
+print((0.1*skillWint.rank)*(1 + skillAmp.rank*0.1)*(1 + skillFoc.rank*0.2))
 result1 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2)
 result2 = (0.1 * skillSpr.rank) * (1 + skillAmp.rank * 0.1)
 print(f"{result1}  {result2}") #Spring
@@ -996,7 +996,7 @@ def printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, sk
     comSumFoc = max(1,1 + (comFactor * (((skillSum.rank + 10) * 3 * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
     comSum = max(1,1 + (comFactor * (((skillSum.rank + 10) * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
     comFalFoc = max(1,1 + (comFactor * (((skillFal.rank + 10) * 3 * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
-    comFal = max(1,1 + (comFactor * (((skillFal.rank + 10) * (1 + skillSyn.rank*0.001*synRanks)) - 10))) #compress down to 10 meters
+    comFal = max(1,1 + (comFactor * (((skillFal.rank + 10) * (1 + skillSyn.rank*0.001*synRanks)) - 6))) #6 meter for fall to just barely break 100% 
 
     result1 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillFoc.rank * 0.2) * (1 + skillSyn.rank*0.001*synRanks) * comWintFoc
     result2 = (0.1 * skillWint.rank) * (1 + skillAmp.rank * 0.1) * (1 + skillSyn.rank*0.001*synRanks) * comWint
@@ -1155,7 +1155,39 @@ daniel.cast_skill("Fall",8*(1 + skillAmp.rank*0.2)*(1 + skillExt.rank*0.2)*(1 + 
 
 daniel.regen(24) #Morning of day 51
 daniel.essence_exhange() #The next arc
-print("And so things advance anew")
+print("Delveday")
+
+daniel.regen(24) #Morning of day 52
+daniel.essence_exhange() #The next arc
+print("Back to town")
+
+daniel.regen(24) #Morning of day 53
+daniel.essence_exhange() #The next arc
+print("On our way to Doduo")
+
+daniel.regen(24) #Morning of day 54
+daniel.essence_exhange() #The next arc
+print("Travelling to Diglett")
+
+daniel.regen(24) #Morning of day 55
+daniel.essence_exhange() #The next arc
+print("Made it to Duodecillion")
+
+daniel.regen(24) #Morning of day 56
+daniel.essence_exhange() #The next arc
+print("Overnight in Daryl")
+
+daniel.regen(24) #Morning of day 57
+daniel.essence_exhange() #The next arc
+print("Travel")
+
+daniel.regen(24) #Morning of day 58
+daniel.essence_exhange() #The next arc
+print("Travel")
+
+daniel.regen(24) #Morning of day 59
+daniel.essence_exhange() #The next arc
+print("Back at lair")
 
 printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 39)
 print(1 + skillSyn.rank*0.001*39)

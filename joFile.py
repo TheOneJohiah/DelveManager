@@ -242,9 +242,463 @@ skillEtAff.bank_exp(0.1*160*50)
 micah.add_experience(5400)
 
 micah.regen(24) #Morning of the 26th day
-micah.essence_exhange() #Third day of fighting at the cave mouth
+micah.essence_exhange() #Begin timelapse
+print("1 of 25 big timelapse")
 
 micah.add_skill(sk.rooted)
+
+micah.add_vital("MP",micah.vitals[5]*5.2) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",50)
+skillEtAff.bank_exp(0.1*50*50)
+micah.cast_skill("Rooted",300)
+skillEtAff.bank_exp(0.1*300*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 27
+micah.essence_exhange() #Begin timelapse
+print("2 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*5.2) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 28
+micah.essence_exhange() #Begin timelapse
+print("3 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*5.2) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 29
+micah.essence_exhange() #Begin timelapse
+print("4 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*5.2) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 30
+micah.essence_exhange() #Begin timelapse
+print("5 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*5.2) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",2000)
+skillEtAff.bank_exp(0.1*2000)
+
+micah.regen(24) #Morning of the day 31
+micah.essence_exhange() #Begin timelapse
+print("6 of 25 big timelapse")
+
+micah.add_skill(sk.liquefaction)
+skillLiq = micah.skills["Liquefaction"]
+
+micah.add_vital("MP",micah.vitals[5]*5.6) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",1000)
+skillEtAff.bank_exp(0.1*1000*skillLiq.cost['value'])
+
+micah.regen(24) #Morning of the day 32
+micah.essence_exhange() #Begin timelapse
+print("7 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*5.6) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",500)
+skillEtAff.bank_exp(0.1*500*skillLiq.cost['value'])
+
+micah.regen(24) #Morning of the day 33
+micah.essence_exhange() #Begin timelapse
+print("8 of 25 big timelapse")
+
+micah.add_skill(sk.stoneset)
+micah.add_skill(sk.stonemolding)
+
+micah.add_vital("MP",micah.vitals[5]*5.6) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",250)
+skillEtAff.bank_exp(0.1*250*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",250)
+skillEtAff.bank_exp(0.1*250*5)
+micah.cast_skill("Stoneset",250)
+skillEtAff.bank_exp(0.1*250)
+
+micah.regen(24) #Morning of the day 34
+micah.essence_exhange() #Begin timelapse
+print("9 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*6) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",100)
+skillEtAff.bank_exp(0.1*100*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",250)
+skillEtAff.bank_exp(0.1*250*5)
+micah.cast_skill("Stoneset",250)
+skillEtAff.bank_exp(0.1*250)
+
+micah.regen(24) #Morning of the day 35
+micah.essence_exhange() #Begin timelapse
+print("10 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*6) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",100)
+skillEtAff.bank_exp(0.1*100*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",250)
+skillEtAff.bank_exp(0.1*250*5)
+micah.cast_skill("Stoneset",250)
+skillEtAff.bank_exp(0.1*250)
+
+micah.regen(24) #Morning of the day 36
+micah.essence_exhange() #Begin timelapse
+print("11 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*6.18) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",750)
+skillEtAff.bank_exp(0.1*750*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 37
+micah.essence_exhange() #Begin timelapse
+print("12 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*7.1) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 38
+micah.essence_exhange() #Begin timelapse
+print("13 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*7.5) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 39
+micah.essence_exhange() #Begin timelapse
+print("14 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*7.8) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 40
+micah.essence_exhange() #Begin timelapse
+print("15 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.04) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 41
+micah.essence_exhange() #Begin timelapse
+print("16 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.1) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 42
+micah.essence_exhange() #Begin timelapse
+print("17 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.1) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 43
+micah.essence_exhange() #Begin timelapse
+print("18 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.16) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 44
+micah.essence_exhange() #Begin timelapse
+print("19 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.16) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 45
+micah.essence_exhange() #Begin timelapse
+print("20 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.2) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 46
+micah.essence_exhange() #Begin timelapse
+print("21 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.2) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+skillEtAff.bank_exp(0.1*100*50)
+micah.cast_skill("Rooted",400)
+skillEtAff.bank_exp(0.1*400*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Liquefaction",50)
+skillEtAff.bank_exp(0.1*50*skillLiq.cost['value'])
+micah.cast_skill("Stonemolding",2000)
+skillEtAff.bank_exp(0.1*2000*5)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 47
+micah.essence_exhange() #Begin timelapse
+print("22 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.28) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",150)
+skillEtAff.bank_exp(0.1*150*50)
+micah.cast_skill("Rooted",1600)
+skillEtAff.bank_exp(0.1*1600*10)
+micah.cast_skill("Earthmolding",1000)
+skillEtAff.bank_exp(0.1*1000)
+micah.cast_skill("Stoneset",1000)
+skillEtAff.bank_exp(0.1*1000)
+
+micah.regen(24) #Morning of the day 48
+micah.essence_exhange() #Begin timelapse
+print("23 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.28) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+micah.cast_skill("Rooted",1600)
+micah.cast_skill("Earthmolding",1000)
+micah.cast_skill("Stoneset",1000)
+micah.cast_skill("Rock Push",2000)
+
+micah.regen(24) #Morning of the day 49
+micah.essence_exhange() #Begin timelapse
+print("24 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.28) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",100)
+micah.cast_skill("Rooted",1600)
+micah.cast_skill("Earthmolding",1000)
+micah.cast_skill("Stoneset",1000)
+micah.cast_skill("Rock Push",2000)
+
+micah.regen(24) #Morning of the day 50
+micah.essence_exhange() #Begin timelapse
+print("25 of 25 big timelapse")
+
+micah.add_vital("MP",micah.vitals[5]*8.34) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Rooted",2000)
+
+micah.regen(24) #Morning of day 51
+micah.essence_exhange() #The next arc
+print("Delveday")
+
+micah.add_vital("MP",micah.vitals[5]*8.34) #regen with night spent neat Daniel
+micah.add_vital("MP",1000) # Mana bank, edging soulstrain
+micah.cast_skill("Stone Spear",120)
+micah.cast_skill("Stonebolt",1100)
+micah.cast_skill("Rooted",480)
+micah.cast_skill("Stonemolding",500)
+
+micah.regen(24) #Morning of day 52
+micah.essence_exhange() #The next arc
+print("Back to town")
+
+micah.regen(24) #Morning of day 53
+micah.essence_exhange() #The next arc
+print("On our way to Doduo")
+
+micah.regen(24) #Morning of day 54
+micah.essence_exhange() #The next arc
+print("Travelling to Diglett")
+
+micah.regen(24) #Morning of day 55
+micah.essence_exhange() #The next arc
+print("Made it to Duodecillion")
+
+micah.regen(24) #Morning of day 56
+micah.essence_exhange() #The next arc
+print("Overnight in Daryl")
+
+micah.regen(24) #Morning of day 57
+micah.essence_exhange() #The next arc
+print("Travel")
+
+micah.regen(24) #Morning of day 58
+micah.essence_exhange() #The next arc
+print("Travel")
+
+micah.regen(24) #Morning of day 59
+micah.essence_exhange() #The next arc
+print("Back at lair")
 
 micah.update_vitals()
 micah.update_free_attributes()

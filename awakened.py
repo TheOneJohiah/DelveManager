@@ -92,6 +92,7 @@ class Awakened:
         self.attributes[2][index] += amount
         self.update_attributes()
         self.update_vitals()
+        self.calculate_resistances()
         self.update_free_attributes()
     
     def update_free_attributes(self): self.free_attributes = 90 + (self.level * 10) - sum(self.attributes[2])
@@ -188,6 +189,24 @@ class Awakened:
         self.currVitals[type] -= amount
         self.bank_experience(.5*amount)
 
+        if type == 0:
+            for skill in list(self.skills.values()):
+                if skill.name == "Rugged Defense":
+                    self.bank_skill_exp(skill.name, .5*amount)
+                elif skill.name == "Turtle Skin":
+                    self.bank_skill_exp(skill.name, .5*amount)
+                elif skill.name == "Intrinsic Resistance":
+                    self.bank_skill_exp(skill.name, .5*amount)
+                elif skill.name == "Turtle Skin":
+                    self.bank_skill_exp(skill.name, .5*amount)
+                elif skill.name == "Physical Synergy":
+                    self.bank_skill_exp(skill.name, .5*amount)
+        if type == 1:
+            for skill in list(self.skills.values()):
+                if skill.name == "Strength of Arm":
+                    self.bank_skill_exp(skill.name, .5*amount)
+                elif skill.name == "Physical Synergy":
+                    self.bank_skill_exp(skill.name, .5*amount)
         if type == 2:
             for skill in list(self.skills.values()):
                 if skill.name == "Intrinsic Clarity":
@@ -196,6 +215,7 @@ class Awakened:
                     self.bank_skill_exp(skill.name, .5*amount)
                 elif skill.name == "Magical Synergy":
                     self.bank_skill_exp(skill.name, .5*amount)
+
                     
     def add_vital(self, type, amount):
         if type == "HP": type = 0
@@ -215,6 +235,10 @@ class Awakened:
             self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
             
             #Debug output
+            if x == 0 and overN > 0:
+                print(f"Wasted {overN} health regen!")
+            if x == 1 and overN > 0:
+                print(f"Wasted {overN} stamina regen!")
             if x == 2 and overN > 0:
                 print(f"Wasted {overN} mana regen!")
 
