@@ -3,10 +3,11 @@ from delve_Class import *
 from skill import *
 from item import *
 from copy import *
+from timeline import *
 from jinja2 import Template;
 
 class Awakened:
-    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed):
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed,date=Moment('0936-06-03-12:00:00:000')):
         # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
@@ -57,7 +58,7 @@ class Awakened:
         self.update_attributes()  # Initialize attributes when the character is created
         self.calculate_resistances()
         self.initialize_vitals()  # Initialize vitals when the character is created
-        self.hours = 0
+        self.date = date
 
     def update_attributes(self):
         for x in range(8):
@@ -255,7 +256,7 @@ class Awakened:
         return addN
 
     def regen (self, hours):
-        self.hours += hours
+        self.date = self.date.plus(Duration(int(hours*3600000)))
         time = hours/24
         for x in range(3):
             regN = self.add_vital(x,time*self.vitals[2*x + 1])

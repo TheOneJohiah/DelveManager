@@ -16,7 +16,7 @@ class Moment:
         elif type(src) is int:
             self.year = int(src/30412800000)
             src -= self.year*30412800000
-            self.year += 1
+            #self.year += 1
             self.month = int(src/2764800000)
             src -= self.month*2764800000
             self.month += 1
@@ -34,14 +34,16 @@ class Moment:
 
     def absolute(self): return (self.year*30412800000 + self.month*2764800000 + self.day*86400000 + self.hour*3600000 + self.minute*60000 + self.second*1000 + self.milli - 2851200000)
 
-    def path(self): return "-".join([str(self.year).rjust(4,"0"), str(self.month),str(self.day).rjust(2,"0"),":".join([str(self.hour).rjust(2,"0"),str(self.minute).rjust(2,"0"),str(self.second).rjust(2,"0"),str(self.milli).rjust(3,"0")])])
+    def path(self): return "-".join([str(self.year).rjust(4,"0"), str(self.month).rjust(2,"0"),str(self.day).rjust(2,"0"),":".join([str(self.hour).rjust(2,"0"),str(self.minute).rjust(2,"0"),str(self.second).rjust(2,"0"),str(self.milli).rjust(3,"0")])])
 
     def to(self,next): return Interval(self,next)
+
+    def plus(self,change): return Moment(self.absolute() + change.absolute())
 
 class Duration:
     def __init__(self,src=None):
         if type(src) is str:
-            date = src.split('-')
+            date = src.split(';')
             time = date[3].split(":")
             self.years   = int(date[0])
             self.months  = int(date[1])
@@ -55,10 +57,8 @@ class Duration:
             src -= self.years*30412800000
             self.months = int(src/2764800000)
             src -= self.months*2764800000
-            self.months += 1
             self.days = int(src/86400000)
             src -= self.days*86400000
-            self.days += 1
             self.hours = int(src/3600000)
             src -= self.hours*3600000
             self.minutes = int(src/60000)
@@ -68,9 +68,9 @@ class Duration:
             self.millis = src
         elif type(src) is Moment: self = src
 
-    def absolute(self): return (self.years*30412800000 + self.months*2764800000 + self.days*86400000 + self.hours*3600000 + self.minutes*60000 + self.seconds*1000 + self.millis - 2851200000)
+    def absolute(self): return (self.years*30412800000 + self.months*2764800000 + self.days*86400000 + self.hours*3600000 + self.minutes*60000 + self.seconds*1000 + self.millis)
 
-    def path(self): return "-".join([str(self.years).rjust(4,"0"), str(self.months),str(self.days).rjust(2,"0"),":".join([str(self.hours).rjust(2,"0"),str(self.minutes).rjust(2,"0"),str(self.seconds).rjust(2,"0"),str(self.millis).rjust(3,"0")])])
+    def path(self): return ";".join([str(self.years).rjust(4,"0"), str(self.months).rjust(2,"0"),str(self.days).rjust(2,"0"),":".join([str(self.hours).rjust(2,"0"),str(self.minutes).rjust(2,"0"),str(self.seconds).rjust(2,"0"),str(self.millis).rjust(3,"0")])])
 
     def in_seconds(self): return self.absolute()/1000
     def in_minutes(self): return self.absolute()/60000
@@ -84,7 +84,7 @@ class Interval:
     def __init__(self,start,end):
         self.start = Moment(start)
         self.end = Moment(end)
-        self.length = Duration(end.absolute()-start.absolute())
+        self.length = Duration(abs(end.absolute() - start.absolute()))
 
-    def from_start_dur(start,dur): return Interval(start,Moment(start.abslute() + dur.absolute()))
-    def from_end_dur(end,dur): return Interval(Moment(end.abslute() - dur.absolute()),end)
+    def from_start_dur(start,dur): return Interval(start,Moment(start.absolute() + dur.absolute()))
+    def from_end_dur(end,dur): return Interval(Moment(end.absolute() - dur.absolute()),end)

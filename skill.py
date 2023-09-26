@@ -268,8 +268,8 @@ class steady_scribing(Passive):
     def __init__(self):
         super().__init__("Steady Scribing", "Greater percision is greater power <br> +2%*RNK*(1 + .005*VGR) boost to the effects of all created Runes", 0, "Runecrafting", mod=Modifier(target='Runes'), keywords=["Non-Combat","Runecrafting"])
 
-    def get_power(self, awakened): return 0.02*self.rank*(1 + 0.05*awakened.attributes[1][3])
-    def describe(self, awakened): return f"Greater percision is greater power <br> {100*self.get_power(awakened)} boost to the effects of all created Runes"
+    def get_power(self, awakened): return 2*self.rank*(1 + 0.05*awakened.attributes[1][3])
+    def describe(self, awakened): return f"Greater percision is greater power <br> {self.get_power(awakened)}% boost to the effects of all created Runes"
     def get_modifier(self, awakened):
         return Modifier(
             target="Runes",

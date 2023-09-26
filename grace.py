@@ -2,6 +2,7 @@ import awakened as aw
 import delve_Class as dc
 import item as item
 import skill as sk
+from timeline import *
 
 
 grace = aw.Awakened(name='Grace McGwaed', level_cap=12)
@@ -19,6 +20,8 @@ def printPotTrees (t):
         if grace.trees[tree].tiers[t].lock and not grace.trees[tree].tiers[t-1].lock: print(f'grace.unlock_tier("{tree}",{t})')
 
 #Day 1
+print("Day 1")
+grace.regen(10.4)
 grace.add_experience(195)
 grace.reduce_vital("HP",110)
 grace.reduce_vital("SP",50)
@@ -26,6 +29,7 @@ grace.add_skill(sk.healing_word())
 grace.cast_skill("Healing Word",20) #all the healing on Day 1
 
 # Day 2
+print("Day 2")
 grace.regen(9.6)
 grace.essence_exhange()
 grace.raise_attribute(4,30) #raise Focus by 30
@@ -36,9 +40,10 @@ grace.cast_skill("Healing Word",4) #Healing Micah
 grace.add_skill(sk.natural_intuition)
 grace.add_skill(sk.chemical_intuition)
 
-grace.regen(14.4)
+grace.regen(16)
 
 # Day 3
+print("Day 3")
 grace.regen(3.6)
 grace.essence_exhange()
 grace.cast_skill("Healing Word",7) #Post Work-out Healing
@@ -46,6 +51,7 @@ grace.reduce_vital("SP",100)
 grace.regen(20.4)
 
 #Day 4, training
+print("Day 4")
 grace.regen(4)
 grace.essence_exhange()
 grace.cast_skill("Healing Word",7) #Post Work-out Healing
@@ -53,6 +59,7 @@ grace.reduce_vital("SP",100)
 grace.regen(20)
 
 # Day 5, training
+print("Day 5")
 grace.regen(6)
 grace.essence_exhange()
 grace.raise_attribute(5,10) #Raise Clarity
@@ -61,6 +68,7 @@ grace.cast_skill("Healing Word",7) #Post Work-out Healing
 grace.reduce_vital("SP",100)
 grace.regen(18)
 
+print("Day 6")
 # Day 6; KIN
 grace.regen(1)
 grace.essence_exhange()
@@ -77,7 +85,6 @@ grace.regen(4)
 grace.cast_skill("Cleave Fibers",10)
 grace.regen(0.5)
 grace.cast_skill("Congeal",3)
-
 #Level 8 Dire-Kin
 grace.reduce_vital("HP",20)
 grace.reduce_vital("HP",27)
@@ -90,6 +97,7 @@ grace.reduce_vital("HP",20)
 grace.regen(16.5)
 
 #Day 7
+print("Day 7")
 grace.regen(8)
 grace.essence_exhange()
 grace.cast_skill("Healing Word",15)
@@ -104,6 +112,7 @@ grace.cast_skill("Purge Poison",1)
 grace.regen(13)
 
 #Day 8; Leaving once again.
+print("Day 8")
 grace.regen(9)
 grace.essence_exhange()
 #...or back, I suppose
@@ -113,7 +122,7 @@ grace.regen(15)
 print("Day 9")
 grace.regen(24)
 grace.essence_exhange()
-print(grace.get_skill_power("Healing Word") * 15)
+#print(grace.get_skill_power("Healing Word") * 15)
 grace.cast_skill("Cleave Fibers",5)
 grace.cast_skill("Healing Word",15)
 grace.cast_skill("Congeal",9)
@@ -146,8 +155,10 @@ grace.essence_exhange()
 grace.cast_skill("Cleave Fibers",5)
 grace.cast_skill("Healing Word",15)
 grace.cast_skill("Congeal",3)
+
 #14
 print("Day 14")
+grace.regen(24)
 grace.essence_exhange()
 grace.cast_skill("Cleave Fibers",5)
 grace.cast_skill("Healing Word",15)
@@ -1357,10 +1368,8 @@ grace.set_class(dc.life_worker)
 grace.bank_skill_exp("Natural Intuition",1)
 grace.skills["Natural Intuition"].xp -= 1
 grace.essence_exhange()
-
 #Just resting for the day
 grace.regen(16)
-grace.hours = int(grace.hours) #because floating point errors are ugly
 
 #51; Amor, then Depths
 print("Day 51")
@@ -1479,24 +1488,61 @@ grace.regen(16)
 grace.cast_skill("Healing Word",20)
 
 #59 Skar!
-print("Day 57")
+print("Day 59")
 grace.character_class.attribute_effect[5] = 834
 grace.update_vitals()
 grace.regen(8)
 grace.character_class.attribute_effect[5] = 0
 grace.update_vitals()
 grace.essence_exhange()
-grace.regen(4)
+grace.attributes[4][2] += 10 #Manually adding because fuck it
+grace.update_attributes()
+#grace.add_equipment(item.Item("Endurance "))
+grace.regen(6)
+grace.cast_skill("Cleave Fibers",6)
+tel += 550
+#Creating +30 Heat Resist Potion
+grace.cast_skill("Cleave Fibers",12)
+tel -= 8 
+grace.regen(10)
+
+#60 More Crafting!
+print("Day 60")
+grace.character_class.attribute_effect[5] = 834
+grace.update_vitals()
+grace.regen(8)
+grace.character_class.attribute_effect[5] = 0
+grace.update_vitals()
+grace.essence_exhange()
+grace.raise_attribute(4,10)
+grace.add_skill(sk.steady_scribing())
+#grace.bank_skill_exp("Steady Scribing",700)
+
+'''#61 More Crafting!
+print("Day 61")
+grace.character_class.attribute_effect[5] = 834
+grace.update_vitals()
+grace.regen(8)
+grace.character_class.attribute_effect[5] = 0
+grace.update_vitals()
+grace.essence_exhange()'''
+
+#62 
+
+#63; Frostfall 1
 
 print('')
 print("Tel:",tel)
 #printPotTrees(3)
-print("Hours:",grace.hours)
+print("Day:",grace.date.path())
+timeInt = Moment('0936-06-03-12:00:00:000').to(grace.date)
+#print(timeInt.length.absolute())
+print("Hours:",timeInt.length.in_hours())
+print("Days:",int(timeInt.length.in_days()+.5))
 grace.printCharSheet(altCol= True)
 
 '''
 print(grace.experience)
-grace.unlock_tier("",1)
 
 grace.unlock_tier("Physical Passive",2)
 grace.unlock_tier("Physical Utility",2)
