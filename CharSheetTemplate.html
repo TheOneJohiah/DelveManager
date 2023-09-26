@@ -14,6 +14,14 @@
             font-size: 12pt;
             --fg: #ccc;
             --bg: #00436e;
+            --heat: rgb(254,0,2);
+            --cold: rgb(4,46,96);
+            --light: rgb(255,255,255);
+            --dark: rgb(0,0,0);
+            --force: rgb(107,124,133);
+            --arcane: rgb(78,5,80);
+            --chemical: rgb(21,68,6);
+            --mental: #f0a;
         }
         
         h1 {font-size:1.5em}
@@ -43,6 +51,7 @@
             --RE: #f64;
             --NW: #cf0;
             --CH: var(--chemical);
+            --RU: var(--mp);
         }
 
         body.Mo {
@@ -88,6 +97,7 @@
         .Restoration {--TR: var(--RE);}
         .Natureworking {--TR: var(--NW);}
         .Chemistry {--TR: var(--CH);}
+        .Runecrafting {--TR: var(--RU);}
         .alt table.Tree {color: var(--TR); --fg: var(--TR);}
         
         .alt #ResHE {color:var(--heat);}
@@ -121,9 +131,9 @@
 
         table th {font-weight: bold;text-align: center;}
         
-        #VitHP td:nth-child(2) span {opacity: {{curHP / maxHP}};}
-        #VitSP td:nth-child(2) span {opacity: {{curSP / maxSP}};}
-        #VitMP td:nth-child(2) span {opacity: {{curMP / maxMP}};}
+        #VitHP td:nth-child(2) span {opacity: calc({{curHP / maxHP}} + .1);}
+        #VitSP td:nth-child(2) span {opacity: calc({{curSP / maxSP}} + .1);}
+        #VitMP td:nth-child(2) span {opacity: calc({{curMP / maxMP}} + .1);}
 
         #Skills {text-align: left;}
 
@@ -157,9 +167,9 @@
             <h2>Vitals</h2>
             <table id="Vitals">
                 <tr id="VitHD"><td></td><th>CUR</th><th>MAX</th><th>RGN</th></tr>
-                <tr id="VitHP"><th>HP</th><td><span>{{curHP}}</span></td><td>{{maxHP}}</td><td>{{rgnHP}}</td></tr>
-                <tr id="VitSP"><th>SP</th><td><span>{{curSP}}</span></td><td>{{maxSP}}</td><td>{{rgnSP}}</td></tr>
-                <tr id="VitMP"><th>MP</th><td><span>{{curMP}}</span></td><td>{{maxMP}}</td><td>{{rgnMP}}</td></tr>
+                <tr id="VitHP"><th>Health</th><td><span>{{curHP}}</span></td><td>{{maxHP}}</td><td>{{rgnHP}}</td></tr>
+                <tr id="VitSP"><th>Stamina</th><td><span>{{curSP}}</span></td><td>{{maxSP}}</td><td>{{rgnSP}}</td></tr>
+                <tr id="VitMP"><th>Mana</th><td><span>{{curMP}}</span></td><td>{{maxMP}}</td><td>{{rgnMP}}</td></tr>
             </table>
 
             <h2>Attributes</h2>
@@ -197,8 +207,8 @@
                 <tr><th><h4>{{tier.tier}}</h4></th>
                 <td><table>
                 {% for skill in tier.skills.values() %}
-                    <tr><td><h5>{{skill.name}} ({{skill.rank}} / {{skill.cap}}) (Exp: {{skill.xp}} / {{ skill.getNextRankXP() }})</h5>
-                    {{skill.description}}</td></tr>
+                    <tr><td><h5>{{skill.name}} ({{skill.rank + skill.rank_bonus}}/{{skill.cap}}) {% if not skill.rank == skill.cap %} (Exp: {{skill.xp}}/{{ skill.getNextRankXP() }}) {% endif %}</h5>
+                    {{skill.describe(aw)}}</td></tr>
                 {% endfor %}
             </table></td></tr>
             {% endfor %}
