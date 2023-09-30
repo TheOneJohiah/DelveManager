@@ -255,13 +255,38 @@ class Awakened:
 
         return addN
 
-    def regen (self, hours):
+    def regen (self, hours, mods=[0,0,0]):
         self.date = self.date.plus(Duration(int(hours*3600000)))
         time = hours/24
         for x in range(3):
-            regN = self.add_vital(x,time*self.vitals[2*x + 1])
+            regN = self.add_vital(x,time*self.vitals[2*x + 1]*(1 + .01*mods[x]))
             self.add_statistics("total "+["HP","SP","MP"][x]+" regen",regN)
 
+    def train(self, hours, skills,mods=[0,0,0],spending=[0,0,0]):
+        # Break down into health, stamina, and mana skills
+        hp_skills = list(filter(lambda s: "HP"==self.skills[s].cost['type'],skills))
+        sp_skills = list(filter(lambda s: "SP"==self.skills[s].cost['type'],skills))
+        mp_skills = list(filter(lambda s: "MP"==self.skills[s].cost['type'],skills))
+        time = hours/24
+        for x in range(3):
+            vp_skills = [hp_skills,sp_skills,mp_skills][x]
+            t = ["HP","SP","MP"][x]
+            # Regen
+            regN = time*self.vitals[2*x + 1]*(1 + .01*mods[x])
+            if (len(vp_skills)>0): self.currVitals[x] += regN
+            else: self.add_vital(t,regN)
+            self.add_statistics("total "+t+" regen",regN)
+            
+            #base spending
+            self.reduce_vital(t,spending[x])
+            
+            #dealing with skills
+            for s in vp_skills:
+                self.cast_skill(s,floor(self.currVitals[x]/(len(vp_skills)*self.skills[s].get_cost()['value'])))
+
+
+        self.date = self.date.plus(Duration(int(hours*3600000)))
+    
     def update_level_cap(self, newLevel):
         self.level_cap = newLevel
 
@@ -340,7 +365,7 @@ class Awakened:
         return required_exp
 
     def add_experience(self, amount):
-        self.banked_xp = int(self.banked_xp)
+        amount = int(amount)
         self.total_xp += amount
         current_exp = self.experience  # You should have a variable for tracking the character's experience
         required_exp = self.calculate_required_experience()

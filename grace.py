@@ -1421,7 +1421,7 @@ grace.character_class.attribute_effect[5] = 0
 grace.update_vitals()
 grace.essence_exhange()
 grace.raise_attribute(4,10)
-grace.add_skill(sk.runes_of_defense)
+grace.add_skill(sk.runes_of_defense())
 grace.cast_skill("Healing Word",106)
 grace.regen(16)
 
@@ -1459,6 +1459,8 @@ grace.character_class.attribute_effect[5] = 0
 grace.update_vitals()
 grace.essence_exhange()
 tel -= 500 #Highway robbery @ Cadabra
+heat_crysts = 15
+arcane_crysts = 15
 grace.cast_skill("Healing Word",130)
 grace.regen(16)
 grace.cast_skill("Healing Word",20)
@@ -1489,11 +1491,7 @@ grace.cast_skill("Healing Word",20)
 
 #59 Skar!
 print("Day 59")
-grace.character_class.attribute_effect[5] = 834
-grace.update_vitals()
-grace.regen(8)
-grace.character_class.attribute_effect[5] = 0
-grace.update_vitals()
+grace.regen(8,[0,0,834])
 grace.essence_exhange()
 grace.attributes[4][2] += 10 #Manually adding because fuck it
 grace.update_attributes()
@@ -1501,44 +1499,70 @@ grace.update_attributes()
 grace.regen(6)
 grace.cast_skill("Cleave Fibers",6)
 tel += 550
-#Creating +30 Heat Resist Potion
+heat_crysts += 22
+#Creating Heat Resist Leather
 grace.cast_skill("Cleave Fibers",12)
 tel -= 8 
+heat_crysts -= 4
 grace.regen(10)
 
 #60 More Crafting!
 print("Day 60")
-grace.character_class.attribute_effect[5] = 834
-grace.update_vitals()
-grace.regen(8)
-grace.character_class.attribute_effect[5] = 0
-grace.update_vitals()
+grace.regen(8,[0,0,834])
 grace.essence_exhange()
 grace.raise_attribute(4,10)
 grace.add_skill(sk.steady_scribing())
 #grace.bank_skill_exp("Steady Scribing",700)
+grace.regen(9)
+tel += 79
+heat_crysts += 1
+#Unwashed Archer - Skar Ogwa
+grace.cast_skill("Cleave Fibers",1)
+grace.cast_skill("Healing Word",1)
+#Lair!
+grace.cast_skill("Healing Word",1) #Healing Fiig
+grace.update_level_cap(16)
+tel += 8
+heat_crysts += 3
+grace.regen(3)
+grace.cast_skill("Cleave Fibers",1)
+grace.regen(4)
 
-'''#61 More Crafting!
+#61 To Dudiro, once more
 print("Day 61")
-grace.character_class.attribute_effect[5] = 834
-grace.update_vitals()
-grace.regen(8)
-grace.character_class.attribute_effect[5] = 0
-grace.update_vitals()
-grace.essence_exhange()'''
+grace.regen(5)
+grace.regen(16,[0,380,0])
+grace.essence_exhange()
+grace.cast_skill("Healing Word",100)
+grace.regen(3,[0,0,834])
 
-#62 
+#62
+print("Day 62")
+grace.regen(8,[0,0,834])
+grace.essence_exhange()
+grace.regen(16,[0,380,0])
+grace.cast_skill("Healing Word",150)
 
-#63; Frostfall 1
+#63; At Dudiro
+print("Day 63")
+grace.regen(8,[0,0,834])
+grace.essence_exhange()
+tel -= 600
+tel += 120
 
-print('')
-print("Tel:",tel)
-#printPotTrees(3)
-print("Day:",grace.date.path())
+#grace.regen(8,[0,0,834])
+#grace.essence_exhange()
+
 timeInt = Moment('0936-06-03-12:00:00:000').to(grace.date)
-#print(timeInt.length.absolute())
-print("Hours:",timeInt.length.in_hours())
-print("Days:",int(timeInt.length.in_days()+.5))
+#printPotTrees(3)
+print("\nTel:",tel,
+      "\nHeat Crysts:",heat_crysts,
+      "\nArcane Crysts:",arcane_crysts,
+      "\nDay:",grace.date.path(),
+      "\nDay:",grace.date.datetime(),
+      "\nHours:",timeInt.length.in_hours(),
+      "\nDays:",int(timeInt.length.in_days()+.5)
+)
 grace.printCharSheet(altCol= True)
 
 '''

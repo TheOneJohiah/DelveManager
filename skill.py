@@ -266,9 +266,9 @@ energize_rune = Skill("Energize Rune","Convert up to 10*RNK tel to up to 10*RNK 
 
 class steady_scribing(Passive):
     def __init__(self):
-        super().__init__("Steady Scribing", "Greater percision is greater power <br> +2%*RNK*(1 + .005*VGR) boost to the effects of all created Runes", 0, "Runecrafting", mod=Modifier(target='Runes'), keywords=["Non-Combat","Runecrafting"])
+        super().__init__("Steady Scribing", "Greater percision is greater power <br> +2%*RNK*(1 + .005*VGR) boost to the effects of all Rune skills", 0, "Runecrafting", mod=Modifier(target='Runes'), keywords=["Non-Combat","Runecrafting"])
 
-    def get_power(self, awakened): return 2*self.rank*(1 + 0.05*awakened.attributes[1][3])
+    def get_power(self, awakened): return 5*self.rank*(1 + 0.01*awakened.attributes[1][3])
     def describe(self, awakened): return f"Greater percision is greater power <br> {self.get_power(awakened)}% boost to the effects of all created Runes"
     def get_modifier(self, awakened):
         return Modifier(
@@ -276,30 +276,84 @@ class steady_scribing(Passive):
             power_buff=self.get_power(awakened)
         )
     
-runes_of_resevoirs = Skill("Runes of Resevoirs","Gain a greater familiarity with the gathering and storing of energy <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runecrafting"])
+class runes_of_resevoirs(Passive):
+    def __init__(self):
+        super().__init__("Runes of Resevoirs","Gain a greater familiarity with the gathering and storing of energy <br> +2%*RNK*(1 + .005*STR) boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runes","Runecrafting"])
+    
+    def get_power(self, awakened): return 2*self.rank*(1 + 0.005*awakened.attributes[1][0])
+    def describe(self, awakened): return f"Gain a greater familiarity with the gathering and storing of energy <br> {self.get_power(awakened)}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
+    def get_modifier(self, awakened):
+        return Modifier(
+            target="N/A",
+            power_buff=self.get_power(awakened)
+        )
 
-runes_of_living_enhancement = Skill("Runes of Living Enhancement","Gain a greater familiarity with enhancing attributes <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runecrafting"])
+class runes_of_living_enhancement(Passive):
+    def __init__(self):
+        super().__init__("Runes of Living Enhancement","Gain a greater familiarity with enhancing attributes <br> +2%*RNK*(1 + .005*STR) boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runes","Runecrafting"])
 
-runes_of_item_enhancement = Skill("Runes of Item Enhancment","Gain a greater familiarity with enhancing the properties of materials <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runecrafting"])
+    def get_power(self, awakened): return 2*self.rank*(1 + 0.005*awakened.attributes[1][0])
+    def describe(self, awakened): return f"Gain a greater familiarity with enhancing attributes <br> {self.get_power(awakened)}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
+    def get_modifier(self, awakened):
+        return Modifier(
+            target="N/A",
+            power_buff=self.get_power(awakened)
+        )
 
-runes_of_defense = Skill("Runes of Defense","Gain a greater familiarity with strengthening defenses <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runecrafting"])
+class runes_of_item_enhancement(Passive):
+    def __init__(self):
+        super().__init__("Runes of Item Enhancment","Gain a greater familiarity with enhancing the properties of materials <br> +2%*RNK*(1 + .005*STR) boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runes","Runecrafting"])
 
-runes_of_complexity = Skill("Runes of Complexity","Gain a greater familiarity with connecting similar runes into Rune Complexes <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runecrafting"])
+    def get_power(self, awakened): return 2*self.rank*(1 + 0.005*awakened.attributes[1][0])
+    def describe(self, awakened): return f"Gain a greater familiarity with enhancing the properties of materials <br> {self.get_power(awakened)}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
+    def get_modifier(self, awakened):
+        return Modifier(
+            target="N/A",
+            power_buff=self.get_power(awakened)
+        )
+
+class runes_of_defense(Passive):
+    def __init__(self):
+        super().__init__("Runes of Defense","Gain a greater familiarity with strengthening defenses <br> +2%*RNK*(1 + .005*STR) boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runes","Runecrafting"])
+
+    def get_power(self, awakened): return 2*self.rank*(1 + 0.005*awakened.attributes[1][0])
+    def describe(self, awakened): return f"Gain a greater familiarity with strengthening defenses <br> {self.get_power(awakened)}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
+    def get_modifier(self, awakened):
+        return Modifier(
+            target="N/A",
+            power_buff=self.get_power(awakened)
+        )
+
+class runes_of_complexity(Passive):
+    def __init__(self):
+        super().__init__("Runes of Complexity","Gain a greater familiarity with connecting similar runes into Rune Complexes <br> +2%*RNK*(1 + .005*STR) boost to the effects of relevant created runes <br> Higher ranks mean stronger insight",1,"Runecrafting",keywords=["Non-Combat","Runes","Runecrafting"])
+
+    def get_power(self, awakened): return 2*self.rank*(1 + 0.005*awakened.attributes[1][0])
+    def describe(self, awakened): return f"Gain a greater familiarity with connecting similar runes into Rune Complexes <br> {self.get_power(awakened)}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
+    def get_modifier(self, awakened):
+        return Modifier(
+            target="N/A",
+            power_buff=self.get_power(awakened)
+        )
+
 '''
 Current list of Runecrafting skills;
 
 T2
 ```Runes of Skill Imitation
 Gain a greater familiarity with imitating other's capabilities through Runes
++2%*RNK*(1 + .005*STR) boost to the effects of relevant created runes
 Higher ranks mean stronger insight
 ```
 ```Runes of Connection
 Gain a greater familiarity with connecting seperate Runes and Rune Complexes into one network
++2%*RNK*(1 + .005*STR) boost to the effects of relevant created runes
 Higher ranks mean stronger insight
 Requires Runes of Complexity```
 T3
 ```Runes of Skill Enhancement
 Gain a greater familiarity with empowering other's capabilities through Runes
++2%*RNK*(1 + .005*STR) boost to the effects of relevant created runes
 Higher ranks mean stronger insight
 Requires Skill Imitation R5+```
 '''
