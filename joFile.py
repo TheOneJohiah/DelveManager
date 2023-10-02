@@ -698,7 +698,48 @@ print("Travel")
 
 micah.regen(24) #Morning of day 59
 micah.essence_exhange() #The next arc
-print("Back at lair")
+print("Back at lair, clearing out the hounds, seeing the blue")
+
+micah.regen(24) #Morning of day 60
+micah.essence_exhange()
+print("Crafting and army scout encounter")
+
+micah.regen(24) #Morning of day 61
+micah.essence_exhange()
+print("Day 1 marching with village")
+
+micah.regen(24) #Morning of day 62
+micah.essence_exhange()
+print("Day 2 marching with village")
+
+micah.regen(24) #Morning of day 63
+micah.essence_exhange()
+print("Day 3 marching with village, arriving")
+
+micah.regen(24) #Morning of day 64
+micah.essence_exhange()
+print("Prep for travel and twiddling thumbs in town")
+
+micah.regen(24) #Morning of day 65
+micah.essence_exhange()
+print("Ambush army harried back over the border by silver team")
+
+micah.regen(24) #Morning of day 66
+micah.essence_exhange()
+print("Travel")
+
+micah.regen(24) #Morning of day 67
+micah.essence_exhange()
+print("Travel")
+
+micah.regen(24) #Morning of day 68
+micah.essence_exhange()
+print("Arriving back at quillcaves")
+
+## Add 28 days of training
+
+# Day 96?
+
 
 micah.update_vitals()
 micah.update_free_attributes()
