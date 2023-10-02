@@ -18,3 +18,6 @@ t.add_skill(sk.Passive("Resistance Synergy","Allow synergistic cross-multiplicat
 t.add_equipment(eq.grand_allstat_ring)
 t.raise_attribute(3,20)
 t.printCharSheet()
+
+print(t.accolades)
+print(t.used_accolade_slots)

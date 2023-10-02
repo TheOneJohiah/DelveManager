@@ -7,4 +7,4 @@ class Monster:
         self.tamed = tamed
         self.reward_exp = 25*tier*level
 
-slime = Monster('Slime','Goopy Goober',1,5,False)
+slime = Monster('Slime','Goopy Goober',1,1,False)

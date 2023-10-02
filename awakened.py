@@ -1,6 +1,7 @@
 import math
 from delve_Class import *
 from skill import *
+from accolade import *
 from item import *
 from copy import *
 from timeline import *
@@ -31,6 +32,7 @@ class Awakened:
         self.accolades = {}
         self.vitals = vitals
         self.used_skill_points = 0
+        self.used_accolade_slots = 0
         self.level = level
         self.level_cap = level_cap if level_cap >= level else level
         self.experience = experience
@@ -125,11 +127,17 @@ class Awakened:
     
     def update_free_attributes(self): self.free_attributes = 90 + (self.level * 10) - sum(self.attributes[2])
 
-    def max_skill_points(self): return self.level + 1
+    def max_level_points(self): return self.level + 1
     
     def calculate_used_skill_points(self): return len(self.skills)
     
-    def calculate_free_skill_points(self): return self.max_skill_points() - self.calculate_used_skill_points()
+    def calculate_free_skill_points(self): return self.max_level_points() - self.calculate_used_skill_points()
+
+    #Not technically correct, some accolades use more than 1 slot
+    #TODO: Fix later lol
+    def calculate_used_accolade_slots(self): return len(self.accolades)
+
+    def calculate_free_accolade_slots(self): return self.max_level_points() - self.calculate_used_accolade_slots()
 
     def calculate_health_cap(self):
         base_health = self.attributes[1][0] * 20
@@ -315,6 +323,27 @@ class Awakened:
         self.experience -= cost
         self.trees[tree].unlock(tier)
 
+    #TODO: Add swapping of active accolades
+    def add_accolade(self, accolade):
+        free_slots = self.calculate_free_accolade_slots()
+
+        if free_slots > accolade.rank:
+            #Equip automatically, free slots available
+            self.activate_accolade()
+        return True
+
+    def remove_accolade(self):
+
+        return True
+    
+    def activate_accolade(self):
+
+        return True
+    
+    def deactivate_accolade(self):
+
+        return True
+    
     def set_class(self, character_class):
         if not self.level in [5,25,50,75]:
             print(f"{self.name} not at a class selection level!")   
