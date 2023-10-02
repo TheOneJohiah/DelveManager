@@ -9,7 +9,6 @@ from jinja2 import Template;
 
 class Awakened:
     def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed,date=Moment('0936-06-03-12:00:00:000')):
-        # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
                                    "total SP regen":0,
@@ -331,16 +330,25 @@ class Awakened:
             #Equip automatically, free slots available
             self.activate_accolade()
         return True
-
-    def remove_accolade(self):
-
-        return True
     
     def activate_accolade(self):
 
         return True
     
     def deactivate_accolade(self):
+
+        return True
+    
+    def remove_accolade(self, toRemove, toAdd):
+
+        #If active, deactivate before removing
+        self.deactivate_accolade(self, toRemove)
+        #Autoslot a new accolade if toAdd is empty
+        #And there are any unbound accolades
+
+        return True
+    
+    def swap_accolade(self, toAdd, toRemove):
 
         return True
     
