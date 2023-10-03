@@ -53,7 +53,7 @@ greenfort = Accolade("Greenfort","50% stronger grip when climbing",2,0)
 lair_of_embers = Resists("The Lair of Embers","+1000 Heat Resistance",3,0,resists=[1000,0,0,0,0,0,0,0])
 oh_gods_not_another = Attributes("Oh Gods! Not Another Chem Lair!","+1000 Mana",2,0,attribute=[0,0,0,0,1000,0])
 
-skars_glorious_return = Stats("Skar's Glorious Return","+10 to all main stats",2,0,stats=[10,0,10,0,10,0,0,0])
+skars_glorious_return = PercentStats("Skar's Glorious Return","+10 to all main stats",2,0,percentStats=[10,0,10,0,10,0,0,0])
 lava_vents = Stats("Lava Vents","+10 Strength",1,0,stats=[10,0,0,0,0,0,0,0])
 flamewillow_grove = Stats("Flamewillow Grove","+10 Recovery",1,0,stats=[0,0,0,10,0,0,0,0])
 sphinx_riddle = Stats("Sphinx Riddle","+50% Strength",2,0,stats=[50,0,0,0,0,0,0,0])

@@ -3,6 +3,7 @@ import awakened as aw;
 import delve_Class as dc;
 import skill as sk;
 import item as eq;
+import accolade as ac;
 
 # Example usage
 t = aw.Awakened(name='Teston Lautts',attributes = [10, 10, 200, 10, 10, 10, 10, 10], level = 20, character_class = dc.shieldwielding_defender)
@@ -18,6 +19,7 @@ t.add_skill(sk.Passive("Resistance Synergy","Allow synergistic cross-multiplicat
 t.add_equipment(eq.grand_allstat_ring)
 t.raise_attribute(3,20)
 t.printCharSheet()
+t.add_accolade(ac.lava_vents)
 
 print(t.accolades)
 print(t.used_accolade_slots)

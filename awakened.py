@@ -84,7 +84,13 @@ class Awakened:
                     if hasattr(enchant,'resistance_buff'): self.resistances[6] = [sum(i) for i in zip(self.resistances[6],enchant.resistance_buff)]
         #Update array column [3] with accolade attribute buffs
         #Do something for spell buffs?
-        #for acc in self.accolades:
+        # Iterate through self.accolades and add their bonuses to self.attributes[4]
+        for accolade in self.accolades.values():
+            if isinstance(accolade, Stats):  # Check if the accolade is a Stats accolade
+                num_active = accolade.numActive  # Get the number of active instances of this accolade
+                accolade_stats = [stat * num_active for stat in accolade.stats]  # Multiply accolade stats by numActive
+                self.attributes[3] = [a + b for a, b in zip(self.attributes[3], accolade_stats)]
+
         self.update_attributes()
     
     def initialize_trees(self):
@@ -132,9 +138,14 @@ class Awakened:
     
     def calculate_free_skill_points(self): return self.max_level_points() - self.calculate_used_skill_points()
 
-    #Not technically correct, some accolades use more than 1 slot
-    #TODO: Fix later lol
-    def calculate_used_accolade_slots(self): return len(self.accolades)
+    def calculate_used_accolade_slots(self):
+        used_slots = 0
+        
+        for accolade in self.accolades.values():
+            used_slots += accolade.rank * accolade.numActive
+
+        self.used_accolade_slots = used_slots
+        return used_slots
 
     def calculate_free_accolade_slots(self): return self.max_level_points() - self.calculate_used_accolade_slots()
 
@@ -326,14 +337,29 @@ class Awakened:
     def add_accolade(self, accolade):
         free_slots = self.calculate_free_accolade_slots()
 
+        # Check if the accolade already exists in self.accolades
+        if accolade.name in self.accolades:
+            self.accolades[accolade.name].numStored += 1  # Increase numStored by one
+        else:
+            accolade.numStored = 1  # Initialize numStored to 1 if it doesn't exist
+            self.accolades[accolade.name] = accolade  # Add the accolade to self.accolades
+
         if free_slots > accolade.rank:
-            #Equip automatically, free slots available
-            self.activate_accolade()
-        return True
-    
-    def activate_accolade(self):
+            # Equip automatically, free slots available
+            self.activate_accolade(accolade, free_slots)
+
+
+        self.update_buffs()
+        self.calculate_used_accolade_slots()
 
         return True
+    
+    def activate_accolade(self, accolade, free_slots):
+        if accolade.name in self.accolades and accolade.numActive < accolade.numStored and free_slots >= accolade.rank:
+            self.accolades[accolade.name].numActive += 1  # Increase numActive by one for the specified accolade
+            return True
+        else:
+            return False  # Return False if the accolade doesn't exist in self.accolades or all are active already or free slots are insufficient
     
     def deactivate_accolade(self):
 
