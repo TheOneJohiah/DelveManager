@@ -270,6 +270,7 @@ class Awakened:
         time = hours/24
         for x in range(3):
             vp_skills = [hp_skills,sp_skills,mp_skills][x]
+            vp_skills.sort(key=(lambda c: self.skills[c].cost['value']),reverse=True)
             t = ["HP","SP","MP"][x]
             # Regen
             regN = time*self.vitals[2*x + 1]*(1 + .01*mods[x])
@@ -282,10 +283,27 @@ class Awakened:
             
             #dealing with skills
             for s in vp_skills:
-                self.cast_skill(s,floor(self.currVitals[x]/(len(vp_skills)*self.skills[s].get_cost()['value'])))
-
+                self.cast_skill(s,math.floor(self.currVitals[x]/(len(vp_skills)*self.skills[s].get_cost()['value'])))
 
         self.date = self.date.plus(Duration(int(hours*3600000)))
+    
+    def train_days(self,days,skills,mods=[0,0,0],dayspending=[0,0,0],sleepmod=[0,0,0],nextskills=[],stats=[0,0,0,0,0,0]):
+        for day in range(days):
+            print(f"Day {int(Moment('0936-06-03-12:00:00:000').to(self.date).length.in_days()+.5)}")
+            self.regen(8,sleepmod)
+            self.essence_exhange()
+            if self.calculate_free_skill_points()>0 and not len(nextskills)==0: #add new skills
+                self.add_skill(nextskills[0])
+                if hasattr(nextskills[0],'cost'): skills.append(nextskills[0].name)
+                nextskills.pop(0)
+            if self.free_attributes>0: #add stats
+                div = len(list(filter(lambda x: x>0,stats)))
+                inc = 0 if div==0 else int(self.free_attributes/div)
+                for st in range(6):
+                    self.raise_attribute(st,min(stats[st],inc))
+                stats = list(map(lambda x: max(0,x - inc),stats))
+            skills = list(filter(lambda s: not self.skills[s].cap==self.skills[s].rank,skills)) #remove maxxed skills 
+            self.train(16,skills,mods,dayspending)
     
     def update_level_cap(self, newLevel):
         self.level_cap = newLevel
@@ -571,7 +589,6 @@ class Awakened:
                     trees = self.genSkillList(),
 
                     Items = filter(None,list(self.inventory.values()))
-                    
             ))
 
         sheet.close()

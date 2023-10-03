@@ -1,6 +1,4 @@
 # second =60> minute =60> hour =24> day =8> week =4> month =11> year
-from math import *
-
 seclen = 1000
 minlen = seclen*60
 hourlen = minlen*60

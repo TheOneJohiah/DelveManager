@@ -1549,9 +1549,53 @@ grace.regen(8,[0,0,834])
 grace.essence_exhange()
 tel -= 600
 tel += 120
+grace.regen(16)
 
-#grace.regen(8,[0,0,834])
-#grace.essence_exhange()
+#64
+print("Day 64")
+grace.regen(8,[0,0,834])
+grace.essence_exhange()
+grace.regen(16)
+
+#65 - Attack rebuffed, to Quill caves
+print("Day 65")
+grace.regen(8,[0,0,834])
+grace.essence_exhange()
+
+#66
+print("Day 66")
+grace.regen(8,[0,0,834])
+grace.essence_exhange()
+grace.regen(16,[0,380,0])
+grace.cast_skill("Healing Word",150)
+
+#67
+print("Day 67")
+grace.regen(8,[0,0,834])
+grace.essence_exhange()
+grace.regen(16,[0,380,0])
+grace.cast_skill("Healing Word",113)
+
+#68 - Quillcaves
+print("Day 68")
+grace.regen(8,[0,0,834])
+grace.essence_exhange()
+grace.regen(16,[0,380,0])
+
+# To day 96!
+grace.train_days(28,
+                 ["Healing Word","Cleave Fibers","Purge Poison","Congeal"],
+                 [0,38,750],
+                 sleepmod=[0,0,834],
+                 nextskills=[sk.runes_of_living_enhancement(),sk.runes_of_item_enhancement(),sk.runes_of_complexity(),sk.healing_affinity(),sk.dissolve()],
+                 stats=[0,0,0,0,50,10]
+                )
+tel += 498
+
+#Day 96
+print("Day 96")
+grace.regen(8,[0,0,834])
+grace.essence_exhange()
 
 timeInt = Moment('0936-06-03-12:00:00:000').to(grace.date)
 #printPotTrees(3)
@@ -1561,7 +1605,7 @@ print("\nTel:",tel,
       "\nDay:",grace.date.path(),
       "\nDay:",grace.date.datetime(),
       "\nHours:",timeInt.length.in_hours(),
-      "\nDays:",int(timeInt.length.in_days()+.5)
+      "\nDays:",int(timeInt.length.in_days()+.5),
 )
 grace.printCharSheet(altCol= True)
 

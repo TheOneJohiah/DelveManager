@@ -196,7 +196,7 @@ class healing_word(Instant):
     def __init__(self):
         super().__init__("Healing Word","Invoke a word of healing to restore health to a touched entity <br> Heal [10-20]*[RNK]*[1 + .005*FCS] hp <br> Cost: 10mp <br> Cannot Heal Self",0,"Restoration",cost={'type':"MP",'value':10},keywords=["Non-Combat","Healing"])
 
-    def get_power(self, awakened): return 15*self.rank*(1 + awakened.attributes[1][4]/200)*(1 + awakened.get_skill_power("Healing Affinity"))
+    def get_power(self, awakened): return 15*self.rank*(1 + awakened.attributes[1][4]/200)*(1 + awakened.get_skill_power("Healing Affinity")/100)
     def describe(self, awakened): return "Invoke a word of healing to restore health to a touched entity <br> Heal "+str(round(self.get_power(awakened)/1.5,2))+"-"+str(round(self.get_power(awakened)/.75,2))+" hp <br> Cost: 10mp <br> Cannot Heal Self"
 
 stamina_transfer = Skill("Stamina Transfer","Sacrifice a portion of your stamina to energize a touched entity <br> Gives: [20*RNK] sp <br> Cost: [40*RNK] sp",0,"Restoration")
@@ -205,7 +205,7 @@ class purge_poison(Instant):
     def __init__(self):
         super().__init__("Purge Poison","Weaken and destroy poisons and toxins (fcs) <br> Reduce Chemical Effect damage by [20*RNK*(1 + .01*FCS)] <br> Range: Touch<br> Cost: 20mp <br> If damage is reduced to 0, the Effect is ended",1,"Restoration",cost={'type':"MP",'value':20},keywords=["Non-Combat","Healing"])
 
-    def get_power(self, awakened): return 20*self.rank*(1 + awakened.attributes[1][4]/100)*(1 + awakened.get_skill_power("Healing Affinity"))
+    def get_power(self, awakened): return 20*self.rank*(1 + awakened.attributes[1][4]/100)*(1 + awakened.get_skill_power("Healing Affinity")/100)
     def describe(self, awakened): return "Weaken and destroy poisons and toxins (fcs) <br> Reduce Chemical Effect damage by "+str(round(self.get_power(awakened),2))+" <br> Range: Touch<br> Cost: 20mp <br> If damage is reduced to 0, the Effect is ended"
 
 regeneration = Skill("Regeneration","Instill a font of life within a target that slowly restores them (fcs) <br> Target recovers (1 + .01*FCS) health every second <br> Range: Touch<br> Cost: 50mp <br> Duration: .5*RNK m",1,"Restoration")
@@ -214,8 +214,8 @@ class healing_affinity(Passive):
     def __init__(self):
         super().__init__("Healing Affinity","Multiply intensity of healing skills by [1+0.1*RNK] <br> Requires 10 ranks in Restoration",1,"Restoration",Modifier(target="Healing"),keywords=["Non-Combat"])
 
-    def get_power(self, awakened): return 0.1*self.rank
-    def describe(self, awakened): return f"Multiply intensity of healing skills by {1 + self.get_power(awakened)}"
+    def get_power(self, awakened): return 10*self.rank
+    def describe(self, awakened): return f"Boost intensity of healing skills by {self.get_power(awakened)}%"
     def get_modifier(self, awakened):
         return Modifier(
             target="Healing",
