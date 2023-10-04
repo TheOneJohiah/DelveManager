@@ -96,7 +96,9 @@ class Awakened:
         # Now do the same for PercentStat accolades
         for accolade in self.accolades.values():
             if isinstance(accolade, PercentStats):  # Check if the accolade is a PercentStats accolade
-                self.percentAccolades[0] = [a + b for a, b in zip(self.percentAccolades[0], accolade.percentStats)]
+                num_active = accolade.numActive  # Get the number of active instances of this accolade
+                accolade_stats = [percentStat * num_active for percentStat in accolade.percentStats]  # Multiply accolade stats by numActive
+                self.percentAccolades[0] = [a + b for a, b in zip(self.percentAccolades[0], accolade_stats)]
 
         self.update_attributes()
     
@@ -385,6 +387,7 @@ class Awakened:
                     return True
                     #TODO: Implement random slotting if free slots remain after
             return True
+        self.update_buffs()
         return False  # Return False if toRemove is not in self.accolades or numActive is not greater than 0
 
     def swap_accolade(self, toAdd, toRemove):
