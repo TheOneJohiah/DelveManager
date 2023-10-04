@@ -19,7 +19,9 @@ t.add_skill(sk.Passive("Resistance Synergy","Allow synergistic cross-multiplicat
 t.add_equipment(eq.grand_allstat_ring)
 t.raise_attribute(3,20)
 t.printCharSheet()
-t.add_accolade(ac.lava_vents)
+t.add_accolade(ac.lava_vents,2)
+t.add_accolade(ac.skars_glorious_return,200)
+t.remove_accolade(ac.skars_glorious_return,195)
 
 print(t.accolades)
-print(t.used_accolade_slots)
+print(t.calculate_used_accolade_slots())
