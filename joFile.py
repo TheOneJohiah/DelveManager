@@ -672,7 +672,7 @@ micah.regen(24) #Morning of day 52
 micah.essence_exhange() #The next arc
 print("Back to town")
 
-micah.regen(24) #Morning of day 53
+"""micah.regen(24) #Morning of day 53
 micah.essence_exhange() #The next arc
 print("On our way to Doduo")
 
@@ -734,7 +734,7 @@ print("Travel")
 
 micah.regen(24) #Morning of day 68
 micah.essence_exhange()
-print("Arriving back at quillcaves")
+print("Arriving back at quillcaves")"""
 
 ## Add 28 days of training
 

@@ -536,10 +536,6 @@ henrik.regen(24) #Morning of day 51
 henrik.essence_exhange() #The next arc
 print("Delveday")
 
-henrik.regen(24) #Morning of day 52
-henrik.essence_exhange() #The next arc
-print("Dunno yet")
-
 
 henrik.update_vitals()
 henrik.update_free_attributes()

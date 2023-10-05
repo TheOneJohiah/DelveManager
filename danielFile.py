@@ -1157,7 +1157,7 @@ daniel.regen(24) #Morning of day 51
 daniel.essence_exhange() #The next arc
 print("Delveday")
 
-daniel.regen(24) #Morning of day 52
+"""daniel.regen(24) #Morning of day 52
 daniel.essence_exhange() #The next arc
 print("Back to town")
 
@@ -1187,7 +1187,7 @@ print("Travel")
 
 daniel.regen(24) #Morning of day 59
 daniel.essence_exhange() #The next arc
-print("Back at lair")
+print("Back at lair")"""
 
 printCompStats(daniel, skillWint, skillSpr, skillSum, skillFal, skillAmp, skillFoc, skillSyn, skillCom, 39)
 print(1 + skillSyn.rank*0.001*39)
