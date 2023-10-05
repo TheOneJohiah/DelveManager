@@ -34,7 +34,7 @@ grace.regen(9.6)
 grace.essence_exhange()
 grace.raise_attribute(4,30) #raise Focus by 30
 grace.unlock_tier("Restoration",1)
-#todo: add Tier-unlocks... & Total XP while you're at it.
+#TODO: add Tier-unlocks... & Total XP while you're at it.
 grace.cast_skill("Healing Word",4) #Healing Micah
 
 grace.add_skill(sk.natural_intuition)

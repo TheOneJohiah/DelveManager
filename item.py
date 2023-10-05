@@ -101,7 +101,7 @@ class Rune:
         self.slot_requirement = slot_requirement
 
     def deplete_charge(self, enchantments, amount):
-        ##Todo: if item has Capacitance rune, then deplete charge from it.
+        ##TODO: if item has Capacitance rune, then deplete charge from it.
         ##depletion amount for time passing on passive runes calculated outside this function
         ##if mana below 0, rune deactivates.
         return True

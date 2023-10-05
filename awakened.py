@@ -1,6 +1,7 @@
 import math
 from delve_Class import *
 from skill import *
+from accolade import *
 from item import *
 from copy import *
 from timeline import *
@@ -8,7 +9,6 @@ from jinja2 import Template;
 
 class Awakened:
     def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed,date=Moment('0936-06-03-12:00:00:000')):
-        # Health/stamina/mana regenned, 3: damage absorbed, 4: melee kills, 5: ranged kills, 6: magic kills
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
                                    "total SP regen":0,
@@ -29,6 +29,9 @@ class Awakened:
         self.attributes[5] = [0] * 9 # 5 = tolerance, [8] = general tolerance
         self.attributes[6] = [1] * 8 # 6 = synchronized
         self.accolades = {}
+        self.percentAccolades = [[]] * 2
+        self.percentAccolades[0] = [0]*8 # % for attributes
+        self.percentAccolades[1] = [0]*8 # % for resists
         self.vitals = vitals
         self.used_skill_points = 0
         self.level = level
@@ -75,15 +78,28 @@ class Awakened:
         self.resistances[5] = [0] * 8
         self.resistances[6] = [0] * 8
         self.resistances[7] = [0] * 8
+        self.percentAccolades[0] = [0] * 8  # Reset percentAccolades[0]
+
         #Update array column [4] with item attribute buffs
         for item in filter(None, list(self.inventory.values())):
             for rune in item.runes:
                 for enchant in rune.enchantments: #Add buffs to arrays
                     if hasattr(enchant,'attribute_buff'): self.attributes[4] = [sum(i) for i in zip(self.attributes[4],enchant.attribute_buff)]
                     if hasattr(enchant,'resistance_buff'): self.resistances[6] = [sum(i) for i in zip(self.resistances[6],enchant.resistance_buff)]
-        #Update array column [3] with accolade attribute buffs
         #Do something for spell buffs?
-        #for acc in self.accolades:
+        # Iterate through self.accolades and add their bonuses to self.attributes[3]
+        for accolade in self.accolades.values():
+            if isinstance(accolade, Stats):  # Check if the accolade is a Stats accolade
+                num_active = accolade.numActive  # Get the number of active instances of this accolade
+                accolade_stats = [stat * num_active for stat in accolade.stats]  # Multiply accolade stats by numActive
+                self.attributes[3] = [a + b for a, b in zip(self.attributes[3], accolade_stats)]
+        # Now do the same for PercentStat accolades
+        for accolade in self.accolades.values():
+            if isinstance(accolade, PercentStats):  # Check if the accolade is a PercentStats accolade
+                num_active = accolade.numActive  # Get the number of active instances of this accolade
+                accolade_stats = [percentStat * num_active for percentStat in accolade.percentStats]  # Multiply accolade stats by numActive
+                self.percentAccolades[0] = [a + b for a, b in zip(self.percentAccolades[0], accolade_stats)]
+
         self.update_attributes()
     
     def initialize_trees(self):
@@ -125,40 +141,50 @@ class Awakened:
     
     def update_free_attributes(self): self.free_attributes = 90 + (self.level * 10) - sum(self.attributes[2])
 
-    def max_skill_points(self): return self.level + 1
+    def max_level_points(self): return self.level + 1
     
     def calculate_used_skill_points(self): return len(self.skills)
     
-    def calculate_free_skill_points(self): return self.max_skill_points() - self.calculate_used_skill_points()
+    def calculate_free_skill_points(self): return self.max_level_points() - self.calculate_used_skill_points()
+
+    def calculate_used_accolade_slots(self):
+        used_slots = 0
+        
+        for accolade in self.accolades.values():
+            used_slots += accolade.rank * accolade.numActive
+
+        return used_slots
+
+    def calculate_free_accolade_slots(self): return self.max_level_points() - self.calculate_used_accolade_slots()
 
     def calculate_health_cap(self):
         base_health = self.attributes[1][0] * 20
-        health_multiplier = 100 + self.character_class.attribute_effect[0]
+        health_multiplier = 100 + self.character_class.attribute_effect[0] + self.percentAccolades[0][0]
         health_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Strength")
         return base_health * health_multiplier / 10000
 
     def calculate_health_regen(self):
         base_health_regen = self.attributes[1][1] * 10
-        health_regen_multiplier = 100 + self.character_class.attribute_effect[1]
+        health_regen_multiplier = 100 + self.character_class.attribute_effect[1] + self.percentAccolades[0][1]
         health_regen_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Recovery")
         return base_health_regen * health_regen_multiplier / 10000
 
     def calculate_stamina_cap(self):
         base_stamina = self.attributes[1][2] * 20
-        stamina_multiplier = 100 + self.character_class.attribute_effect[2]
+        stamina_multiplier = 100 + self.character_class.attribute_effect[2] + self.percentAccolades[0][2]
         stamina_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Endurance")
         return base_stamina * stamina_multiplier / 10000
     
     def calculate_stamina_regen(self):
         base_stamina_regen = self.attributes[1][3] * 10
-        stamina_regen_multiplier = 100 + self.character_class.attribute_effect[3]
+        stamina_regen_multiplier = 100 + self.character_class.attribute_effect[3] + self.percentAccolades[0][3]
         stamina_regen_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Vigor")
         return base_stamina_regen * stamina_regen_multiplier / 10000
 
     def calculate_mana_cap(self):
         synergy_mana = 0
         base_mana_cap = self.attributes[1][4] * 20
-        mana_cap_multiplier = 100 + self.character_class.attribute_effect[4]
+        mana_cap_multiplier = 100 + self.character_class.attribute_effect[4] + self.percentAccolades[0][4]
 
         # Calculate the multiplicative effect based on the skill's rank
         mana_cap_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Focus")  # 20% increase per rank
@@ -171,7 +197,7 @@ class Awakened:
     def calculate_mana_regen(self):
         synergy_mana = 0
         base_mana_regen = self.attributes[1][5] * 10
-        mana_regen_multiplier = 100 + self.character_class.attribute_effect[5]
+        mana_regen_multiplier = 100 + self.character_class.attribute_effect[5] + self.percentAccolades[0][5]
 
         mana_regen_multiplier *= 100 + 20*self.get_skill_rank("Intrinsic Clarity")  # 20% increase per rank
         synergy_effect = self.get_skill_power("Magical Synergy")
@@ -358,6 +384,59 @@ class Awakened:
         self.experience -= cost
         self.trees[tree].unlock(tier)
 
+    def add_accolade(self, accolade, count):
+        free_slots = self.calculate_free_accolade_slots()
+
+        # Check if the accolade already exists in self.accolades
+        if accolade.name in self.accolades:
+            self.accolades[accolade.name].numStored += count  # Increase numStored by one
+        else:
+            accolade.numStored = count  # Initialize numStored to 1 if it doesn't exist
+            self.accolades[accolade.name] = accolade  # Add the accolade to self.accolades
+
+        if free_slots > accolade.rank:
+            # Equip automatically, free slots available
+            self.activate_accolade(accolade, count, free_slots)
+
+        self.update_buffs()
+        return True
+    
+    def activate_accolade(self, accolade, count, free_slots):
+        if accolade.name in self.accolades and self.accolades[accolade.name].numActive < self.accolades[accolade.name].numStored and free_slots >= accolade.rank:
+            count = min(count, free_slots // accolade.rank)
+            new_active = min(count, self.accolades[accolade.name].numStored - self.accolades[accolade.name].numActive) #Make sure not to activate more than stored
+            self.accolades[accolade.name].numActive += new_active  # Increase numActive for the specified accolade
+            return True
+        else:
+            return False  # Return False if the accolade doesn't exist in self.accolades or all are active already or free slots are insufficient
+    
+    def remove_accolade(self, toRemove, outCount, toAdd=None, inCount=0):
+        if toRemove.name in self.accolades and self.accolades[toRemove.name].numActive > 0:
+            if outCount >= self.accolades[toRemove.name].numStored:
+                # Remove the accolade entirely if outCount is greater than or equal to numStored
+                del self.accolades[toRemove.name]
+            else:
+                # Reduce numActive to numStored if outCount is less than numStored
+                self.accolades[toRemove.name].numStored = self.accolades[toRemove.name].numStored - outCount
+                if self.accolades[toRemove.name].numStored < self.accolades[toRemove.name].numActive:
+                    self.accolades[toRemove.name].numActive = self.accolades[toRemove.name].numStored
+
+            # Autoslot a new accolade if toAdd is not empty and there are any unbound accolades
+            if toAdd and inCount > 0:
+                free_slots = self.calculate_free_accolade_slots()
+                if free_slots >= toAdd.rank:
+                    self.activate_accolade(toAdd, inCount, free_slots)
+                elif free_slots > 0:
+                    return True
+                    #TODO: Implement random slotting if free slots remain after
+            return True
+        self.update_buffs()
+        return False  # Return False if toRemove is not in self.accolades or numActive is not greater than 0
+
+    def swap_accolade(self, toAdd, toRemove):
+
+        return True
+    
     def set_class(self, character_class):
         if not self.level in [5,25,50,75]:
             print(f"{self.name} not at a class selection level!")   

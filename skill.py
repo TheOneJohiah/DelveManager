@@ -27,7 +27,7 @@ class Tree:
         self.tiers = {0:Tier(0),1:Tier(1),2:Tier(2),3:Tier(3),4:Tier(4)}
         self.tiers[0].lock = False
 
-    #def count_ranks(self): return 0 #todo: implement? or keep as Awakened method?
+    #def count_ranks(self): return 0 #TODO: implement? or keep as Awakened method?
     
     def unlock(self, tier): self.tiers[tier].lock = False
 
