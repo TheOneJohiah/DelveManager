@@ -1,10 +1,9 @@
-import awakened as aw;
-import delve_Class as dc;
-import skill as sk;
+import awakened as aw, delve_Class as dc, skill as sk, timeline as tl
 
 #Purify>Winter>Amplify Aura>Intrinsic Clarity>Extend Aura>Aura Focus
 
 daniel = aw.Awakened(name='Daniel',attributes = [10, 10, 10, 10, 10, 10, 10, 10], level = 5, level_cap=12)
+daniel.date = daniel.date.plus(tl.Duration(int(50.5*86400000)))
 daniel.set_class(dc.dynamo)
 daniel.add_experience(200000)
 daniel.unlock_tier("Utility Auras",1)
