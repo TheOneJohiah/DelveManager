@@ -1,6 +1,7 @@
 import awakened as aw
 import delve_Class as dc
 import item as item
+import accolade as acc
 import skill as sk
 from timeline import *
 
@@ -34,7 +35,6 @@ grace.regen(9.6)
 grace.essence_exhange()
 grace.raise_attribute(4,30) #raise Focus by 30
 grace.unlock_tier("Restoration",1)
-#TODO: add Tier-unlocks... & Total XP while you're at it.
 grace.cast_skill("Healing Word",4) #Healing Micah
 
 grace.add_skill(sk.natural_intuition)
@@ -278,7 +278,7 @@ grace.unlock_tier("Armor Crafting",1)
 grace.unlock_tier("Weapon Crafting",1)
 grace.unlock_tier("Artificing",1)
 grace.unlock_tier("Arcane Shifter",1)
-grace.attributes[3][3] = 50
+grace.add_accolade(acc.flamewillow_grove,5)
 grace.update_attributes()
 grace.cast_skill("Congeal",1)
 grace.cast_skill("Cleave Fibers",20)
@@ -1561,6 +1561,7 @@ grace.regen(16)
 print("Day 65")
 grace.regen(8,[0,0,834])
 grace.essence_exhange()
+grace.regen(16,[0,380,0])
 
 #66
 print("Day 66")
@@ -1583,17 +1584,32 @@ grace.essence_exhange()
 grace.regen(16,[0,380,0])
 
 # To day 96!
+def test():
+    print("XP:",grace.experience)
+    for sk in ["Healing Word","Cleave Fibers","Purge Poison","Congeal","Dissolve","Tissue Scan","Alchemic Intuition"]:
+        print(sk,": R",grace.get_skill_rank(sk),"XP:",grace.get_skill_xp(sk))
+    if grace.level>=15 and grace.free_attributes>0: grace.raise_attribute(0,10)
+
 grace.train_days(28,
-                 ["Healing Word","Cleave Fibers","Purge Poison","Congeal"],
+                 ["Purge Poison","Congeal"],
                  [0,38,750],
                  sleepmod=[0,0,834],
-                 nextskills=[sk.runes_of_living_enhancement(),sk.runes_of_item_enhancement(),sk.runes_of_complexity(),sk.healing_affinity(),sk.dissolve()],
-                 stats=[0,0,0,0,50,10]
+                 nextskills=[
+                     sk.dissolve(),
+                     sk.tissue_scan,
+                     sk.alchemic_intuition,
+                     sk.runes_of_living_enhancement(),
+                     sk.runes_of_item_enhancement(),
+                     sk.runes_of_complexity(),
+                     #sk.stabilize
+                 ],
+                 stats=[0,0,0,0,50,10],
+                 cb=test
                 )
 tel += 498
 
-#Day 96
-print("Day 96")
+#Day 97
+print("Day 97")
 grace.regen(8,[0,0,834])
 grace.essence_exhange()
 

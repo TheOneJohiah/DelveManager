@@ -241,29 +241,29 @@ class Awakened:
 
     def bank_experience(self, xp): self.banked_xp += xp
 
-    def reduce_vital(self, type, amount):
-        self.add_statistics("total "+type+" spent",amount) 
+    def reduce_vital(self, vital, amount):
+        self.add_statistics("total "+vital+" spent",amount) 
         underV = 0
-        if type == "HP": type = 0
-        elif type == "SP": type = 1
-        elif type == "MP": type = 2
+        if vital == "HP": vital = 0
+        elif vital == "SP": vital = 1
+        elif vital == "MP": vital = 2
         #else: print(type+" is not a vital, goof")
-        
+
         self.bank_experience(.5*amount)
-        if amount > self.currVitals[type]:
-            underV = self.currVitals[type] - amount #Undervital
-            self.currVitals[type] = 0
-            print(str(underV) + ["HP","SP","MP"][type])
+        if amount > self.currVitals[vital]:
+            underV = self.currVitals[vital] - amount #Undervital
+            self.currVitals[vital] = 0
+            print(str(underV) + ["HP","SP","MP"][vital])
         else:
-            self.currVitals[type] -= amount
+            self.currVitals[vital] -= amount
         
-        if type == 0:
+        if vital == 0:
             for passive in ["Intrinsic Resistance","Turtle Skin","Intrinsic Strength","Intrinsic Recovery"]:
                 if passive in self.skills: self.bank_skill_exp(passive, .5*amount)
-        if type == 1:
+        if vital == 1:
             for passive in ["Strength of Arm","Intrinsic Endurance","Intrinsic Vigor"]:
                 if passive in self.skills: self.bank_skill_exp(passive, .5*amount)
-        if type == 2:
+        if vital == 2:
             for passive in ["Intrinsic Clarity","Intrinsic Focus","Magical Synergy"]:
                 if passive in self.skills: self.bank_skill_exp(passive, .5*amount)
 
@@ -297,6 +297,7 @@ class Awakened:
         for x in range(3):
             vp_skills = [hp_skills,sp_skills,mp_skills][x]
             vp_skills.sort(key=(lambda c: self.skills[c].cost['value']),reverse=True)
+            print("V",x,len(vp_skills))
             t = ["HP","SP","MP"][x]
             # Regen
             regN = time*self.vitals[2*x + 1]*(1 + .01*mods[x])
@@ -308,12 +309,14 @@ class Awakened:
             self.reduce_vital(t,spending[x])
             
             #dealing with skills
-            for s in vp_skills:
-                self.cast_skill(s,math.floor(self.currVitals[x]/(len(vp_skills)*self.skills[s].get_cost()['value'])))
+            for sk in vp_skills:
+                times = min(hours*3600/self.get_skill_duration(sk),math.floor(self.currVitals[x]/(len(vp_skills)*self.get_skill_cost(sk,1)['value'])))
+                print(sk,":",times,self.get_skill_cost(sk,1)['value']*times,self.get_skill_cost(sk,1)['type'])
+                self.cast_skill(sk,times)
 
         self.date = self.date.plus(Duration(int(hours*3600000)))
     
-    def train_days(self,days,skills,mods=[0,0,0],dayspending=[0,0,0],sleepmod=[0,0,0],nextskills=[],stats=[0,0,0,0,0,0]):
+    def train_days(self,days,skills,mods=[0,0,0],dayspending=[0,0,0],sleepmod=[0,0,0],nextskills=[],stats=[0,0,0,0,0,0],cb=None):
         for day in range(days):
             print(f"Day {int(Moment('0936-06-03-12:00:00:000').to(self.date).length.in_days()+.5)}")
             self.regen(8,sleepmod)
@@ -330,15 +333,20 @@ class Awakened:
                 stats = list(map(lambda x: max(0,x - inc),stats))
             skills = list(filter(lambda s: not self.skills[s].cap==self.skills[s].rank,skills)) #remove maxxed skills 
             self.train(16,skills,mods,dayspending)
+            if callable(cb): cb()
     
-    def update_level_cap(self, newLevel):
-        self.level_cap = newLevel
+    def update_level_cap(self, newLevel): self.level_cap = newLevel
 
-    def count_skills_in_tree(self, tree_name):
-        return sum(1 for skill in self.skills if skill.tree == tree_name)
+    def count_skills_in_tree(self, tree_name): return sum(1 for skill in self.skills if skill.tree == tree_name)
 
     def get_modifiers(self,targets):
         return 0
+    
+    def get_skill_duration(self,skillN):
+        if hasattr(self.skills[skillN],'get_duration'): return self.skills[skillN].get_duration(self)
+        else: return 1
+
+    def get_skill_cost(self,skillN,n): return self.skills[skillN].get_cost(self,n)
     
     def get_skill_rank(self, skillN):
         if skillN in self.skills: return self.skills[skillN].rank
@@ -348,8 +356,12 @@ class Awakened:
         if skillN in self.skills: return self.skills[skillN].get_power(self)
         else: return 0
 
+    def get_skill_xp(self, skillN):
+        if skillN in self.skills: return self.skills[skillN].xp
+        else: return 0
+
     def add_skill(self, skill, starting_level=1):
-        if self.trees[skill.tree].tiers[skill.tier].lock: print("Tree not unlocked!"); return False
+        if self.trees[skill.tree].tiers[skill.tier].lock: print(f"{skill.tree} Tier {skill.tier} not unlocked!"); return False
         if skill.name in self.skills: print("Skill already aquired!"); return False
                 
         self.skills.update({skill.name:skill})
@@ -367,17 +379,17 @@ class Awakened:
                 skill.cap = 10 + self.character_class.tree_effect[skill.tree]
     
     def bank_skill_exp (self, skillN, xp): self.skills[skillN].bank_exp(xp) #redirect to skill method
+    
     def add_skill_exp (self, skillN): self.skills[skillN].add_exp() #redirect to skill method
 
     def cast_skill (self, skillN, n):
-        skill = self.skills[skillN]
-        cost = skill.get_cost()
-        underV = self.reduce_vital(cost['type'],cost['value']*n)
-        skill.bank_exp(.5*(n*cost['value'] - underV))
+        cost = self.get_skill_cost(skillN,n)
+        underV = self.reduce_vital(cost['type'],cost['value'])
+        self.bank_skill_exp(skillN,.5*(cost['value'] - underV))
     
     def unlock_tier(self,tree,tier):
         if not self.trees[tree].tiers[tier].lock: print(f"{tree} already unlocked!"); return False
-        if self.trees[tree].tiers[max(0,tier-1)].lock: print(f"Unlock {tree} tier {tier-1} first!"); return False
+        if self.trees[tree].tiers[tier-1].lock: print(f"Unlock {tree} tier {tier-1} first!"); return False
         cost = 10**(tier+1)
         if self.experience < cost: print(f"Not enough experience for {tree}!"); return False
 
@@ -667,7 +679,10 @@ class Awakened:
 
                     trees = self.genSkillList(),
 
-                    Items = filter(None,list(self.inventory.values()))
+                    Items = filter(None,list(self.inventory.values())),
+
+                    totAccAct = self.calculate_used_accolade_slots(),
+                    accolades = list(self.accolades.values()),
             ))
 
         sheet.close()
