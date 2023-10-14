@@ -51,6 +51,7 @@
             --RE: #f64;
             --NW: #cf0;
             --CH: var(--chemical);
+            --AL: #9f0;
             --RU: var(--mp);
         }
 
@@ -97,6 +98,7 @@
         .Restoration {--TR: var(--RE);}
         .Natureworking {--TR: var(--NW);}
         .Chemistry {--TR: var(--CH);}
+        .Alchemy {--TR: var(--AL);}
         .Runecrafting {--TR: var(--RU);}
         .alt table.Tree {color: var(--TR); --fg: var(--TR);}
         
@@ -232,7 +234,7 @@
                 <td><table>
                 {% for skill in tier.skills.values() %}
                     <tr><td><h5>{{skill.name}} ({{skill.rank + skill.rank_bonus}}/{{skill.cap}}) {% if not skill.rank == skill.cap %} (Exp: {{skill.xp}}/{{ skill.getNextRankXP() }}) {% endif %}</h5>
-                    {{skill.describe(aw)}}</td></tr>
+                    {{skill.describe()}}</td></tr>
                 {% endfor %}
             </table></td></tr>
             {% endfor %}

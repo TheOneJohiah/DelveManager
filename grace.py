@@ -1601,6 +1601,7 @@ grace.train_days(28,
                      sk.runes_of_living_enhancement(),
                      sk.runes_of_item_enhancement(),
                      sk.runes_of_complexity(),
+                     #sk.regeneration
                      #sk.stabilize
                  ],
                  stats=[0,0,0,0,50,10],
@@ -1611,8 +1612,12 @@ tel += 498
 #Day 97
 print("Day 97")
 grace.regen(8,[0,0,834])
+#grace.bank_skill_exp("Steady Scribing",12900)
+#grace.bank_skill_exp("Runes of Defense",25800)
+#grace.bank_skill_exp("Runes of Living Enhancement",25800)
+#grace.bank_skill_exp("Runes of Item Enhancement",25800)
+#grace.bank_skill_exp("Runes of Complexity",25800)
 grace.essence_exhange()
-
 timeInt = Moment('0936-06-03-12:00:00:000').to(grace.date)
 #printPotTrees(3)
 print("\nTel:",tel,

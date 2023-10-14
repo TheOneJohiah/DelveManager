@@ -31,7 +31,7 @@ class Stats(Accolade):
     def describe(self):
         desc = ""
         for v in range(8):
-            if self.stats[v]>0: desc += f'+{self.stats[v]*self.numActive} {["Strength","Recovery","Endurance","Vigor","Focus","Clarity","Perception","Speed"][v]}'
+            if self.stats[v]>0: desc += f'+{self.stats[v]*self.numActive} {["Strength","Recovery","Endurance","Vigor","Focus","Clarity","Perception","Speed"][v]}<br>'
         return desc
 
 # % Stat accolade
@@ -45,7 +45,7 @@ class PercentStats(Accolade):
     def describe(self):
         desc = ""
         for v in range(8):
-            if self.percentStats[v]>0: desc += f'+{self.percentStats[v]*self.numActive}% boost to the effects {["Strength","Recovery","Endurance","Vigor","Focus","Clarity","Perception","Speed"][v]}'
+            if self.percentStats[v]>0: desc += f'+{self.percentStats[v]*self.numActive}% boost to the effects {["Strength","Recovery","Endurance","Vigor","Focus","Clarity","Perception","Speed"][v]}<br>'
         return desc
 
 # Resist accolade
@@ -59,7 +59,7 @@ class Resists(Accolade):
     def describe(self):
         desc = ""
         for v in range(8):
-            if self.resists[v]>0: desc += f'+{self.resists[v]*self.numActive} {["Heat","Cold","Light","Dark","Force","Arcane","Chemical","Mental"][v]} Resistance'
+            if self.resists[v]>0: desc += f'+{self.resists[v]*self.numActive} {["Heat","Cold","Light","Dark","Force","Arcane","Chemical","Mental"][v]} Resistance<br>'
         return desc
 
 # Skill accolade

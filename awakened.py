@@ -57,6 +57,7 @@ class Awakened:
         self.resistances[5] = [0] * 8 #accolade percent
         self.resistances[6] = [0] * 8 #misc flat
         self.resistances[7] = [0] * 8 #misc percent
+        self.mods = {}
         self.update_free_attributes()
         self.update_attributes()  # Initialize attributes when the character is created
         self.calculate_resistances()
@@ -339,21 +340,34 @@ class Awakened:
 
     def count_skills_in_tree(self, tree_name): return sum(1 for skill in self.skills if skill.tree == tree_name)
 
-    def get_modifiers(self,targets):
-        return 0
+    def add_mods(self,source,mod): self.mods[source] = mod
+    
+    def get_mods(self,targets):
+        modifier = Modifier(targets,1,0,1,0,1,0,1,0)
+        for mod in filter(lambda m: m.target in targets,list(self.mods.values())):
+            modifier.power_buff    *= 1 + .01*mod.power_buff    
+            modifier.power_flat    += mod.power_flat    
+            modifier.range_buff    *= 1 + .01*mod.range_buff    
+            modifier.range_flat    += mod.range_flat    
+            modifier.duration_buff *= 1 + .01*mod.duration_buff 
+            modifier.duration_flat += mod.duration_flat 
+            modifier.cost_buff     *= 1 + .01*mod.cost_buff     
+            modifier.cost_flat     += mod.cost_flat    
+        print(targets,modifier.power_buff)
+        return modifier
     
     def get_skill_duration(self,skillN):
-        if hasattr(self.skills[skillN],'get_duration'): return self.skills[skillN].get_duration(self)
+        if hasattr(self.skills[skillN],'get_duration'): return self.skills[skillN].get_duration()
         else: return 1
 
-    def get_skill_cost(self,skillN,n): return self.skills[skillN].get_cost(self,n)
+    def get_skill_cost(self,skillN,n): return self.skills[skillN].get_cost(n)
     
     def get_skill_rank(self, skillN):
         if skillN in self.skills: return self.skills[skillN].rank
         else: return 0
     
     def get_skill_power(self, skillN):
-        if skillN in self.skills: return self.skills[skillN].get_power(self)
+        if skillN in self.skills: return self.skills[skillN].get_power()
         else: return 0
 
     def get_skill_xp(self, skillN):
@@ -368,8 +382,10 @@ class Awakened:
         self.trees[skill.tree].tiers[skill.tier].skills.append(skill.name)
         self.update_vitals()
         self.used_skill_points = self.calculate_used_skill_points()
+        skill.awakened = self
         skill.rank = starting_level
         skill.cap = 10 + self.trees[skill.tree].bonus
+        skill.on_level_up()
         return True
         
     def update_skill_caps (self):
@@ -454,17 +470,18 @@ class Awakened:
             print(f"{self.name} not at a class selection level!")   
             return False 
     
-        if character_class.meets_requirements(self):
-            self.character_class = character_class
-            print(f"Class '{character_class.name}' assigned successfully")
-
-            # Update tree effects based on the assigned class
-            for tree, bonus in character_class.tree_effect.items(): self.trees[tree].bonus = bonus
-            self.update_skill_caps()
-            #self.update_attributes()
-            self.update_vitals()
-        else:
+        if not character_class.meets_requirements(self): 
             print(f"{self.name} does not meet the requirements for class '{character_class.name}'")
+            return False
+        
+        self.character_class = character_class
+        print(f"Class '{character_class.name}' assigned successfully")
+
+        # Update tree effects based on the assigned class
+        for tree, bonus in character_class.tree_effect.items(): self.trees[tree].bonus = bonus
+        self.update_skill_caps()
+        #self.update_attributes()
+        self.update_vitals()
 
     def calculate_required_experience(self):
         if self.character_class is None or self.level < 5 or self.character_class.rarity in ["Common", "Uncommon"]:
