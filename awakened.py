@@ -494,10 +494,11 @@ class Awakened:
 
     def add_experience(self, amount):
         amount = int(amount)
-        self.total_xp += amount
         current_exp = self.experience  # You should have a variable for tracking the character's experience
         required_exp = self.calculate_required_experience()
 
+        self.total_xp -= current_exp
+        
         new_exp = current_exp + amount
 
         if new_exp >= required_exp:
@@ -506,12 +507,15 @@ class Awakened:
                 if self.level == 5 and self.character_class == unclassed or self.level == 25 or self.level == self.level_cap:
                     max_exp = required_exp - 1
                     new_exp = min(new_exp, max_exp)
+                    self.total_xp += new_exp
                     self.experience = new_exp
                     return True
                 new_exp -= required_exp
+                self.total_xp += required_exp
                 self.level_up()
                 required_exp = self.calculate_required_experience()
 
+        self.total_xp += new_exp
         self.experience = new_exp
 
     def add_statistics(self, location, amount):
