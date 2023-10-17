@@ -38,14 +38,16 @@ class Tree:
 class Skill:
     def __init__(self, name, description, tier, tree, cast_time=1, keywords=[]):
         self.name = name
-        self.keywords = []
-        self.keywords.extend(keywords)
         self.awakened = None
         self.rank_bonus = 0
         self.description = description
         self.tier = tier
         self.tree = tree
         self.cast_time = cast_time
+        self.keywords = []
+        self.keywords.extend(keywords)
+        self.keywords.append(self.tree)
+        self.keywords.append(self.name)
         self.rank = 1  # Initial rank is 1
         self.cap = 10 # Starting cap for all skills is 10
         self.xp = 0 # starting xp for all skills is 0
@@ -113,7 +115,7 @@ class Instant(Skill):
         self.keywords.append('Instant')
         self.cost = cost
     
-    def get_cost(self,n=1): return  {'type': self.cost['type'],'value': self.cost['value']*n}
+    def get_cost(self,n=1): return  {'type': self.cost['type'],'value': self.cost['value']*n*self.awakened.get_mods(self.keywords).cost_buff}
 
 class Evocation(Instant):
     def __init__(self, name, description, tier, tree, cost={'type': "",'value': 0},cast_time=1,keywords=[]):
@@ -126,7 +128,7 @@ class Sustain(Instant):
         self.baseCost = baseCost
         self.keywords.append('Sustain')
 
-    def get_cost(self,n=1): return {'type': self.cost['type'],'value': self.baseCost + self.cost['value']*n}
+    def get_cost(self,n=1): return {'type': self.cost['type'],'value': self.baseCost + self.cost['value']*n*self.awakened.get_mods(self.keywords).cost_buff}
 
 class Buff(Skill):
     def __init__(self, name, description, tier, tree, keywords=[]):
@@ -139,13 +141,13 @@ class Channel(Skill):
         self.cost = cost
         self.keywords.append('Channel')
 
-    def get_cost(self,n=1): return {'type': self.cost['type'],'value': self.cost['value']*n}
+    def get_cost(self,n=1): return {'type': self.cost['type'],'value': self.cost['value']*n*self.awakened.get_mods(self.keywords).cost_buff}
 
 class Aura(Channel):
     def __init__(self, name, description, tier, tree, cost={ 'type': "",'value': 0 }, keywords=[]):
         super().__init__(name, description, tier, tree, cost, keywords)
 
-    def get_range(self): return self.rank * 1
+    def get_range(self): return self.rank *self.awakened.get_mods(self.keywords).power_buff
 
     def get_cost(self,n=1): return {'type': self.cost['type'],'value': self.rank*self.cost['value']*n}
 
@@ -154,7 +156,7 @@ class intrinsic_strength(Passive):
     def __init__(self):
         super().__init__("Intrinsic Strength","Multiply maximum Health by 1+(RNK/5)",0,"Physical Utility",keywords=[])
     
-    def get_power(self): return 20*self.rank
+    def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost maximum Health by {self.get_power()}%"
     def get_modifier(self): return None
 
@@ -162,7 +164,7 @@ class intrinsic_recovery(Passive):
     def __init__(self):
         super().__init__("Intrinsic Recovery","Multiply Health regen by 1+(RNK/5)",0,"Physical Utility",keywords=[])
 
-    def get_power(self): return 20*self.rank
+    def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost Health regen by {self.get_power()}%"
     def get_modifier(self): return None
 
@@ -170,7 +172,7 @@ class intrinsic_endurance(Passive):
     def __init__(self):
         super().__init__("Intrinsic Endurance","Multiply maximum Stamina by 1+(RNK/5)",0,"Physical Utility",keywords=[])
     
-    def get_power(self): return 20*self.rank
+    def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost maximum Stamina by {self.get_power()}%"
     def get_modifier(self): return None
 
@@ -178,7 +180,7 @@ class intrinsic_vigor(Passive):
     def __init__(self):
         super().__init__("Intrinsic Vigor","Multiply mana Stamina by 1+(RNK/5)",0,"Physical Utility",keywords=[])
 
-    def get_power(self): return 20*self.rank
+    def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Multiply mana Stamina by {self.get_power()}%"
     def get_modifier(self): return None
 
@@ -191,7 +193,7 @@ class intrinsic_focus(Passive):
     def __init__(self):
         super().__init__("Intrinsic Focus","Multiply maximum Mana by 1+(RNK/5)",0,"Magical Utility",keywords=[])
     
-    def get_power(self): return 20*self.rank
+    def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost maximum Mana by {self.get_power()}%"
     def get_modifier(self): return None
 
@@ -199,7 +201,7 @@ class intrinsic_clarity(Passive):
     def __init__(self):
         super().__init__("Intrinsic Clarity","Multiply Mana regen by 1+(RNK/5)",0,"Magical Utility",keywords=[])
 
-    def get_power(self): return 20*self.rank
+    def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost Mana regen by {self.get_power()}%"
     def get_modifier(self): return None
 
@@ -207,7 +209,7 @@ class magical_synergy(Passive):
     def __init__(self):
         super().__init__("Magical Synergy","Enables limited synergistic cross-coupling of magical attributes <br> [2.5%*RNK] of Focus contributes to M.Regen <br> [2.5%*RNK] of Clarity contributes to Mana <br> Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus",2,"Magical Utility")
         
-    def get_power(self): return 2.5*self.rank
+    def get_power(self): return 2.5*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Enables limited synergistic cross-coupling of magical attributes <br> {self.get_power()}% of Focus contributes to M.Regen <br> {self.get_power()}% of Clarity contributes to Mana <br> Requires 10 ranks in Intrinsic Clarity <br> Requires 10 ranks in Intrinsic Focus"
 
 # Restoration
@@ -216,7 +218,7 @@ class healing_word(Instant):
         super().__init__("Healing Word","Invoke a word of healing to restore health to a touched entity <br> Heal [10-20]*[RNK]*[1 + .005*FCS] hp <br> Cost: 10mp <br> Cannot Heal Self",0,"Restoration",cost={'type':"MP",'value':10},keywords=["Non-Combat","Healing"])
     
     def get_cost(self, n=1): return super().get_cost(n)
-    def get_power(self): return 15*self.rank*(1 + .00005*self.awakened.attributes[1][4]*(100 + self.awakened.character_class.attribute_effect[4] + self.awakened.percentAccolades[0][4]))*(1 + self.awakened.get_skill_power("Healing Affinity")/100)
+    def get_power(self): return 15*self.rank*(1 + .00005*self.awakened.attributes[1][4]*(100 + self.awakened.character_class.attribute_effect[4] + self.awakened.percentAccolades[0][4]))*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return "Invoke a word of healing to restore health to a touched entity <br> Heal "+str(round(self.get_power()/1.5,2))+"-"+str(round(self.get_power()/.75,2))+" hp <br> Cost: 10mp <br> Cannot Heal Self"
 
 stamina_transfer = Skill("Stamina Transfer","Sacrifice a portion of your stamina to energize a touched entity <br> Gives: [20*RNK] sp <br> Cost: [40*RNK] sp",0,"Restoration")
@@ -225,7 +227,7 @@ class purge_poison(Instant):
     def __init__(self):
         super().__init__("Purge Poison","Weaken and destroy poisons and toxins (fcs) <br> Reduce Chemical Effect damage by [20*RNK*(1 + .01*FCS)] <br> Range: Touch<br> Cost: 20mp <br> If damage is reduced to 0, the Effect is ended",1,"Restoration",cost={'type':"MP",'value':20},keywords=["Non-Combat","Healing"])
 
-    def get_power(self): return 20*self.rank*(1 + .0001*self.awakened.attributes[1][4]*(100 + self.awakened.character_class.attribute_effect[4] + self.awakened.percentAccolades[0][4]))*(1 + self.awakened.get_skill_power("Healing Affinity")/100)
+    def get_power(self): return 20*self.rank*(1 + .0001*self.awakened.attributes[1][4]*(100 + self.awakened.character_class.attribute_effect[4] + self.awakened.percentAccolades[0][4]))*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return "Weaken and destroy poisons and toxins (fcs) <br> Reduce Chemical Effect damage by "+str(round(self.get_power(),2))+" <br> Range: Touch<br> Cost: 20mp <br> If damage is reduced to 0, the Effect is ended"
 
 regeneration = Skill("Regeneration","Instill a font of life within a target that slowly restores them (fcs) <br> Target recovers (1 + .01*FCS) health every second <br> Range: Touch<br> Cost: 50mp <br> Duration: .5*RNK m",1,"Restoration")
@@ -234,7 +236,7 @@ class healing_affinity(Passive):
     def __init__(self):
         super().__init__("Healing Affinity","Multiply intensity of healing skills by [1+0.1*RNK] <br> Requires 10 ranks in Restoration",1,"Restoration",Modifier(target="Healing"),keywords=["Non-Combat"])
 
-    def get_power(self): return 10*self.rank
+    def get_power(self): return 10*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost intensity of healing skills by {self.get_power()}%"
     def get_modifier(self):
         return Modifier(
@@ -244,7 +246,12 @@ class healing_affinity(Passive):
 
 healers_synergy = Skill("Healers Synergy","Multiply intensity of healing skills by [1+0.002*RNK*restoration_ranks] <br> Requires 50 ranks in Restoration",2,"Restoration")
 
-tissue_scan = Instant("Tissue Scan","Scan the body of a touched entity. <br> Resolution of resulting scan is equal to: [200 + 20*RNK] % of mundane optical vision <br> Cost: 5mp",2,"Restoration",cost={ 'type': "MP",'value': 5 })
+class tissue_scan(Instant):
+    def __init__(self):
+        super().__init__("Tissue Scan","Scan the body of a touched entity. <br> Resolution of resulting scan is equal to: [200 + 20*RNK] % of mundane optical vision <br> Cost: 5mp",2,"Restoration",cost={ 'type': "MP",'value': 5 })
+    
+    def describe(self):
+        return f"Scan the body of a touched entity. <br> Resolution of resulting scan is equal to: {200 + 20*self.rank*self.awakened.get_mods(self.keywords).power_buff}% of mundane optical vision <br> Cost: {self.get_cost()['value']}mp"
 
 # Natureworking
 natural_intuition = Skill("Natural Intuition","Develop an intuitive understanding of the mechanics of fibres <br> Higher ranks mean greater insight",0,"Natureworking")
@@ -253,8 +260,8 @@ class cleave_fibers(Instant):
     def __init__(self):
         super().__init__("Cleave Fibers", "Manipulate the bonds between fibers, binding them together or cutting them apart. <br> Alter volume of [10*RNK]^3 cm<sup>3</sup> <br> Cost: 5*RNK mp",0,"Natureworking",cost={'type':"MP",'value':5},keywords=["Non-Combat"])
 
-    def get_power(self): return 1000 * self.rank**3
-    def get_cost(self,n): return {'type':"MP",'value':5*n*self.rank}
+    def get_power(self): return 1000 * (self.rank*self.awakened.get_mods(self.keywords).power_buff)**3
+    def get_cost(self,n): return {'type':"MP",'value':5*n*self.rank*self.awakened.get_mods(self.keywords).cost_buff}
     def describe(self): return f"Manipulate the bonds between fibers, binding them together or cutting them apart. <br> Alter volume of {self.get_power()} cm<sup>3</sup> <br> Cost: {self.get_cost(1)['value']} mp"
 
 # Chemistry
@@ -264,7 +271,7 @@ class dissolve(Instant):
     def __init__(self):
         super().__init__("Dissolve","Dissolve a material into a solvent <br> Rate: 600/RNK s/m<sup>3</sup> <br> cost: 20*RNK sp",0,"Chemistry",cost={'type': "SP", 'value': 20},keywords=["Non-Combat","Chemistry"])
 
-    def get_power(self): return 600/self.rank
+    def get_power(self): return 600/(self.rank*self.awakened.get_mods(self.keywords).power_buff)
     def get_cost(self,n): return {'type':"SP",'value':20*n*self.rank}
     def describe(self): return f"Dissolve a material into a solvent <br> Rate: {self.get_power()} s/m<sup>3</sup> <br> cost: {self.get_cost(1)['value']} sp"
 

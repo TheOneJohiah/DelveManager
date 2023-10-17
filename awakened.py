@@ -482,6 +482,8 @@ class Awakened:
         self.update_skill_caps()
         #self.update_attributes()
         self.update_vitals()
+        if type(character_class.additional_effect)==Modifier:
+            self.add_mods("Class",character_class.additional_effect)
 
     def calculate_required_experience(self):
         if self.character_class is None or self.level < 5 or self.character_class.rarity in ["Common", "Uncommon"]:

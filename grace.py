@@ -1596,7 +1596,7 @@ grace.train_days(28,
                  sleepmod=[0,0,834],
                  nextskills=[
                      sk.dissolve(),
-                     sk.tissue_scan,
+                     sk.tissue_scan(),
                      sk.alchemic_intuition,
                      sk.runes_of_living_enhancement(),
                      sk.runes_of_item_enhancement(),
@@ -1620,6 +1620,7 @@ grace.regen(8,[0,0,834])
 grace.essence_exhange()
 timeInt = Moment('0936-06-03-12:00:00:000').to(grace.date)
 #printPotTrees(3)
+print(grace.mods["Class"].power_buff)
 print("\nTel:",tel,
       "\nHeat Crysts:",heat_crysts,
       "\nArcane Crysts:",arcane_crysts,

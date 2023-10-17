@@ -6,7 +6,7 @@ import item as eq;
 import accolade as ac;
 
 # Example usage
-t = aw.Awakened(name='Teston Lautts',attributes = [10, 10, 200, 70, 10, 10, 10, 10], level = 25, character_class = dc.shieldwielding_defender)
+t = aw.Awakened(name='Teston Lautts',attributes = [10, 10, 200, 80, 10, 10, 10, 10], level = 25, character_class = dc.shieldwielding_defender)
 t.add_experience(2000)  # Set the character's current experience
 t.add_skill(sk.intrinsic_strength(), starting_level=10)
 t.add_skill(sk.intrinsic_recovery(), starting_level=10)
@@ -24,8 +24,8 @@ t.inventory['Ring'].runes[1].enchantments[0].attribute_buff = [0,0,920,180,0,0,0
 t.add_accolade(ac.skars_glorious_return,8)
 t.add_accolade(ac.sphinx_riddle,200)
 t.remove_accolade(ac.sphinx_riddle,195)
-
-t.regen(240)
-
 t.update_buffs()
-t.printCharSheet()
+
+t.regen(1512)
+
+t.printCharSheet(altCol=True)
