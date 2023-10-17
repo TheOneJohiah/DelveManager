@@ -39,13 +39,14 @@ skillIFF = daniel.skills["Aura IFF"]
 daniel.update_level_cap(13)
 daniel.add_experience(200000)
 daniel.unlock_tier("Aura Metamagic",3)
-daniel.add_skill(sk.aura_compression,10)
+daniel.add_skill(sk.aura_compression,8)
 skillCom = daniel.skills["Aura Compression"]
 
 daniel.raise_attribute(5,130)
 skillSpr.bank_exp(327)
 skillFal.bank_exp(2108)
 skillSum.bank_exp(572)
+skillCom.bank_exp(16800)
 
 daniel.essence_exhange()
 
