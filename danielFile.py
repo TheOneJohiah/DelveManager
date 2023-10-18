@@ -48,6 +48,7 @@ skillFal.bank_exp(2108)
 skillSum.bank_exp(572)
 skillCom.bank_exp(16800)
 
+daniel.update_level_cap(16)
 daniel.essence_exhange()
 
 daniel.update_vitals()

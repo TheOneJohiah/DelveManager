@@ -1,5 +1,5 @@
 #Hard-coded list of all skill trees; add whenever you add skills for a new tree. Recombinants should be added for relevant trees through their own thing (method of Awakened?)
-AllTreeList = ["Physical Passive","Physical Utility","Physicality","Equipment Use","Melee Weapons","Heavy Armor","Light Armor","Shieldwielding","Staff Combat","Swordplay","Fencing","Dagger Combat","Hurling","Sharpshooting","Tracking","Threat Attraction","Magical Utility","Aura Metamagic","Offensive Auras","Defensive Auras","Utility Auras","Elemental Archer","Evocation Metamagic","Fire Evocation","Ice Evocation","Geoevocation","Hydroevocation","Aeroevocation","Earth Manipulation","Water Manipulation","Air Manipulation","Arcane Metamagic","Arcane Mysteries","Arcane Utility","Arcane Shifter","Elemental Enhancement","Elemental Inhibition","Psionics","Restoration","Beams","Survivalist Utility","Monster Taming","Divination","Defensive Constructs","Force Metamagic","Blood Magic","Chemistry","Alchemy","Natureworking","Runecrafting","Stoneworking","Armor Crafting","Weapon Crafting","Artificing","Metalworking"]
+AllTreeList = ["Physical Passive","Physical Utility","Physicality","Equipment Use","Melee Weapons","Heavy Armor","Light Armor","Shieldwielding","Staff Combat","Swordplay","Fencing","Dagger Combat","Hurling","Sharpshooting","Tracking","Threat Attraction","Magical Utility","Aura Metamagic","Offensive Auras","Defensive Auras","Utility Auras","Elemental Archer","Evocation Metamagic","Fire Evocation","Ice Evocation","Geoevocation","Hydroevocation","Aeroevocation","Earth Manipulation","Water Manipulation","Air Manipulation","Arcane Metamagic","Arcane Mysteries","Arcane Utility","Arcane Shifter","Elemental Enhancement","Elemental Inhibition","Psionics","Restoration","Beams","Survivalist Utility","Monster Taming","Divination","Defensive Constructs","Force Metamagic","Blood Magic","Chemistry","Alchemy","Natureworking","Runecrafting","Stoneworking","Armor Crafting","Weapon Crafting","Artificing","Metalworking","Offensive Constructs","Defensive Constructs","Utility Constructs","Construct Metamagic"]
 for x in range(len(AllTreeList)+1,145): AllTreeList.append("Tree "+str(x))
 
 class Modifier:
@@ -183,6 +183,8 @@ class intrinsic_clarity(Passive):
     def get_power(self, awakened): return 20*self.rank
     def describe(self,awakened): return f"Boost Mana regen by {self.get_power(awakened)}%"
     def get_modifier(self, awakened): return None
+
+mana_manipulation = Sustain("Mana Manipulation","Allows internal control of mana <br> Allows expulsion of mana to environment <br> Allows transfer of mana to and from capacitive items with direct contact <br> Alternative formula [100*RNK*(1+FCS/50)]",1,"Magical Utility",cost={'type':"MP",'value':1}) #Just setting to be 1 to 1 for now
 
 class magical_synergy(Passive):
     def __init__(self):
