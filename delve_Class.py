@@ -16,7 +16,10 @@ unclassed = delve_Class("Unclassed", "Common", "Everyone's first class")
 worker = delve_Class("Worker", "Common", "Warning: Experience may no longer be gained through combat", tree_effect={}, additional_effect="50% boost to non-combat skills")
 
 # Create specific classes
+tortugo = delve_Class("Tortugo", "Rare", "Tanky", attribute_effect=[0, 0, 200, 0, 0, 0, 0, 0], tree_effect={}, additional_effect=None)
+
 dynamo = delve_Class("Dynamo", "Rare", "Master of energy manipulation", attribute_effect=[0, 0, 0, 0, 0, 200, 0, 0], tree_effect={}, additional_effect=None)
+animus = delve_Class("Animus", "Rare", "Master of energy manipulation", attribute_effect=[0, 0, 0, 0, 200, 0, 0, 0], tree_effect={}, additional_effect=None)
 
 shieldwielding_defender = delve_Class("Shieldwielding Defender", "Uncommon", "Master of defense with a shield", attribute_effect=[0, 0, 50, 0, 0, 0, 0, 0], tree_effect={"Shieldwielding": 3}, additional_effect=None)
 

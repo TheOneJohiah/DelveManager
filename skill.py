@@ -1,5 +1,5 @@
 #Hard-coded list of all skill trees; add whenever you add skills for a new tree. Recombinants should be added for relevant trees through their own thing (method of Awakened?)
-AllTreeList = ["Physical Passive","Physical Utility","Physicality","Equipment Use","Melee Weapons","Heavy Armor","Light Armor","Shieldwielding","Staff Combat","Swordplay","Fencing","Dagger Combat","Hurling","Sharpshooting","Tracking","Threat Attraction","Magical Utility","Aura Metamagic","Offensive Auras","Defensive Auras","Utility Auras","Elemental Archer","Evocation Metamagic","Fire Evocation","Ice Evocation","Geoevocation","Hydroevocation","Aeroevocation","Earth Manipulation","Water Manipulation","Air Manipulation","Arcane Metamagic","Arcane Mysteries","Arcane Utility","Arcane Shifter","Elemental Enhancement","Elemental Inhibition","Psionics","Restoration","Beams","Survivalist Utility","Monster Taming","Divination","Defensive Constructs","Force Metamagic","Blood Magic","Chemistry","Alchemy","Natureworking","Runecrafting","Stoneworking","Armor Crafting","Weapon Crafting","Artificing","Metalworking","Offensive Constructs","Defensive Constructs","Utility Constructs","Construct Metamagic"]
+AllTreeList = ["Physical Passive","Physical Utility","Physicality","Equipment Use","Melee Weapons","Heavy Armor","Light Armor","Shieldwielding","Staff Combat","Swordplay","Fencing","Dagger Combat","Hurling","Sharpshooting","Tracking","Threat Attraction","Magical Utility","Aura Metamagic","Offensive Auras","Defensive Auras","Utility Auras","Elemental Archer","Evocation Metamagic","Fire Evocation","Ice Evocation","Geoevocation","Hydroevocation","Aeroevocation","Earth Manipulation","Water Manipulation","Air Manipulation","Arcane Metamagic","Arcane Mysteries","Arcane Utility","Arcane Shifter","Elemental Enhancement","Elemental Inhibition","Psionics","Restoration","Beams","Survivalist Utility","Monster Taming","Divination","Defensive Constructs","Force Metamagic","Blood Magic","Chemistry","Alchemy","Natureworking","Runecrafting","Stoneworking","Armor Crafting","Weapon Crafting","Artificing","Metalworking","Offensive Constructs","Defensive Constructs","Utility Constructs","Construct Metamagic","Fire Manipulation","Physical Passives"]
 for x in range(len(AllTreeList)+1,145): AllTreeList.append("Tree "+str(x))
 
 class Modifier:
@@ -365,7 +365,6 @@ firebolt = Instant("Firebolt","A bolt of magical fire assails your target <br> D
 fire_affinity = Skill("Fire Affinity", "Multiply the intensity of all Fire skills by [1 + .1*RNK]",0,"Fire Evocation")
 
 heat_mastery = Skill("Heat Mastery", "Multiply the intensity of all Heat skills by [1 + .1*RNK]",1,"Fire Evocation")
-smoke_burst = Instant("Smoke Burst","Burst forward [RNK] meters in an instant, leaving a trail of fire in your wake. <br> Fire trail deals [(5~7)*RNK*(1+FCS/100)] heat damage to everything it touches <br> Cost: 15mp <br> Note: burst can be in wathever direction the casters decides incluiding to the air <br> Smoke abilities are Fire abilities, subject to fire affinity and heat mastery",1,"Fire Evocation",cost={'type':'mp','value':15})
 
 smoke_cloud = Evocation("Smoke Cloud","""Conjure the embers of the mallow into a storm as you drag your enemies into the darkest, deepest hell where their screams will never again be heard as they drown.
 Damage: [(15~20)*RNK*(1+FCS*0.75/100)]
@@ -379,6 +378,9 @@ Note: sounds originating within the smoke cloud are nullified
 Note: thick and deeply black smoke, normal eyes cannot see through it
 Note: 75% of the damage is heat and the other 25% is chem
 Note: cooldown starts when the spell is off""",2,"Fire Evocation",cost={'type':'MP','value':25})
+
+# Fire Manipulation
+smoke_burst = Instant("Smoke Burst","Burst forward [RNK] meters in an instant, leaving a trail of fire in your wake. <br> Fire trail deals [(5~7)*RNK*(1+FCS/100)] heat damage to everything it touches <br> Cost: 15mp <br> Note: burst can be in wathever direction the casters decides incluiding to the air <br> Smoke abilities are Fire abilities, subject to fire affinity and heat mastery",1,"Fire Manipulation",cost={'type':'MP','value':15})
 
 # Geoevocation
 stonebolt = Instant("Stonebolt","A magical stone assails your target <br> Deal [(7.5-11)*RNK*(1+FCS/100)] force damage on hit <br> Range: 5*RNK meters <br> Cost: 10mp",0,"Geoevocation",cost={'type':"MP",'value':10})
@@ -519,8 +521,8 @@ empowered_armor = Passive("Empowered Armor","Numerical enchantment boosts from a
 strength_of_arm = Passive("Strength of Arm","Increase physical strength by 2% (str)",0,"Physical Passives")
 rugged_defense = Passive("Rugged Defense","Increase physical resistance by 2% (end)",0,"Physical Passives")
 
-turtle_skin = Passive("Turtle skin","Increase magical resistance by 2% (end) <br> Requires 5 ranks in Rugged defense",1,"Physical Passives")
-physical_synergy = Passive("Physical synergy","Enables limited synergistic cross-coupling of physical attributes <br> [2.5%*RNK] of Strength contributes to Stamina <br> [2.5%*RNK] of Endurance contributes to Health <br> Requires 10 ranks in Strength of arm <br> Requires 10 ranks in Rugged defense",1,"Physical Passives")
+turtle_skin = Passive("Turtle Skin","Increase magical resistance by 2% (end) <br> Requires 5 ranks in Rugged defense",1,"Physical Passives")
+physical_synergy = Passive("Physical Synergy","Enables limited synergistic cross-coupling of physical attributes <br> [2.5%*RNK] of Strength contributes to Stamina <br> [2.5%*RNK] of Endurance contributes to Health <br> Requires 10 ranks in Strength of arm <br> Requires 10 ranks in Rugged defense",1,"Physical Passives")
 
 intrinsic_resistance = Passive("Intrinsic Resistance","Increase resistances by 100% + 20% per rank",2,"Physical Passives")
 
