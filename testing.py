@@ -6,23 +6,26 @@ import item as eq;
 import accolade as ac;
 
 # Example usage
-t = aw.Awakened(name='Teston Lautts',attributes = [10, 10, 200, 10, 10, 10, 10, 10], level = 20, character_class = dc.shieldwielding_defender)
+t = aw.Awakened(name='Teston Lautts',attributes = [10, 10, 200, 70, 10, 10, 10, 10], level = 25, character_class = dc.shieldwielding_defender)
 t.add_experience(2000)  # Set the character's current experience
-t.add_skill(sk.intrinsic_clarity(), starting_level=10)
+t.add_skill(sk.intrinsic_strength(), starting_level=10)
+t.add_skill(sk.intrinsic_recovery(), starting_level=10)
+t.add_skill(sk.intrinsic_endurance(), starting_level=10)
+t.add_skill(sk.intrinsic_vigor(), starting_level=10)
 t.add_skill(sk.intrinsic_focus(), starting_level=10)
-t.add_skill(sk.healing_word(), starting_level=10)
+t.add_skill(sk.intrinsic_clarity(), starting_level=10)
 t.unlock_tier("Physicality",1)
 t.unlock_tier("Physicality",2)
-t.add_skill(sk.Passive("Intrinsic Resistance","Multiplies Resistances by 1 + .2*RNK",1,"Physicality",keywords=['Resistance']),starting_level=10)
-t.add_skill(sk.Passive("Resistance Synergy","Allow synergistic cross-multiplication of resistances, 2.5%*RNK",2,"Physicality",keywords=['Resistance']),starting_level=10)
-#t.add_equipment(eq.Equipment("Greater Force-sheild","A powerful shield",eq.force_steel,"Offhand",20000,500,1000,99,1,[eq.])
+t.add_skill(sk.intrinsic_resistance,starting_level=10)
+t.add_skill(sk.resistance_synergy,starting_level=10)
+t.add_equipment(eq.Equipment("Greater Force-sheild","A powerful shield",eq.force_steel,"Offhand",20000,500,1000,99,1,[eq.Rune("Grand Force Resistance",[eq.ResistanceEnchantment("Resistance","",[0,0,0,0,1000,0,100,0],1)])]))
 t.add_equipment(eq.grand_allstat_ring)
-t.raise_attribute(3,20)
-t.add_accolade(ac.lava_vents,2)
+t.inventory['Ring'].runes[1].enchantments[0].attribute_buff = [0,0,920,180,0,0,0,0]
+t.add_accolade(ac.skars_glorious_return,8)
 t.add_accolade(ac.sphinx_riddle,200)
 t.remove_accolade(ac.sphinx_riddle,195)
 
+t.regen(240)
+
 t.update_buffs()
-print(t.accolades)
-print(t.calculate_used_accolade_slots())
 t.printCharSheet()

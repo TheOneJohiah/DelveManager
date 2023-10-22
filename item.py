@@ -18,14 +18,14 @@ def describe (thing):
             elif hasattr(val[0], 'describe'):
                 desc += "[<ul>"
                 for item in val:
-                    desc += "<li>"+describe(item)+"</li>,"
-                desc += "<ul>]"
+                    desc += "<li>"+describe(item)+"</li>"
+                desc += "</ul>]"
             else: desc = str(val).replace('<','{').replace('>','}')
         elif hasattr(val,'name'): desc = str(getattr(val,'name'))
         else: desc = str(val).replace('<','{').replace('>','}')
 
         descr += "<li>"+attr+": "+desc+"</li>"
-        #print(descr)
+        #print(descr+"</ul>")
     return descr+"</ul>"
 
 class Enchantment:
