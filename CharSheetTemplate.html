@@ -51,6 +51,7 @@
             --RE: #f64;
             --NW: #cf0;
             --CH: var(--chemical);
+            --AL: #9f0;
             --RU: var(--mp);
         }
 
@@ -97,6 +98,7 @@
         .Restoration {--TR: var(--RE);}
         .Natureworking {--TR: var(--NW);}
         .Chemistry {--TR: var(--CH);}
+        .Alchemy {--TR: var(--AL);}
         .Runecrafting {--TR: var(--RU);}
         .alt table.Tree {color: var(--TR); --fg: var(--TR);}
         
@@ -200,22 +202,6 @@
         </td></tr>
     </table>
 
-    <table id="Skills"><tr><td><h2>Skills</h2>
-        {% for tree in trees %}
-            <table class="Tree {{tree.name}}"><tr><th>Tier</th><th><h3>{{tree.name}}</h3></th></tr>
-            {% for tier in tree.tiers.values() %}
-                <tr><th><h4>{{tier.tier}}</h4></th>
-                <td><table>
-                {% for skill in tier.skills.values() %}
-                    <tr><td><h5>{{skill.name}} ({{skill.rank + skill.rank_bonus}}/{{skill.cap}}) {% if not skill.rank == skill.cap %} (Exp: {{skill.xp}}/{{ skill.getNextRankXP() }}) {% endif %}</h5>
-                    {{skill.describe(aw)}}</td></tr>
-                {% endfor %}
-            </table></td></tr>
-            {% endfor %}
-        </table>
-        {% endfor %}
-    </td></tr></table>
-
     <table id="Inventory">
         <tr><th>Slot</th><th>Item</th><th>Charge</th><th>Saturation</th><th>Durability</th></tr>
     {% for item in Items %}
@@ -228,5 +214,32 @@
         </tr>
     {% endfor %}
     </table>
+
+    <table>
+        <tr><th>{{totAccAct}}/{{Level + 1}} Slots</th><th>Accolade</th><th>Total Bonus</th></tr>
+    {% for acc in accolades %}
+        <tr class="accolade">
+            <td>{{acc.numActive * acc.rank}} [{{acc.numActive}} x {{acc.rank}}]</td>
+            <th>{{acc.name}}</th>
+            <td>{{acc.describe()}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <table id="Skills"><tr><td><h2>Skills</h2>
+        {% for tree in trees %}
+            <table class="Tree {{tree.name}}"><tr><th>Tier</th><th><h3>{{tree.name}}</h3></th></tr>
+            {% for tier in tree.tiers.values() %}
+                <tr><th><h4>{{tier.tier}}</h4></th>
+                <td><table>
+                {% for skill in tier.skills.values() %}
+                    <tr><td><h5>{{skill.name}} ({{skill.rank + skill.rank_bonus}}/{{skill.cap}}) {% if not skill.rank == skill.cap %} (Exp: {{skill.xp}}/{{ skill.getNextRankXP() }}) {% endif %}</h5>
+                    {{skill.describe()}}</td></tr>
+                {% endfor %}
+            </table></td></tr>
+            {% endfor %}
+        </table>
+        {% endfor %}
+    </td></tr></table>
 </body>
 </html>
