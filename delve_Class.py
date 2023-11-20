@@ -10,7 +10,7 @@ class delve_Class:
         self.additional_effect = additional_effect
         
     def meets_requirements(self, awakened):
-        ##TODO: Reimplement these requirements in a better way
+        #TODO: Reimplement these requirements in a better way
         return True
     
 unclassed = delve_Class("Unclassed", "Common", "Everyone's first class")

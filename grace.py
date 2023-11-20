@@ -1593,6 +1593,8 @@ def test():
 
 #grace.add_accolade(acc.flamewillow_grove,11)
 
+grace.remove_accolade(acc.flamewillow_grove,5)
+grace.add_accolade(acc.skars_glorious_return,1)
 grace.train_days(28,
                  ["Healing Word","Cleave Fibers","Purge Poison","Congeal"],
                  [0,38,750],
