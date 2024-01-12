@@ -232,13 +232,17 @@ class Awakened:
         else: return 0
 
     def essence_exhange(self):
+        currentLvl = self.level
         #All banked xp from stat expenditure or anything else
         self.add_experience(self.banked_xp)
         self.banked_xp = 0
         for skill in list(self.skills.values()):
             if skill.banked_xp > 0:
                 self.add_skill_exp(skill.name)
-        print(f"A new dawn, a new day! You are currently level {self.level}")
+        if currentLvl == self.level:
+            print(f"No level up last night. {self.name} is currently level {self.level}")
+        else:
+            print(f"A new dawn, a new day! {self.name} is now level {self.level}")
 
     def bank_experience(self, xp): self.banked_xp += xp
 
@@ -518,7 +522,7 @@ class Awakened:
     def level_up(self):
         if self.level < self.level_cap:
             self.level += 1
-            print(f"Congratulations! You have leveled up to level {self.level}!")
+            print(f"Congratulations! {self.name} leveled up to level {self.level}!")
             self.update_free_attributes()
 
     def genSkillList (self):
