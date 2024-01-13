@@ -42,6 +42,9 @@ shieldwielding_defender = delve_Class(
     additional_effect=None
 )
 
+tortugo = delve_Class("Tortugo", "Rare", "Tanky", attribute_effect=[0, 0, 200, 0, 0, 0, 0, 0], tree_effect={}, additional_effect=None)
+animus = delve_Class("Animus", "Rare", "Master of energy manipulation", attribute_effect=[0, 0, 0, 0, 200, 0, 0, 0], tree_effect={}, additional_effect=None)
+
 geomancer = delve_Class(
     "Geomancer",
     "Uncommon",
