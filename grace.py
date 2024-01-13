@@ -1585,22 +1585,27 @@ grace.regen(16,[0,380,0])
 
 # To day 96!
 def test():
+    grace.update_buffs()
     print("XP:",grace.experience)
     for sk in ["Healing Word","Cleave Fibers","Purge Poison","Congeal","Dissolve","Tissue Scan","Alchemic Intuition"]:
         print(sk,": R",grace.get_skill_rank(sk),"XP:",grace.get_skill_xp(sk))
     if grace.level>=15 and grace.free_attributes>0: grace.raise_attribute(0,10)
 
+#grace.add_accolade(acc.flamewillow_grove,11)
+
+grace.remove_accolade(acc.flamewillow_grove,5)
+grace.add_accolade(acc.skars_glorious_return,1)
 grace.train_days(28,
-                 ["Purge Poison","Congeal"],
+                 ["Healing Word","Cleave Fibers","Purge Poison","Congeal"],
                  [0,38,750],
                  sleepmod=[0,0,834],
                  nextskills=[
-                     sk.dissolve(),
-                     sk.tissue_scan,
-                     sk.alchemic_intuition,
                      sk.runes_of_living_enhancement(),
                      sk.runes_of_item_enhancement(),
                      sk.runes_of_complexity(),
+                     sk.alchemic_intuition,
+                     sk.dissolve(),
+                     sk.tissue_scan(),
                      #sk.regeneration
                      #sk.stabilize
                  ],
