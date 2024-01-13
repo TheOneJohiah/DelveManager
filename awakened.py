@@ -321,7 +321,7 @@ class Awakened:
 
         self.date = self.date.plus(Duration(int(hours*3600000)))
     
-    def train_days(self,days,skills,mods=[0,0,0],dayspending=[0,0,0],sleepmod=[0,0,0],nextskills=[],stats=[0,0,0,0,0,0],cb=None):
+    def train_days(self,days,skills,mods=[0,0,0],dayspending=[0,0,0],sleepmod=[0,0,0],nextskills=[],stats=[0,0,0,0,0,0],cb=None,clear_skills=True):
         for day in range(days):
             print(f"Day {int(Moment('0936-06-03-12:00:00:000').to(self.date).length.in_days()+.5)}")
             self.regen(8,sleepmod)
@@ -336,19 +336,34 @@ class Awakened:
                 for st in range(6):
                     self.raise_attribute(st,min(stats[st],inc))
                 stats = list(map(lambda x: max(0,x - inc),stats))
-            skills = list(filter(lambda s: not self.skills[s].cap==self.skills[s].rank,skills)) #remove maxxed skills 
-            self.train(16,skills,mods,dayspending)
             if callable(cb): cb()
+            if clear_skills: skills = list(filter(lambda s: not self.skills[s].cap==self.skills[s].rank,skills)) #remove maxxed skills 
+            self.train(16,skills,mods,dayspending)
     
     def update_level_cap(self, newLevel): self.level_cap = newLevel
 
-    def count_skills_in_tree(self, tree_name): return sum(1 for skill in self.skills if skill.tree == tree_name)
+    def count_skills_in_tree(self, tree_name):
+        total = 0
+        for tier in self.trees[tree_name].tiers:
+            total += len(tier.skills)
+        return total
+    
+    def count_ranks_in_tree(self,tree_name):
+        total = 0
+        for tier in self.trees[tree_name].tiers:
+            for skill in tier.skills:
+                total += skill.rank
+        return total
 
     def add_mods(self,source,mod): self.mods[source] = mod
     
-    def get_mods(self,targets):
+    def get_mods(self,targets,extra=[]):
         modifier = Modifier(targets,1,0,1,0,1,0,1,0)
-        for mod in filter(lambda m: m.target in targets,list(self.mods.values())):
+        mods = list(filter(lambda m: m.target in targets,list(self.mods.values())))
+        "Channel Mastery:2".split(":")[0]
+        mods.extend(map(lambda s: self.skills[s.split(":")[0]].get_mod(),extra))
+        #mods.extend(map(lambda s: self.skills[s.split(":")[0]].get_mod(s.split(":")[1]),extra))
+        for mod in mods:
             modifier.power_buff    *= 1 + .01*mod.power_buff    
             modifier.power_flat    += mod.power_flat    
             modifier.range_buff    *= 1 + .01*mod.range_buff    
@@ -357,7 +372,6 @@ class Awakened:
             modifier.duration_flat += mod.duration_flat 
             modifier.cost_buff     *= 1 + .01*mod.cost_buff     
             modifier.cost_flat     += mod.cost_flat    
-        print(targets,modifier.power_buff)
         return modifier
     
     def get_skill_duration(self,skillN):
@@ -402,7 +416,8 @@ class Awakened:
     
     def add_skill_exp (self, skillN): self.skills[skillN].add_exp() #redirect to skill method
 
-    def cast_skill (self, skillN, n):
+    def cast_skill (self, skillN, n, mods=[]):
+        self.skills[skillN].modifier = self.get_mods(self.skills[skillN].keywords,mods)
         cost = self.get_skill_cost(skillN,n)
         underV = self.reduce_vital(cost['type'],cost['value'])
         self.bank_skill_exp(skillN,.5*(cost['value'] - underV))
@@ -486,6 +501,8 @@ class Awakened:
         self.update_skill_caps()
         #self.update_attributes()
         self.update_vitals()
+        if type(character_class.additional_effect)==Modifier:
+            self.add_mods("Class",character_class.additional_effect)
 
     def calculate_required_experience(self):
         if self.character_class is None or self.level < 5 or self.character_class.rarity in ["Common", "Uncommon"]:
@@ -496,10 +513,11 @@ class Awakened:
 
     def add_experience(self, amount):
         amount = int(amount)
-        self.total_xp += amount
         current_exp = self.experience  # You should have a variable for tracking the character's experience
         required_exp = self.calculate_required_experience()
 
+        self.total_xp -= current_exp
+        
         new_exp = current_exp + amount
 
         if new_exp >= required_exp:
@@ -508,12 +526,15 @@ class Awakened:
                 if self.level == 5 and self.character_class == unclassed or self.level == 25 or self.level == self.level_cap:
                     max_exp = required_exp - 1
                     new_exp = min(new_exp, max_exp)
+                    self.total_xp += new_exp
                     self.experience = new_exp
                     return True
                 new_exp -= required_exp
+                self.total_xp += required_exp
                 self.level_up()
                 required_exp = self.calculate_required_experience()
 
+        self.total_xp += new_exp
         self.experience = new_exp
 
     def add_statistics(self, location, amount):
