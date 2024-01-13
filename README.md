@@ -15,6 +15,9 @@
 - Stat synchronization and tolerance
 - Attack modeling
 - Monster generation?
+- Soulstrains
+- Better item and accolade handling
+- Crafting?
 
 #### UI?
 #### Networking?
