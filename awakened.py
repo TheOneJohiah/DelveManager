@@ -8,7 +8,7 @@ from timeline import *
 from jinja2 import Template;
 
 class Awakened:
-    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed,date=Moment('0936-06-03-12:00:00:000')):
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], level=0, level_cap=5, experience=0, character_class=unclassed,date=Moment('0936-06-03-12:00:00:000')):
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
                                    "total SP regen":0,
@@ -23,7 +23,7 @@ class Awakened:
         self.attributes = [[]] * 7 
         self.attributes[0] = [0] * 8 # 0 = effective
         self.attributes[1] = [0] * 8 # 1 = total
-        self.attributes[2] = attributes # 2 = base
+        self.attributes[2] = copy(attributes) # 2 = base
         self.attributes[3] = [0] * 8 # 3 = accolades
         self.attributes[4] = [0] * 8 # 4 = misc
         self.attributes[5] = [0] * 9 # 5 = tolerance, [8] = general tolerance
@@ -32,7 +32,7 @@ class Awakened:
         self.percentAccolades = [[]] * 2
         self.percentAccolades[0] = [0]*8 # % for attributes
         self.percentAccolades[1] = [0]*8 # % for resists
-        self.vitals = vitals
+        self.vitals = [200, 100, 200, 100, 200, 100]
         self.used_skill_points = 0
         self.level = level
         self.level_cap = level_cap if level_cap >= level else level

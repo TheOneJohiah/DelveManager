@@ -6,8 +6,11 @@ import item as eq;
 import accolade as ac;
 
 # Example usage
-t = aw.Awakened(name='Teston Lautts',attributes = [10, 10, 200, 80, 10, 10, 10, 10], level = 25, character_class = dc.shieldwielding_defender)
+t = aw.Awakened(name='Teston Lautts',attributes = [10, 10, 10, 10, 10, 10, 10, 10], level = 25, character_class = dc.shieldwielding_defender)
+v = aw.Awakened(name="Invess T'gatin",level=20,character_class=dc.animus)
+h = aw.Awakened(name="Eg'zpe Rym-Ant",level=12,character_class=dc.geomancer)
 t.add_experience(2000)  # Set the character's current experience
+'''
 t.add_skill(sk.intrinsic_strength(), starting_level=10)
 t.add_skill(sk.intrinsic_recovery(), starting_level=10)
 t.add_skill(sk.intrinsic_endurance(), starting_level=10)
@@ -33,5 +36,11 @@ t.add_skill(sk.extend_aura(),10)
 t.regen(1512)
 
 t.cast_skill("Winter",16,["Amplify Aura","Extend Aura"])
-
+'''
+v.raise_attribute(4,200)
+print("T:",t.attributes[1],t.attributes[2],t.vitals)
+print("V:",v.attributes[1],v.attributes[2],v.vitals)
+print("H:",h.attributes[1],h.attributes[2],h.vitals)
 t.printCharSheet(altCol=True)
+v.printCharSheet(altCol=True)
+h.printCharSheet(altCol=True)
