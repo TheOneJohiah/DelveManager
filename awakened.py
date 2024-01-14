@@ -360,7 +360,7 @@ class Awakened:
     def get_mods(self,targets,extra=[]):
         modifier = Modifier(targets,1,0,1,0,1,0,1,0)
         mods = list(filter(lambda m: m.target in targets,list(self.mods.values())))
-        "Channel Mastery:2".split(":")[0]
+        
         mods.extend(map(lambda s: self.skills[s.split(":")[0]].get_mod(),extra))
         #mods.extend(map(lambda s: self.skills[s.split(":")[0]].get_mod(s.split(":")[1]),extra))
         for mod in mods:
@@ -421,6 +421,8 @@ class Awakened:
         cost = self.get_skill_cost(skillN,n)
         underV = self.reduce_vital(cost['type'],cost['value'])
         self.bank_skill_exp(skillN,.5*(cost['value'] - underV))
+        for mod in mods:
+            self.bank_skill_exp(mod.split(":")[0],.5*(cost['value'] - underV))
     
     def unlock_tier(self,tree,tier):
         if not self.trees[tree].tiers[tier].lock: print(f"{tree} already unlocked!"); return False
