@@ -89,7 +89,7 @@ class Passive(Skill):
         self.mod = mod
         self.keywords.append('Passive')
 
-    def get_mod(self): return self.mod
+    def get_mod(self,arg=1): return self.mod
 
     def on_level_up(self):
         self.awakened.add_mods(self.name,self.get_mod())
@@ -165,7 +165,7 @@ class intrinsic_strength(Passive):
     
     def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost maximum Health by {self.get_power()}%"
-    def get_mod(self): return Modifier("N/A")
+    def get_mod(self,arg=1): return Modifier("N/A")
 
 class intrinsic_recovery(Passive):
     def __init__(self):
@@ -173,7 +173,7 @@ class intrinsic_recovery(Passive):
 
     def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost Health regen by {self.get_power()}%"
-    def get_mod(self): return Modifier("N/A")
+    def get_mod(self,arg=1): return Modifier("N/A")
 
 class intrinsic_endurance(Passive):
     def __init__(self):
@@ -181,7 +181,7 @@ class intrinsic_endurance(Passive):
     
     def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost maximum Stamina by {self.get_power()}%"
-    def get_mod(self): return Modifier("N/A")
+    def get_mod(self,arg=1): return Modifier("N/A")
 
 class intrinsic_vigor(Passive):
     def __init__(self):
@@ -189,7 +189,7 @@ class intrinsic_vigor(Passive):
 
     def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Multiply mana Stamina by {self.get_power()}%"
-    def get_mod(self): return Modifier("N/A")
+    def get_mod(self,arg=1): return Modifier("N/A")
 
 intrinsic_resistance = Passive("Intrinsic Resistance","Multiplies Resistances by 1 + .2*RNK",1,"Physicality",keywords=['Resistance'])
 
@@ -202,7 +202,7 @@ class intrinsic_focus(Passive):
     
     def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost maximum Mana by {self.get_power()}%"
-    def get_mod(self): return Modifier("N/A")
+    def get_mod(self,arg=1): return Modifier("N/A")
 
 class intrinsic_clarity(Passive):
     def __init__(self):
@@ -210,7 +210,7 @@ class intrinsic_clarity(Passive):
 
     def get_power(self): return 20*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost Mana regen by {self.get_power()}%"
-    def get_mod(self): return Modifier("N/A")
+    def get_mod(self,arg=1): return Modifier("N/A")
 
 mana_manipulation = Sustain("Mana Manipulation","Allows internal control of mana <br> Allows expulsion of mana to environment <br> Allows transfer of mana to and from capacitive items with direct contact <br> Alternative formula [100*RNK*(1+FCS/50)]",1,"Magical Utility",cost={'type':"MP",'value':1}) #Just setting to be 1 to 1 for now
 
@@ -247,7 +247,7 @@ class healing_affinity(Passive):
 
     def get_power(self): return 10*self.rank*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Boost intensity of healing skills by {self.get_power()}%"
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="Healing",
             power_buff=self.get_power()
@@ -310,7 +310,7 @@ class steady_scribing(Passive):
 
     def get_power(self): return 5*self.rank*(1 + 0.0001*self.awakened.attributes[1][3]*(100 + self.awakened.character_class.attribute_effect[3] + self.awakened.percentAccolades[0][3]))*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Greater percision is greater power <br> {self.get_power()}% boost to the effects of all created Runes"
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="Runes",
             power_buff=self.get_power()
@@ -322,7 +322,7 @@ class runes_of_resevoirs(Passive):
     
     def get_power(self): return 2*self.rank*(1 + 0.00005*self.awakened.attributes[1][0]*(100 + self.awakened.character_class.attribute_effect[0] + self.awakened.percentAccolades[0][0]))*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Gain a greater familiarity with the gathering and storing of energy <br> {self.get_power()}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="N/A",
             power_buff=self.get_power()
@@ -334,7 +334,7 @@ class runes_of_living_enhancement(Passive):
 
     def get_power(self): return 2*self.rank*(1 + 0.00005*self.awakened.attributes[1][0]*(100 + self.awakened.character_class.attribute_effect[0] + self.awakened.percentAccolades[0][0]))*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Gain a greater familiarity with enhancing attributes <br> {self.get_power()}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="N/A",
             power_buff=self.get_power()
@@ -346,7 +346,7 @@ class runes_of_item_enhancement(Passive):
 
     def get_power(self): return 2*self.rank*(1 + 0.00005*self.awakened.attributes[1][0]*(100 + self.awakened.character_class.attribute_effect[0] + self.awakened.percentAccolades[0][0]))*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Gain a greater familiarity with enhancing the properties of materials <br> {self.get_power()}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="N/A",
             power_buff=self.get_power()
@@ -358,7 +358,7 @@ class runes_of_defense(Passive):
 
     def get_power(self): return 2*self.rank*(1 + 0.00005*self.awakened.attributes[1][0]*(100 + self.awakened.character_class.attribute_effect[0] + self.awakened.percentAccolades[0][0]))*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Gain a greater familiarity with strengthening defenses <br> {self.get_power()}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="N/A",
             power_buff=self.get_power()
@@ -370,7 +370,7 @@ class runes_of_complexity(Passive):
 
     def get_power(self): return 2*self.rank*(1 + 0.00005*self.awakened.attributes[1][0]*(100 + self.awakened.character_class.attribute_effect[0] + self.awakened.percentAccolades[0][0]))*self.awakened.get_mods(self.keywords).power_buff
     def describe(self): return f"Gain a greater familiarity with connecting similar runes into Rune Complexes <br> {self.get_power()}% boost to the effects of relevant created runes  <br> Higher ranks mean stronger insight"
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="N/A",
             power_buff=self.get_power()
@@ -451,7 +451,7 @@ class amplify_aura(Metamagic):
     def __init__(self):
         super().__init__("Amplify Aura", "Multiply aura intensity by [1+RNK/10] <br> Boost aura mana cost by [1+RNK/5]",0,"Aura Metamagic")
 
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="Aura Focus_target",
             power_buff= 10*self.rank*self.modifier.power_buff,
@@ -462,7 +462,7 @@ class extend_aura(Metamagic):
     def __init__(self):
         super().__init__("Extend Aura", "Extend aura range by [RNK] m <br> Boost aura mana cost by [1+RNK/5]",0,"Aura Metamagic")
     
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="Extend Aura_target",
             range_flat=self.rank*self.modifier.power_buff,
@@ -473,7 +473,7 @@ class aura_focus(Metamagic):
     def __init__(self):
         super().__init__("Aura Focus", "Focus on an aura to boost its output <br> Multiply aura intensity by [1+RNK/5] <br> Multiply aura range by [1+RNK/5] <br> Multiply aura mana cost by [1+RNK/5] <br> User loses all external senses while focusing <br> Requires 5 ranks in amplify aura <br> Requires 5 ranks in extend aura",1,"Aura Metamagic")
 
-    def get_mod(self):
+    def get_mod(self,arg=1):
         return Modifier(
             target="Aura Focus_target",
             power_buff= 20*self.rank*self.modifier.power_buff,
