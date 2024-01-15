@@ -422,7 +422,7 @@ class Awakened:
         underV = self.reduce_vital(cost['type'],cost['value'])
         self.bank_skill_exp(skillN,.5*(cost['value'] - underV))
         for mod in mods:
-            self.bank_skill_exp(mod.split(":")[0],.5*(cost['value'] - underV))
+            self.bank_skill_exp(mod.split(":")[0],.1*(cost['value'] - underV))
     
     def unlock_tier(self,tree,tier):
         if not self.trees[tree].tiers[tier].lock: print(f"{tree} already unlocked!"); return False
