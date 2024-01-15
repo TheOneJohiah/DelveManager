@@ -8,7 +8,7 @@ from timeline import *
 from jinja2 import Template;
 
 class Awakened:
-    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], vitals=[200, 100, 200, 100, 200, 100], level=0, level_cap=5, experience=0, character_class=unclassed,date=Moment('0936-06-03-12:00:00:000')):
+    def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], level=0, level_cap=5, experience=0, character_class=unclassed,date=Moment('0936-06-03-12:00:00:000')):
         self.general_statistics = {"total HP regen":0,
                                    "total HP spent":0,
                                    "total SP regen":0,
@@ -23,7 +23,7 @@ class Awakened:
         self.attributes = [[]] * 7 
         self.attributes[0] = [0] * 8 # 0 = effective
         self.attributes[1] = [0] * 8 # 1 = total
-        self.attributes[2] = attributes # 2 = base
+        self.attributes[2] = copy(attributes) # 2 = base
         self.attributes[3] = [0] * 8 # 3 = accolades
         self.attributes[4] = [0] * 8 # 4 = misc
         self.attributes[5] = [0] * 9 # 5 = tolerance, [8] = general tolerance
@@ -32,7 +32,7 @@ class Awakened:
         self.percentAccolades = [[]] * 2
         self.percentAccolades[0] = [0]*8 # % for attributes
         self.percentAccolades[1] = [0]*8 # % for resists
-        self.vitals = vitals
+        self.vitals = [200, 100, 200, 100, 200, 100]
         self.used_skill_points = 0
         self.level = level
         self.level_cap = level_cap if level_cap >= level else level
@@ -232,13 +232,17 @@ class Awakened:
         else: return 0
 
     def essence_exhange(self):
+        currentLvl = self.level
         #All banked xp from stat expenditure or anything else
         self.add_experience(self.banked_xp)
         self.banked_xp = 0
         for skill in list(self.skills.values()):
             if skill.banked_xp > 0:
                 self.add_skill_exp(skill.name)
-        print(f"A new dawn, a new day! You are currently level {self.level}")
+        if currentLvl == self.level:
+            print(f"No level up last night. {self.name} is currently level {self.level}")
+        else:
+            print(f"A new dawn, a new day! {self.name} is now level {self.level}")
 
     def bank_experience(self, xp): self.banked_xp += xp
 
@@ -356,7 +360,7 @@ class Awakened:
     def get_mods(self,targets,extra=[]):
         modifier = Modifier(targets,1,0,1,0,1,0,1,0)
         mods = list(filter(lambda m: m.target in targets,list(self.mods.values())))
-        "Channel Mastery:2".split(":")[0]
+        
         mods.extend(map(lambda s: self.skills[s.split(":")[0]].get_mod(),extra))
         #mods.extend(map(lambda s: self.skills[s.split(":")[0]].get_mod(s.split(":")[1]),extra))
         for mod in mods:
@@ -417,6 +421,8 @@ class Awakened:
         cost = self.get_skill_cost(skillN,n)
         underV = self.reduce_vital(cost['type'],cost['value'])
         self.bank_skill_exp(skillN,.5*(cost['value'] - underV))
+        for mod in mods:
+            self.bank_skill_exp(mod.split(":")[0],.1*(cost['value'] - underV))
     
     def unlock_tier(self,tree,tier):
         if not self.trees[tree].tiers[tier].lock: print(f"{tree} already unlocked!"); return False
@@ -539,7 +545,7 @@ class Awakened:
     def level_up(self):
         if self.level < self.level_cap:
             self.level += 1
-            print(f"Congratulations! You have leveled up to level {self.level}!")
+            print(f"Congratulations! {self.name} leveled up to level {self.level}!")
             self.update_free_attributes()
 
     def genSkillList (self):
