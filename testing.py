@@ -1,3 +1,5 @@
+import pickle
+
 # Witness my jank!
 import awakened as aw;
 import delve_Class as dc;
@@ -48,3 +50,20 @@ print("H:",h.attributes[1],h.attributes[2],h.vitals)
 t.printCharSheet(altCol=True)
 v.printCharSheet(altCol=True)
 h.printCharSheet(altCol=True)
+
+
+## Pickling test
+db = {}
+db['teston'] = t
+db['invess'] = v
+
+dbfile = open('./saves/campaign1.pk1','ab')
+pickle.dump(db, dbfile)                    
+dbfile.close()
+
+## For loading
+dbfile = open('./saves/campaign1.pk1','rb')
+db = pickle.load(dbfile)
+for keys in db:
+    print(keys, '=>', db[keys])
+dbfile.close()
