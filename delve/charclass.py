@@ -1,5 +1,7 @@
 """ The character class type for the game """
 
+from .base import Attribute
+
 class CharClass:
     """ Class for a character (awakened) """
 
@@ -7,13 +9,13 @@ class CharClass:
         name,
         rarity,
         notes,
-        attribute_effect = [0, 0, 0, 0, 0, 0, 0, 0],
+        attribute_effect = Attribute.fill(),
         tree_effect = {},
         additional_effect = None):
 
         self.name = name
         self.rarity = rarity
         self.notes = notes
-        self.attribute_effect = attribute_effect  # Now an array [str, rec, end, vig, foc, cla]
+        self.attribute_effect = attribute_effect
         self.tree_effect = tree_effect
         self.additional_effect = additional_effect
