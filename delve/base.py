@@ -7,6 +7,7 @@ class Attribute:
     endurance, vigor, focus,
     clarity, perception, speed
     ):
+        # str rcv end vgr fcs clr per spd
         self.strength = strength
         self.recovery = recovery
         self.endurance = endurance
@@ -46,3 +47,29 @@ class Vitals:
         self.health4 = health4
         self.health5 = health5
         self.health6 = health6
+
+class Item:
+    """ Any kind of item """
+    def __init__(self, name="Thing", description="A thing!"):
+        self.name = name
+        self.description = description
+        self.type = None
+        self.rarity = None
+
+class CharClass:
+    """ Class for a character (awakened) """
+
+    def __init__(self,
+        name,
+        rarity,
+        notes,
+        attribute_effect = Attribute.fill(),
+        tree_effect = {},
+        additional_effect = None):
+
+        self.name = name
+        self.rarity = rarity
+        self.notes = notes
+        self.attribute_effect = attribute_effect
+        self.tree_effect = tree_effect
+        self.additional_effect = additional_effect

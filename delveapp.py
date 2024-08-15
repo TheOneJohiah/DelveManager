@@ -1,4 +1,4 @@
-""" The web application """
+""" The flask web application """
 
 from flask import Flask
 from flask import render_template
@@ -10,7 +10,7 @@ def homepage():
     """ Shows the homepage """
     return "<h2>Hello, Delve!!</h2>"
 
-@app.route("/character/<id>")
-def show_character(id):
+@app.route("/character/<charid>")
+def show_character(charid):
     """ Shows a character sheet """
     return render_template("charsheet.html")

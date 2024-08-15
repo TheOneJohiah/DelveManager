@@ -1,0 +1,86 @@
+body {
+    background: #080808;
+    color:var(--fg);
+    font-family: monospace;
+    text-align: center;
+    font-size: 12pt;
+    --fg: #ccc;
+    --bg: #00436e;
+    --heat: rgb(254,0,2);
+    --cold: rgb(4,46,96);
+    --light: rgb(255,255,255);
+    --dark: rgb(0,0,0);
+    --force: rgb(107,124,133);
+    --arcane: rgb(78,5,80);
+    --chemical: rgb(21,68,6);
+    --mental: rgb(255, 0, 170);
+    --TR:var(--fg);
+}
+
+h1 {font-size:1.5em}
+h2 {font-size:1.4em}
+h3 {font-size:1.3em}
+h4 {font-size:1.2em}
+h5 {font-size:1.1em;margin: 0;}
+h6 {font-size:1em;margin: 0;}
+
+#Skills {text-align: left;}
+
+#Skills h2, #Skills h3, #Skills h4 {text-align: center;margin:0}
+
+#Skills table tr th:nth-child(1) {width: 10%;}
+
+table table table {
+    margin: -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+}
+
+#Inventory tr th:nth-child(1) {width: 12%;}
+#Inventory tr th:nth-child(2) {width: 52%;}
+#Inventory tr td:nth-child(2) {text-align: left;}
+#Inventory tr th:nth-child(n+3) {width: 12%;}
+
+.alt #VitHP, .alt #AttSTR, .alt #AttRCV {color:var(--hp)}
+.alt #VitSP, .alt #AttEND, .alt #AttVGR  {color:var(--sp)}
+.alt #VitMP, .alt #AttFCS, .alt #AttCLR  {color:var(--mp)}
+.alt #AttPER {color:var(--PER)}
+.alt #AttSPD {color:var(--SPD)}
+
+.Restoration {--TR: var(--RE);}
+.Natureworking {--TR: var(--NW);}
+.Chemistry {--TR: var(--CH);}
+.Alchemy {--TR: var(--AL);}
+.Runecrafting {--TR: var(--RU);}
+.alt table.Tree {color: var(--TR); --fg: var(--TR);}
+
+.alt #ResHE {color:var(--heat);}
+.alt #ResCO {color:var(--cold);}
+.alt #ResLI {color:var(--light);}
+.alt #ResDA {color:var(--dark);}
+.alt #ResFO {color:var(--force);}
+.alt #ResAR {color:var(--arcane);}
+.alt #ResCH {color:var(--chemical);}
+.alt #ResME {color:var(--mental);}
+
+table {
+    background: var(--bg);
+    table-layout: fixed;
+    border: none;
+    border-collapse: separate;
+    border-spacing: 2px;
+    margin: 10px auto;
+    width: 90%;
+    overflow: hidden;
+}
+
+table td , table th {
+    margin: 0;
+    padding: 6px;
+    border: 1px solid var(--fg);
+}
+table td h1 {border-bottom: 1px solid var(--fg);}
+
+#Overview tr:nth-child(1),#Overview tr:nth-child(3) {font-weight: bold;}
+
+table th {font-weight: bold;text-align: center;}

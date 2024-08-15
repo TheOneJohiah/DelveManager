@@ -19,5 +19,6 @@
 - Better item and accolade handling
 - Crafting?
 
-#### UI?
-#### Networking?
+### UI
+
+In da works

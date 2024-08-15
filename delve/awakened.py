@@ -1,6 +1,35 @@
 """ Module that handles the character, or awakened """
 
 from .base import Attribute
+from .time import Moment
+
+class AwakenedAttribs:
+    """ The attributes of the awakened """
+
+    def __init__(self):
+        self.effective = Attribute.fill()
+        self.total = Attribute.fill()
+        self.base = Attribute.fill()
+        self.accolade = Attribute.fill()
+        self.misc = Attribute.fill()
+        self.sync = Attribute.fill()
+
+class AwakenedEquipment:
+    """ The equipment the awakened has """
+    def __init__(self):
+        # Stuff like items and such
+
+        self.head = None
+        self.chest = None
+        self.legs = None
+        self.hands = None
+        self.feet = None
+        self.rings = None
+        self.amulet = None
+        self.mainhand = None
+        self.underwear = None
+        self.overwear = None
+        self.offhand = None
 
 class Awakened:
     """ A singular character (awakened) for the thing """
@@ -11,51 +40,20 @@ class Awakened:
     level_cap=5,
     exp = 0,
     char_class = None,
-    date = None
+    date = Moment("0936-06-03-12:00:00:000")
     ):
-
         self.name = name
+        self.date = date
         self.level = level
         self.level_cap = level_cap if level_cap >= level else level
         self.exp = exp
         self.char_class = char_class
 
-        # Character stat attributes
-        self.attributes = {
-            # str rcv end vgr fcs clr per spd
-            "effec": Attribute.fill(),
-            "total": Attribute.fill(),
-            "base": attributes,
-            "acco": Attribute.fill(),
-            "misc": Attribute.fill(),
-            "sync": Attribute.fill(),
-        }
+        self.attributes = AwakenedAttribs()
+        self.attributes.base = attributes
 
         self.accolades_percent = {
             "attribPercent": Attribute.fill(),
             "resistPercent": Attribute.fill()
         }
 
-        # Stuff like items and such
-        self.wearables = {
-            "Head" : None,
-            "Chest" : None,
-            "Legs" : None,
-            "Hands" : None,
-            "Feet" : None,
-            "Ring[0]" : None,
-            "Ring[1]" : None,
-            "Ring[2]" : None,
-            "Ring[3]" : None,
-            "Ring[4]" : None,
-            "Ring[5]" : None,
-            "Ring[6]" : None,
-            "Ring[7]" : None,
-            "Ring[8]" : None,
-            "Ring[9]" : None,
-            "Amulet" : None,
-            "Mainhand" : None,
-            "Underwear" : None,
-            "Overwear" : None,
-            "Offhand" : None
-        }
