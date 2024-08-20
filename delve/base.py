@@ -32,21 +32,51 @@ class Attribute:
             self.perception,
             self.speed])
 
-# TODO: name these variables according to
-# what they actually mean in delve
 class Vitals:
-    """ Character/enemy? vital values """
+    """ Vitals values """
     def __init__(self,
-    health, health2,
-    health3, health4,
-    health5, health6
-    ):
+        health,
+        stamina,
+        mana
+        ):
         self.health = health
-        self.health2 = health2
-        self.health3 = health3
-        self.health4 = health4
-        self.health5 = health5
-        self.health6 = health6
+        self.stamina = stamina
+        self.mana = mana
+
+class VitalsStats:
+    """ vital values """
+    def __init__(self,
+    health_max, health_regen,
+    stamina_max, stamina_regen,
+    mana_max, mana_regen
+    ):
+        self.health_max = health_max
+        self.health_regen = health_regen
+        self.stamina_max = stamina_max
+        self.stamina_regen = stamina_regen
+        self.mana_max = mana_max
+        self.mana_regen = mana_regen
+
+class Resistance:
+    """ Collection of resistances """
+    def __init__(self,
+    heat, cold,
+    light, dark, force,
+    arcane, chemical, mental
+    ):
+        self.heat = heat
+        self.cold = cold
+        self.light = light
+        self.dark = dark
+        self.force = force
+        self.arcane = arcane
+        self.chemical = chemical
+        self.mental = mental
+
+    @classmethod
+    def fill(cls, val=0):
+        """ Create Attribute filled out with a single value """
+        return Resistance(val, val, val, val, val, val, val, val)
 
 class Item:
     """ Any kind of item """

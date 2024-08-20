@@ -1,6 +1,9 @@
 """ Module that handles the character, or awakened """
 
 from .base import Attribute
+from .base import Resistance
+from .base import VitalsStats
+from .base import Vitals
 from .time import Moment
 
 class AwakenedAttribs:
@@ -14,6 +17,18 @@ class AwakenedAttribs:
         self.misc = Attribute.fill()
         self.sync = Attribute.fill()
 
+class AwakenedResistances:
+    """ The resistances for the awakened """
+
+    def __init__(self):
+        self.total_flat = Resistance.fill()
+        self.total_percent = Resistance.fill()
+        self.base_flat = Resistance.fill()
+        self.accolade_flat = Resistance.fill()
+        self.accolade_percent = Resistance.fill()
+        self.misc_flat = Resistance.fill()
+        self.misc_percent = Resistance.fill()
+
 class AwakenedEquipment:
     """ The equipment the awakened has """
     def __init__(self):
@@ -24,7 +39,7 @@ class AwakenedEquipment:
         self.legs = None
         self.hands = None
         self.feet = None
-        self.rings = None
+        self.rings = None # limit = 10
         self.amulet = None
         self.mainhand = None
         self.underwear = None
@@ -38,7 +53,7 @@ class Awakened:
     attributes = Attribute.fill(10),
     level = 0,
     level_cap=5,
-    exp = 0,
+    experience = 0,
     char_class = None,
     date = Moment("0936-06-03-12:00:00:000")
     ):
@@ -46,11 +61,16 @@ class Awakened:
         self.date = date
         self.level = level
         self.level_cap = level_cap if level_cap >= level else level
-        self.exp = exp
+        self.experience = experience
         self.char_class = char_class
 
         self.attributes = AwakenedAttribs()
         self.attributes.base = attributes
+
+        self.resistances = AwakenedResistances()
+
+        self.vitals = VitalsStats(200, 100, 200, 100, 200, 100)
+        self.curr_vitals = Vitals(200, 200, 200)
 
         self.accolades_percent = {
             "attribPercent": Attribute.fill(),
