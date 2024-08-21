@@ -1,9 +1,6 @@
 import awakened # Pull in awakened, and thus everything else?
-import signal
-import sys
-import os
-import pickle
-from flask import Flask, render_template
+import signal, sys, os, pickle
+from flask import Flask, render_template, send_from_directory
 from flask_socketio import SocketIO
 
 """def exit_handler(signum, frame):
@@ -33,22 +30,24 @@ def handle_command(command):
 """
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+socket = SocketIO(app)
+
+user = awakened.Awakened()
 
 @app.route('/')
 def index():
-    return render_template("example.html")
+    return "<p>"+user.outputCharSheet()+"</p>" #render_template("example.html")
 
-@socketio.on('connect')
+@socket.on('connect')
 def handle_connect():
     print('Client connected')
 
-@socketio.on('disconnect')
+@socket.on('disconnect')
 def handle_disconnect():
     print('Client disconnected')
 
 if __name__ == '__main__':
-    socketio.run(app, host='127.0.0.1', port=51000, debug=True)
+    socket.run(app, host='127.0.0.1', port=51000, debug=True)
 
 """# Main control loop
 while True:

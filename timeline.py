@@ -53,7 +53,7 @@ class Moment:
             ["1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","13th","14th","15th","16th","17th","18th","19th","20th","21st","22nd","23rd","24th","25th","26th","27th","28th","29th","30th","31st","32nd"][self.day - 1],
             ["Promise(01)", "Expectation(02)","Sowing(03)","Seedlings(04)","Light(05)","First Harvest(06)","Second Harvest(07)","Frostfall(08)","Winternight(09)","Fallow(10)","Breaking(11)"][self.month - 1],
             str(self.year).rjust(4,"0"),
-        ])
+        ].__reversed__())
     
     def to(self,next): return Interval(self,next)
 
@@ -103,7 +103,7 @@ class Interval:
     def __init__(self,start,end):
         self.start = Moment(start)
         self.end = Moment(end)
-        self.length = Duration(abs(end.absolute() - start.absolute()))
+        self.length = Duration(abs(self.end.absolute() - self.start.absolute()))
 
     def from_start_dur(start,dur): return Interval(start,Moment(start.absolute() + dur.absolute()))
     def from_end_dur(end,dur): return Interval(Moment(end.absolute() - dur.absolute()),end)

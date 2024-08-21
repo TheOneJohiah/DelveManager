@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="DelveManagerHex.ico">
+    <title>Game Interface</title>
+
+    <style>
+        body {
+            background: #080808;
+            color:var(--fg);
+            font-family: monospace;
+            text-align: center;
+            font-size: 12pt;
+            --fg: #ccc;
+            --bg: #00436e;
+            --heat: rgb(254,0,2);
+            --cold: rgb(4,46,96);
+            --light: rgb(255,255,255);
+            --dark: rgb(0,0,0);
+            --force: rgb(107,124,133);
+            --arcane: rgb(78,5,80);
+            --chemical: rgb(21,68,6);
+            --mental: rgb(255, 0, 170);
+            --TR:var(--fg);
+        }
+        
+        h1 {font-size:1.5em}
+        h2 {font-size:1.4em}
+        h3 {font-size:1.3em}
+        h4 {font-size:1.2em}
+        h5 {font-size:1.1em;margin: 0;}
+        h6 {font-size:1em;margin: 0;}
+
+        body.Grace {
+            background-color: #000;
+            --fg:#9f6;
+            --bg:hsla(98, 55%, 22%,63%);
+            --hp:#2f2;
+            --sp:#ff2;
+            --mp:#fff;
+            --SPD: #fc0;
+            --PER: #60f;
+            --heat: #f40;
+            --cold: #04f;
+            --light: #ffa;
+            --dark: #002;
+            --force: #8a8;
+            --arcane: #306;
+            --chemical: #6f0;
+            --mental: #f0a;
+            --RE: #f64;
+            --NW: #cf0;
+            --CH: var(--chemical);
+            --AL: #9f0;
+            --RU: var(--mp);
+        }
+
+        body.Mo {
+            background-color: #210;
+            --fg: #f40;
+            --bg: hsla(20,9%,20%,69%);
+            --hp: #465;
+            --sp: #ff6;
+            --mp: #f20;
+            --heat: #f20;
+            --cold: #000;
+            --light: #ffa;
+            --dark: #000;
+            --force: #454;
+            --arcane: #408;
+            --chemical: #380;
+            --mental: #805;
+        }
+
+        body.Micah {
+            background-color: hsl(28 100% 2% / 1);
+            --fg: #aba;
+            --bg: hsla(28,28%,21%,70%);
+            --hp: #898;
+            --sp: hsl(28 100% 60% / 1);
+            --mp: hsl(2 100% 5% / 1);
+            --heat: #f40;
+            --cold: #04f;
+            --light: #ffd;
+            --dark: #002;
+            --force: #aba;
+            --arcane: #80f;
+            --chemical: #6f0;
+            --mental: #f0a;
+        }
+
+        .alt #VitHP, .alt #AttSTR, .alt #AttRCV {color:var(--hp)}
+        .alt #VitSP, .alt #AttEND, .alt #AttVGR  {color:var(--sp)}
+        .alt #VitMP, .alt #AttFCS, .alt #AttCLR  {color:var(--mp)}
+        .alt #AttPER {color:var(--PER)}
+        .alt #AttSPD {color:var(--SPD)}
+
+        .Restoration {--TR: var(--RE);}
+        .Natureworking {--TR: var(--NW);}
+        .Chemistry {--TR: var(--CH);}
+        .Alchemy {--TR: var(--AL);}
+        .Runecrafting {--TR: var(--RU);}
+        .alt table.Tree {color: var(--TR); --fg: var(--TR);}
+        
+        .alt #ResHE {color:var(--heat);}
+        .alt #ResCO {color:var(--cold);}
+        .alt #ResLI {color:var(--light);}
+        .alt #ResDA {color:var(--dark);}
+        .alt #ResFO {color:var(--force);}
+        .alt #ResAR {color:var(--arcane);}
+        .alt #ResCH {color:var(--chemical);}
+        .alt #ResME {color:var(--mental);}
+        
+        table {
+            background: var(--bg);
+            table-layout: fixed;
+            border: none;
+            border-collapse: separate;
+            border-spacing: 2px;
+            margin: 10px auto;
+            width: 90%;
+            overflow: hidden;
+        }
+
+        table td , table th {
+            margin: 0;
+            padding: 6px;
+            border: 1px solid var(--fg);
+        }
+        table td h1 {border-bottom: 1px solid var(--fg);}
+
+        #Overview tr:nth-child(1),#Overview tr:nth-child(3) {font-weight: bold;}
+
+        table th {font-weight: bold;text-align: center;}
+        
+        #VitHP td:nth-child(2) span {opacity: calc(1.0 + .1);}
+        #VitSP td:nth-child(2) span {opacity: calc(1.0 + .1);}
+        #VitMP td:nth-child(2) span {opacity: calc(0.8848 + .1);}
+
+        #Skills {text-align: left;}
+
+        #Skills h2, #Skills h3, #Skills h4 {text-align: center;margin:0}
+
+        #Skills table tr th:nth-child(1) {width: 10%;}
+        
+        table table table {
+            margin: -6px;
+            width: calc(100% + 12px);
+            height: calc(100% + 12px);
+        }
+
+        #Inventory tr th:nth-child(1) {width: 12%;}
+        #Inventory tr th:nth-child(2) {width: 52%;}
+        #Inventory tr td:nth-child(2) {text-align: left;}
+        #Inventory tr th:nth-child(n+3) {width: 12%;}
+    </style>
+</head>
+<body>
+    <div id="character-info"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function() {
+            console.log('Connected to server');
+        });
+
+        socket.on('disconnect', function() {
+            console.log('Disconnected from server');
+        });
+    </script>
+    <table>
+        <tr><td>
+            <h1>Invess T'gatin</h1>
+            <table id="Overview">
+                <tr><th>CLASS</th><th>LVL</th><th>CAP</th><th>+STAT</th></tr>
+                <tr><td>Dynamo</td><td>20</td><td>20</td><td>10</td></tr>
+                <tr><th>EXP</th><th>NEXT</th><th>TOTAL</th><th>+SKILL</th></tr>
+                <tr><td>11</td><td>30733</td><td>11</td><td>18</td></tr>
+            </table>
+
+            <h2>Vitals</h2>
+            <table id="Vitals">
+                <tr id="VitHD"><td></td><th>CUR</th><th>MAX</th><th>RGN</th></tr>
+                <tr id="VitHP"><th>Health</th><td><span>200.0</span></td><td>200.0</td><td>100.0</td></tr>
+                <tr id="VitSP"><th>Stamina</th><td><span>200.0</span></td><td>200.0</td><td>100.0</td></tr>
+                <tr id="VitMP"><th>Mana</th><td><span>176.96</span></td><td>200.0</td><td>6300.0</td></tr>
+            </table>
+
+            <h2>Attributes</h2>
+            <table id="Attributes">
+                <tr id="AttHD"><td>0/0</td><th>EFF</th><th>TOTAL</th><th>BASE</th><th>ACCLD</th><th>MISC</th><th>SYN</th></tr>
+                <tr id="AttSTR"><th>STR</th><td>1.0</td><td>10</td><td>10</td><td>0</td><td>0/0</td><td>1</td></tr>
+                <tr id="AttRCV"><th>RCV</th><td>1.0</td><td>10</td><td>10</td><td>0</td><td>0/0</td><td>1</td></tr>
+                <tr id="AttEND"><th>END</th><td>1.0</td><td>10</td><td>10</td><td>0</td><td>0/0</td><td>1</td></tr>
+                <tr id="AttVGR"><th>VGR</th><td>1.0</td><td>10</td><td>10</td><td>0</td><td>0/0</td><td>1</td></tr>
+                <tr id="AttFCS"><th>FCS</th><td>1.0</td><td>10</td><td>10</td><td>0</td><td>0/0</td><td>1</td></tr>
+                <tr id="AttCLR"><th>CLR</th><td>1.0</td><td>210</td><td>210</td><td>0</td><td>0/0</td><td>1</td></tr>
+                <tr id="AttPER"><th>PER</th><td>1.0</td><td>10</td><td>10</td><td>0</td><td>0/0</td><td>1</td></tr>
+                <tr id="AttSPD"><th>SPD</th><td>1.0</td><td>10</td><td>10</td><td>0</td><td>0/0</td><td>1</td></tr>
+            </table>
+
+            <h2>Resistances</h2>
+            <table id="Resistances">
+                <tr id="ResHD"><td></td><th>TOTAL</th><th>END</th><th>ACCLD</th><th>MISC</th></tr>
+                <tr id="ResHE"><th>HEAT</th><td>1.0<br>0.0%</td><td>1.0<br>0%</td><td>0<br>0%</td><td>0<br>0%</td></tr>
+                <tr id="ResCO"><th>COLD</th><td>1.0<br>0.0%</td><td>1.0<br>0%</td><td>0<br>0%</td><td>0<br>0%</td></tr>
+                <tr id="ResLI"><th>LIGHT</th><td>1.0<br>0.0%</td><td>1.0<br>0%</td><td>0<br>0%</td><td>0<br>0%</td></tr>
+                <tr id="ResDA"><th>DARK</th><td>1.0<br>0.0%</td><td>1.0<br>0%</td><td>0<br>0%</td><td>0<br>0%</td></tr>
+                <tr id="ResFO"><th>FORCE</th><td>1.0<br>0.0%</td><td>1.0<br>0%</td><td>0<br>0%</td><td>0<br>0%</td></tr>
+                <tr id="ResAR"><th>ARCANE</th><td>1.0<br>0.0%</td><td>1.0<br>0%</td><td>0<br>0%</td><td>0<br>0%</td></tr>
+                <tr id="ResCH"><th>CHEMICAL</th><td>1.0<br>0.0%</td><td>1.0<br>0%</td><td>0<br>0%</td><td>0<br>0%</td></tr>
+                <tr id="ResME"><th>MENTAL</th><td>1.0<br>0.0%</td><td>1.0<br>0%</td><td>0<br>0%</td><td>0<br>0%</td></tr>
+            </table>
+        </td></tr>
+    </table>
+
+    <table id="Inventory">
+        <tr><th>Slot</th><th>Item</th><th>Charge</th><th>Saturation</th><th>Durability</th></tr>
+    
+    </table>
+
+    <table>
+        <tr><th>0/21 Slots</th><th>Accolade</th><th>Total Bonus</th></tr>
+    
+    </table>
+
+    <table id="Skills"><tr><td><h2>Skills</h2>
+        
+            <table class="Tree Aura Metamagic"><tr><th>Tier</th><th><h3>Aura Metamagic</h3></th></tr>
+            
+                <tr><th><h4>0</h4></th>
+                <td><table>
+                
+                    <tr><td><h5>Amplify Aura (1/10)  (Exp: 2/100) </h5>
+                    Multiply aura intensity by [1+RNK/10] <br> Boost aura mana cost by [1+RNK/5]</td></tr>
+                
+                    <tr><td><h5>Extend Aura (1/10)  (Exp: 2/100) </h5>
+                    Extend aura range by [RNK] m <br> Boost aura mana cost by [1+RNK/5]</td></tr>
+                
+            </table></td></tr>
+            
+        </table>
+        
+            <table class="Tree Utility Auras"><tr><th>Tier</th><th><h3>Utility Auras</h3></th></tr>
+            
+                <tr><th><h4>0</h4></th>
+                <td><table>
+                
+                    <tr><td><h5>Winter (1/10)  (Exp: 11/100) </h5>
+                    Boost M.Regen by [10%*RNK] for all entities <br> Range: [RNK] m <br> Cost: [RNK] mp/hr</td></tr>
+                
+            </table></td></tr>
+            
+        </table>
+        
+    </td></tr></table>
+</body>
+</html>

@@ -6,6 +6,7 @@ from item import *
 from copy import *
 from timeline import *
 from jinja2 import Template;
+import json
 
 class Awakened:
     def __init__(self, name="Idie Keigh",attributes=[10, 10, 10, 10, 10, 10,10,10], level=0, level_cap=5, experience=0, character_class=unclassed,date=Moment('0936-06-03-12:00:00:000')):
@@ -563,10 +564,14 @@ class Awakened:
         return list(trees.values());
 
     def printCharSheet (self,altCol = False):
-        temp = Template(open('CharSheetTemplate.html').read())
-        pluscol = self.free_attributes > 0 or self.calculate_free_skill_points() > 0
         sheet = open(self.name+' CharSheet.html','w')
-        sheet.write( temp.render(
+        sheet.write(self.outputCharSheet(altCol))
+        sheet.close()
+
+    def outputCharSheet (self,altCol = False):
+        pluscol = self.free_attributes > 0 or self.calculate_free_skill_points() > 0
+        temp = Template(open('CharSheetTemplate.html').read())
+        return temp.render(
                     aw = self,
                     pluscol = pluscol,
                     altcol = altCol,
@@ -727,6 +732,22 @@ class Awakened:
 
                     totAccAct = self.calculate_used_accolade_slots(),
                     accolades = list(self.accolades.values()),
-            ))
+            )
 
-        sheet.close()
+    def jsonCharSheet (self):
+        return json.dump({
+                    "Name": self.name,
+                    "Class": self.character_class.name,
+                    "Level": self.level,
+                    "LevelCap": self.level_cap,
+                    "FreeStat": self.free_attributes,
+                    "CurrXP": self.experience,
+                    "TotXP": self.total_xp,
+                    "Vitals": self.vitals,
+                    "currVitals": self.currVitals,
+                    "Attributes": self.attributes,
+                    "Resistances": self.resistances,
+                    "Trees": "nah", #self.genSkillList(),
+                    "Items": "Nope", #self.inventory,
+                    "Accolades": "lol. lmao" #self.accolades
+            },open(self.name+'.json','w'),indent=4)

@@ -44,13 +44,13 @@ v.raise_attribute(5,200)
 v.cast_skill("Winter",16,["Amplify Aura","Extend Aura"])
 v.essence_exhange()
 
+'''
 print("T:",t.attributes[1],t.attributes[2],t.vitals)
 print("V:",v.attributes[1],v.attributes[2],v.vitals)
 print("H:",h.attributes[1],h.attributes[2],h.vitals)
 t.printCharSheet(altCol=True)
 v.printCharSheet(altCol=True)
 h.printCharSheet(altCol=True)
-
 
 ## Pickling test
 db = {}
@@ -66,4 +66,6 @@ dbfile = open('./saves/campaign1.pk1','rb')
 db = pickle.load(dbfile)
 for keys in db:
     print(keys, '=>', db[keys])
-dbfile.close()
+dbfile.close()'''
+
+t.jsonCharSheet()
